@@ -1,0 +1,54 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= simple_form_for :search_table, method: :get, html: { class: "form-inline" } do |f| %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-12">
+      <%= button_link :new,
+                      polymorphic_path(active_record, action: :new),
+                      class: %W[btn-success],
+                      dynamic_width: true,
+                      i18n: i18n_scope
+      %>
+    </div>
+
+    <%= yield(:sortable_table_form_field) if content_for?(:sortable_table_form_field) %>
+
+    <% if batch_delete %>
+      <div class="col-md-2 col-sm-4 col-xs-12 hidden batch-delete">
+        <%= button_link :batch_delete,
+                        polymorphic_path(active_record, action: :batch_delete),
+                        with_modal: true,
+                        class: %w[btn btn-danger],
+                        i18n: i18n_scope
+        %>
+      </div>
+    <% end %>
+
+    <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+      <div class="has-feedback">
+        <%= f.input search_object_field,
+                    label: false,
+                    placeholder: t("#{i18n_scope}.search"),
+                    required: false,
+                    wrapper_html: {
+                      class: %w[searchable_table_search_wrapper]
+                    },
+                    input_html: {
+                        name: "#{active_record.table_name.singularize}_#{search_object_field}",
+                        value: params[search_object_field],
+                        class: %W[sortable_table_search_field]
+                    }
+        %>
+        <i class="glyphicon glyphicon-search form-control-feedback"></i>
+      </div>
+    </div>
+  </div>
+<% end %>

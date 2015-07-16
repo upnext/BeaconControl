@@ -1,0 +1,35 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+button, input {
+  &.btn {
+    margin-left: 10px;
+  }
+}
+
+.btn {
+  &.active, &:active {
+    .box-shadow(none);
+  }
+
+  font-size: 14px;
+}
+
+.btn-success:not(:hover) {
+  &:focus, &.focus {
+    background-color: @btn-success-bg;
+    border-color: @btn-success-border;
+  }
+}
+
+.btn-primary {
+  font-weight: @btn-primary-weight;
+}
+.btn-default {
+  font-weight: @btn-default-weight;
+}

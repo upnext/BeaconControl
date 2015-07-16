@@ -1,0 +1,42 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="<%= active_record.table_name %>-table sortable-table table-responsive">
+  <%= render "shared/sortable_table/form",
+             i18n_scope: i18n_scope,
+             batch_delete: (defined?(batch_delete) ? batch_delete : false),
+             search_object_field: search_object_field,
+             active_record: active_record
+  %>
+
+  <table class="table table-list table-striped">
+    <thead>
+    <%= render 'shared/sortable_table/table_header',
+               i18n_scope: i18n_scope,
+               active_record: active_record,
+               fields: fields,
+               collection: collection
+    %>
+    </thead>
+    <tbody>
+    <%= form_tag "beacons/batch_update", method: :patch, class: "batch-update-form" do %>
+      <% collection.each do |object| %>
+        <%= render 'shared/sortable_table/row',
+                   i18n_scope: i18n_scope,
+                   active_record: active_record,
+                   fields: fields,
+                   object: object,
+                   object_row_data: (defined?(object_row_data) ? object_row_data : nil)
+        %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= prompt_modal(t("#{active_record.table_name}.modal.title"), t("#{active_record.table_name}.modal.body")) %>

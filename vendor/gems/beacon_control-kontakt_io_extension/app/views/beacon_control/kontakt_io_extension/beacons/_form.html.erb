@@ -1,0 +1,17 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= form_tag beacon_control_kontakt_io_extension.beacons_path do %>
+  <div class="form-container">
+    <div class="kontakt-io-table-buttons">
+      <%= submit_tag t(".submit"), class: "btn btn-success btn-static-width" %>
+      <%= link_to t("helpers.links.cancel"), beacon_control_kontakt_io_extension.beacons_path, class: "btn btn-primary btn-static-width" %>
+    </div>
+    <%= render partial: "list", locals: {form: true} %>
+  </div>
+<% end %>

@@ -1,0 +1,56 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="row form-container">
+  <div class="col-md-6 first-column">
+    <%= simple_form_for @application do |f| %>
+      <h3> Main </h3>
+
+      <%= f.input :name, required: false %>
+
+      <%= f.input :uid,    readonly: true %>
+      <%= f.input :secret, readonly: true %>
+
+      <div class="form-group clearfix">
+        <%= f.button :submit, t('.save'),
+                     class: button_class('pull-right', action: :save, static: true)
+        %>
+      </div>
+    <% end %>
+
+    <% @application.active_extensions.select{ |ext| ext.settings.present? }.each do |ext| %>
+      <div id="<%= ext.extension_class.name.demodulize %>">
+        <h3><%= ext.name %></h3>
+        <%= simple_nested_form_for @application do |f| %>
+          <% @application.application_settings.select{|s| s.extension_name == ext.name}.each do |app_setting| %>
+            <%= f.simple_fields_for :application_settings, app_setting do |ff| %>
+              <%= ff.input :extension_name, as: :hidden %>
+              <%= ff.input :type, as: :hidden, input_html: {value: app_setting.read_attribute(:type)} %>
+              <%= ff.input :key, as: :hidden %>
+              <%= ff.input :value, as: app_setting.config[:type], label: t(app_setting.config[:i18n_key]) %>
+              <% if app_setting.file? && app_setting.value.present? %>
+                <%= link_to app_setting.value.file.filename, app_setting.value.url, target: :_blank %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <div class="form-group clearfix">
+            <%= f.button :submit, t('.save'),
+                class: button_class('pull-right', action: :save, static: true)
+            %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-6 second-column">
+    <%= render 'apns_cert_form' unless @application.test? %>
+  </div>
+
+</div>

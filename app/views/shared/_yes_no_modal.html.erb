@@ -1,0 +1,33 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<!-- Modal -->
+<div class="modal fade in" id="yes-no-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only"><%= t('modal.close') %></span>
+        </button>
+        <h4 class="modal-title"><%= title %></h4>
+      </div>
+      <div class="modal-body">
+        <%= body %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          <%= t('modal.close') %>
+        </button>
+        <%= link_to t('modal.positive'), '#', class: %W[btn btn-success modal-button yes] %>
+        <%= link_to t('modal.negative'), '#', class: %W[btn btn-success modal-button no] %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal -->

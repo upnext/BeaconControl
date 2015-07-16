@@ -1,0 +1,34 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= simple_form_for resource, html: { class: %W[user-form with-sticky-footer] }  do |f| %>
+  <div class="row form-container">
+    <div class="col-md-6 first-column">
+      <div class="control-group">
+        <div class="controls">
+          <%= f.input :email %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 second-column">
+      <div class="control-group">
+        <div class="controls">
+          <%= f.input :role, as: :select, collection: resource.role_names, include_blank: t('.select_role') %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <%= button_link :cancel, admins_path %>
+        <%= f.button :submit, t('.save'), class: button_class('btn-success', action: :save, static: true) %>
+      </div>
+    </div>
+  </div>
+<% end %>

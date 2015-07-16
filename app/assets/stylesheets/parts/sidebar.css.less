@@ -1,0 +1,61 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+@import "custom_bootstrap/variables.less";
+
+.sidebar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    background-color: @gray-dark;
+
+    @media (min-width: 768px) {
+      border-right: 2px solid @border-color;
+    }
+
+    a {
+      color: #fff;
+      background-color: @gray-dark;
+      border: 3px solid transparent;
+    }
+
+    .nav-sidebar {
+      margin-right: 0;
+      margin-bottom: 20px;
+      margin-left: 0px;
+
+      li {
+        a {
+          height: 60px;
+          font-size: 16px;
+          font-weight: @light;
+
+          padding: 15px 0px 15px 71px;
+
+          position: relative;
+
+          span.bos, span.fa {
+            position: absolute;
+            top: 19px;
+            left: 25px;
+            vertical-align: middle;
+          }
+        }
+        a.active, a:hover, a:focus {
+          background-color: @gray-darker;
+        }
+        a.active {
+          color: @brand-success;
+          font-weight: @semibold;
+        }
+      }
+    }
+  }
+}

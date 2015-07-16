@@ -1,0 +1,180 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+body {
+  background: #fff;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+.coupon-fx(@height, @padding, @logo-height) {
+  background: #fff;
+  height: 100%;
+
+  .coupon-header {
+    height: @height;
+    width: 100%;
+
+    padding-top: @height - @logo-height - @padding;
+
+    background-size: cover !important;
+  }
+
+  .coupon-logo {
+    float: left;
+    margin-left: @padding;
+
+    img {
+      max-width: @logo-height;
+      max-height: @logo-height;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  .coupon-title {
+    float: left;
+
+    h3 {
+      text-shadow: 1px 1px 1px #4F4F4F;
+      color: #fff;
+
+      font-size: 20px;
+
+      line-height: @logo-height;
+      margin: 0 0 0 @padding;
+    }
+  }
+
+  .coupon-content {
+    @content-padding: @padding + 5px;
+
+    padding: 0 @content-padding;
+    clear: both;
+
+    h4 {
+      font-size: 17.5px;
+      font-weight: 600;
+      margin: @content-padding 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 18px;
+      color: #727271;
+      font-weight: lighter;
+    }
+  }
+
+  .coupon-button {
+    @btn-height: 50px;
+    height: @btn-height;
+
+    a.button {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      height: @btn-height;
+      line-height: @btn-height;
+      font-size: 14px;
+      text-align: center;
+
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 0 rgba(0,0,0,0.6);
+      box-shadow: 0 1px 0 0 rgba(0,0,0,0.6);
+
+      background: #000;
+      color: #fff;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &.with-barcode {
+    .coupon-header {
+      height: calc(@height * 0.7);
+      padding-top: calc(@height * 0.7 - @logo-height - @padding);
+    }
+
+    .coupon-content {
+      overflow: hidden;
+    }
+
+    .coupon-barcode {
+      height: 100px;
+      width: 100%;
+
+      .coupon-barcode-image {
+        display: block;
+        margin: 0 auto;
+
+        &.qr_code {
+          height: 115px;
+          width: 115px;
+        }
+
+        &.barcode-preview.qr_code {
+          width: 80px;
+          height: 80px;
+        }
+
+        &.code_128 {
+          padding-top: 30px;
+          width: 200px;
+
+          margin-bottom: -20px;
+        }
+
+        &.barcode-preview.code_128 {
+          padding-top: auto;
+          width: auto;
+          margin-bottom: 0;
+        }
+      }
+
+      object {
+        height: 110px;
+      }
+
+      .coupon-barcode-text {
+        text-align: center;
+        font-size: 15px;
+        line-height: 22px;
+      }
+
+      .scan-code {
+        text-align: center;
+
+        width: 100%;
+
+        margin-top: 5px;
+        margin-bottom: 10px;
+
+        font-size: 14px;
+        line-height: 18px;
+        color: #727271;
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.coupon {
+  .coupon-fx(350px, 15px, 60px);
+}

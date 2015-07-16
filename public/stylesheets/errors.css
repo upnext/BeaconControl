@@ -1,0 +1,34 @@
+body {
+  background-color: #f8f9fa;
+  color: #393939;
+  text-align: center;
+  font-family: avenir-book, arial, sans-serif;
+  font-size: 24px;
+  margin: 0;
+}
+
+h1 {
+  margin-top: 140px;
+  margin-bottom: 0px;
+  font-size: 160px;
+  line-height: 0.8;
+}
+
+#logo-header {
+  background: #fff;
+  padding: 50px;
+}
+
+.logo {
+  background: url('/images/beacon_logo@2x.png') no-repeat center;
+  background-size: contain;
+  display: block;
+  height: 70px;
+  margin: auto;
+}
+
+.error-label {
+  line-height: 0.8;
+  font-size: 30px;
+  margin-bottom: 60px;
+}

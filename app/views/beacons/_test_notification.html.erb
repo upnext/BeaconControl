@@ -1,0 +1,53 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="well control-group test-notification-group">
+  <%= f.simple_fields_for beacon.test_activity do |activity_form| %>
+
+    <%= activity_form.simple_fields_for :trigger do |trigger_form| %>
+      <%= trigger_form.label :test, class: %W[trigger-test] do %>
+        <%= trigger_form.input :test, label: false, inline_label: false %>
+        <%= t('beacons.test_notification.title') %> <span class="grayed"><%= t('beacons.test_notification.hint') %></span>
+      <% end %>
+    <% end %>
+
+    <%= activity_form.simple_fields_for :trigger do |trigger_form| %>
+
+      <%= activity_form.simple_fields_for(:custom_attributes, custom_attributes.blank? ? CustomAttribute.new : custom_attributes) do |ff| %>
+        <%= activity_form.input :name,
+                                label: t('beacons.test_notification.name'),
+                                placeholder: t('beacons.test_notification.placeholder'),
+                                input_html: {
+                                    class: %W[col-xs-6],
+                                    value: activity_form.object.name.present? ? activity_form.object.name : t('beacons.test_notification.placeholder')
+                                }
+        %>
+
+        <%= ff.hidden_field :name, value: "text" %>
+        <%= ff.input :value,
+                     label: 'Message',
+                     input_html: {
+                         value: ff.object.value.present? ? ff.object.value : t('beacons.test_notification.default_message'),
+                         placeholder: t('beacons.test_notification.default_message')
+                     }
+        %>
+
+        <div class="form-break-line"></div>
+
+        <%= trigger_form.input :event_type,
+                               collection: Trigger::Collection.list(current_admin.test_application, 'BeaconTrigger'),
+                               value_method: :type,
+                               include_blank: false,
+                               input_html: {
+                                   class: %W[selectpicker col-xs-6]
+                               }
+        %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

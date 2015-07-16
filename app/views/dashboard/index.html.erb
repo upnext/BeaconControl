@@ -1,0 +1,45 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<div class="dashboard <%= @walkthrough ? 'walkthrough-autorun' : '' %>">
+  <h1><%= t('.welcome') %></h1>
+  <p class="subtitle"><%= t('.description') %></p>
+
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2><%= t('.beacon_title') %></h2>
+        <p><%= t('.beacon_description') %></p>
+      </div>
+
+      <%= link_to t(".add_beacon"), new_beacon_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 1 %>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2><%= t('.zone_title') %></h2>
+        <p><%= t('.zone_description') %></p>
+      </div>
+
+      <%= link_to t(".add_zone"), new_zone_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 2 %>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2><%= t('.application_title') %></h2>
+        <p><%= t('.application_description') %></p>
+      </div>
+
+      <%= link_to t(".add_application"), applications_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 4 %>
+    </div>
+  </div>
+</div>

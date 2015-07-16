@@ -1,0 +1,23 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+
+en:
+  dwell_time_extension:
+    sidebar_links:
+    settings:
+    configurations:
+  activities:
+    form:
+      scheme:
+        dwell_time: DwellTime
+    trigger:
+      dwell_time:
+        dwell_time_preview: "%{time} min"
+  triggers:
+    dwell_time: 'DwellTime'
+    dwell_time_description: "Trigger an action after customisable amount of time after a user appears in the beacon range."

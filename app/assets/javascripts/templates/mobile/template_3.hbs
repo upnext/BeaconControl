@@ -1,0 +1,33 @@
+{{!--
+  Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+  All rights reserved.
+
+  This source code is licensed under the BSD 3-Clause License found in the
+  LICENSE.txt file in the root directory of this source tree. 
+--}}
+
+<div class="coupon with-barcode">
+  <div class="coupon-header" style="background: transparent url('{{#if image_url}}{{image_url}}{{else}}/images/preview/image.png{{/if}}') no-repeat center center;">
+    <div class="header-title">
+      <div class="coupon-logo">
+        {{#if logo_url}}
+          <img src="{{ logo_url }}" />
+        {{else}}
+          <img src="/images/preview/logo.png" />
+        {{/if}}
+      </div>
+      <div class="coupon-title">
+        <h3>{{ name }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="coupon-content">
+    <h4>{{ title }}</h4>
+    <p>{{ description }}</p>
+  </div>
+
+  <div class="coupon-barcode">
+    <img src="/images/preview/{{ encoding_type }}.png" class="coupon-barcode-image barcode-preview {{ encoding_type }}" />
+    <div class="scan-code">Scan code to get discount</div>
+  </div>
+</div>

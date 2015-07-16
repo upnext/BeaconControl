@@ -1,0 +1,74 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= link_to t('.title'), main_app.applications_path %></span>
+  <span><%= @application.name %></span>
+  <span><%= t('.breadcrumbs') %></span>
+<% end %>
+
+<%= render partial: 'shared/subheader',
+           locals: {
+               controller: 'beacon_control/presence_extension/presences',
+               action: 'show'
+           }
+%>
+
+<div class="table-responsive presence-extension sortable-table">
+  <%= simple_form_for :search_table, method: :get, html: { class: %W[form-inline] } do |f| %>
+
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+        <div class="has-feedback">
+          <%= f.input :extension_name,
+                      label: false,
+                      placeholder: t('.search'),
+                      required: false,
+                      wrapper_html: {
+                          class: %w[searchable_table_search_wrapper]
+                      },
+                      input_html: {
+                          name: "sorted[name]",
+                          value: params.fetch(:sorted, {})[:name],
+                          class: %W[ sortable_table_search_field ]
+                      }
+          %>
+          <i class="glyphicon glyphicon-search form-control-feedback"></i>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+  <table class="table table-list table-striped">
+    <thead>
+    <tr>
+      <th class="col-sm-5"><%= sortable "range", t('.range')  %></th>
+      <th class="col-sm-5"><%= sortable "name", t('.name')  %></th>
+      <th class="col-sm-2"><%= sortable "active", t('.monitor') %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @beacons_and_zones.each do |range| %>
+      <tr class="<%= "active" if range.active? %>">
+        <td class="col-sm-5"><%= range.range %></td>
+        <td class="col-sm-5"><%= truncate(range.name, length: 30) %></td>
+        <td class="col-sm-2 text-center">
+          <label class="styled-checkbox">
+            <%= check_box_tag :range_id, range.id, range.active?, { url: range.url(@application), disabled: @application.test? } -%>
+            <span class="input"></span>
+          </label>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

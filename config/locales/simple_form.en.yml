@@ -1,0 +1,45 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      application:
+        name: 'Application name'
+        sdk_key: 'SDK key'
+        uid: 'Client ID'
+        secret: 'Client secret'
+        apns_app_sandbox:
+          cert_p12: 'P12 Certificate'
+        apns_app_production:
+          cert_p12: 'P12 Certificate'
+
+      beacon:
+        lat: 'Latitude'
+        lng: 'Longitude'
+
+      image:
+        file: 'Background image'
+
+      logo:
+        file: 'Logo'
+
+      trigger:
+        event_type: 'Trigger'
+
+      zone:
+        name: 'Zone name'
+        manager_id: 'Managing user'
+        add_beacon: 'Assing beacons'

@@ -1,0 +1,70 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+ *= require_self
+ *= require font-awesome
+ *= require ./ext/bootstrap-select
+ *= require ./ext/bootstrap-switch
+ *= require ./ext/bootstrap-slider
+ *= require ./ext/jasny-bootstrap.min.css
+ *= require ./ext/spectrum.css
+ */
+
+@import './custom_bootstrap/custom_bootstrap.less';
+@import './ext/pick_a_color.css.less';
+
+@import url("http://fast.fonts.net/cssapi/7f963086-9834-4df8-931c-daf6a0a27993.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+// Mobile
+@import './mobile/coupon.css.less';
+
+// Admin
+@import './parts/mixins.css.less';
+@import './parts/forms.css.less';
+@import './parts/beacon.css.less';
+@import './parts/zone.css.less';
+@import './parts/buttons.css.less';
+@import './parts/general.css.less';
+@import './parts/admin-access.css.less';
+@import './parts/dashboard.css.less';
+@import './parts/layout.css.less';
+@import './parts/sidebar.css.less';
+@import './parts/modals.css.less';
+@import './parts/map.css.less';
+@import './parts/navbar.css.less';
+@import './parts/activities.css.less';
+@import './parts/preview.css.less';
+@import './parts/sections.css.less';
+@import './parts/apps.css.less';
+@import './parts/profile.css.less';
+@import './parts/header.css.less';
+@import './parts/select.css.less';
+@import './parts/extensions.css.less';
+@import './parts/icons.css.less';
+@import './parts/checkbox.css.less';
+@import './parts/admins.css.less';
+@import './parts/walkthrough.css.less';
+@import './parts/cookie-info.css.less';
+
+// Extensions
+@import 'analytics_extension.css.less';
+@import 'dwell_time_extension.css.less';
+@import 'kontakt_io_extension.css.less';
+@import 'presence.css.less';

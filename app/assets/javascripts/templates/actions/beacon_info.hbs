@@ -1,0 +1,48 @@
+{{!--
+  Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+  All rights reserved.
+
+  This source code is licensed under the BSD 3-Clause License found in the
+  LICENSE.txt file in the root directory of this source tree. 
+--}}
+
+<h5>Beacon Information</h5>
+<div class="map-view-sidebar-section">
+
+  <div class="beacon-details">
+    <h5><span class="zone-mark" style="border-color:
+      {{#if zone}}
+        {{zone.hex_color}}
+      {{ else }}
+        transparent
+      {{/if }}
+    ">
+    {{ name }}</span></h5>
+
+    <ul>
+      <li>Zone:
+      {{#if zone }}
+        {{ truncate zone.name limit=18 }}
+      {{ else }}
+        Unassigned
+      {{/if }}
+      <li>Floor:
+        {{#with location }}
+          {{#if floor }}
+            {{ floor }}
+          {{ else }}
+            N/A
+          {{/if }}
+        {{/with }}
+      </li>
+    </ul>
+    <ul>
+      <li>Latitude: {{ location.lat }}</li>
+      <li>Longitude: {{ location.lng }}</li>
+    </ul>
+  </div>
+  <div class="beacon-actions">
+    <a href="/beacons/{{ id }}/edit" class="btn btn-success btn-block btn-action-edit">Edit</a>
+    <a href="#" data-url="#" data-target="#destroy-modal" class="btn btn-default btn-block btn-action-delete" id="delete-beacon">Delete</a>
+  </div>
+</div>

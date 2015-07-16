@@ -1,0 +1,43 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+default: &default
+  config:
+    secret_key_base: <%= @secret_key_base %>
+    registerable: <%= @registerable %>
+    confirmable: <%= @confirmable %>
+    invitation_codes: <%= @invitation_codes %>
+    mailer_sender: <%= @mailer_sender %>
+    mailer_url_options:
+      host: <%= @mailer_url_options[:host] %>
+      port: <%= @mailer_url_options[:port] %>
+    smtp_settings:
+      address: <%= @smtp_settings[:address] %>
+      port: <%= @smtp_settings[:port] %>
+      domain: <%= @smtp_settings[:domain] %>
+      user_name: <%= @smtp_settings[:user_name] %>
+      password: <%= @smtp_settings[:password] %>
+      authentication: <%= @smtp_settings[:authentication] %>
+      enable_starttls_auto: <%= @smtp_settings[:enable_starttls_auto] %>
+    system_mailer_receiver: <%= @system_mailer_receiver %>
+    redis_url: redis://<%= @redis_url %>
+    create_test_app_on_new_account: <%= @create_test_app_on_new_account %>
+    autoload_extensions:
+      "Analytics":  <%= @autoload_extensions[:analytics] %>
+      "DwellTime":  <%= @autoload_extensions[:dwell_time] %>
+      "Kontakt.io": <%= @autoload_extensions[:kontakt_io] %>
+      "Presence":   <%= @autoload_extensions[:presence] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

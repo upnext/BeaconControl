@@ -1,0 +1,47 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<div class="section-group event-extentions">
+  <div class="items-section clearfix">
+    <h2><%= t('.active') %></h2>
+    <ul class="items-list">
+      <% active_extensions.each do |extension| %>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <div class="controls">
+            <%= link_to '<span class="fa fa-power-off"></span>'.html_safe,
+              deactivate_extensions_marketplace_path(extension.name), class: %W[], method: :put %>
+          </div>
+          <%= link_to extension.configurations ? edit_extensions_marketplace_path(extension.name) : "#", class: %W[item-box edit] do %>
+            <h3>
+              <%= extension.name %>
+            </h3>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="items-section clearfix">
+    <h2><%= t('.available') %></h2>
+    <ul class="items-list">
+      <% inactive_extensions.each do |extension| %>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12 inactive">
+          <%= link_to activate_extensions_marketplace_path(extension.name), class: %W[item-box], method: :put do %>
+            <h3>
+              <%= extension.name %>
+            </h3>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

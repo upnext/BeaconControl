@@ -1,0 +1,171 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= simple_nested_form_for [@application, @activity], html: { class: %W[edit_activity with-sticky-footer] } do |f| %>
+  <%= f.input :scheme, as: :hidden %>
+
+  <%= render partial: "activities/scheme/#{f.object.scheme}", locals: { f: f } %>
+
+  <div class="row form-container <%= f.object.scheme %>-scheme">
+
+    <div class="col-md-6 first-column">
+      <h3><%= t(".essentials") %></h3>
+
+      <%= f.simple_fields_for :trigger do |trigger| %>
+        <%= trigger.label :type %>
+        <div class="range-buttons row" data-toggle="buttons">
+          <%=
+              trigger.collection_radio_buttons :type, Trigger::Collection.source_types, :type, :name, item_wrapper_tag: :div do |b|
+                custom_radio_button(b, label: { class: %W[btn activity-type] })
+              end
+          %>
+        </div>
+
+        <%= trigger.label :event_type %>
+
+        <!-- BEACONS -->
+        <div class="range-field-triggered field-triggered-BeaconTrigger">
+          <div class="activity-buttons row" data-toggle="buttons">
+            <%=
+                trigger.collection_radio_buttons :event_type, Trigger::Collection.list(@application, 'BeaconTrigger'), :type, :name, item_wrapper_tag: :div do |b|
+                  custom_radio_button(b, label: { class: %W[btn activity-type] })
+                end
+            %>
+          </div>
+          <div class="form-group">
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <%= trigger.input :add_beacon,
+                                    as: :select,
+                                    wrapper: :with_action,
+                                    hint: t(".add"),
+                                    selected: nil,
+                                    collection: current_admin.account.beacons,
+                                    hint_html: {
+                                        class: button_class(action: :new)
+                                    },
+                                    input_html: {
+                                        class: ['selectpicker', 'dropup'],
+                                        data: {
+                                            :'live-search' => true,
+                                            :'live-search-placeholder' => t(".search_beacon")
+                                        }
+                                    }
+                  %>
+                </div>
+              </div>
+              <div style="display:none">
+                <%= trigger.collection_check_boxes "beacon_ids", current_admin.account.beacons, :id, :name, include_blank: false, checked: trigger.object.beacon_ids %>
+              </div>
+              <br />
+              <table class="table table-bordered">
+                <tbody>
+                <% current_admin.account.beacons.each do |beacon| %>
+                  <tr class="element-<%=beacon.id%>" style="display:none">
+                    <td class="col-xs-11"><%= beacon.name %></td>
+                    <td class="col-xs-1 active button-holder">
+                      <%= content_tag :span,
+                                      value: beacon.id,
+                                      class: button_class('remove-element', action: :delete, static: false) do %>
+                        <%= t(".remove") %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ZONES -->
+        <div class="range-field-triggered field-triggered-ZoneTrigger">
+          <div class="activity-buttons row" data-toggle="buttons">
+            <%=
+                trigger.collection_radio_buttons :event_type, Trigger::Collection.list(@application, 'ZoneTrigger'), :type, :name, item_wrapper_tag: :div do |b|
+                  custom_radio_button(b, label: { class: %W[btn activity-type] })
+                end
+            %>
+          </div>
+          <div class="form-group">
+
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <%= trigger.input :add_zone,
+                                    as: :select,
+                                    wrapper: :with_action,
+                                    hint: t(".add"),
+                                    selected: nil,
+                                    collection: current_admin.account.zones,
+                                    input_html: {
+                                        class: %W[selectpicker],
+                                        data: {
+                                            :'live-search' => true,
+                                            :'live-search-placeholder' => t(".search_zone")
+                                        }
+                                    }
+                  %>
+                </div>
+              </div>
+              <div style="display:none">
+                <%= trigger.collection_check_boxes "zone_ids", current_admin.account.zones, :id, :name, checked: trigger.object.zone_ids %>
+              </div>
+              <br />
+              <table class="table table-bordered">
+                <tbody>
+                <% current_admin.account.zones.each do |zone| %>
+                  <tr class="element-<%=zone.id%>" style="display:none">
+                    <td style="background-color:#<%=zone.color%>"></td>
+                    <td class="col-xs-11"><%= zone.name %></td>
+                    <td class="col-xs-1 active button-holder">
+                      <%= content_tag :span,
+                                      value: zone.id,
+                                      class: button_class('remove-element', action: :delete, static: false) do %>
+                        <%= t(".remove") %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extensions custom Triggers -->
+        <% @application.active_extensions.each do |ext| %>
+          <% ext.triggers.each do |ext_trigger| %>
+            <%= render partial: "activities/trigger/#{ext_trigger[:key]}", locals: { trigger: trigger } %>
+          <% end %>
+        <% end %>
+
+      <% end %>
+      <%= content_for :scheme_content_left %>
+    </div>
+
+    <div class="col-md-6 second-column">
+      <%= content_for :scheme_content_right %>
+    </div>
+  </div>
+
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <%= button_link :cancel,
+                        application_activities_path(@application),
+                        class: %W[btn btn-primary], static_width: true
+        %>
+        <%= f.button :submit, t(".submit.#{@activity.persisted? ? 'edit' : 'new'}"),
+                     class: button_class(action: :save, static: true)
+        %>
+      </div>
+    </div>
+  </div>
+<% end %>

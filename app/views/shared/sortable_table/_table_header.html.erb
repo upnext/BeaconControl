@@ -1,0 +1,21 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<tr>
+  <th class="select-all-checkbox">
+    <% if collection.present? %>
+      <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
+    <% end %>
+  </th>
+  <% fields.each do |field_name| %>
+    <th class="sortable">
+      <%= sortable "#{active_record.table_name}.#{field_name}", active_record.human_attribute_name(field_name) %>
+    </th>
+  <% end %>
+  <th><%= t("#{i18n_scope}.details") %></th>
+</tr>

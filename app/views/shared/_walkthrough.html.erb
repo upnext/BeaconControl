@@ -1,0 +1,29 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="modal fade" id="walkthrough-modal" tabindex="-1" role="dialog" aria-hidden="true" data-walkthrough-index="0" data-walkthrough-title="<%=t('walkthrough.welcome.title')%>" data-walkthrough-body="<%= raw t('walkthrough.welcome.body', github_url: '<a href=https://github.com/upnext/BeaconCtrl> https://github.com/upnext/BeaconCtrl </a>') %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-sidebar">
+      </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <span class="step-counter"><%= t("walkthrough.step") %> <span class="step-no"></span>/<span class="step-total"></span></span>
+        <button type="button" class="btn btn-primary prev"><%=t("walkthrough.previous")%></button>
+        <button type="button" class="btn btn-success next"><%=t("walkthrough.next")%></button>
+        <button type="button" class="btn btn-success start"><%=t("walkthrough.start")%></button>
+        <button type="button" class="btn btn-success finish" data-dismiss="modal"><%=t("walkthrough.finish")%></button>
+      </div>
+    </div>
+  </div>
+</div>

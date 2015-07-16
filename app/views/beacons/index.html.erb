@@ -1,0 +1,112 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<div class="beacons-table table-responsive">
+  <%= simple_form_for :search_table, method: :get, html: { class: %W[form-inline] } do |f| %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+
+    <div class="row">
+      <div class="col-md-2 col-sm-4 col-xs-12">
+        <%= button_link :new, new_beacon_path, class: %w[btn-success], i18n: 'beacons.index' %>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 hidden zone-select">
+        <select name="search_table[zone]" id="search_table_zone" class="selectpicker" data-live-search="true" data-size="10" data-header="<%= t('.select_zone_prompt') %>">
+          <option value="" style="border-color:transparent; display:none;"><%= t('.select_zone_prompt') %></option>
+          <option value="" class="with-border" style="border-color: #494846;"><%= t('.unassigned_zone') %></option>
+          <% @zones.each do |zone| %>
+            <option value="<%= zone.id %>" class="with-border" data-color="<%= zone.hex_color %>" style="border-color: <%= zone.hex_color %>;"><%= truncate(zone.name, length: 30) %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 hidden floor-select">
+        <select name="search_table[floor]" id="search_table_floor" class="selectpicker" data-live-search="true" data-size="false" data-header="<%= t('.select_floor_prompt') %>">
+          <option value="" class="hidden"><%= t('.select_floor_prompt') %></option>
+          <% BeaconDecorator.floors_for_select(t('.unassigned_floor')).each do |floor, floor_name| %>
+            <option value="<%= floor %>"><%= floor_name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="col-md-2 col-sm-4 col-xs-12 hidden batch-delete">
+        <%= button_link :batch_delete, batch_delete_beacons_path, class: %w[btn-danger], dynamic_width: true, with_modal: true %>
+      </div>
+
+      <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+        <div class="has-feedback">
+          <%= f.input :beacon_name,
+                      label: false,
+                      placeholder: t(".search"),
+                      required: false,
+                      input_html: {
+                          name: "beacon_name",
+                          value: params[:beacon_name],
+                          class: %W[ sortable_table_search_field ]
+                      }
+          %>
+          <i class="glyphicon glyphicon-search form-control-feedback"></i>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+  <table class="table table-list table-striped">
+    <thead>
+      <tr>
+        <th colspan="2" class="select-all-checkbox">
+          <% if @beacons.present? %>
+            <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
+          <% end %>
+        </th>
+        <th class="sortable"><%= sortable "beacons.name", Beacon.human_attribute_name(:name) %></th>
+        <th class="sortable"><%= sortable "zones.name", Beacon.human_attribute_name(:zone) %></th>
+        <th class="sortable"><%= sortable "floor", Beacon.human_attribute_name(:floor) %></th>
+        <th class="sortable"><%= sortable "beacons.created_at", Beacon.human_attribute_name(:created_at) %></th>
+        <th><%= t('.details') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form_tag "beacons/batch_update", method: :patch, class: %W[batch-update-form] do %>
+        <%= hidden_field_tag 'beacon[zone_id]' %>
+        <%= hidden_field_tag 'beacon[floor]' %>
+        <% @beacons.each do |beacon| %>
+          <tr data-zone-id="<%= beacon.zone_id %>" data-floor="<%= beacon.floor %>">
+            <td class="zone-mark disable-select" style="background: <%= (beacon.zone && beacon.zone.hex_color) || 'transparent' %>"></td>
+            <td class="with-checkbox"><input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" /></td>
+            <td><%= truncate(beacon.name, length: 30) %></td>
+            <td class="beacon_zone">
+              <% if beacon.zone_name? %>
+                <%= truncate(beacon.zone_name, length: 30) %>
+              <% else %>
+                <%= t('.unassigned_zone') %>
+              <% end %>
+            </td>
+            <td class="beacon_floor">
+              <% if beacon.floor.present? %>
+                <%= beacon.floor %>
+              <% else %>
+                <%= t('.unassigned_floor') %>
+              <% end %>
+            </td>
+            <td><%= beacon.created_at.to_formatted_s(:two_digits) %></td>
+            <td class="disable-select">
+              <%= button_link :edit, edit_beacon_path(beacon), dynamic_width: true %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= prompt_modal(t('beacons.modal.title'), t('beacons.modal.body')) %>

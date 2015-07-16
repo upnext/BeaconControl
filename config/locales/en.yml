@@ -1,0 +1,148 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+
+en:
+  modal:
+    close: 'Close'
+    delete: 'Delete'
+    positive: 'Yes'
+    negative: 'No'
+
+    cancel: "Cancel"
+  helpers:
+    links:
+      add: "Add"
+      back: "Back"
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+      destroy: "Delete"
+      new: "New"
+      edit: "Edit"
+      save: "Save"
+      delete: "Delete"
+      remove: "Remove"
+    titles:
+      edit: "Edit %{model}"
+      save: "Save %{model}"
+      new: "New %{model}"
+      delete: "Delete %{model}"
+
+  models:
+    rpush_apns:
+      passphrase_error: "Wrong password or corrupted file"
+      cert_error: "Wrong password or corrupted file"
+
+  activerecord:
+    attributes:
+      activity:
+        name: "Action name"
+        url: "URL"
+
+      admin:
+        id: "ID"
+        email: "Email"
+        role: "Role"
+        roles:
+          admin: "Admin"
+          beacon_manager: "Beacon Manager"
+        created_at: "Created At"
+
+      application:
+        test: "Test"
+
+      beacon:
+        id: "ID"
+        name: "Beacon Name"
+        major: "Major"
+        minor: "Minor"
+        location: "Location"
+        floor: "Floor"
+        lat: "Latitude"
+        lng: "Longitude"
+        created_at: "Added on"
+        zone: "Zone"
+
+      trigger:
+        type: "Based on"
+        event_type: "Trigger"
+        add_beacon: "Assign to a Beacon"
+        add_zone: "Assign to a Zone"
+        test: "Test notification"
+
+      zone:
+        id: "ID"
+        name: "Name"
+
+    errors:
+      models:
+        admin:
+          attributes:
+            password_confirmation:
+              mismatch: "Password does not match"
+        beacon:
+          attributes:
+            manager_id:
+              wrong_role: "Should have beacon_manager role"
+
+        zone:
+          attributes:
+            manager_id:
+              wrong_role: "Should have beacon_manager role"
+
+  admins:
+    shared:
+
+      layout:
+        email: "your email"
+        password: "password"
+        password_confirmation: "confirm password"
+        invitation_code: "Invitation code"
+        remember_me: "Remember me"
+        create_account: "create an account"
+        resend_confirmation_instructions: "Resend confirmation instructions"
+        set_password: "Set password"
+        log_in: "Log in"
+        sign_up: "Sign up"
+        forgot_password: "Forgot your password"
+        change_password: "Change password"
+        restore_password: "Restore password"
+        return_to_login: "Return to Log in"
+        have_account: "Have an account?"
+        send: "Send"
+        subheader: "Manage your customers' interactions with the world around them and learn from their behavior"
+
+      links:
+        forgot_password: "Forgot your password?"
+        have_account: "If you have an account:"
+        not_have_account: "Do not have an account?"
+        not_received_confirmation: "Didn't receive confirmation instructions?"
+        not_received_unlock: "Didn't receive unlock instructions?"
+        sign_in_with: "Sign in with %{provider}"
+
+  beacons:
+    zero: "no beacons"
+    one: "%{count} beacon"
+    other: "%{count} beacons"
+    test_notification:
+      title: 'Test this beacon'
+      hint: '(send the notification to your BeaconCtrl mobile app)'
+      name: 'Title'
+      placeholder: 'Hello world!'
+      default_message: "Your beacon is working."
+    form:
+      unassigned_floor: "N/A"
+      location_on_map: "Location on the map"
+    index:
+      new: "Add Beacon"
+      all_floors: "All"
+  maps:
+    show:
+      unassigned_floor: "N/A"
+  zones:
+    form:
+      currently_assigned_beacons: "Currently assigned beacons:"

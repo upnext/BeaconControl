@@ -1,0 +1,235 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+/* Admin acces */ 
+
+@admin-access-primary: #62BAE8;
+@admin-access-primary-hover: #88C9EB;
+@admin-access-error:    #c01212;
+
+html, body {
+  height: 100%;
+}
+
+#admin-access-topbar {
+  background: #fff;
+  height: 110px;
+  padding: 35px 0;
+  position: relative;
+
+  @media (max-width: 520px) {
+    height: 80px;
+    padding: 18px 0;
+  }
+
+  .logo {
+    background: image-url('beacon_logo.png') no-repeat;
+    display: block;
+    height: 46px;
+    width: 189px;
+    margin-top: -1px;
+    margin-left: 30px;
+  }
+}
+
+#admin-access {
+  background: @gray-lighter;
+  bottom: 0;
+  color: #4e4e4e;
+  font: 18px 'Avenir', sans-serif;
+  margin: auto;
+  display: table;
+  height: 100%;
+  left: 0;
+  margin: -110px auto auto;
+  padding-top: 100px;
+  right: 0;
+  table-layout: fixed;
+  top: 0;
+
+  @media (max-width: 520px) {
+    padding: 100px 30px 30px;
+    width: 100%;
+  }
+
+  .center-vertically {
+    display: table-cell;
+    padding: 60px 0;
+    vertical-align: middle;
+    width: 420px;
+
+    @media (max-width: 520px) {
+      width: 100%;
+    }
+  }
+
+   h1, h2 {
+    font-family: 'Avenir', sans-serif;
+  }
+
+  h1 {
+    color: #0D2041;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0 0 60px;
+    text-align: center;
+  }
+
+  h2 {
+    color: #4e4e4e;
+    font-size: 28px;
+    margin-bottom: 30px;
+
+    small {
+      color: #4e4e4e;
+      line-height: 36px;
+    }
+  }
+
+  a {
+    color: @admin-access-primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  form {
+    border: none;
+    margin: 0 auto;
+    width: 100%;
+
+    input[type=text],
+    input[type=email],
+    input[type=password]{
+      background: #fff;
+      border: 2px solid @admin-access-primary;
+      border-radius: 2px;
+      font: 20px 'Avenir', sans-serif;
+      font-weight: 300;
+      height: 56px;
+      padding: 16px 20px 12px;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+        border: 2px solid @admin-access-primary;
+      }
+
+      &.error {
+        border-color: @admin-access-error;
+        color: @admin-access-error !important;
+
+        &::-webkit-input-placeholder {
+           color: @admin-access-error;
+        }
+
+        &:-moz-placeholder {
+           color: @admin-access-error;
+        }
+
+        &::-moz-placeholder {
+           color: @admin-access-error;
+        }
+
+        &:-ms-input-placeholder {
+           color: @admin-access-error;
+        }
+      }
+    }
+
+    input[type=submit]{
+      background: @admin-access-primary;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      height: 56px;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      padding: 15px 0 15px 6px;
+      text-transform: uppercase;
+      width: 100%;
+      .transition(background, .2s, ease);
+
+      &:focus {
+        outline: none !important;
+      }
+
+      &:hover,
+      &:active {
+        background: @admin-access-primary-hover;
+      }
+    }
+  }
+
+  .checkbox {
+    margin: 20px 0 14px;
+    position: relative;
+
+    label {
+      cursor: pointer;
+      color: #4e4e4e;
+      display: inline;
+      padding-left: 27px;
+
+      &:before {
+        background: #fff;
+        border: 2px solid @admin-access-primary;
+        border-radius: 2px;
+        content: '';
+        display: inline-block;
+        height: 16px;
+        left: 0;
+        width: 16px;
+        position: absolute;
+        top: 4px;
+      }
+    }
+
+    input[type=checkbox] {
+      display: none;
+
+      &:checked + label:before {
+        background: @admin-access-primary image-url('icons/accept-white.png') no-repeat center !important;
+      }
+
+      &.error + label:before {
+        border-color: @admin-access-error;
+      }
+    }
+  }
+
+  .alert {
+    color: @admin-access-error;
+    margin: -10px 0 23px;
+    padding: 0;
+  }
+
+  .notice {
+    color: #189b3d;
+    margin: -10px 0 23px;
+  }
+
+  .form-group.has-error .help-inline, 
+  .fields.has-error .help-inline {
+    color: @admin-access-error;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .has-error .form-control {
+    border-color: @admin-access-error;
+
+    &:focus {
+      border-color: @admin-access-error;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+  }
+}

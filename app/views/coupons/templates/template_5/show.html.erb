@@ -1,0 +1,37 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header do %>
+  <style>
+    .coupon-header { background: transparent url('<%= with_host(@coupon.image.url) %>') no-repeat center center; }
+  </style>
+<% end %>
+
+<div class="coupon with-button">
+  <div class="coupon-header">
+  </div>
+  <div class="header-title">
+    <div class="coupon-logo">
+      <%= image_tag with_host(@coupon.logo.url) %>
+    </div>
+    <div class="coupon-title">
+      <h3><%= @coupon.name %></h3>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="coupon-content">
+    <h4><%= @coupon.title %></h4>
+    <p><%= @coupon.description %></p>
+  </div>
+  <div class="coupon-button">
+    <%= link_to @coupon.button_label, @coupon.button_link, class: %W[button],
+          style: "background: ##{@coupon.button_background_color}; color: ##{@coupon.button_font_color};"
+    %>
+  </div>
+</div>
+

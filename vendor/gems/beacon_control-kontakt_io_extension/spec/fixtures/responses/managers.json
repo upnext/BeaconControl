@@ -1,0 +1,50 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+{
+    "managers": [
+        {
+            "id": "65a0c6d5-5edc-877f-a4de-81308ea7d876",
+            "supervisorId": null,
+            "lastName": "Userio",
+            "email": "super@kontakt.io",
+            "devicesCount": 25,
+            "role": "SUPERUSER",
+            "firstName": "Superia",
+            "uniqueId": "co1SUR"
+        },
+        {
+            "id": "5fa4e4d2-d4d4-2356-a5a3-02d2d94ca66c",
+            "supervisorId": "65a0c6d5-5edc-877f-a4de-81308ea7d876",
+            "lastName": "Piper",
+            "email": "adsa@oo.pl",
+            "devicesCount": 0,
+            "role": "OPERATOR",
+            "firstName": "Peter",
+            "uniqueId": "4INXsF"
+        },
+        {
+            "id": "cdd31c00-26b8-11e4-8c21-0800200c9a66",
+            "supervisorId": "5fa4e4d2-d4d4-2356-a5a3-02d2d94ca66c",
+            "lastName": "Toulson",
+            "email": "stoulson@kontakt.io",
+            "devicesCount": 4,
+            "role": "OPERATOR",
+            "firstName": "Simon",
+            "uniqueId": "qHeqbj"
+        }
+    ],
+    "searchMeta": {
+        "startIndex": 0,
+        "maxResult": 50,
+        "prevResults": "",
+        "nextResults": "",
+        "orderBy": "created",
+        "order": "ASC"
+    }
+}

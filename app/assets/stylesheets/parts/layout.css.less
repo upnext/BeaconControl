@@ -1,0 +1,117 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+@navbar-weight: 70px;
+@sidebar-width: 250px;
+
+.main-navbar {
+  margin-bottom: 0;
+  min-height: @navbar-height;
+
+  @media (max-width: 767px) {
+    overflow: hidden;
+  }
+
+  .wrapper {
+
+    .navbar-header {
+      height: @navbar-height;
+
+      @media (min-width: 768px) {
+        display: block;
+        width: @sidebar-width;
+        padding-left: 5px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+      }
+
+      .navbar-brand {
+        font-size: 26px;
+        padding: 15px;
+
+        img {
+          margin-top: 6px;
+        }
+      }
+
+      @media (max-width: 767px) {
+
+        .navbar-toggle {
+          margin-top: 15px;
+          margin-bottom: 15px;
+          border: 1px solid @btn-success-border;
+
+          &:hover,
+          &:active,
+          &:focus {
+            background: @btn-success-bg;
+
+            .icon-bar {
+              background-color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    .navbar-collapse {
+
+      .navbar-nav {
+        .dropdown {
+          margin-right: 32px;
+          float: none;
+        }
+
+        .account-dropdown {
+          line-height: 23px;
+          padding: 21px 0 21px 0;
+          text-align: right;
+
+          overflow: hidden;
+          white-space: nowrap;
+          word-break: break-all;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  position: relative;
+  width: 100%;
+
+  .sidebar {
+
+    @media (min-width: 768px) {
+      display: block;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      width: @sidebar-width;
+      min-height: 100%;
+      box-sizing: border-box;
+      margin-top: @navbar-height;
+    }
+  }
+  .content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: 768px) {
+      margin-left: @sidebar-width;
+      width: ~"calc( 100% - 240px )";
+    }
+
+    .edit-area {
+      margin-top: 35px;
+    }
+  }
+}

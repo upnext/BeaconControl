@@ -1,0 +1,135 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+/*
+ * Mail template
+ */
+
+@import url("http://fast.fonts.net/cssapi/7f963086-9834-4df8-931c-daf6a0a27993.css");
+
+* {
+  font-family: "Avenir", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F5F5F6;
+  height: 100%;
+  width: 100% !important;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  padding: 25px 0;
+}
+
+a {
+  color: #62BAE8;
+  text-decoration: none;
+}
+
+p {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+p.under-btn {
+  margin: 0;
+  padding-top: 25px;
+}
+
+.btn {
+  background-color: #62BAE8;
+  border-radius: 2px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 15px auto;
+  padding: 14px 25px 12px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+table.wrapper,
+.content table {
+  width: 100%;
+}
+
+.container {
+  display: block !important;
+  clear: both !important;
+  margin: 0 auto !important;
+  max-width: 600px !important;
+}
+
+.content {
+  display: block;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 15px;
+}
+
+.header-content {
+  padding: 35px 15px;
+}
+
+.body-content {
+  color: #383A42;
+  font-size: 16px;
+  text-align: center;
+  padding: 60px;
+}
+
+.body-content > ul {
+  margin-left: 20px 30px;
+  text-align: left;
+}
+
+.footer {
+  text-align: center;
+}
+
+.footer p {
+  font-size: 14px;
+  padding: 0 30px;
+}
+
+.footer img {
+  padding-top: 25px;
+}
+
+.footer .content {
+  padding: 20px 50px;
+}
+
+.footer .copyrights .content {
+  color: #7B7B7B;
+  padding-top: 0px;
+}
+
+.footer .copyrights p {
+  margin: 4px 0;
+}
+
+.footer .copyrights .logo {
+  width: 140px;
+  opacity: 0.5;
+}

@@ -1,0 +1,76 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<div class="map-view">
+  <%= simple_form_for :beacon, url: search_beacons_path, html: { id: 'beacon-filter-form' }, defaults: { input_html: { class: %W[beacon-filter] } } do |f| %>
+    <div class="row">
+      <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">
+        <%= button_link :add_beacon, new_beacon_path, class: %w[btn-success btn-action-save] %>
+      </div>
+      <div class="col-xs-7 col-sm-6 col-md-6 col-lg-4">
+        <div id="beacon-actions" class="row">
+          <div class="col-xs-6" id="set-zone">
+            <select name="beacon[set_zone]" id="beacon_set_zone" class="select form-control selectpicker show-tick" data-live-search="true" data-size="6">
+              <% @form.zones.each do |zone| %>
+                <option value="<%= zone.id %>" class="with-border" data-color="<%= zone.hex_color %>" style="border-color: <%= zone.hex_color %>;"><%= truncate(zone.name, length: 30) %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="col-xs-6">
+            <%= f.input :set_floor, as: :select, collection: BeaconDecorator.floors_for_select(t('.unassigned_floor'), true), prompt: false, label: false, input_html: { class: %W[selectpicker] } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+        <div class="has-feedback">
+          <%= f.input :name, label: false, placeholder: t(".search") %>
+          <i class="glyphicon glyphicon-search form-control-feedback"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row map-view-top-container">
+      <div class="map-view-container">
+        <div class="map-view-sidebar">
+          <h5><%= t('.select_floor') %></h5>
+          <div class="map-view-sidebar-section">
+            <%= f.input :floor, as: :select, collection: @form.floors, include_blank: false, label: false, input_html: { class: %W[selectpicker] } %>
+          </div>
+
+          <h5><%= t('.filter_zone') %></h5>
+          <div class="map-view-sidebar-section">
+            <div class="zones-list">
+              <% @form.zones.each do |zone| %>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label class="zone-choose-label">
+                      <%= content_tag :span, class: %W(zone-mark), style: %W(border-color: #{zone.hex_color}) do %>
+                        <%= truncate(zone.name, length: 13) %>
+                      <% end %>
+                      <%= check_box_tag 'beacon[zone_id][]', zone.id || 'null', checked: true %>
+                    </label>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="beacon-info">
+          </div>
+        </div>
+        <div id="beacons-map">
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= prompt_modal(t('maps.modal.title'), t('maps.modal.body')) %>

@@ -1,0 +1,46 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<div class="profile-edit">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="beacon-os-box">
+        <div class="form-field-wrapper">
+          <%= simple_form_for(resource, as: resource_name, url: profile_path, html: { method: :put }) do |f| %>
+            <%= f.input :default_beacon_uuid, label: 'Default beacon UUID', autofocus: true, required: false, input_html: { class: %W[uuid-input] } %>
+
+            <div class="submit-section clearfix">
+              <%= f.button :submit, t('admins.edit.update'), class: %W[btn-success pull-right] %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="beacon-os-box">
+        <div class="form-field-wrapper">
+          <%= simple_form_for(resource, as: resource_name, url: admin_registration_path, html: { method: :put }) do |f| %>
+            <%= f.input :current_password %>
+            <%= f.input :password, autocomplete: "off" %>
+            <%= f.input :password_confirmation %>
+
+            <div class="submit-section clearfix">
+              <%= f.button :submit, t('admins.edit.change'), class: %W[btn-success pull-right] %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

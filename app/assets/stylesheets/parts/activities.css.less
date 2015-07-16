@@ -1,0 +1,298 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.elements-select {
+  table {
+    tr {
+      td {
+        border: 1px solid #D5D5D5;
+        &:first-child {
+          line-height: 26px;
+        }
+        &.button-holder {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.activity-buttons {
+  margin-left: -5px;
+  margin-right: -5px;
+  padding-bottom: 10px;
+
+  div {
+    width: 25%;
+    box-sizing: border-box;
+    padding-bottom: 25%;
+    float: left;
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    @media (max-width: 360px) {
+      width: 100%;
+      padding-bottom: 100%;
+    }
+
+    @media (min-width: 361px) and (max-width: 500px) {
+      width: 50%;
+      padding-bottom: 50%;
+    }
+
+    @media (min-width: 501px) and (max-width: 991px) {
+      width: 33.333332%;
+      padding-bottom: 33.333332%;
+    }
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+      width: 50%;
+      padding-bottom: 50%;
+    }
+
+    @media (min-width: 1280px) and (max-width: 1440px) {
+      width: 33.333332%;
+      padding-bottom: 33.333332%;
+    }
+
+    .activity-type {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      padding: 5px;
+      border: 0;
+      white-space: normal;
+      border-radius: 0;
+      background: @gray-light;
+      transition: all 0.2s;
+      font-weight: 400;
+      font-size: 16px;
+
+      &.active,
+      &:hover {
+        background: @brand-success;
+        color: #fff;
+      }
+
+      input {
+        display: none;
+      }
+
+      span {
+        display: block;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        margin-top: 50%;
+        height: 50%;
+        overflow: hidden;
+
+        /* Internet Explorer 10 */
+        display:-ms-flexbox;
+        -ms-flex-pack:center;
+        -ms-flex-align:center;
+
+        /* Firefox */
+        display:-moz-box;
+        -moz-box-pack:center;
+        -moz-box-align:center;
+
+        /* Safari, Opera, and Chrome */
+        display:-webkit-box;
+        -webkit-box-pack:center;
+        -webkit-box-align:center;
+
+        /* W3C */
+        display: box;
+        box-pack:center;
+        box-align:center;
+      }
+
+    }
+
+  }
+
+  &:after {
+    content: ' ';
+    clear: both;
+  }
+
+}
+
+.range-buttons {
+  margin-left: -5px;
+  margin-right: -5px;
+  padding-bottom: 10px;
+
+  div {
+    width: 25%;
+    box-sizing: border-box;
+    padding-bottom: 25%;
+    float: left;
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    @media (max-width: 360px) {
+      width: 100%;
+      padding-bottom: 20%;
+    }
+
+    @media (min-width: 361px) and (max-width: 500px) {
+      width: 50%;
+      padding-bottom: 20%;
+    }
+
+    @media (min-width: 501px) and (max-width: 991px) {
+      width: 50%;
+      padding-bottom: 10%;
+    }
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+      width: 50%;
+      padding-bottom: 20%;
+    }
+
+    @media (min-width: 1280px) and (max-width: 1440px) {
+      width: 50%;
+      padding-bottom: 10%;
+    }
+
+    .activity-type {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      padding: 5px;
+      border: 0;
+      white-space: normal;
+      border-radius: 0;
+      background: @gray-light;
+      transition: all 0.2s;
+      font-weight: 400;
+      font-size: 16px;
+
+      &.active,
+      &:hover {
+        background: @brand-success;
+        color: #fff;
+      }
+
+      input {
+        display: none;
+      }
+
+      span {
+        display: block;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        margin-top: 0;
+        height: 100%;
+        overflow: hidden;
+
+        /* Internet Explorer 10 */
+        display:-ms-flexbox;
+        -ms-flex-pack:center;
+        -ms-flex-align:center;
+
+        /* Firefox */
+        display:-moz-box;
+        -moz-box-pack:center;
+        -moz-box-align:center;
+
+        /* Safari, Opera, and Chrome */
+        display:-webkit-box;
+        -webkit-box-pack:center;
+        -webkit-box-align:center;
+
+        /* W3C */
+        display:box;
+        box-pack:center;
+        box-align:center;
+      }
+
+    }
+
+  }
+
+  &:after {
+    content: ' ';
+    clear: both;
+  }
+}
+
+form.new_activity, form.edit_activity {
+  h3 {
+    font-weight: 300;
+  }
+
+  .col-bordered {
+    @media (min-width: @screen-md) {
+      border-right: 1px solid @border-color;
+    }
+  }
+
+  .custom-attributes-header {
+    margin-top: 40px;
+    h3 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .custom-attribute {
+    position: relative;
+    margin-top: 10px;
+
+    .form-group {
+      width: 95%;
+    }
+
+    a.remove_nested_fields {
+      position: absolute;
+      right: 8px;
+      top: 3px;
+    }
+
+    span.fa-remove {
+      font-size: 36px;
+      color: @gray;
+      &:before { content: '\00d7'; }
+      &:hover, &:focus { color: red; }
+    }
+  }
+
+  .elements-select {
+    span.remove-element {
+      cursor: pointer;
+    }
+  }
+}
+
+.section-group.activities {
+  input.batch-delete-btn {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.stick-bottom {
+  background-color: #fff;
+  z-index: 1000;
+  bottom: 0;
+  position: fixed;
+  padding: 10px;
+  margin-left: -25px;
+  .calc(width; "100% - 250px");
+  border-top: 2px solid @border-color;
+}

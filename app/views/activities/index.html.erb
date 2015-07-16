@@ -1,0 +1,35 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= link_to t('.title'), applications_path %></span>
+  <span><%= @application.name %></span>
+<% end %>
+
+<%= render partial: 'shared/subheader' %>
+
+<div class="section-group activities">
+  <%= form_tag application_activities_path(@application), method: :delete do %>
+    <% %w(url custom coupon).each do |group| %>
+      <%= render partial: 'action', locals: { scheme: group } %>
+    <% end %>
+
+    <% @application.active_extensions.each do |ext| %>
+      <% ext.actions.each do |action| %>
+        <%= render partial: 'action', locals: { name: t(action[:i18n_key]), scheme: action[:scheme] } %>
+      <% end %>
+    <% end %>
+
+    <div class='stick-bottom batch-delete-bar'>
+      <%= submit_tag t('.delete_actions'), class: %W[btn btn-danger batch-delete-btn pull-right] %>
+    </div>
+
+  <% end %>
+</div>
+
+<%= prompt_modal(t('activities.modal.title'), t('activities.modal.body')) %>

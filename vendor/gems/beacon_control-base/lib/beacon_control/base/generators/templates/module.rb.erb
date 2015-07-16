@@ -1,0 +1,33 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+require "beacon_control/<%= file_name %>_extension/engine" if defined?(Rails)
+require "beacon_control/<%= file_name %>_extension/version"
+
+module BeaconControl
+  module <%= class_name %>Extension
+    include BeaconControl::Base::Extension
+
+    self.registered_name = "<%= class_name %>"
+
+    register_extension! 'beacon_control-<%= file_name %>_extension'
+
+    def self.table_name_prefix
+      "ext_<%= file_name %>_"
+    end
+
+    # Does files needs to be loaded without constant missing mechanism.
+    # For example:
+    # * You want add some functionality to model
+    # * You want override some class/instance methods
+    # @see {BeaconControl::Base#load_extensions!}
+    def self.load_files
+      []
+    end
+  end
+end

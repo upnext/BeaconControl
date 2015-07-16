@@ -1,0 +1,45 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.section-group {
+  padding: 30px 10px;
+
+  .items-section {
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid @border-color;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: @gray-dark;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 30px;
+      font-size: 28px;
+      font-weight: 300;
+      margin-top: 6px;
+      margin-bottom: 11px;
+    }
+
+    .items-list {
+      overflow: hidden;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-top: 20px;
+      margin-bottom: 0px;
+
+      li {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+// This CSS is used in coupon preview when creating "COUPON" activity
+//   for chosen application, e.g. /applications/1/activities/coupon/new
+
+.preview-wrapper {
+  width: 350px;
+  margin: 0 auto;
+}
+
+.preview-container {
+  background-image: image-url('iphone-frame.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 64px;
+
+  width: 350px;
+  height: 740px;
+  padding-top: 117px;
+
+  &.affix {
+    top: 20px;
+  }
+}
+
+.coupon-preview {
+  overflow: hidden;
+  display: block;
+  border: none;
+
+  width: 306px;
+  height: 527px;
+  margin-left: 22px;
+}
+
+// Coupon preview media queries for different screen heights
+@media (min-height: 800px) {
+  .preview-container {
+    width: 301px;
+    height: 640px;
+    padding-top: 103px;
+    margin: -320px 0 0 0 !important;
+  }
+  .coupon-preview {
+    width: 263px;
+    height: 454px;
+    margin-left: 20px;
+  }
+  .coupon {
+    .coupon-fx(300px, 11px, 54px);
+  }
+}
+@media (min-height: 700px) and (max-height: 799px) {
+  .preview-container {
+    width: 253px;
+    height: 540px;
+    padding-top: 87px;
+    margin: -270px 0 0 0 !important;
+  }
+  .coupon-preview {
+    width: 223px;
+    height: 383px;
+    margin-left: 16px;
+  }
+  .coupon {
+    .coupon-fx(250px, 8px, 47px);
+  }
+}
+@media (min-height: 600px) and (max-height: 699px) {
+  .preview-container {
+    width: 206px;
+    height: 440px;
+    padding-top: 70px;
+    margin: -220px 0 0 0 !important;
+  }
+  .coupon-preview {
+    width: 182px;
+    height: 312px;
+    margin-left: 13px;
+  }
+  .coupon {
+    .coupon-fx(200px, 5px, 40px);
+  }
+}
+@media (max-height: 599px) {
+  .preview-container.affix {
+    position: static;
+  }
+  .preview-container {
+    width: 206px;
+    height: 440px;
+    padding-top: 70px;
+    margin: -220px 0 0 0 !important;
+  }
+  .coupon-preview {
+    width: 182px;
+    height: 312px;
+    margin-left: 13px;
+  }
+  .coupon {
+    .coupon-fx(200px, 5px, 40px);
+  }
+}

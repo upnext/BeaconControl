@@ -1,0 +1,18 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= content_for :scheme_content_right do %>
+  <h3><%= t("activities.form.scheme.#{@activity.scheme}") %> <%= t("activities.form.action") %></h3>
+  <%= f.input :name, required: false %>
+  <%= f.input :url, wrapper: :append do %>
+    <div class="input-group">
+      <div class="input-group-addon prefix">http://</div>
+      <%= f.input_field :url, value: @activity.url_without_protocol %>
+    </div>
+  <% end %>
+<% end %>

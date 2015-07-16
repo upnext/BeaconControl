@@ -1,0 +1,19 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+  <div class="controls left">
+    <%= activity.delete_checkbox %>
+  </div>
+  <div class="controls">
+    <%= activity.destroy_link(@application) %>
+  </div>
+  <%= link_to edit_application_activity_path(@application, activity), class: %W[item-box edit] do %>
+    <h3><%= activity.name %></h3>
+  <% end %>
+</li>

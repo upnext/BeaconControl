@@ -1,0 +1,50 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<link rel="stylesheet" href="email" />
+
+<table class="wrapper" bgcolor="#F5F5F6">
+  <tr>
+    <td>
+      <div class="content header-content">
+        <%= image_tag 'beacon_logo.png', class: 'logo' %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="wrapper container">
+  <tr>
+    <td bgcolor="#FFFFFF">
+      <div class="body-content">
+        <%= yield %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="footer wrapper">
+  <tr>
+    <td class="container">
+      <div class="content">
+        <%= content_for 'links' %>
+      </div>
+    </td>
+  </tr>
+  <tr class="copyrights">
+    <td>
+      <div class="content">
+        <p><%= t('.beacon_ctrl_team') %></p>
+        <p><a href='www.beaconctrl.com'>www.beaconctrl.com</a></p>
+        <p>
+          <%= image_tag 'upnext_logo.png', class: 'logo' %>
+        </p>
+      </div>
+    </td>
+  </tr>
+</table>

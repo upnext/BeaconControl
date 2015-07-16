@@ -1,0 +1,28 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= content_for :scheme_content_right do %>
+  <h3><%= t("activities.form.scheme.#{@activity.scheme}") %> <%= t("activities.form.action") %></h3>
+
+  <%= f.input :name, required: false %>
+
+  <div class="clearfix custom-attributes-header">
+    <h3 class="pull-left"><%= t(".attributes") %></h3>
+    <%= f.link_to_add t("helpers.links.add"), :custom_attributes, data: { target: "#custom-payload" }, class: button_class('pull-right', action: :new, static: true) %>
+  </div>
+
+  <div class="custom-attributes" id="custom-payload">
+    <%= f.fields_for :custom_attributes do |ff| %>
+      <div class="well custom-attribute">
+        <%= ff.link_to_remove awesome_icon(:remove) %>
+        <%= ff.input :name %>
+        <%= ff.input :value %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+{
+  "name": "BeaconCtrl",
+  "description": "Setup and manage even large beacon deployments with BeaconCtrl - our open source platform",
+  "repository": "https://github.com/upnext/BeaconOS",
+  "website": "http://www.beaconctrl.com/",
+  "logo": "http://admin.beaconctrl.com/logo.svg",
+  "env": {
+    "RAILS_ENV": "production",
+    "RACK_ENV": "production",
+    "RAILS_SERVE_STATIC_FILES": "true"
+  },
+  "scripts": {
+    "postdeploy": "bundle exec ./bin/heroku_postdeploy"
+  },
+  "addons": ["cleardb:ignite", "redistogo:nano"]
+}

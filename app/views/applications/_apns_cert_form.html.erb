@@ -1,0 +1,41 @@
+<%= simple_nested_form_for @application, url: set_apns_sandbox_cert_application_path, method: :post do |f| %>
+  <h3>APNS Sandbox</h3> <%= "(uploaded)" if @application.apns_app_sandbox.try(:persisted?) %>
+
+  <%= f.simple_fields_for :apns_app_sandbox do |rpush_apps_application| %>
+    <%= rpush_apps_application.input :passphrase, as: :password, placeholder: "Passphrase" %>
+    <%= rpush_apps_application.input :cert_p12, as: :file %>
+    <div class="form-group clearfix">
+      <%= f.button :submit, t('.save'),
+                   class: button_class('pull-right', action: :save, static: true)
+      %>
+      <% if rpush_apps_application.object.persisted? %>
+        <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+                    application_rpush_apps_application_path(@application, rpush_apps_application.object),
+                    class: button_class('pull-right', action: :cancel, static: true),
+                    method: :delete
+        %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= simple_nested_form_for @application, url: set_apns_production_cert_application_path, method: :post do |f| %>
+  <h3>APNS Production</h3> <%= "(uploaded)" if @application.apns_app_production.try(:persisted?) %>
+
+  <%= f.simple_fields_for :apns_app_production do |rpush_apps_application| %>
+    <%= rpush_apps_application.input :passphrase, as: :password, placeholder: "Passphrase" %>
+    <%= rpush_apps_application.input :cert_p12, as: :file %>
+    <div class="form-group clearfix">
+      <%= f.button :submit, t('.save'),
+                   class: button_class('pull-right', action: :save, static: true)
+      %>
+      <% if rpush_apps_application.object.persisted? %>
+        <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+                    application_rpush_apps_application_path(@application, rpush_apps_application.object),
+                    class: button_class('pull-right', action: :cancel, static: true),
+                    method: :delete
+        %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

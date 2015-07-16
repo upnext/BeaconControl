@@ -1,0 +1,107 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+#beacon-map {
+  width: 100%;
+  height: 450px;
+  border: 1px solid #ccc;
+
+  margin-bottom: 25px;
+}
+
+.beacons-navbar {
+  margin: 10px;
+
+  ul {
+    list-style-type: none;
+    display: inline-block;
+    word-spacing: -4px;
+    padding: 0px;
+
+    li {
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      border: 1px solid #d3d3d3;
+      border-right: 0px;
+      background-color: #fff;
+
+      &:last-child {
+        border-right: 1px solid #d3d3d3;
+      }
+    }
+  }
+}
+select#beacon_zone_id {
+  option:first-child {
+    background-color: #494846;
+  }
+}
+
+div.beacons-table {
+  margin-top: 20px;
+  min-height: 430px;
+
+  form {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid @table-border-color;
+    border-bottom-width: 0;
+
+    .has-feedback {
+      .form-control {
+        padding-right: 45px;
+      }
+
+      .search_table_beacon_name {
+        width: 100%;
+      }
+    }
+
+    .row {
+      a, .btn-group, input { width: 100%; }
+    }
+  }
+
+  thead {
+    th {
+      background-color: @gray-lighter;
+    }
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+    }
+
+    td.disable-select {
+      cursor: initial;
+    }
+  }
+
+  .zone-mark {
+    padding-left:  2px;
+    padding-right: 2px;
+    width: 1px;
+  }
+
+  .select-all-checkbox {
+    input {
+      margin-left: 8px;
+    }
+  }
+
+  .with-checkbox input.checkbox {
+    margin-left: 4px;
+    margin-top: 15px;
+  }
+
+  td > .btn {
+    color: black;
+  }
+}

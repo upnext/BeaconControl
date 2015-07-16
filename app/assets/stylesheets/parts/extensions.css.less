@@ -1,0 +1,46 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.event-extentions {
+
+  .items-section {
+
+    .items-list {
+
+      li {
+
+        .controls {
+
+          .fa-power-off {
+            color: #f00;
+          }
+        }
+
+        &.inactive {
+
+          .controls {
+
+            .fa-power-off {
+              color: @brand-success;
+            }
+          }
+
+          .item-box {
+            border-top-color: #898989;
+            background: #FFF image-url('icons/addon_box_background.png') no-repeat center;
+            transition: all 0.2s;
+
+            h3 {
+              color: @gray-dark;
+            }
+          }
+        }
+      }
+    }
+  }
+}

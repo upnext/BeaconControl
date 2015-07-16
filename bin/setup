@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path("../lib",File.dirname(__FILE__))
+
+require "pathname"
+require "yaml"
+require "string"
+require "fileutils"
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+Dir.chdir APP_ROOT do
+  puts "== Ruby check =="
+
+  # Check Ruby version
+  if Gem::Version.new(RUBY_VERSION) > Gem::Version.new("1.9.3")
+    puts "Ruby version: #{RUBY_VERSION}".green
+  else
+    puts "Ruby #{RUBY_VERSION} will be deprecated soon and >= 2.0.0 is advised".red
+  end
+
+  # Run rest of the rake setup tasks
+  if File.exist?("Rakefile")
+    system "rake setup:all"
+  else
+    puts "No Rakefile found".red
+  end
+end

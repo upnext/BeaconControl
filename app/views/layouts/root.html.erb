@@ -1,0 +1,63 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : t('.site_title') %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+
+    <%= render partial: 'shared/ga' %>
+</head>
+
+<body>
+  <nav class="main-navbar navbar navbar-default" role="navigation">
+    <div class="wrapper">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only"><%= t('.toggle_nav') %></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><div class="logo"></div></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <%= render 'shared/header' %>
+        <ul class="nav navbar-nav visible-xs-block">
+          <%= content_for(:menu_links) %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown visible-sm-block visible-md-block visible-lg-block">
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="main">
+      <div class="sidebar">
+        <ul class="nav nav-sidebar">
+          <%= content_for(:menu_links) %>
+        </ul>
+      </div>
+      <div class="content">
+        <%= yield %>
+      </div>
+  </div>
+</body>
+</html>

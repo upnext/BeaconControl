@@ -1,0 +1,40 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<!-- Modal -->
+<div class="modal fade delete-modal" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="Destroy" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only"><%= t('modal.close') %></span>
+        </button>
+        <h4 class="modal-title"><%= title %></h4>
+      </div>
+      <div class="modal-body">
+        <%= body %>
+      </div>
+      <div class="modal-footer">
+        <%= content_tag :button,
+                        class: button_class('btn-default', action: :cancel, static: true),
+                        type: 'button',
+                        data: {
+                            dismiss: 'modal'
+                        } do %>
+          <%= t('modal.cancel') %>
+        <% end %>
+        <%= button_link :delete, '#',
+                        class: %W[btn modal-button delete-action],
+                        data: { method: 'delete' }
+        %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal -->

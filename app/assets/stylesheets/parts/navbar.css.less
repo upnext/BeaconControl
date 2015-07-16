@@ -1,0 +1,85 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+@import "custom_bootstrap/variables.less";
+
+.navbar {
+  border: 0;
+  text-transform: uppercase;
+
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-header {
+    background: #fff;
+
+    @media (min-width: 768px) {
+      border-right: 2px solid @border-color;
+
+      .navbar-brand {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        margin-left: -32px;
+      }
+    }
+
+    .navbar-brand {
+      &:hover, &:focus {
+        background: transparent;
+      }
+
+      .logo {
+        display: inline-block;
+        width: 172px;
+        height: 43px;
+        background: image-url('beacon_logo.png') no-repeat;
+        background-size: contain !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -96px;
+        margin-top: -21.5px;
+
+        @media
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+          background: image-url('beacon_logo@2x.png') no-repeat;
+        }
+      }
+    }
+  }
+
+  .navbar-collapse {
+    background: #fff;
+  }
+}
+
+#bs-example-navbar-collapse-1 {
+  border-bottom: 2px solid @input-border;
+
+  @media (min-width: 768px) {
+    margin-left: @sidebar-width;
+    padding-left: 5px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -10;
+  }
+
+  & > .page-header {
+    width: 70%;
+  }
+  & > .navbar-right {
+    width: 30%;
+  }
+}

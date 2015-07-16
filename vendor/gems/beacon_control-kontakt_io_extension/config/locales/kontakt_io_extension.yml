@@ -1,0 +1,62 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+
+en:
+  beacon_control:
+    kontakt_io_extension:
+      beacons:
+        index:
+          title: Kontakt.io
+          import: Import beacons
+          sync: Sync beacons
+        import:
+          title: Kontakt.io
+          action: Import beacons
+        sync:
+          header: Synchronized beacons
+          import: Import beacons
+          title: Kontakt.io
+          action: Synchronized beacons
+        form:
+          submit: Import
+        list:
+          header: Beacons
+          unique_id: Unique ID
+          name: Name
+          major: Major
+          minor: Minor
+
+      extensions_marketplace:
+        form:
+          test: Test
+          api_key_valid: API Key valid, %{beacon_count} beacons found!
+
+        info:
+          get_your_api_key: Get your API key
+          all_requests_to_the_kontakt_io: All requests to the Kontakt.io API require an <code>Api-Key</code> header containing your <strong>API key</strong>. Your API key is unique and gives you secure access to your Devices and other resources.
+          when_you_receive_your_devices: When you receive your Devices (Beacons, Cloud Beacons etc), they will all be assigned to the SUPERUSER manager for your company and you can retrieve your API key as described as below.
+          to_get_your_superuser_manager: To get your SUPERUSER manager API key from the WebPanel
+          sign_into_your_kontakt_io: Sign into your Kontakt.io
+          kontakt_io_web_panel: Kontakt.io Web Panel
+          web_panel_account: Web Panel account
+          if_you_haven_t_already_done: If you haven’t already done this, then check out our article
+          how_to_sign_in_to_your_kontakt: How to sign in to your Kontakt.io Web Panel for the first time
+          on_the_footer_of_the_web_panel: On the footer of the Web Panel page, you’ll see a link to <strong>Get API key</strong> at the bottom left. Click the link to display your key.
+          how_do_i_find_my_developer_api: How do I find my developer API Key
+
+  kontakt_io_extension:
+    configurations:
+      api_key: API key
+    sidebar_links:
+      kontakt_io: Kontakt.io
+    settings:
+
+  activities:
+    form:
+      scheme:
+        kontakt_io: KontaktIo

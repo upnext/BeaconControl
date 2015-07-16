@@ -1,0 +1,20 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= link_to t('.title'), beacon_control_kontakt_io_extension.beacons_path %></span>
+  <span><%= t('.action') %></span>
+<% end %>
+
+<div class="row form-container container">
+  <h3 class="kontakt-io"><%= t(".header") %></h3>
+  <div class="kontakt-io-table-buttons">
+    <%= link_to t(".import"), beacon_control_kontakt_io_extension.import_beacons_path, class: "btn btn-static-width-large btn-success", method: :post %>
+  </div>
+  <%= render partial: "list" %>
+</div>

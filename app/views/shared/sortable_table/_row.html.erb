@@ -1,0 +1,33 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= content_tag :tr, data: (object_row_data ? object_row_data.call(object) : {}) do %>
+  <td class="with-checkbox">
+    <%= check_box_tag(
+            "#{active_record.name.underscore}_ids[]",
+            object.id,
+            false,
+            id: "#{active_record.name.underscore}_#{object.id}",
+            class: %w[checkbox value-checkbox],
+        )
+    %>
+  </td>
+  <% fields.each do |field| %>
+    <%= content_tag(:td, class: ["#{active_record.table_name}_#{field}"]) do %>
+      <%- value = object.send(field) %>
+      <% if value.is_a?(Date) || value.is_a?(Time) || value.is_a?(DateTime) %>
+        <%= value.to_formatted_s(:two_digits) %>
+      <% elsif value.present? %>
+        <%= truncate(value, length: 30) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <td class="disable-select">
+    <%= link_to "Edit", polymorphic_path(object, action: :edit), class: 'btn btn-default' %>
+  </td>
+<% end %>

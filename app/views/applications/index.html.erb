@@ -1,0 +1,41 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= t('.title') %></span>
+<% end %>
+
+<ul class="items-list">
+  <% @applications.each do |application| %>
+    <li class="col-lg-4 col-md-6 col-xs-12">
+      <%= render application %>
+    </li>
+  <% end %>
+
+  <div class="application-form">
+    <li class="col-lg-4 col-md-6 col-xs-12 create-application hidden">
+      <div class="controls">
+        <a href="#" class="accept"><span class="bos bos-accept"></span></a>
+        <a href="#" class="cancel"><span class="bos bos-cancel"></span></a>
+      </div>
+      <a class="item-box">
+        <%= simple_form_for :application do |f| %>
+          <h3><%= f.input_field :name, label: false, class: %W[no-border], placeholder: "Name your App" %></h3>
+        <% end %>
+      </a>
+    </li>
+
+    <li class="col-lg-4 col-md-6 col-xs-12 add-application">
+      <a class="item-box add">
+        <div>+</div>
+      </a>
+    </li>
+  </div>
+</ul>
+
+<%= prompt_modal(t('applications.modal.title'), t('applications.modal.body')) %>

@@ -1,0 +1,70 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= content_for :scheme_content_right do %>
+  <div class="preview-wrapper">
+    <div class="preview-container visible-md-block visible-lg-block stick-80-top">
+      <div class="coupon-preview"></div>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :scheme_content_left do %>
+  <h3><%= t("activities.form.scheme.#{@activity.scheme}") %></h3>
+  <%= f.input :name, required: false %>
+
+  <div class="coupon-fields" data-mappings=<%= Coupon::TEMPLATE_FIELDS.to_json %>>
+    <%= f.fields_for :coupon do |coupon| %>
+      <%= coupon.input :template, as: :select, collection: coupon.object.decorate.templates_list, include_blank: false, input_html: { class: %W[selectpicker] } %>
+
+      <div class="filtered-field" data-name="encoding_type">
+        <%= coupon.input :encoding_type, as: :select, collection: coupon.object.decorate.encoding_types_list, include_blank: false, input_html: { class: %W[selectpicker] } %>
+      </div>
+      <div class="filtered-field" data-name="unique_identifier_number">
+        <%= coupon.input :unique_identifier_number %>
+      </div>
+      <div class="filtered-field" data-name="identifier_number">
+        <%= coupon.input :identifier_number %>
+      </div>
+
+      <%= coupon.input :name %>
+      <%= coupon.input :title %>
+      <%= coupon.input :description, as: :text %>
+
+      <div class="filtered-field" data-name="button_label">
+        <%= coupon.input :button_label %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="filtered-field" data-name="button_background_color">
+            <%= coupon.input :button_background_color, input_html: { class: %W[pick-a-color] }, label: t('.button_background_color') %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="filtered-field" data-name="button_font_color">
+            <%= coupon.input :button_font_color, input_html: { class: %W[pick-a-color] }, label: t('.button_font_color')  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="filtered-field" data-name="button_link">
+        <%= coupon.input :button_link %>
+      </div>
+
+      <div id="activity-logo" class="filtered-field" data-name="logo">
+        <%= render partial: 'shared/image_input', locals: { form: coupon, object_name: :logo } %>
+      </div>
+
+      <div id="activity-image" class="filtered-field" data-name="image">
+        <%= render partial: 'shared/image_input', locals: { form: coupon, object_name: :image } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

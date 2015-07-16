@@ -1,0 +1,35 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="form-group field-triggered field-triggered-dwell_time dwell-time-container">
+  <div class="row">
+    <div class="col-xs-12">
+      <%= trigger.label :dwell_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-md-5 col-lg-4">
+      <%= text_field_tag :dwell_time_preview, t('.dwell_time_preview', time: trigger.object.dwell_time), class: 'form-control' %>
+    </div>
+    <div class="col-sm-8 col-md-7 col-lg-8 dwell-time-slider-container">
+      <%= trigger.input :dwell_time, as: :string, label: false,
+        input_html: {
+          class: 'slider dwell-time-slider',
+          data: {
+            slider_min:     Trigger::DWELL_TIME.min,
+            slider_max:     Trigger::DWELL_TIME.max,
+            slider_step:    Trigger::DWELL_TIME.step,
+            slider_value:   trigger.object.dwell_time,
+            slider_handle:  :square
+          }
+      } %>
+      <span class="dwell-time-hint dwell-time-min"><%= Trigger::DWELL_TIME.min %> min</span>
+      <span class="dwell-time-hint dwell-time-max"><%= Trigger::DWELL_TIME.max %> min</span>
+    </div>
+  </div>
+</div>

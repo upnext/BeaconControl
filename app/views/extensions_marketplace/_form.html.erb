@@ -1,0 +1,26 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div class="row form-container">
+  <% content_for :extension_configurations do %>
+    <%= simple_nested_form_for @account_extension, url: main_app.extensions_marketplace_path(resource), method: :put do |f| %>
+
+      <%= render partial: 'extensions_marketplace/form_fields', locals: {f: f} %>
+
+      <div class="form-group clearfix">
+        <%= f.button :submit, t('helpers.links.save'), class: %W[btn-success pull-right] %>
+        <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+            main_app.extensions_marketplace_index_path, class: %W[btn btn-primary pull-right] %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= ext_configuration_partial(@account_extension.extension_name) %>
+
+  <%= yield :extension_configurations %>
+</div>

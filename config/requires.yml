@@ -1,0 +1,33 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+
+database:
+
+  mysql2:
+    name: "Mysql"
+    command: "mysql --version"
+    matcher: "Distrib ((\\d+\\.?){2,3})"
+    minimum: "4.0.0"
+    suggested: "5.5.0"
+    install: "https://dev.mysql.com/doc/refman/5.5/en/installing.html"
+
+  postgresql:
+    name: "PostgreSQL"
+    command: "psql --version"
+    matcher: "\\(PostgreSQL\\) ((\\d+\\.?){2,3})"
+    minimum: "8.1.0"
+    suggested: "9.3.0"
+    install: "http://www.postgresql.org/docs/9.3/static/tutorial-install.html"
+
+redis:
+  name: "Redis"
+  command: "redis-server --version"
+  matcher: "v=((\\d+\\.?){2,3})"
+  minimum: "2.4.0"
+  suggested: "2.5.10"
+  install: "http://redis.io/topics/quickstart#installing-redis"

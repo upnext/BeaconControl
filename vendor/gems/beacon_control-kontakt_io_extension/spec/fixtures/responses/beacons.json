@@ -1,0 +1,65 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+{
+    "beacons": [
+        {
+            "interval": 350.0,
+            "alias": null,
+            "minor": 58568,
+            "txPower": 3,
+            "venue": null,
+            "actionsCount": 0,
+            "uniqueId": "0YA4",
+            "id": "df3b124f-ae00-474d-bff6-610d4a83c027",
+            "proximity": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+            "deviceType": "BEACON",
+            "managerId": "60f98f65-3afe-4805-8b4c-87786d2bfb26",
+            "name": "Kontakt",
+            "major": 43277
+        },
+        {
+            "interval": 350.0,
+            "alias": null,
+            "minor": 47821,
+            "txPower": 3,
+            "venue": null,
+            "actionsCount": 0,
+            "uniqueId": "IMS2",
+            "id": "bfbb4963-7210-4e85-831e-b30115adb659",
+            "proximity": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+            "deviceType": "BEACON",
+            "managerId": "60f98f65-3afe-4805-8b4c-87786d2bfb26",
+            "name": "Kontakt",
+            "major": 24089
+        },
+        {
+            "interval": 350.0,
+            "alias": null,
+            "minor": 64274,
+            "txPower": 3,
+            "venue": null,
+            "actionsCount": 0,
+            "uniqueId": "9GF3",
+            "id": "bfb4963b-7021-4e85-831e-b30115adb659",
+            "proximity": "6da6f782-984e-4fa2-8024-71e0893ebc5b",
+            "deviceType": "BEACON",
+            "managerId": "60f98f65-3afe-4805-8b4c-87786d2bfb26",
+            "name": "Kontakt",
+            "major": 23572
+        }
+    ],
+    "searchMeta": {
+        "startIndex": 0,
+        "maxResult": 50,
+        "prevResults": "",
+        "nextResults": "",
+        "orderBy": "created",
+        "order": "ASC"
+    }
+}

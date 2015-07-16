@@ -1,0 +1,25 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= render layout: 'admins/shared/layout' do %>
+  <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), html: { method: :post }) do |f| %>
+
+    <h2><%= t('.resend_confirmation_instructions') %></h2>
+
+    <div class="alert alert-error">
+      <%= f.full_error :confirmation_token %>
+    </div>
+
+    <%= f.input :email, required: false, autofocus: true, label: false, placeholder: "Email" %>
+
+    <%= f.button :submit, t(".send"), class: %W[btn btn-sm btn-success pull-right] %>
+
+    <%= link_to t('.return_to_login'), new_session_path(resource_name) %>
+
+  <% end %>
+<% end %>

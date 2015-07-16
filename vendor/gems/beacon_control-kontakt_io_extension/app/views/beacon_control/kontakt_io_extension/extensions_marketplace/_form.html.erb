@@ -1,0 +1,35 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :extension_configurations, flush: true do %>
+  <% if @valid %>
+    <div class="alert alert-success" role="alert">
+      <p><%= t('.api_key_valid', beacon_count: @beacons_count) %></p>
+    </div>
+  <% end %>
+
+  <%= simple_nested_form_for @account_extension, url: beacon_control_kontakt_io_extension.extensions_marketplace_path, method: :put do |f| %>
+    <div class="row form-container">
+      <div class="col-md-6 first-column">
+      <%= hidden_field_tag :valid, @valid %>
+
+      <%= render partial: 'extensions_marketplace/form_fields', locals: {f: f} %>
+
+      <div class="form-group clearfix">
+        <%= f.button :button, t('helpers.links.save'), name: :commit, value: 'save', class: 'btn-success btn-static-width pull-right', disabled: !@valid %>
+        <%= f.button :button, t('.test'), name: :commit, value: 'test', class: 'btn-success btn-static-width pull-right' %>
+        <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+            main_app.extensions_marketplace_index_path, class: 'btn btn-primary btn-static-width pull-right' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-6 second-column">
+    <%= render partial: "beacon_control/kontakt_io_extension/extensions_marketplace/info" %>
+  </div>
+<% end %>

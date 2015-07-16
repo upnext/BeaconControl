@@ -1,0 +1,315 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###
+#
+en:
+  activities:
+    scheme:
+      coupon:
+        button_background_color: 'Button background'
+        button_font_color: 'Button text'
+      custom:
+        attributes: 'Attributes'
+
+    action:
+      scheme:
+        header:
+          url: 'URL actions'
+          coupon: 'Coupons'
+          custom: 'Custom actions'
+          default: "%{scheme} actions"
+
+    edit:
+      title: "Applications"
+      action: "Edit %{scheme} action"
+
+    form:
+      add: "Add"
+      essentials: "Essentials"
+      action: "action"
+      remove: "Remove"
+      search_beacon: "Search for a beacon"
+      search_zone: "Search for a zone"
+      submit:
+        edit: 'Save action'
+        new: 'Add action'
+      scheme:
+        url: 'URL'
+        coupon: 'Coupon'
+        custom: 'Custom'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete action?'
+
+    new:
+      title: "Applications"
+      action: "Add new %{scheme} action"
+
+    index:
+      title: 'Applications'
+      delete_actions: 'Delete Actions'
+
+  analytics:
+    show:
+      dwell_time_title: 'Dwell time'
+      actions_title: 'Actions'
+      active_users_title: 'Active users'
+
+  applications:
+    application:
+      created_at: 'Created at: %{date}'
+
+    form:
+      save: 'Save'
+      update: 'Update'
+      cancel: 'Cancel'
+
+    apns_cert_form:
+      save: 'Save'
+      update: 'Update'
+      cancel: 'Cancel'
+
+    index:
+      title: 'Applications'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete application?'
+
+    new:
+      form_placeholder: 'Application name'
+      add_new: 'Add new'
+
+    edit:
+      title: 'Applications'
+
+  zones:
+    edit:
+      title: 'Zones'
+      action: 'Edit Zone'
+
+    form:
+      save: 'Save Zone'
+      cancel: 'Cancel'
+      add: 'Add'
+      search_beacon: "Search for a beacon"
+
+      modal:
+        title: 'Beacons mismatch'
+        body: 'Some of selected Beacons belongs to different manager. Update their manager?'
+
+    index:
+      title:    'Zones'
+      add_new:  'Add New Zone'
+      options:  'Options'
+
+    new:
+      title: 'Zones'
+      action: 'Add Zone'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete zone?'
+
+  beacons:
+    edit:
+      title:  'Beacons'
+      action: 'Edit Beacon'
+
+    form:
+      unassigned: 'Unassigned'
+      save: 'Save Beacon'
+      cancel: 'Cancel'
+      test_notification: '(will be displayed for the ContextOS App users)'
+
+    index:
+      title:   'Beacons'
+      add_new: 'Add Beacon'
+      options: 'Options'
+      details: 'Details'
+      batch_delete: 'Delete Beacons'
+
+      unassigned_zone: 'Unassigned'
+      unassigned_floor: 'N/A'
+      select_zone_prompt: 'Set zone'
+      select_floor_prompt: 'Set floor'
+      search: 'Search...'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete beacon?'
+
+    new:
+      title: 'Beacons'
+      action: 'Add Beacon'
+
+  maps:
+    show:
+      title: 'Map'
+      select_floor: 'Select floor'
+      filter_zone: 'Filter zone'
+      add_beacon: 'Add Beacon'
+      search: 'Search...'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete this Beacon?'
+
+  admins:
+    edit:
+      title: 'Users'
+      action: 'Edit User'
+      change: 'Change'
+      update: 'Update'
+
+    form:
+      save: 'Save User'
+      cancel: 'Cancel'
+      select_role: 'Select role'
+
+    index:
+      title: 'Users'
+      new: 'Add New User'
+      add_new: 'Add New User'
+      options: 'Options'
+      batch_delete: 'Delete admins'
+      search: 'Search...'
+      details: 'Details'
+
+    modal:
+      title: 'Warning!'
+      body: 'Are you sure you want to delete user?'
+
+    new:
+      title: 'Users'
+      action: 'Add User'
+
+    registrations:
+      edit:
+        title: 'Profile'
+
+  dashboard:
+    index:
+      title: 'Home'
+      welcome: 'Welcome to BeaconCtrl!'
+      description: "This is the place where you’ll manage your beacon infrastructure and configure actions triggered in your mobile applications. Why don’t you start by adding some beacons? Then you can create your first application, add actions and start monitoring your beacons’ usage."
+      beacon_title: 'NEW BEACON'
+      beacon_description: "Adding the beacon is fast and easy. Recognize your beacon with UUID, and the major and minor numbers provided by its supplier, and then locate your beacon on the map. Now you're ready to setup actions for it, test it on BeaconCtrl mobile application and use in further development."
+      zone_title: "NEW ZONE"
+      zone_description: "Link your beacons into zones to create an extended range for your beacon deployment. Extended ranges create an area in which specified zone actions are triggered, improving the efficiency of beacon management and mapping. Use this feature to magnify the effect of single beacons."
+      application_title: "NEW APPLICATION"
+      application_description: "Our iOS test application is a good start but you'll want to connect your own at the end. Use automatically generated keynumbers to match your setup with your mobile applications. You can also embed our opensource SDK for iOS to speed up your project development."
+      add_beacon: "Add Beacon"
+      add_zone: "Add Zone"
+      add_application: "Add Application"
+
+  event_extension_assignments:
+    show:
+      switch_user: 'Switch user'
+
+  extensions:
+    form:
+
+    index:
+      title: 'Applications'
+
+      active: 'Active Add-ons'
+      inactive: 'More Add-ons'
+
+    extension:
+      created_at: 'Created at %{date}'
+
+    inactive_extension:
+      created_at: 'Created at %{date}'
+
+  extensions_marketplace:
+    index:
+      title: 'Add-ons'
+      active: 'Enabled Add-ons'
+      available: 'More Add-ons'
+
+    edit:
+      title: 'Add-ons'
+
+  layouts:
+    application:
+      site_title: 'Beacon Admin'
+
+      menu:
+        dashboard: 'Home'
+        applications: 'Applications'
+        beacons: 'Beacons'
+        zones: 'Zones'
+        map: 'Map'
+        extensions_marketplace: 'Add-ons'
+        users: 'Users'
+        walkthrough: 'Walkthrough'
+
+      toggle_nav: 'Toggle navigation'
+      profile: 'Profile'
+      logout: 'Logout'
+
+  shared:
+    subheader:
+      actions: 'Actions'
+      analytics: 'Analytics'
+      settings: 'Settings'
+      extensions: 'Add-ons'
+
+    image_input:
+      select: 'Add'
+      change: 'Change'
+      remove: 'Remove'
+
+  templates:
+    template_1: 'Template with logo'
+    template_2: 'Template without logo'
+    template_3: 'Template with logo & barcode'
+    template_4: 'Template without logo & with barcode'
+    template_5: 'Template with button'
+
+  triggers:
+    enter: 'On Hello'
+    enter_description: 'Trigger an action when a user appears in the beacon range.'
+    leave: 'On Exit'
+    leave_description: 'Trigger an action when a user leaves the beacon range.'
+    near: 'Nearby'
+    near_description: 'Trigger an action when a user is in medium-to-close distance from the beacon. (20cm – 5m )'
+    far: 'In Sight'
+    far_description: 'Trigger an action when a user is distant from the beacon. (>5m)'
+    immediate: 'Almost Touching'
+    immediate_description: "Trigger an action when a user's device is in direct proximity of the beacon. (<20cm)"
+    default: 'Not specified'
+    range:
+      BeaconTrigger: 'Beacon'
+      ZoneTrigger: 'Zone'
+
+  walkthrough:
+    previous: "PREVIOUS"
+    next: "NEXT"
+    start: "START"
+    finish: "FINISH"
+    step: "Step"
+    welcome:
+      title: "Welcome to BeaconCtrl walkthrough!"
+      body: "Welcome to BeaconCtrl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconCtrl. You’re also invited to github: %{github_url}"
+    beacons:
+      title: "ADD BEACON"
+      body: "This functionality enables you to add beacons and assign notifications that your beacons will send out. Add Beacon will also allow you to position your beacons on the map."
+    zones:
+      title: "ZONES"
+      body: "Zones functionality enables you to group your beacons into zones according to your criteria. Here, you'll easily manage the deployment of your beacons: for example, your zones can correspond to different floors of a multi-storey building."
+    map:
+      title: "MAP"
+      body: "This functionality gives you a visualisation of all your beacons on the map, with no need to refer to a list."
+    applications:
+      title: "APPLICATIONS"
+      body: "This functionality will enable you to develop apps for your clients.  For your convenience we've provided you with a test app that will let you test your beacons. Applications will also let you store and manage the apps that work with your beacons."
+    addons:
+      title: "ADD-ONS"
+      body: "Here you can create your own add-ons. We've provided you with a starter set of ready-to-go add-ons to build on."

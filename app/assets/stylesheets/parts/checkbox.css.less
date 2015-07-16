@@ -1,0 +1,50 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.styled-checkbox {
+  input {
+    display: none;
+  }
+
+  span {
+    width: 32px;
+    height: 32px;
+    display: block;
+    background: image-url("icons/monitor_inactive.png") no-repeat center center;
+
+    // fix select issue on double click
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -o-user-select:none;
+    user-select:none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input:checked + span {
+    background: image-url("icons/monitor_active.png") no-repeat center center;
+  }
+
+  // with font awesome icon
+  &.styled-checkbox-fa {
+    span {
+      width: auto;
+      height: auto;
+      background: none;
+      color: #bbb;
+    }
+
+    input:checked + span {
+      background: none;
+      color: @brand-success;
+    }
+  }
+}

@@ -1,0 +1,129 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.map-view {
+  @zoneMarkWidth: 8px;
+  @zoneLabelHeight: 50px;
+
+  padding-top: 20px;
+
+  #beacon-filter-form {
+    a.btn-success {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 0;
+      margin-bottom: 15px;
+    }
+  }
+
+  .bootstrap-select {
+    background: #fff;
+    border: 0;
+    margin-bottom: 0 !important;
+  }
+
+  .beacon_floor {
+    margin-bottom: 0;
+  }
+
+  .bootstrap-switch {
+    .bootstrap-switch-handle-on.bootstrap-switch-primary {
+      background: @brand-success;
+    }
+  }
+
+  label.zone-choose-label {
+    height: @zoneLabelHeight;
+    margin: 0;
+  }
+
+  span.zone-mark {
+    border-left: @zoneMarkWidth solid;
+    padding-left: 8px;
+    width: 180px;
+    height: 100%;
+    display: inline-block;
+    line-height: @zoneLabelHeight;
+    font-weight: normal;
+  }
+
+  .map-view-container {
+    position: relative;
+  }
+
+  .map-view-sidebar {
+    z-index: 99;
+    position: fixed;
+    overflow-y: auto;
+    .calc(height; "100% - 144px");
+
+    background: rgba(255, 255, 255, 0.7);
+
+    @sidebarMargin: 20px;
+
+    h5 {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-left: @sidebarMargin;
+    }
+
+    .map-view-sidebar-section {
+      margin-left: @sidebarMargin;
+      margin-right: @sidebarMargin;
+
+      width: @zoneLabelHeight * 6;
+      box-sizing: border-box;
+
+      border: 1px solid @gray;
+      background: #ffffff;
+
+      .zones-list {
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        .row {
+          border-top: 1px solid @gray;
+        }
+        .row:first-child {
+          border-top: none;
+        }
+      }
+    }
+  }
+
+  #beacons-map {
+    .calc(width; "100% - 240px");
+    .calc(height; "100% - 144px");
+    position: fixed !important;
+  }
+
+  .beacon-info {
+    .beacon-details {
+      h5 {
+        margin: 0;
+        border-bottom: 1px solid @gray;
+
+        .zone-mark {
+          line-height: 40px;
+        }
+      }
+
+      ul {
+        padding-left: 15px;
+        margin-right: 10px;
+        margin-top: 15px;
+        list-style: none;
+      }
+    }
+
+    .beacon-actions {
+      margin: 15px;
+    }
+  }
+}

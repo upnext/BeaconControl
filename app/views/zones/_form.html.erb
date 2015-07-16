@@ -1,0 +1,129 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<script id="spectrum-color-palette">
+  $.fn.spectrum.defaults.palette = <%== ZoneColors.to_json %>;
+</script>
+
+<%= simple_nested_form_for @zone, html: { class: %W[zone-form with-sticky-footer] } do |f| %>
+
+  <div class="row form-container">
+    <div class="col-md-6 first-column">
+
+      <div class="control-group row">
+        <div class="controls">
+          <div class="col-xs-9 zone-name">
+            <%= f.input :name, required: false %>
+          </div>
+
+          <div class="col-xs-3 zone-color">
+            <div class="color-button inline-button btn btn-default dropdown-toggle">
+              Color <span class="caret"></span>
+            </div>
+            <%= f.input :color, as: :hidden, input_html: { value: @zone.color } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.input :description, input_html: { rows: 4 } %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 second-column">
+
+      <div class="elements-select">
+        <div class="control-group">
+          <div class="controls add-beacon-dropdown">
+            <%= f.input :add_beacon,
+                        as: :select,
+                        wrapper: :with_action,
+                        hint: t(".add"), selected: nil,
+                        collection: beacon_select_options(@beacons),
+                        hint_html: {
+                            class: button_class(action: :new)
+                        },
+                        input_html: {
+                            class: %W[chained-target selectpicker],
+                            data: {
+                                :'live-search' => true,
+                                :'live-search-placeholder' => t(".search_beacon")
+                            }
+                        }
+            %>
+          </div>
+        </div>
+
+        <div style="display:none">
+          <%= f.collection_check_boxes "beacon_ids", @beacons, :id, :name, checked: @zone.beacon_ids do |b| %>
+            <%= b.check_box(:"data-group" => b.object.manager_id.to_s) %>
+          <% end %>
+        </div>
+
+        <br />
+
+        <%= t('.currently_assigned_beacons') %>
+        <span class="beacons-count"><%= @zone.beacons.count %></span>
+        <table class="table beacons-table">
+          <tbody>
+          <% @beacons.each do |beacon| %>
+            <tr class="element-<%=beacon.id%> currently-assigned-beacon" style="display:none">
+              <td class="col-xs-6 currently-assigned-beacon-name">
+                <%= beacon.name %>
+              </td>
+              <td class="col-xs-4 currently-assigned-beacon-floor">
+                <% if beacon.floor.present? %>
+                  Floor:
+                  <%= beacon.floor %>
+                <% else %>
+                <%= t('beacons.form.unassigned_floor') %>
+                <% end %>
+              </td>
+              <td class="col-xs-2 active remove-element btn-danger currently-assigned-beacon-delete" value="<%=beacon.id%>">
+                <span><%= t('helpers.links.remove') %></span>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="form-buttons row">
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :move_beacons, as: :hidden, input_html: {value: nil, autocomplete: 'off'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-6">
+      <div class="pull-left">
+        <% if @zone.persisted? %>
+          <%= button_link :delete, zone_path(@zone), class: %W[btn btn-danger], with_modal: true %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="pull-right">
+        <%= button_link :cancel, zones_path %>
+        <%= f.button :submit, t('.save'), class: %w[btn btn-success btn-static-width btn-action-save] %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= prompt_modal(t('zones.modal.title'), t('zones.modal.body')) %>

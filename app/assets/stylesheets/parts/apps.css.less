@@ -1,0 +1,147 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.items-list {
+  margin-top: 20px;
+  padding-left: 0;
+  list-style: none;
+
+  a {
+    color: @gray-dark;
+  }
+
+  li {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 50px;
+
+    @media (min-width: 1600px) {
+      width: 24.999999%;
+    }
+
+    @media (min-width: 1900px) {
+      width: 19.999999%;
+    }
+
+    .item-box {
+      .beacon-os-box;
+      height: 210px;
+    }
+
+    >a {
+      text-decoration: none;
+
+      &:hover {
+        .box-shadow;
+      }
+    }
+
+    h3 {
+      margin-top: 80px;
+      padding: 0 20px;
+      height: 36px;
+      line-height: 36px;
+      font-size: 28px;
+      font-weight: 300;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    span {
+      text-align: center;
+    }
+
+    position: relative;
+
+    .controls {
+      opacity: 0;
+      position: absolute;
+      top: 6px;
+      right: 16px;
+      text-align: right;
+      z-index: 100;
+      transition: opacity 0.2s;
+
+      &.left {
+        left: 16px;
+        text-align: left;
+        opacity: 0.9;
+      }
+
+      a, label.styled-checkbox {
+        font-size: 24px;
+        line-height: 40px;
+        width: 40px;
+        text-align: center;
+        background: transparent;
+        transition: background 0.2s;
+        display: inline-block;
+
+        &:hover {
+          background: @gray-lighter;
+        }
+      }
+
+      label.styled-checkbox {
+        span {
+          display: inline;
+        }
+      }
+    }
+
+    &:hover {
+      .controls {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+input.no-border {
+  text-align: center;
+  font-size: 26px;
+  background-color: #fff;
+}
+
+input.no-border:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+}
+
+input.no-border::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+}
+
+input.no-border:-ms-input-placeholder {
+  text-align: center;
+}
+
+input.no-border::-webkit-input-placeholder {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  font-style: normal
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-style: normal
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  font-style: normal
+}
+
+:-ms-input-placeholder {
+  font-style: normal
+}
+
+.items-list li.create-application .controls {
+  opacity: 1;
+}

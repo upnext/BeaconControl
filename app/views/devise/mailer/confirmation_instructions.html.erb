@@ -1,0 +1,36 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<p><%= t('.welcome_message') %></p>
+
+<ul>
+  <li><%= t('.beacon_options') %></li>
+  <li><%= t('.action_options') %></li>
+  <li><%= t('.add_ons_options') %></li>
+  <li><%= t('.mobile_app_options') %></li>
+</ul>
+
+<p><%= t('.go_ahead') %></p>
+
+<%= link_to t('.admin_panel_button'), confirmation_url(@resource, confirmation_token: @token), class: 'btn' %>
+
+<p><b><%= t('.for_developers_title') %></b></p>
+<p><%= t('.beacon_ctrl_description') %></p>
+
+<p>
+  <%== t('.github_links',
+         doc_url: 'http://www.beaconctrl.com/dev',
+         ios_repo_url: 'https://github.com/upnext/BeaconCtrl_iOS_SDK',
+         backend_repo_url: 'https://github.com/upnext/BeaconCtrl'
+        )
+  %>
+</p>
+
+<% content_for 'footer' do %>
+  <p><%= t('.thanks') %></p>
+<% end %>

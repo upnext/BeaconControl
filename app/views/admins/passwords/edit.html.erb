@@ -1,0 +1,27 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= render layout: 'admins/shared/layout' do %>
+
+  <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+      <h2><%= t('.change_password') %></h2>
+
+    <%= f.error_notification %>
+    <%= f.full_error :reset_password_token %>
+
+    <%= f.input :reset_password_token, :as => :hidden %>
+    <%= f.input :password, label: false, required: true, autofocus: true, placeholder: t(".password") %>
+    <%= f.input :password_confirmation, label: false, required: true, placeholder: t(".password_confirmation") %>
+
+    <%= f.button :submit, t('.change_password'), class: %W[btn btn-sm btn-success pull-right] %>
+
+    <%= link_to t('.return_to_login'), new_session_path(resource_name) %>
+
+  <% end %>
+<% end %>

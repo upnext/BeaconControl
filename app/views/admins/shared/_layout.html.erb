@@ -1,0 +1,25 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<div id="admin-access-topbar">
+  <div class="container">
+    <a href="<%= logo_link_url %>">
+      <div class="logo"></div>
+    </a>
+  </div>
+</div>
+
+<div id="admin-access">
+  <div class="center-vertically">
+    <h1>Admin access</h1>
+
+    <%= yield %>
+  </div>
+</div>
+
+<%= render partial: 'admins/shared/cookie_info' %>

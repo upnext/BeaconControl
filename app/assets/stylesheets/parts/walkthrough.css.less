@@ -1,0 +1,90 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+@modal_logo_width:    220px;
+
+.walkthrough-highlight {
+  position: relative;
+  z-index: 1050;
+  border-color: @brand-success !important;
+}
+
+#walkthrough-modal {
+  .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -292px;
+  }
+  .modal-content {
+    border: none;
+    .box-shadow(none);
+    width: 800px;
+    height: 400px;
+  }
+
+  .modal-sidebar {
+    position: absolute;
+    left: -@modal_logo_width;
+    width: @modal_logo_width;
+    height: 100%;
+    background: @brand-success image-url('walkthrough_logo.png') no-repeat center center;
+    background-size: 172px 43px;
+  }
+
+  .modal-header {
+    border: none;
+    padding: 30px 40px 20px;
+    .modal-title {
+      font-size: 22px;
+      font-weight: @semibold;
+    }
+    .close {
+      margin: -15px -20px 0;
+    }
+  }
+
+  .modal-body {
+    padding: 20px 40px;
+    font-size: 14px;
+  }
+
+  .modal-footer {
+    border: none;
+    padding: 20px 40px 30px;
+    .btn {
+      width: 25%;
+      font-size: 16px;
+    }
+    .step-counter {
+      margin-right: 10px;
+      color: @gray;
+
+    }
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+body.modal-open {
+  .main {
+    position: absolute;
+    min-height: 100%;
+  }
+
+  .sidebar {
+    @media (min-width: 768px) {
+      position: absolute;
+      margin-top: 0;
+    }
+  }
+}

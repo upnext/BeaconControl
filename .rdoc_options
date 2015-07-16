@@ -1,0 +1,30 @@
+--- !ruby/object:RDoc::Options
+encoding: UTF-8
+static_path: []
+rdoc_include:
+charset: UTF-8
+exclude:
+- "bin"
+- "db"
+- "log"
+- "public"
+- "spec"
+- "tmp"
+- "vendor/assets"
+hyperlink_all: false
+line_numbers: false
+locale:
+locale_dir: locale
+locale_name:
+main_page: README.md
+markup: rdoc
+output_decoration: true
+page_dir:
+show_hash: false
+tab_width: 8
+template_stylesheets: []
+title:
+visibility: :protected
+webcvs:
+op_dir: public/doc
+rdoc_include: []

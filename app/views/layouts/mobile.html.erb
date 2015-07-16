@@ -1,0 +1,27 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
+
+  <%= javascript_include_tag "mobile" %>
+  <%= stylesheet_link_tag "mobile", media: "all" %>
+  <%= content_for :header %>
+
+  <%= render partial: 'shared/ga' %>
+</head>
+
+<body>
+  <%= yield %>
+</body>
+</html>

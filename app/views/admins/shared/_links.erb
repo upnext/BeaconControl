@@ -1,0 +1,33 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%- if controller_name != 'sessions' %>
+  <span class="ask-for-account"><%= t(".have_account") %></span> <%= link_to "Sign in", new_session_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <span class="ask-for-account"><%= t(".not_have_account") %></span> <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to t(".forgot_password"), new_password_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to t(".not_received_confirmation"), new_confirmation_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to t(".not_received_unlock"), new_unlock_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to t(".sign_in_with", provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %><br />
+  <% end -%>
+<% end -%>

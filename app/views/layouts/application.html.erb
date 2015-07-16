@@ -1,0 +1,134 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : t('.site_title') %></title>
+    <%= csrf_meta_tags %>
+
+    <script src="https://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <%= javascript_include_tag "application" %>
+
+    <%= render partial: 'shared/ga' %>
+</head>
+
+<body>
+  <%- if admin_signed_in? %>
+    <nav class="main-navbar navbar navbar-default" role="navigation">
+      <div class="wrapper">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only"><%= t('.toggle_nav') %></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to main_app.root_path, class: %W[navbar-brand] do %>
+            <div class="logo"></div>
+          <% end %>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <%= render 'shared/header' %>
+          <ul class="nav navbar-nav visible-xs-block">
+            <li><%= active_link_to t('.menu.dashboard'), main_app.root_path, active: [['dashboard'], []] %></li>
+            <% if can? :manage, Application %>
+              <li><%= active_link_to t('.menu.applications'), main_app.applications_path %></li>
+            <% end %>
+            <li><%= active_link_to t('.menu.beacons'), main_app.beacons_path %></li>
+            <li><%= active_link_to t('.menu.zones'), main_app.zones_path %></li>
+            <li><%= active_link_to t('.menu.extensions_marketplace'), main_app.extensions_marketplace_index_path %></li>
+            <% if (can? :manage, Admin) && AppConfig.user_management %>
+              <li><%= active_link_to t('.menu.users'), main_app.admins_path %></li>
+            <% end %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if admin_signed_in? %>
+              <li class="dropdown visible-sm-block visible-md-block visible-lg-block">
+                <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><%= current_admin.email %><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= active_link_to glyphicon(:user, t('.profile')), main_app.edit_admin_registration_path %>
+                  <li><%= link_to glyphicon(:off, t('.logout')), main_app.destroy_admin_session_path, method: :delete %></li>
+                </ul>
+              </li>
+              <li class="visible-xs-block"><a href="#" data-toggle="dropdown"><%= current_admin.email %></a></li>
+              <li class="visible-xs-block"><%= active_link_to t('.profile'), main_app.edit_admin_registration_path %>
+              <li class="visible-xs-block"><%= link_to t('.logout'), main_app.destroy_admin_session_path, method: :delete %></li>
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="main">
+        <div class="sidebar">
+          <ul class="nav nav-sidebar">
+            <li><%= active_link_to bos_icon(:dashboard, t('.menu.dashboard')), main_app.root_path, active: [['dashboard'], []] %></li>
+            <% if can? :manage, Application %>
+              <li><%= active_link_to bos_icon(:application, t('.menu.applications')), main_app.applications_path, data: walkthrough_data(4, :applications) %></li>
+            <% end %>
+            <li><%= active_link_to bos_icon(:earth, t('.menu.map')), main_app.map_path, active: [['maps'], []], data: walkthrough_data(3, :map) %></li>
+            <li><%= active_link_to bos_icon(:beacon, t('.menu.beacons')), main_app.beacons_path, data: walkthrough_data(1, :beacons) %></li>
+            <li><%= active_link_to bos_icon(:zone, t('.menu.zones')), main_app.zones_path, data: walkthrough_data(2, :zones) %></li>
+            <li><%= active_link_to bos_icon(:extension, t('.menu.extensions_marketplace')), main_app.extensions_marketplace_index_path,
+                    active: /^\/add_ons/, data: walkthrough_data(5, :addons) %></li>
+            <% if (can? :manage, Admin) && AppConfig.user_management %>
+              <li><%= active_link_to bos_icon(:user, t('.menu.users')), main_app.admins_path %></li>
+            <% end %>
+            <% current_admin.account.active_extensions.each do |ext| %>
+              <% ext.sidebar_links.each do |link| %>
+                <li><%= ext_sidebar_link(link, self) %></li>
+              <% end %>
+            <% end %>
+            <li><%= link_to bos_icon(:info, t('.menu.walkthrough')), main_app.root_path(walkthrough: true) %></li>
+          </ul>
+        </div>
+        <div class="content">
+          <%= yield %>
+          <%= render "shared/walkthrough" %>
+        </div>
+    </div>
+  <%- else %>
+    <%= yield %>
+  <% end %>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= link_to t('.title'), (defined?(main_app) ? main_app : self).extensions_marketplace_index_path %></span>
+  <span><%= resource.name %></span>
+<% end %>
+
+<%= render partial: 'extensions_marketplace/form' %>

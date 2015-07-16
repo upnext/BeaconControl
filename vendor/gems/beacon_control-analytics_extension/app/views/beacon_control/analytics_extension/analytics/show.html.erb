@@ -1,0 +1,43 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<% content_for :header_breadcrumbs do %>
+  <span><%= link_to t('.title'), main_app.applications_path %></span>
+  <span><%= @application.name %></span>
+  <span><%= t('.breadcrumbs') %></span>
+<% end %>
+
+<%= render partial: 'shared/subheader', locals: { controller: 'beacon_control/analytics_extension/analytics', action: 'show' } %>
+
+<div class="analytics" data-application-id="<%= @application.id %>">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="chart-box">
+        <h2><%= t('.dwell_time_title') %></h2>
+        <div id="dwell-time-chart" style="width:99.9%; height:400px;"></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="chart-box">
+        <h2><%= t('.actions_title') %></h2>
+        <div id="actions-chart" style="width: 99.9%; height: 400px;"></div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="chart-box">
+        <h2><%= t('.active_users_title') %></h2>
+        <div id="active-users-chart" style="width: 99.9%; height: 400px"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

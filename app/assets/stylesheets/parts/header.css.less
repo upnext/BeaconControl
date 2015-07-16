@@ -1,0 +1,76 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.page-header {
+  margin: 0;
+  padding: 0 35px;
+  border: none;
+
+  h1 {
+    margin: 0;
+    height: @navbar-height;
+    line-height: 56px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    span, a {
+      font-weight: @normal;
+      font-size: 16px;
+      line-height: 64px;
+      color: #424242;
+    }
+
+    span {
+      margin-right: 10px;
+    }
+    span:not(:last-child):after {
+      content: '\f105';
+      font-family: FontAwesome;
+      font-weight: @normal;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+    span:last-child {
+      font-weight: @normal;
+    }
+
+    a {
+      padding: 15px 10px 16px 10px;
+    }
+    a:hover, a:focus {
+      background-color: @gray-lighter;
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    float: none !important;
+  }
+
+  .pull-right {
+
+    form {
+      margin-top: 14px;
+      margin-bottom: 13px;
+    }
+
+    >.btn {
+      margin-top: 14px;
+      margin-bottom: 13px;
+    }
+    .form-control {
+      height: 35px;
+      padding: 7px 15px;
+    }
+
+    @media (max-width: 768px) {
+      float: none !important;
+    }
+  }
+}

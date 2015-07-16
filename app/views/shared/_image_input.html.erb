@@ -1,0 +1,51 @@
+<%###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree. 
+###%>
+
+<%= form.simple_fields_for object_name do |image| %>
+  <%= image.label :file %>
+  <%= image.input :type, as: :hidden, input_html: { vale: object_name.to_s } %>
+  <%= image.hidden_field :file_cache %>
+  <%= image.hidden_field :remove_file, {value: false} %>
+  <div class="fileinput <%= image.object.file.present? ? 'fileinput-exists' : 'fileinput-new' %> input-group" data-provides="fileinput">
+    <div class="form-control" data-trigger="fileinput">
+      <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 50px; max-height: 35px;">
+        <% if image.object.file.present? %>
+          <%= image_tag image.object.file.url, style: 'max-height: 25px;border: none;' %>
+        <% end %>
+      </div>
+    <span class="fileinput-filename" style="line-height: 40px;">
+      <% if image.object.file.present? %>
+        <%= image.object.file.filename %>
+      <% end %>
+    </span>
+    </div>
+
+    <%= content_tag :span, class: button_class('input-group-addon', 'btn-file', action: :new) do %>
+      <span class="fileinput-new"><%= t('.select') %></span>
+      <%= content_tag :span, class: %w(fileinput-exists) do %>
+        <%= t('.change') %>
+      <% end %>
+      <%= image.file_field :file,
+                           data: {
+                               name: object_name.to_s,
+                               cache_url: image.object.file.url
+                           },
+                           class: button_class(action: :new)
+      %>
+    <% end %>
+    <%= button_link(
+            :remove, '#',
+            class: %W[input-group-addon fileinput-exists],
+            data: {
+                dismiss: 'fileinput'
+            },
+            dynamic_width: true
+        )
+    %>
+  </div>
+<% end %>

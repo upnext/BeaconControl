@@ -1,0 +1,76 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+/*
+ * Cookie info
+ */
+
+#cookie-info {
+  background: #f5f5f6;
+  border-top: 1px solid #929497;
+  display: none;
+  font-size: 15px;
+  padding: 28px 0;
+
+  p {
+    margin-bottom: 3px;
+  }
+
+  .btn {
+    background: @admin-access-primary;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    float: right;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: 2px;
+    margin-top: -1px;
+    padding: 14px 40px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    .transition(border-color, .2s, ease);
+
+    &:hover,
+    &:active {
+      background: @admin-access-primary-hover !important;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .btn {
+      margin-top: 8px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .container {
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    .btn {
+      margin-top: 12px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .btn {
+      float: none;
+      margin-top: 20px;
+    }
+
+    .row > div {
+      float: none;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
