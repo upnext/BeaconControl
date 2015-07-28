@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715123712) do
+ActiveRecord::Schema.define(version: 20150723103804) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -260,6 +260,13 @@ ActiveRecord::Schema.define(version: 20150715123712) do
   end
 
   add_index "ext_kontakt_io_beacon_assignments", ["beacon_id"], name: "index_ext_kontakt_io_beacon_assignments_on_beacon_id", using: :btree
+
+  create_table "ext_neighbours_zone_neighbours", force: :cascade do |t|
+    t.integer  "source_id",  limit: 4
+    t.integer  "target_id",  limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ext_presence_beacon_presences", force: :cascade do |t|
     t.integer  "beacon_id",  limit: 4

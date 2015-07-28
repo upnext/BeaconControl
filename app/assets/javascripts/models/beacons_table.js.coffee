@@ -1,3 +1,6 @@
+#= require ./sortable_table
+#= require_self
+
 ###
  Copyright (c) 2015, Upnext Technologies Sp. z o.o.
  All rights reserved.
@@ -5,9 +8,6 @@
  This source code is licensed under the BSD 3-Clause License found in the
  LICENSE.txt file in the root directory of this source tree. 
 ###
-
-#= require ./sortable_table
-#= require_self
 
 class @BeaconTable extends SortableTable
   constructor: (@dom) ->

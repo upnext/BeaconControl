@@ -47,6 +47,9 @@ gem 'beacon_control-dwell_time_extension',
 gem 'beacon_control-kontakt_io_extension',
     path: 'vendor/gems/beacon_control-kontakt_io_extension'
 
+gem 'beacon_control-neighbours_extension',
+  git: 'ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git'
+
 # Barcodes
 gem 'barby'
 
@@ -98,6 +101,8 @@ gem 'foreman'
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'premailer-rails'
+
+gem 'requirejs-rails'
 
 group :development, :test do
   gem 'pry'
