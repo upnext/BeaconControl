@@ -23,7 +23,8 @@ module S2sApi
         {
           lat: object.lat,
           lng: object.lng,
-          floor: object.floor
+          floor: object.floor,
+          address: object.location
         }
       end
     end
