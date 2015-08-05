@@ -63,6 +63,6 @@ AppConfig = ApplicationConfig.new do
   config_key :production_cert_passphrase
   config_key :force_ssl
 
-  config_key :hjid, default: 59339
+  config_key :hjid, default: 59670
   config_key :hjsv, default: 5
 end
