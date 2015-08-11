@@ -19,6 +19,12 @@
 
   p {
     margin-bottom: 3px;
+
+    @media (max-width: 767px) {
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: -8px;
+    }
   }
 
   .btn {
@@ -41,6 +47,12 @@
     &:hover,
     &:active {
       background: @admin-access-primary-hover !important;
+    }
+
+    @media (max-width: 767px){
+      font-size: 12px;
+      height: 35px;
+      padding: 7px 20px;
     }
   }
 
