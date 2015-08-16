@@ -1,0 +1,382 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+@primary-color: #62BAE8;
+@primary-color-hover: #88C9EB;
+@font-color: #0d2041;
+@join-now-bg: #132036;
+@link-color: #acb1bd;
+@error-color: #c01212;
+@border-color: #f5f5f6;
+
+@font-light: 'Avenir Next Cyr W00 Light';
+@font-medium: 'Avenir Next Cyr W00 Medium';
+@font-normal: 'Avenir Next Cyr W00 Regular';
+@font-regular: 'Avenir Next Cyr W00 Regular';
+@font-semi: 'Avenir Next Cyr W00 Demi';
+@font-bold: 'Avenir Next Cyr W00 Bold';
+
+/* Retina ready background image */
+.retina-background-image(@path, @w: auto, @h: auto) {
+  background-image: image-url(@path);
+  @at2x_path: ~`"@{path}".replace(/(.*)\.([^.]+)$/, "$1@2x.$2")`;
+
+   @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    background-image: image-url(@at2x_path);
+    background-size: @w @h;
+  }
+}
+
+/* Footer */
+#static-pages-footer {
+  border-top: 1px solid @font-color;
+  color: @font-color;
+  font-size: 13px;
+  height: 95px;
+  padding: 37px 40px 0;
+  width: 100%;
+
+  @media (max-width: 991px) {
+    height: auto;
+    padding: 15px;
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .logo {
+    background: image-url('logo-upnext.svg') no-repeat center;
+    display: inline-block;
+    height: 20px;
+    margin: 1px 30px 0 -15px;
+    text-indent: -9999px;
+    width: 186px;
+    background-size: 230px auto;
+  }
+
+  a {
+    color: #9a9da5;
+    display: inline-block;
+    margin-left: 30px;
+    font-family: @font-normal;
+    font-size: 16px;
+    text-decoration: none;
+
+    &:hover {
+      color: @primary-color;
+    }
+
+    @media (min-width: 992px) and (max-width: 1050px) {
+      margin-left: 15px;
+    }
+  }
+
+  .social-links-wrapper {
+    float: right;
+    margin-top: -2px;
+
+    @media (max-width: 991px) {
+      float: none;
+      margin: 15px 0 0;
+      padding: 0 0 0 15px;
+    }
+
+    p {
+      color: #45525a;
+      float: left;
+      font-size: 18px;
+      text-align: right;
+    }
+
+    .social-links {
+      float: left;
+      margin: 0 0 0 10px;
+      padding-left: 0px;
+
+      li {
+        margin: 0 0 0 20px;
+
+        a {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    .logo {
+      margin: 10px 0;
+    }
+
+    a {
+      display: block;
+      margin: 5px 0 0;
+    }
+
+    .text-right {
+      text-align: left;
+      padding-bottom: 10px;
+      padding-top: 15px;
+    }
+  }
+}
+
+
+/*
+ * Navigation
+ */
+#main-nav {
+  background: #fff;
+  border-bottom: 2px solid @border-color;
+  height: 110px;
+  position: relative;
+  padding: 45px 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  .clearfix;
+
+  @media (max-width: 1023px) {
+    height: 80px;
+    padding: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    @media (max-width: 1023px) {
+      position: static;
+    }
+  }
+
+  .logo {
+    background: image-url('logo-beaconcontrol.svg') no-repeat left center;
+    float: left;
+    height: 46px;
+    margin-top: -13px;
+    text-indent: -9999px;
+    width: 232px;
+
+    @media (max-width: 1023px) {
+      left: 40px;
+      position: absolute;
+      top: 28px;
+    }
+
+    @media (max-width: 768px){
+      left: 20px;
+    }
+  }
+}
+
+.social-links {
+  margin-top: 27px;
+
+  li {
+    margin-top: 4px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 20px;
+
+    &:first-child {
+      margin-left: -5px;
+    }
+
+    a {
+      .retina-background-image('icons-social.png', 29px, 446px);
+      display: inline-block;
+      height: 28px;
+      text-indent: -9999px;
+      position: relative;
+      width: 28px;
+
+      &.facebook {
+        background-position: 8px 1px;
+
+        &:hover {
+          background-position: 8px -75px;
+        }
+      }
+
+      &.github {
+        background-position: 1px -150px;
+        left: -2px;
+
+        &:hover {
+          background-position: 1px -225px;
+        }
+      }
+
+      &.twitter {
+        background-position: 0px -299px;
+        top: 2px;
+
+        &:hover {
+          background-position: 0px -371px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+
+    .container {
+      padding-bottom: 155px;
+
+      > div {
+        width: 90%;
+
+        &:first-of-type {
+          border-top: 2px solid @border-color;
+          bottom: 0;
+          left: 20px;
+          padding-top: 40px;
+          position: absolute;
+          right: 20px;
+        }
+
+        &:last-of-type {
+          margin-top: 25px;
+        }
+      }
+
+    }
+  }
+}
+
+
+/*
+ * Sub navigation
+ */
+
+#sub-nav {
+  background: #0d2040;
+  display: table;
+  height: 80px;
+  width: 100%;
+
+  .container {
+    display: table-cell;
+    vertical-align: middle;
+
+    .title {
+      color: #fff;
+      margin-left: 140px;
+      font-family: @font-normal;
+      font-size: 24px;
+      font-weight: 300;
+    }
+  }
+
+  @media (max-width: 650px) {
+    height: 80px;
+  }
+}
+
+/*
+ * Walkthrough
+ */
+.walkthrough {
+  height: 100%;
+
+  .walkthrough-sidebar {
+    margin: 0px;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    float: left;
+    width: 330px;
+
+
+    ul {
+      padding-left: 0px;
+      margin: 20px;
+      
+      li {
+        margin: 10px 0px;
+        list-style: none;
+
+        &:first-child {
+          margin-bottom: 20px;
+        }
+
+        a {
+          color: #000;
+
+          &.active {
+            color: #62bae8;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    margin: 0px;
+    margin-left: 330px;
+    padding: 20px 60px;
+    max-width: 800px;
+    border-left: 1px solid black;
+    font-size: 14px;
+
+    .calc(width; "100% - 330px");
+
+    .title {
+      margin: 20px 0px;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    img {
+      width: 640px;
+      height: 320px;
+    }
+
+    ol {
+      margin-left: -20px;
+
+      img {
+        margin-left: -40px;
+        width: 640px;
+        height: 320px;
+      }
+    }
+  }
+}
+
+.static-pages.container {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+body.walktrough {
+  background-color: #fff;
+}
+
+#sticky.stick {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    border-radius: 0 0 0.5em 0.5em;
+}

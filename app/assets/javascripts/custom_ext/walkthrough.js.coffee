@@ -87,6 +87,7 @@ class Walkthrough
     @highlights.removeClass("walkthrough-highlight")
     @highlights.filter("[data-walkthrough-highlight=#{index}]").addClass("walkthrough-highlight")
 
+
 $ ->
   new Walkthrough(
     $("#walkthrough-modal"),

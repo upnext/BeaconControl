@@ -67,6 +67,12 @@ BeaconControl::Application.routes.draw do
     end
   end if AppConfig.user_management
 
+  resource :static_pages, path: '', only: [] do
+    member do
+      get :walkthrough
+    end
+  end
+
   resources :beacons, except: [:show] do
     collection do
       patch :batch_update

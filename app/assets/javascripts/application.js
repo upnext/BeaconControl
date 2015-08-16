@@ -42,6 +42,8 @@
 //= require custom_ext/elements_select
 //= require custom_ext/handlebars
 //= require custom_ext/walkthrough
+//= require custom_ext/sidebar_highlighter
+//= require custom_ext/sticky_element
 //
 // ### Handlebars templates
 //= require_tree ./templates

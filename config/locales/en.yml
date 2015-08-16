@@ -7,6 +7,7 @@
 ###
 
 en:
+  app_name: 'BeaconControl'
   modal:
     close: 'Close'
     delete: 'Delete'
