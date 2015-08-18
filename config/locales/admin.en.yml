@@ -248,7 +248,7 @@ en:
         map: 'Map'
         extensions_marketplace: 'Add-ons'
         users: 'Users'
-        walkthrough: 'Walkthrough'
+        walkthrough: 'Beginners Guide'
 
       toggle_nav: 'Toggle navigation'
       profile: 'Profile'
@@ -296,8 +296,14 @@ en:
     finish: "FINISH"
     step: "Step"
     welcome:
-      title: "Welcome to BeaconCtrl walkthrough!"
-      body: "Welcome to BeaconCtrl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconCtrl. You’re also invited to github: %{github_url}"
+      title: "Hello there!"
+      body: "BeaconControl works the best if paired with mobile app.</br>
+        And now is the perfect moment to download it."
+      intro: "Welcome to BeaconCtrl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconCtrl. You’re also invited to github: %{github_url}"
+    guide:
+      title: "Do you want to see <br/> the Beginners Guide?"
+      body: "You can do it now, or anytime you feel like it.<br/>
+        It's at the bottom left on your Admin Panel"
     beacons:
       title: "ADD BEACON"
       body: "This functionality enables you to add beacons and assign notifications that your beacons will send out. Add Beacon will also allow you to position your beacons on the map."
@@ -313,3 +319,31 @@ en:
     addons:
       title: "ADD-ONS"
       body: "Here you can create your own add-ons. We've provided you with a starter set of ready-to-go add-ons to build on."
+
+    sidebar:
+      intro: "Introduction"
+      add_beacon: "1. Add beacon & test it"
+      setup_custom_action: "2. Setup an action in the test app"
+      setup_coupon_action: "3. Setup an action in the test app"
+    introduction:
+      title: "Introduction"
+      add_beacon: "Add beacon"
+      map: "Map"
+      zones: "Zones"
+      applications: "Applications"
+      add_ons: "Add-ons"
+    add_beacon:
+      title: "Add Beacon & Test it"
+      description: "There are two ways to setup and test new beacon. <br/>
+        Using Admin Panel and mobile phone - or only mobile phone. Remember to setup your BeaconControl account or both, to conviniently test deployments."
+      admin_panel: "Using Admin Panel"
+      mobile_app: "Using a mobile phone only"
+      add_beacon: "Choose \"Add Beacon\" from Admin Panel home view"
+      fill_in_beacon_data: "Name your beacon and fill it's identification data - UUID, major, and minor.
+        Placing the beacon on the map is optional.<br/>
+        To verify beacon setup right away - mark the test notification and make sure the trigger is setup for \"almoust touching\", so you have full control on your test.<br/>
+        Click save."
+      bring_phone: "Bring together the proper beacon and a phone. The notification should come right away."
+      add_beacon_mobile: "Touch the plus and an arrow right to add a new beacon. Name your beacon and fill it's identification data - 
+        UUID, major and minor. Placing the beacon on the map is optional. To verify beacon setup right away, click \"test notification\"."
+      setup_trigger: "Make sure he trigger is setup for \"almoust touching\", so you have full control on your test. Click save."

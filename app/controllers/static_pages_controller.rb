@@ -9,4 +9,16 @@
 class StaticPagesController < AdminController
   def walkthrough
   end
+
+  def introduction
+  end
+
+  def add_beacon
+  end
+
+  def setup_custom_action
+  end
+
+  def setup_coupon_action
+  end
 end

@@ -12,7 +12,7 @@ class DashboardController < AdminController
   before_filter :redirect_to_login, unless: :current_admin
 
   def index
-    @walkthrough = params[:walkthrough] || !current_admin.walkthrough
+    @walkthrough = !current_admin.walkthrough
     current_admin.update_attribute(:walkthrough, true)
   end
 

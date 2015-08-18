@@ -69,7 +69,10 @@ BeaconControl::Application.routes.draw do
 
   resource :static_pages, path: '', only: [] do
     member do
-      get :walkthrough
+      get :introduction, path: 'walkthrough/intro'
+      get :add_beacon, path: 'walkthrough/add_beacon'
+      get :setup_custom_action, path: 'walkthrough/setup_custom_action'
+      get :setup_coupon_action, path: 'walkthrough/setup_coupon_action'
     end
   end
 

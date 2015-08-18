@@ -5,24 +5,50 @@
 # This source code is licensed under the BSD 3-Clause License found in the
 # LICENSE.txt file in the root directory of this source tree. 
 ###%>
-
-<div class="modal fade" id="walkthrough-modal" tabindex="-1" role="dialog" aria-hidden="true" data-walkthrough-index="0" data-walkthrough-title="<%=t('walkthrough.welcome.title')%>" data-walkthrough-body="<%= raw t('walkthrough.welcome.body', github_url: '<a href=https://github.com/upnext/BeaconCtrl> https://github.com/upnext/BeaconCtrl </a>') %>">
+<div class="modal walkthrough-modal" id="walkthrough-modal-first" tabindex="-1" role="dialog" aria-hidden="true" data-walkthrough-index="0" data-walkthrough-title="<%=t('walkthrough.welcome.title')%>" data-walkthrough-body="<%= raw t('walkthrough.welcome.body', github_url: '<a href=https://github.com/upnext/BeaconCtrl> https://github.com/upnext/BeaconCtrl </a>') %>">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-sidebar">
-      </div>
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title"><%= t('walkthrough.welcome.title') %></h4>
+        <p>
+          <br/>
+          <%= raw t('walkthrough.welcome.body') %>
+        </p>
       </div>
       <div class="modal-body">
+        <a href="<%= logo_link_url + '/dev' %>" target="_blank" >
+          <%= image_tag('icon-appstore', class: "content-button") %>
+        </a>
+
+        <p>
+          <a href="#">
+            I already have an app
+          </a>
+        </p>
       </div>
-      <div class="modal-footer">
-        <span class="step-counter"><%= t("walkthrough.step") %> <span class="step-no"></span>/<span class="step-total"></span></span>
-        <button type="button" class="btn btn-primary prev"><%=t("walkthrough.previous")%></button>
-        <button type="button" class="btn btn-success next"><%=t("walkthrough.next")%></button>
-        <button type="button" class="btn btn-success start"><%=t("walkthrough.start")%></button>
-        <button type="button" class="btn btn-success finish" data-dismiss="modal"><%=t("walkthrough.finish")%></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal walkthrough-modal" id="walkthrough-modal-second" tabindex="-1" role="dialog" aria-hidden="true" data-walkthrough-index="0" data-walkthrough-title="<%=t('walkthrough.welcome.title')%>" data-walkthrough-body="<%= raw t('walkthrough.welcome.body', github_url: '<a href=https://github.com/upnext/BeaconCtrl> https://github.com/upnext/BeaconCtrl </a>') %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header gray-light">
+        <h4 class="modal-title"><%= raw t('walkthrough.guide.title') %></h4>
+        <p>
+          <%= raw t('walkthrough.guide.body') %>
+        </p>
+      </div>
+      <div class="modal-body">
+        <a href="<%= '/walkthrough/intro' %>" class="btn btn-success content-button see-it" target="_blank">
+          SEE IT NOW
+        </a>
+
+        <p>
+          <a href="#" data-dismiss="modal">
+            Maybe later
+          </a>
+        </p>
       </div>
     </div>
   </div>

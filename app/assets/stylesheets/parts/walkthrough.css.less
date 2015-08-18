@@ -14,43 +14,53 @@
   border-color: @brand-success !important;
 }
 
-#walkthrough-modal {
+.walkthrough-modal {
   .modal-dialog {
     position: absolute;
     top: 50%;
     left: 50%;
     margin-top: -200px;
-    margin-left: -292px;
+    margin-left: -220px;
+    text-align: center;
   }
+
+  .content-button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
   .modal-content {
     border: none;
     .box-shadow(none);
-    width: 800px;
-    height: 400px;
-  }
-
-  .modal-sidebar {
-    position: absolute;
-    left: -@modal_logo_width;
-    width: @modal_logo_width;
-    height: 100%;
-    background: @brand-success image-url('walkthrough_logo.png') no-repeat center center;
-    background-size: 172px 43px;
+    width: 420px;
+    height: 300px;
   }
 
   .modal-header {
+    background-color: @brand-success;
     border: none;
-    padding: 30px 40px 20px;
+    height: 150px;
+    padding: 20px 20px 20px;
+    color: #fff;
+
+    &.gray-light {
+      background-color: @gray-lighter;
+      color: black;
+    }
+
     .modal-title {
       font-size: 22px;
       font-weight: @semibold;
+      margin-bottom: 10px;
     }
     .close {
       margin: -15px -20px 0;
     }
   }
 
+
   .modal-body {
+    height: 150px;
     padding: 20px 40px;
     font-size: 14px;
   }

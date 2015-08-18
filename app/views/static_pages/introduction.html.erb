@@ -1,0 +1,42 @@
+<div class="walkthrough">
+  <%= render 'sidebar' %>
+
+  <div class='content'>
+    <div id="intro" >
+      <div class="title"><%= t('walkthrough.introduction.title') %></div>
+        
+      <p>
+        <%= raw t('walkthrough.welcome.intro', github_url: '<a href=https://github.com/upnext/BeaconCtrl> https://github.com/upnext/BeaconCtrl </a>') %>
+      </p>
+
+      <div class="subtitle"><%= t('walkthrough.introduction.add_beacon') %></div>
+      <p>
+        <%= t('walkthrough.beacons.body') %>
+      </p>
+      <%= image_tag('walktrough/beacon_new.png') %>
+
+      <div class="subtitle"><%= t('walkthrough.introduction.zones') %></div>
+      <p>
+        <%= t('walkthrough.zones.body') %>
+      </p>
+      <%= image_tag('walktrough/zones.png') %>
+
+      <div class="subtitle"><%= t('walkthrough.introduction.map') %></div>
+      <p>
+        <%= t('walkthrough.map.body') %>
+      </p>
+      <%= image_tag('walktrough/map.png') %>
+
+      <div class="subtitle"><%= t('walkthrough.introduction.applications') %></div>
+      <p>
+        <%= t('walkthrough.applications.body') %>
+      </p>
+      <%= image_tag('walktrough/applications.png') %>
+
+      <div class="subtitle"><%= t('walkthrough.introduction.add_ons') %></div>
+      <p>
+        <%= t('walkthrough.addons.body') %>
+      </p>
+      <%= image_tag('walktrough/extensions.png') %>
+    </div>
+</div>
