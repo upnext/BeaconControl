@@ -36,9 +36,7 @@
           height: 60px;
           font-size: 16px;
           font-weight: @light;
-
           padding: 15px 0px 15px 71px;
-
           position: relative;
 
           span.bos, span.fa {
@@ -48,9 +46,29 @@
             vertical-align: middle;
           }
         }
-        a.active, a:hover, a:focus {
-          background-color: @gray-darker;
+
+        &.walkthrough {
+          @media (min-height: 485px){
+            bottom: 65px;
+            height: auto;
+            position: absolute;
+            width: 100%;
+          }
+
+          a {
+            background-color: @gray-darker;
+
+            &:hover {
+              background-color: @gray-darker;
+            }
+          }
         }
+
+        a:hover, a:focus {
+          background-color: @gray-dark;
+          color: @brand-success;
+        }
+
         a.active {
           color: @brand-success;
           font-weight: @semibold;

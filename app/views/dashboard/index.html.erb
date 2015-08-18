@@ -19,27 +19,24 @@
       <div class="tile">
         <h2><%= t('.beacon_title') %></h2>
         <p><%= t('.beacon_description') %></p>
+        <%= link_to t(".add_beacon"), new_beacon_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 1 %>
       </div>
-
-      <%= link_to t(".add_beacon"), new_beacon_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 1 %>
     </div>
 
     <div class="col-lg-4 col-md-6">
       <div class="tile">
         <h2><%= t('.zone_title') %></h2>
         <p><%= t('.zone_description') %></p>
+        <%= link_to t(".add_zone"), new_zone_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 2 %>
       </div>
-
-      <%= link_to t(".add_zone"), new_zone_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 2 %>
     </div>
 
     <div class="col-lg-4 col-md-6">
       <div class="tile">
         <h2><%= t('.application_title') %></h2>
         <p><%= t('.application_description') %></p>
+        <%= link_to t(".add_application"), applications_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 4 %>
       </div>
-
-      <%= link_to t(".add_application"), applications_path, class: %W[btn btn-success], :"data-walkthrough-highlight" => 4 %>
     </div>
   </div>
 </div>

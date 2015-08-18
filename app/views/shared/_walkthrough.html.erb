@@ -9,15 +9,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"><%= t('walkthrough.welcome.title') %></h4>
-        <p>
-          <br/>
-          <%= raw t('walkthrough.welcome.body') %>
-        </p>
+        <div class="modal-header-content">
+          <h4 class="modal-title"><%= t('walkthrough.welcome.title') %></h4>
+          <p>
+            <%= raw t('walkthrough.welcome.body') %>
+          </p>
+        </div>
       </div>
       <div class="modal-body">
-        <a href="<%= logo_link_url + '/dev' %>" target="_blank" >
-          <%= image_tag('icon-appstore', class: "content-button") %>
+        <a href="https://itunes.apple.com/pl/app/beaconctrl/id1020666394?mt=8" target="_blank" >
+          <%= image_tag('icon-appstore.svg', class: "content-button") %>
         </a>
 
         <p>
@@ -34,18 +35,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header gray-light">
-        <h4 class="modal-title"><%= raw t('walkthrough.guide.title') %></h4>
-        <p>
-          <%= raw t('walkthrough.guide.body') %>
-        </p>
+        <div class="modal-header-content">
+          <h4 class="modal-title"><%= raw t('walkthrough.guide.title') %></h4>
+          <p>
+            <%= raw t('walkthrough.guide.body') %>
+          </p>
+        </div>
       </div>
       <div class="modal-body">
-        <a href="<%= '/walkthrough/intro' %>" class="btn btn-success content-button see-it" target="_blank">
+        <a href="<%= '/walkthrough/intro' %>" class="btn btn-success content-button" target="_blank">
           SEE IT NOW
         </a>
 
         <p>
-          <a href="#" data-dismiss="modal">
+          <a href="#">
             Maybe later
           </a>
         </p>

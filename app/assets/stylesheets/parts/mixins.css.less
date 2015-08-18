@@ -49,10 +49,12 @@
     }
   }
 
-  .active>.bos-@{class} {
-    background: image-url('icons/@{icon}_selected.png') no-repeat;
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      background: image-url('icons/@{icon}_selected@2x.png') no-repeat;
+  .active, &:hover, &:active, &:focus {
+    > .bos-@{class} {
+      background: image-url('icons/@{icon}_selected.png') no-repeat;
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        background: image-url('icons/@{icon}_selected@2x.png') no-repeat;
+      }
     }
   }
 }

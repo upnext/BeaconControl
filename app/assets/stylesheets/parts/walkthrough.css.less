@@ -6,8 +6,6 @@
  * LICENSE.txt file in the root directory of this source tree. 
  */
 
-@modal_logo_width:    220px;
-
 .walkthrough-highlight {
   position: relative;
   z-index: 1050;
@@ -15,18 +13,23 @@
 }
 
 .walkthrough-modal {
+
   .modal-dialog {
     position: absolute;
     top: 50%;
+    width: 420px;
     left: 50%;
-    margin-top: -200px;
-    margin-left: -220px;
+    margin-top: -150px;
+    margin-left: -85px;
     text-align: center;
   }
 
   .content-button {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    height: 55px;
+    line-height: 34px;
+    margin: 13px 0 15px 0;
+    width: 180px;
   }
 
   .modal-content {
@@ -39,53 +42,75 @@
   .modal-header {
     background-color: @brand-success;
     border: none;
+    display: table;
     height: 150px;
-    padding: 20px 20px 20px;
+    padding: 21px 20px 20px;
     color: #fff;
+    width: 100%;
 
     &.gray-light {
       background-color: @gray-lighter;
       color: black;
     }
 
+    .modal-header-content {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
     .modal-title {
       font-size: 22px;
-      font-weight: @semibold;
-      margin-bottom: 10px;
+      font-weight: @normal;
+      line-height: 25px;
+      margin-bottom: 15px;
     }
+
     .close {
       margin: -15px -20px 0;
     }
-  }
 
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
 
   .modal-body {
     height: 150px;
     padding: 20px 40px;
     font-size: 14px;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    a:not(.btn) {
+      color: #000;
+      font-size: 12px;
+    }
   }
 
   .modal-footer {
     border: none;
     padding: 20px 40px 30px;
-    .btn {
-      width: 25%;
-      font-size: 16px;
-    }
-    .step-counter {
-      margin-right: 10px;
-      color: @gray;
-
-    }
-
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+
+    .btn {
+      width: 25%;
+      font-size: 16px;
+    }
+
+    .step-counter {
+      margin-right: 10px;
+      color: @gray;
+    }
   }
 }
 
 body.modal-open {
+
   .main {
     position: absolute;
     min-height: 100%;

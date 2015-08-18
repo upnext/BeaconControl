@@ -12,21 +12,23 @@ class Walkthrough
     return unless @modal.length > 0
 
     @links = @modal.find('a')
+    @closeLinks = @anotherModal.find('a')
+
     @observeOpen()
-    @observeLink()
+    @observeLinks()
 
   observeOpen: ->
-    _self = @
     @open() if @autorun.length > 0
 
     @modal.on "show.bs.modal", ->
       window.scrollTo(0, 0)
 
-  observeLink: ->
-    _self = @
-    @links.click (e) ->
-      _self.openAnotherModal()
-      console.log('clicked')
+  observeLinks: ->
+    @links.click (event) =>
+      @openAnotherModal()
+
+    @closeLinks.click (event) =>
+      @anotherModal.modal('hide')
 
   open: ->
     @modal.modal('show')
