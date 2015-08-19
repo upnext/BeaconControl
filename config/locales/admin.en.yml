@@ -321,10 +321,12 @@ en:
       body: "Here you can create your own add-ons. We've provided you with a starter set of ready-to-go add-ons to build on."
 
     sidebar:
-      intro: "Introduction"
-      add_beacon: "1. Add beacon & test it"
-      setup_custom_action: "2. Setup an action in the test app"
-      setup_coupon_action: "3. Setup an action in the test app"
+      intro: "<b>1.</b> Introduction"
+      add_beacon: "<b>2.</b> How to setup your first beacon and test it"
+      link_beacon: "<b>3.</b> How to link your beacons into the zone"
+      create_action: "<b>4.</b> How to create an action for your beacon"
+      customize_features: "<b>5.</b> How to customize BeaconControl features"
+      glossary: "<b>6.</b> Glossary"
     introduction:
       title: "Introduction"
       add_beacon: "Add beacon"

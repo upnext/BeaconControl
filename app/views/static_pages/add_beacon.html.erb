@@ -9,18 +9,24 @@
 
       <div class="subtitle"><%= t('walkthrough.add_beacon.admin_panel') %></div>
       <ol>
-        <li><%= t('walkthrough.add_beacon.add_beacon') %></li>
-        <%= image_tag('walktrough/dashboard.png') %>
-        <li><%= raw t('walkthrough.add_beacon.fill_in_beacon_data') %></li>
-        <%= image_tag('walktrough/beacon_new.png') %>
+        <li>
+          <%= t('walkthrough.add_beacon.add_beacon') %>
+          <%= image_tag('walktrough/dashboard.png') %>
+        </li>
+        <li>
+          <%= raw t('walkthrough.add_beacon.fill_in_beacon_data') %>
+          <%= image_tag('walktrough/beacon_new.png') %>
+        </li>
         <li><%= t('walkthrough.add_beacon.bring_phone') %></li>
       </ol>
 
       <div class="subtitle"><%= t('walkthrough.add_beacon.mobile_app') %></div>
       <ol>
-        <li><%= t('walkthrough.add_beacon.add_beacon_mobile') %></li>
-        <%= image_tag('walktrough/01-mobile.png', class: 'two-images') %>
-        <%= image_tag('walktrough/02-mobile.png', class: 'two-images') %>
+        <li>
+          <%= t('walkthrough.add_beacon.add_beacon_mobile') %>
+          <%= image_tag('walktrough/01-mobile.png', class: 'two-images margin-t40') %>
+           <%= image_tag('walktrough/02-mobile.png', class: 'two-images') %>
+        </li>
         <li><%= raw t('walkthrough.add_beacon.setup_trigger') %></li>
         <li><%= t('walkthrough.add_beacon.bring_phone') %></li>
       </ol>

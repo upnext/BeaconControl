@@ -1,10 +1,12 @@
 <div id="sticky-anchor"></div>
 <div id="sticky" class='walkthrough-sidebar'>
   <ul>
-    <li><%= active_link_to t('walkthrough.sidebar.intro'), '/walkthrough/intro' %></a></li>
-    <li><%= active_link_to t('walkthrough.sidebar.add_beacon'), '/walkthrough/add_beacon' %></a></li>
-    <li><%= active_link_to t('walkthrough.sidebar.setup_custom_action'), '/walkthrough/setup_custom_action' %></a></li>
-    <li><%= active_link_to t('walkthrough.sidebar.setup_coupon_action'), '/walkthrough/setup_coupon_action' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.intro')), '/walkthrough/intro' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.add_beacon')), '/walkthrough/add_beacon' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.link_beacon')), '/walkthrough/link_beacon' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.create_action')), '/walkthrough/create_action' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.customize_features')), '/walkthrough/customize_features' %></a></li>
+    <li><%= active_link_to raw(t('walkthrough.sidebar.glossary')), '/walkthrough/glossary' %></a></li>
   </ul>
 </div>
         

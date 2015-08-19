@@ -71,8 +71,10 @@ BeaconControl::Application.routes.draw do
     member do
       get :introduction, path: 'walkthrough/intro'
       get :add_beacon, path: 'walkthrough/add_beacon'
-      get :setup_custom_action, path: 'walkthrough/setup_custom_action'
-      get :setup_coupon_action, path: 'walkthrough/setup_coupon_action'
+      get :link_beacon, path: 'walkthrough/link_beacon'
+      get :create_action, path: 'walkthrough/create_action'
+      get :customize_features, path: 'walkthrough/customize_features'
+      get :glossary, path: 'walkthrough/glossary'
     end
   end
 
