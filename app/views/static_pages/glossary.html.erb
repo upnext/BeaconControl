@@ -2,5 +2,34 @@
   <%= render 'sidebar' %>
 
   <div class='content'>
+    <div>
+      <div class="title"><%= t('walkthrough.glossary.title') %></div>
+      <p><%= raw t('walkthrough.glossary.beacon_description') %></p>
+      <p><%= raw t('walkthrough.glossary.beacon_vendors') %></p>
+      <p><%= raw t('walkthrough.glossary.how_to_setup_beacons') %></p>
+      <p><%= raw t('walkthrough.glossary.beacon_range') %></p>
+      <p>
+        <%= raw t('walkthrough.glossary.beacon_distance') %>
+        <ul>
+          <li><%= raw t('walkthrough.glossary.almost_touching') %></li>
+          <li><%= raw t('walkthrough.glossary.nearby') %></li>
+          <li><%= raw t('walkthrough.glossary.in_sight') %></li>
+        </ul>
+      </p>
+      <p><%= raw t('walkthrough.glossary.zones') %></p>
+      <p><%= raw t('walkthrough.glossary.create_zone') %></p>
+      <p><%= raw t('walkthrough.glossary.action_description') %></p>
+      <p><%= raw t('walkthrough.glossary.types_of_actions') %>
+        <ul>
+          <li><%= raw t('walkthrough.glossary.url_actions') %></li>
+          <li><%= raw t('walkthrough.glossary.custom_actions') %></li>
+          <li><%= raw t('walkthrough.glossary.coupons_actions') %></li>
+        </ul>
+      </p>
+      <p><%= raw t('walkthrough.glossary.trigger') %></p>
+      <p><%= raw t('walkthrough.glossary.beacon_broadcast') %></p>
+      <p><%= raw t('walkthrough.glossary.choose_trigger') %></p>
+      <p><%= raw t('walkthrough.glossary.how_to_create_action') %></p>
+    </div>
   </div>
 </div>

@@ -30,6 +30,17 @@
         <li><%= raw t('walkthrough.add_beacon.setup_trigger') %></li>
         <li><%= t('walkthrough.add_beacon.bring_phone') %></li>
       </ol>
+
+      <div class="subtitle"><%= t('walkthrough.add_beacon.sth_wrong') %></div>
+      <ol>
+        <li><%= raw t('walkthrough.add_beacon.no_mobile_app', mobile_app_url: "https://itunes.apple.com/pl/app/beaconctrl/id1020666394?mt=8") %></li>
+        <li><%= t('walkthrough.add_beacon.not_same_account') %></li>
+        <li><%= t('walkthrough.add_beacon.wrong_mobile_settings') %></li>
+        <li><%= t('walkthrough.add_beacon.uuid_mistake') %></li>
+        <li><%= t('walkthrough.add_beacon.battery_dead') %></li>
+        <li><%= t('walkthrough.add_beacon.broken_beacon') %></li>
+        <li><%= t('walkthrough.add_beacon.no_idea_what_wrong') %></li>
+      </ol>
     </div>
   </div>
 </div>
