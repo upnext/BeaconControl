@@ -6,7 +6,8 @@
       <div class="title"><%= t('walkthrough.glossary.title') %></div>
       <p><%= raw t('walkthrough.glossary.beacon_description') %></p>
       <p><%= raw t('walkthrough.glossary.beacon_vendors') %></p>
-      <p><%= raw t('walkthrough.glossary.how_to_setup_beacons') %></p>
+      <p><%= raw t('walkthrough.glossary.how_to_setup_beacons', setup_beacon_url: add_beacon_static_pages_path) %></p>
+      <br/>
       <p><%= raw t('walkthrough.glossary.beacon_range') %></p>
       <p>
         <%= raw t('walkthrough.glossary.beacon_distance') %>
@@ -16,20 +17,23 @@
           <li><%= raw t('walkthrough.glossary.in_sight') %></li>
         </ul>
       </p>
-      <p><%= raw t('walkthrough.glossary.zones') %></p>
-      <p><%= raw t('walkthrough.glossary.create_zone') %></p>
+      <br/>
+      <p id="zones"><%= raw t('walkthrough.glossary.zones') %></p>
+      <p><%= raw t('walkthrough.glossary.create_zone', create_zone_url: link_beacon_static_pages_path) %></p>
+      <br/>
       <p><%= raw t('walkthrough.glossary.action_description') %></p>
-      <p><%= raw t('walkthrough.glossary.types_of_actions') %>
+      <p id="action_type"><%= raw t('walkthrough.glossary.types_of_actions') %>
         <ul>
           <li><%= raw t('walkthrough.glossary.url_actions') %></li>
           <li><%= raw t('walkthrough.glossary.custom_actions') %></li>
           <li><%= raw t('walkthrough.glossary.coupons_actions') %></li>
         </ul>
       </p>
-      <p><%= raw t('walkthrough.glossary.trigger') %></p>
+      <br/>
+      <p id="trigger"><%= raw t('walkthrough.glossary.trigger') %></p>
       <p><%= raw t('walkthrough.glossary.beacon_broadcast') %></p>
       <p><%= raw t('walkthrough.glossary.choose_trigger') %></p>
-      <p><%= raw t('walkthrough.glossary.how_to_create_action') %></p>
+      <p><%= raw t('walkthrough.glossary.how_to_create_action', create_action_url: create_action_static_pages_path) %></p>
     </div>
   </div>
 </div>

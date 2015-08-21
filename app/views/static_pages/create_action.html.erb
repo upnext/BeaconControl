@@ -5,8 +5,8 @@
     <div>
       <div class="title"><%= t('walkthrough.create_action.title') %></div>
       <p><%= raw t('walkthrough.create_action.choose_app') %></p>
-      <p><%= raw t('walkthrough.create_action.see_actions') %></p>
-      <p><%= raw t('walkthrough.create_action.configure_action') %></p>
+      <p><%= raw t('walkthrough.create_action.see_actions', type_of_action_url: "#{glossary_static_pages_path}#action_type" ) %></p>
+      <p><%= raw t('walkthrough.create_action.configure_action', zone_url: "#{glossary_static_pages_path}#zones", trigger_url: "#{glossary_static_pages_path}#trigger") %></p>
     </div>
   </div>
 </div>
