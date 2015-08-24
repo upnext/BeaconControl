@@ -30,6 +30,7 @@
 //= require ext/pick_a_color
 //= require ext/spectrum
 //= require ext/fontawesome-markers.min
+//= require ext/promise
 //
 // ### Bootstrap extensions
 //= require ext_bootstrap/bootstrap-slider
