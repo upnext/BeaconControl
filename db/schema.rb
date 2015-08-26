@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723103804) do
+ActiveRecord::Schema.define(version: 20150826090401) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20150723103804) do
   end
 
   add_index "beacons", ["account_id"], name: "index_beacons_on_account_id", using: :btree
-  add_index "beacons", ["proximity_id"], name: "index_beacons_on_proximity_id", unique: true, using: :btree
+  add_index "beacons", ["proximity_id", "account_id"], name: "index_beacons_on_proximity_id_and_account_id", unique: true, using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false

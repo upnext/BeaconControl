@@ -42,7 +42,7 @@ class Beacon < ActiveRecord::Base
   end
 
   validates :proximity_id,
-    uniqueness: true,
+    uniqueness: { scope: :account },
     presence: true
 
   validates :major, :minor,
@@ -54,7 +54,7 @@ class Beacon < ActiveRecord::Base
 
   validates :floor, inclusion: { in: AVAILABLE_FLOORS }, allow_blank: true
 
-  validates :name, presence: true, uniqueness: { scope: :manager_id }
+  validates :name, presence: true, uniqueness: { scope: :account }
 
   validates :zone_id, inclusion: { in: lambda { |beacon| beacon.manager.zone_ids} },
     allow_blank: true, if: :manager_id?
