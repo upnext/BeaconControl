@@ -350,7 +350,7 @@ en:
         UUID, major and minor. Placing the beacon on the map is optional. To verify beacon setup right away, click \"test notification\"."
       setup_trigger: "Make sure he trigger is setup for \"almoust touching\", so you have full control on your test. Click save."
       sth_wrong: "It's not working. What could have go wrong?"
-      no_mobile_app: "You don't have BeaconControl test application on your mobile. Download it <a href=%{mobile_app_url}>here</a>."
+      no_mobile_app: "You don't have BeaconControl test application on your mobile. Download it <a href=%{mobile_app_url} target='_blank'>here</a>."
       not_same_account: "Your Admin Panel and BeaconControl mobile Application is not connected to the same account. Remember to use the same e-mail and password on both."
       wrong_mobile_settings: "Your mobile settings are blocking the action. Open an app and see if there is any information about it. If anything is wrong the application will display it."
       uuid_mistake: "You've made a mistake in UUID, major and minor numbers, and the system does not recognize your beacon. Double-check it to be sure."
@@ -372,7 +372,7 @@ en:
     glossary:
       title: "Glossary"
       beacon_description: "<b>Beacon</b> is a BLE transmitter that broadcasts to nearby portable electronic devices. It enables smartphones, tablets and other devices to perform actions."
-      beacon_vendors: "Beacons are provided by a variety of vendors, like <a href='http://kontakt.io'>kontakt.io</a>, estimote and such. You need at least one beacon device to use BeaconControl properly."
+      beacon_vendors: "Beacons are provided by a variety of vendors, like <a href='http://kontakt.io' target='_blank'>kontakt.io</a>, estimote and such. You need at least one beacon device to use BeaconControl properly."
       how_to_setup_beacons: "<a href=%{setup_beacon_url}>See how to setup the beacon</a>"
       beacon_range: "<b>Beacon Range</b> is a space in which the user device can be reached by a beacon signal. The signal strength depends on the hardware capabilities, (standard beacons have an approximate range of 70 meters) and can be diffracted by obstructions in the environment (including a human body)."
       beacon_distance: "The distance (between a transmitting iBeacon and receiving device) fits three triggers in BeaconControl"
@@ -399,10 +399,10 @@ en:
       presence_add_on: "<b>Presence Add-on</b><br/>
         This add-on sends information about the users' presence in the beacon/zone range to the backend. It allows to more advanced functionalities like check-in or personalized communication to be created.<br/>
         Once you've activated this add-on you need to add it to your app. Go to applications, choose the app you want to activate it for and click the tab \"add-ons\" at the top bar.<br/>
-        *There is no User Interface to observe the users’ presence. For more information you can see the <a href=%{developers_documentation_url}>developers' documentation.</a>"
+        *There is no User Interface to observe the users’ presence. For more information you can see the <a href=%{developers_documentation_url} target='_blank'>developers' documentation.</a>"
       kontakt_io_add_on: "<b>Kontakt.io Add-on</b><br/>
         This add-on is dedicated to kontakt.io beacon hardware and eases the addition of multiple beacons automatically.<br/>
-        To activate this add-on you'll need API-key from kontakt.io <a href='https://support.kontakt.io/hc/en-gb/articles/201628731'>https://support.kontakt.io/hc/en-gb/articles/201628731</a>"
+        To activate this add-on you'll need API-key from kontakt.io <a href='https://support.kontakt.io/hc/en-gb/articles/201628731' target='_blank'>https://support.kontakt.io/hc/en-gb/articles/201628731</a>"
       kontakt_io_beacons: "Once you've activated this add-on the new tab will appear on side menu bar. Just click on it and you’ll see the list of all your kontakt.io beacons ready to import."
       analytics_add_on: "<b>Analytics Add-on</b><br/>
         This add-on collects and displays data about how your application is used.<br/>
