@@ -196,10 +196,10 @@ en:
   dashboard:
     index:
       title: 'Home'
-      welcome: 'Welcome to BeaconCtrl!'
+      welcome: 'Welcome to BeaconControl!'
       description: "This is the place where you’ll manage your beacon infrastructure and configure actions triggered in your mobile applications. Why don’t you start by adding some beacons? Then you can create your first application, add actions and start monitoring your beacons’ usage."
       beacon_title: 'NEW BEACON'
-      beacon_description: "Adding the beacon is fast and easy. Recognize your beacon with UUID, and the major and minor numbers provided by its supplier, and then locate your beacon on the map. Now you're ready to setup actions for it, test it on BeaconCtrl mobile application and use in further development."
+      beacon_description: "Adding the beacon is fast and easy. Recognize your beacon with UUID, and the major and minor numbers provided by its supplier, and then locate your beacon on the map. Now you're ready to setup actions for it, test it on BeaconControl mobile application and use in further development."
       zone_title: "NEW ZONE"
       zone_description: "Link your beacons into zones to create an extended range for your beacon deployment. Extended ranges create an area in which specified zone actions are triggered, improving the efficiency of beacon management and mapping. Use this feature to magnify the effect of single beacons."
       application_title: "NEW APPLICATION"
@@ -248,7 +248,7 @@ en:
         map: 'Map'
         extensions_marketplace: 'Add-ons'
         users: 'Users'
-        walkthrough: 'Beginners Guide'
+        walkthrough: "Beginners' Guide"
 
       toggle_nav: 'Toggle navigation'
       profile: 'Profile'
@@ -299,7 +299,7 @@ en:
       title: "Hello there!"
       body: "BeaconControl works the best if paired with a mobile app.</br>
         And now is the perfect moment to download it."
-      intro: "Welcome to BeaconCtrl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconCtrl. You’re also invited to github: %{github_url}"
+      intro: "Welcome to BeaconControl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconControl. You’re also invited to github: %{github_url}"
     guide:
       title: "Do you want to see <br/> the Beginners' Guide?"
       body: "You can do it now, or anytime<br/>
@@ -402,7 +402,8 @@ en:
         *There is no User Interface to observe the users’ presence. For more information you can see the <a href=%{developers_documentation_url} target='_blank'>developers' documentation.</a>"
       kontakt_io_add_on: "<b>Kontakt.io Add-on</b><br/>
         This add-on is dedicated to kontakt.io beacon hardware and eases the addition of multiple beacons automatically.<br/>
-        To activate this add-on you'll need API-key from kontakt.io <a href='https://support.kontakt.io/hc/en-gb/articles/201628731' target='_blank'>https://support.kontakt.io/hc/en-gb/articles/201628731</a>"
+        To activate this add-on you'll need API-key from kontakt.io<br/>
+        <a href='https://support.kontakt.io/hc/en-gb/articles/201628731' target='_blank'>https://support.kontakt.io/hc/en-gb/articles/201628731</a>"
       kontakt_io_beacons: "Once you've activated this add-on the new tab will appear on side menu bar. Just click on it and you’ll see the list of all your kontakt.io beacons ready to import."
       analytics_add_on: "<b>Analytics Add-on</b><br/>
         This add-on collects and displays data about how your application is used.<br/>
