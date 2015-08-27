@@ -297,12 +297,12 @@ en:
     step: "Step"
     welcome:
       title: "Hello there!"
-      body: "BeaconControl works the best if paired with mobile app.</br>
+      body: "BeaconControl works the best if paired with a mobile app.</br>
         And now is the perfect moment to download it."
       intro: "Welcome to BeaconCtrl, your free entry to the beacon world. Here, you’ll prepare your beacons deployment, manage your beacons on the map, and customize your implementation by developing add ons. Please use our short walkthrough first, and then you’ll be free to depart on your own journey with BeaconCtrl. You’re also invited to github: %{github_url}"
     guide:
-      title: "Do you want to see <br/> the Beginners Guide?"
-      body: "You can do it now, or anytime you feel like it.<br/>
+      title: "Do you want to see <br/> the Beginners' Guide?"
+      body: "You can do it now, or anytime<br/>
         It's at the bottom left on your Admin Panel"
     beacons:
       title: "ADD BEACON"
@@ -391,3 +391,20 @@ en:
       beacon_broadcast: "A beacon broadcast has the ability to approximate when a user has entered, exited, or lingered in a beacon range. Depending on those and the user’s proximity to a beacon, they are able to proceed with different actions."
       choose_trigger: "You choose the trigger when creating an action for your beacon."
       how_to_create_action: "<a href=%{create_action_url}>See how to create an action for your beacon.</a>"
+      add_on: "<b>Add-on</b> is an extra element you can enable to customize your Admin Panel features.<br/>
+        See all available add-ons in the Add-ons tab."
+      how_to_enable_add_on: "<a href=%{enable_add_on_url}>See how to enable and use Add-ons.</a>"
+      dwell_time: "<b>DwellTime Add-on</b><br/>
+        An extra <a href=%{trigger_definition_url}>trigger</a>. It causes an action to start when a user lingers within the beacon range for customizable amount of time (between 5 and 60 minutes). Once you’ve activated this add-on you need to add it to your app. Go to applications, choose the app you want to activate it for and click the tab “add-ons” at the top bar. Click on the dwell time add-on in the bottom part."
+      presence_add_on: "<b>Presence Add-on</b><br/>
+        This add-on sends information about the users' presence in the beacon/zone range to the backend. It allows to more advanced functionalities like check-in or personalized communication to be created.<br/>
+        Once you've activated this add-on you need to add it to your app. Go to applications, choose the app you want to activate it for and click the tab \"add-ons\" at the top bar.<br/>
+        *There is no User Interface to observe the users’ presence. For more information you can see the <a href=%{developers_documentation_url}>developers' documentation.</a>"
+      kontakt_io_add_on: "<b>Kontakt.io Add-on</b><br/>
+        This add-on is dedicated to kontakt.io beacon hardware and eases the addition of multiple beacons automatically.<br/>
+        To activate this add-on you'll need API-key from kontakt.io <a href='https://support.kontakt.io/hc/en-gb/articles/201628731'>https://support.kontakt.io/hc/en-gb/articles/201628731</a>"
+      kontakt_io_beacons: "Once you've activated this add-on the new tab will appear on side menu bar. Just click on it and you’ll see the list of all your kontakt.io beacons ready to import."
+      analytics_add_on: "<b>Analytics Add-on</b><br/>
+        This add-on collects and displays data about how your application is used.<br/>
+        Once you've activated this add-on you need to add it to your app. Go to applications, choose the app you want to activate it for and click the tab \"add-ons\" at the top bar. Click on the Analytics add-on in the bottom part, and then simply click on it."
+
