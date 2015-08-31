@@ -103,8 +103,6 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'premailer-rails'
 
-gem 'requirejs-rails'
-
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'

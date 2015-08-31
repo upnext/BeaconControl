@@ -285,8 +285,6 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     request_store (1.1.0)
-    requirejs-rails (0.9.9)
-      railties (>= 3.1.1)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
     rpush (2.4.0)
@@ -427,7 +425,6 @@ DEPENDENCIES
   quiet_assets
   rack-cors
   rails (= 4.2.0)
-  requirejs-rails
   responders
   rpush (~> 2.4.0)
   rqrcode
