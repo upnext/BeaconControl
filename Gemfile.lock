@@ -38,10 +38,9 @@ PATH
 
 GIT
   remote: ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git
-  revision: aade62c9b9acb26c7001dfbce30f7d2521a14a0c
+  revision: ffefd979cd53cd4f3a615303cd27fff76c850ad6
   specs:
     beacon_control-neighbours_extension (0.1.1)
-      requirejs-rails
       sprockets (>= 3.0.0)
       sprockets-es6
 
