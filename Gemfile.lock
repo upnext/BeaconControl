@@ -38,7 +38,7 @@ PATH
 
 GIT
   remote: ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git
-  revision: fa131067fcb8e0e2d0359e2484b7fe3faa89e906
+  revision: aade62c9b9acb26c7001dfbce30f7d2521a14a0c
   specs:
     beacon_control-neighbours_extension (0.1.1)
       requirejs-rails
@@ -94,7 +94,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    babel-source (5.8.19)
+    babel-source (5.8.23)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
@@ -165,7 +165,7 @@ GEM
       activesupport (>= 3.2)
     equalizer (0.0.9)
     erubis (2.7.0)
-    execjs (2.5.2)
+    execjs (2.6.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -214,14 +214,14 @@ GEM
     letter_opener (1.2.0)
       launchy (~> 2.2)
     libv8 (3.16.14.7)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.0)
     moneta (0.8.0)
     multi_json (1.11.2)
     multipart-post (2.0.0)
@@ -267,7 +267,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.6)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -338,7 +338,7 @@ GEM
       tilt (>= 1.3, < 3)
     slop (3.6.0)
     spring (1.2.0)
-    sprockets (3.2.0)
+    sprockets (3.3.3)
       rack (~> 1.0)
     sprockets-es6 (0.7.0)
       babel-transpiler
@@ -448,4 +448,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

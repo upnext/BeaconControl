@@ -9,18 +9,11 @@
 brand_factory = Brand::Factory.new(name: "Beacon OS")
 brand = brand_factory.create
 
-invitation_code = if AppConfig.invitation_codes
-  BeaconControl::InvitationCodesExtension::InvitationCode.create
-else
-  OpenStruct.new(code: nil)
-end
-
 email = ENV['SEED_ADMIN_EMAIL'] || 'admin@example.com'
 password  = ENV['SEED_ADMIN_PASSWORD'] || 'test123'
 
 admin_factory = Admin::Factory.new(
   email:                 email,
-  invitation_code:       invitation_code.code,
   password:              password,
   password_confirmation: password,
 )
