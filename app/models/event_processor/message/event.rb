@@ -34,6 +34,11 @@ module EventProcessor
       attribute :action_id,    Integer
       attribute :action,       Activity
 
+      attribute :data,         Hash
+
+      def data=(value)
+        super(value.is_a?(String) ? JSON.parse(value) : value)
+      end
 
       def with_range?
         range_id.present?

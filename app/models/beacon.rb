@@ -9,6 +9,7 @@
 class Beacon < ActiveRecord::Base
   AVAILABLE_FLOORS = ((AppConfig.lowest_floor)..(AppConfig.highest_floor)).to_a
   SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at)
+  PROTOCOLS = %w(iBeacon Eddystone)
   VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Sensorberg', 'Sonic Notify' ]
 
   extend UuidField
@@ -61,6 +62,8 @@ class Beacon < ActiveRecord::Base
     allow_blank: true, if: :manager_id?
 
   validate :validate_manager_role, if: :manager_id?
+
+  validates :protocol, inclusion: { in: PROTOCOLS }
 
   validate :validate_test_activity
 

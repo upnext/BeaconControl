@@ -83,6 +83,18 @@
     <div class="col-md-6 second-column">
       <div class="control-group">
         <div class="controls">
+          <%= f.input :protocol,
+                      as: :select,
+                      collection: Beacon::PROTOCOLS,
+                      include_blank: false,
+                      input_html: {
+                          class: %W[selectpicker show-tick select-with-border],
+                          data: {
+                              live_search: true
+                          }
+                      } %>
+        </div>
+        <div class="controls">
           <%= f.input :name %>
         </div>
         <div class="controls">

@@ -69,6 +69,7 @@
           <% end %>
         </th>
         <th class="sortable"><%= sortable "beacons.name", Beacon.human_attribute_name(:name) %></th>
+        <th class="sortable"><%= sortable "beacons.protocol", Beacon.human_attribute_name(:protocol) %></th>
         <th class="sortable"><%= sortable "zones.name", Beacon.human_attribute_name(:zone) %></th>
         <th class="sortable"><%= sortable "floor", Beacon.human_attribute_name(:floor) %></th>
         <th class="sortable"><%= sortable "beacons.created_at", Beacon.human_attribute_name(:created_at) %></th>
@@ -84,6 +85,9 @@
             <td class="zone-mark disable-select" style="background: <%= (beacon.zone && beacon.zone.hex_color) || 'transparent' %>"></td>
             <td class="with-checkbox"><input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" /></td>
             <td><%= truncate(beacon.name, length: 30) %></td>
+            <td class="beacon_protocol">
+              <%= beacon.protocol %>
+            </td>
             <td class="beacon_zone">
               <% if beacon.zone_name? %>
                 <%= truncate(beacon.zone_name, length: 30) %>

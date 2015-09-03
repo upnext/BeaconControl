@@ -9,7 +9,7 @@
 module S2sApi
   module V1
     class BeaconSerializer < BaseSerializer
-      attributes :id, :name, :proximity_id, :location, :zone, :vendor
+      attributes :id, :name, :proximity_id, :location, :zone, :vendor, :protocol
 
       def zone
         S2sApi::V1::ZoneWithoutBeaconsSerializer.new(object.zone, root: false).as_json if object.zone

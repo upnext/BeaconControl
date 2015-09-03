@@ -10,8 +10,11 @@ module Api
   module V1
     class EventsController < BaseController
 
+      rescue_from JSON::ParserError do
+        render json: { error: 'data json malformed' }, status: :unprocessable_entity
+      end
       #
-      # Processes events by all acitive extension's workers.
+      # Processes events by all active extension's workers.
       #
       #   POST /api/v1/events
       #

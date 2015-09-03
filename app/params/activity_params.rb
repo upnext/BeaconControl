@@ -68,6 +68,6 @@ class ActivityParams
   end
 
   def self.permitted_attributes
-    [ :name, :url, :scheme, :campaign_id, ActivityParams.nested_permitted_attributes ]
+    [ :name, :url, :scheme, :campaign_id, :protocol, ActivityParams.nested_permitted_attributes ]
   end
 end
