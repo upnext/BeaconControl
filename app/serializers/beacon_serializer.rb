@@ -7,7 +7,7 @@
 ###
 
 class BeaconSerializer < ApplicationSerializer
-  attributes :id, :name, :proximity_id, :location
+  attributes :id, :name, :proximity_id, :location, :vendor
 
   def proximity_id
     object.proximity_id.to_s

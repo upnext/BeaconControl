@@ -9,6 +9,7 @@
 class Beacon < ActiveRecord::Base
   AVAILABLE_FLOORS = ((AppConfig.lowest_floor)..(AppConfig.highest_floor)).to_a
   SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at)
+  VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Sensorberg', 'Sonic Notify' ]
 
   extend UuidField
 
@@ -62,6 +63,8 @@ class Beacon < ActiveRecord::Base
   validate :validate_manager_role, if: :manager_id?
 
   validate :validate_test_activity
+
+  validates :vendor, inclusion: { in: VENDORS }
 
   scope :unassigned,    -> { where(zone: nil) }
   scope :with_location, -> { where('beacons.lat IS NOT NULL AND beacons.lng IS NOT NULL') }

@@ -86,7 +86,7 @@ class BeaconsController < AdminController
   def permitted_params
     {
       beacon: params.fetch(:beacon, {}).permit(
-        [:name, :uuid, :major, :minor, :location, :lat, :lng, :floor, :zone_id] | role_permitted_params
+        [:name, :uuid, :major, :minor, :location, :lat, :lng, :floor, :zone_id, :vendor] | role_permitted_params
       )
     }
   end

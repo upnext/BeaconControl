@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826090401) do
+ActiveRecord::Schema.define(version: 20150903101425) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.integer  "account_id",             limit: 4
     t.integer  "role",                   limit: 4,   default: 0
     t.string   "correlation_id",         limit: 255
-    t.boolean  "invitation_confirmed",   limit: 1,   default: false
     t.boolean  "walkthrough",            limit: 1,   default: false
   end
 
@@ -122,8 +121,8 @@ ActiveRecord::Schema.define(version: 20150826090401) do
   create_table "beacons", force: :cascade do |t|
     t.string   "name",         limit: 255
     t.string   "proximity_id", limit: 255
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.decimal  "lat",                      precision: 9, scale: 6
     t.decimal  "lng",                      precision: 9, scale: 6
     t.integer  "floor",        limit: 4
@@ -131,6 +130,8 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.integer  "zone_id",      limit: 4
     t.integer  "manager_id",   limit: 4
     t.string   "location",     limit: 255
+    t.string   "protocol",     limit: 255,                         default: "iBeacon"
+    t.string   "vendor",       limit: 255,                         default: "Other"
   end
 
   add_index "beacons", ["account_id"], name: "index_beacons_on_account_id", using: :btree
@@ -244,16 +245,6 @@ ActiveRecord::Schema.define(version: 20150826090401) do
   add_index "ext_analytics_events", ["timestamp"], name: "index_ext_analytics_events_on_timestamp", using: :btree
   add_index "ext_analytics_events", ["user_id"], name: "index_ext_analytics_events_on_user_id", using: :btree
 
-  create_table "ext_invitation_codes_invitation_codes", force: :cascade do |t|
-    t.string   "code",       limit: 255, null: false
-    t.datetime "used_at"
-    t.integer  "admin_id",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "ext_invitation_codes_invitation_codes", ["code"], name: "index_ext_invitation_codes_invitation_codes_on_code", unique: true, using: :btree
-
   create_table "ext_kontakt_io_beacon_assignments", force: :cascade do |t|
     t.integer "beacon_id", limit: 4,   null: false
     t.string  "unique_id", limit: 255, null: false
@@ -285,15 +276,6 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-
-  create_table "ext_sample_examples", force: :cascade do |t|
-    t.integer  "activity_id", limit: 4,   null: false
-    t.string   "name",        limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  add_index "ext_sample_examples", ["activity_id"], name: "index_ext_sample_examples_on_activity_id", using: :btree
 
   create_table "extension_settings", force: :cascade do |t|
     t.integer "account_id",     limit: 4,   null: false
@@ -376,8 +358,8 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.text     "certificate",             limit: 65535
     t.string   "password",                limit: 255
     t.integer  "connections",             limit: 4,     default: 1, null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "type",                    limit: 255,               null: false
     t.string   "auth_key",                limit: 255
     t.string   "client_id",               limit: 255
@@ -392,8 +374,8 @@ ActiveRecord::Schema.define(version: 20150826090401) do
   create_table "rpush_feedback", force: :cascade do |t|
     t.string   "device_token", limit: 64, null: false
     t.datetime "failed_at",               null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "app_id",       limit: 4
   end
 
@@ -413,8 +395,8 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.integer  "error_code",        limit: 4
     t.text     "error_description", limit: 65535
     t.datetime "deliver_after"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "alert_is_json",     limit: 1,        default: false
     t.string   "type",              limit: 255,                          null: false
     t.string   "collapse_key",      limit: 255
@@ -438,10 +420,10 @@ ActiveRecord::Schema.define(version: 20150826090401) do
     t.datetime "updated_at",                                   null: false
     t.string   "event_type",     limit: 255, default: "enter"
     t.integer  "application_id", limit: 4
-    t.integer  "dwell_time",     limit: 4
     t.string   "type",           limit: 255
     t.integer  "activity_id",    limit: 4
     t.boolean  "test",           limit: 1,   default: false
+    t.integer  "dwell_time",     limit: 4
   end
 
   add_index "triggers", ["activity_id"], name: "index_triggers_on_activity_id", using: :btree

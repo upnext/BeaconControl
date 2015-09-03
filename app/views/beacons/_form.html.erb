@@ -85,6 +85,18 @@
         <div class="controls">
           <%= f.input :name %>
         </div>
+        <div class="controls">
+          <%= f.input :vendor,
+                      as: :select,
+                      collection: Beacon::VENDORS,
+                      include_blank: false,
+                      input_html: {
+                          class: %W[selectpicker show-tick],
+                          data: {
+                              live_search: true
+                          }
+                      } %>
+        </div>
         <div class="control-group">
           <div class="controls">
             <%= f.input :uuid, label: 'UUID', input_html: { class: %W[uuid-input] } %>
