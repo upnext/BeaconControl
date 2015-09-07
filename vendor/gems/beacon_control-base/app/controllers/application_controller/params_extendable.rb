@@ -6,7 +6,7 @@
 # LICENSE.txt file in the root directory of this source tree. 
 ###
 
-require 'application_controller' unless defined? ApplicationController
+require 'application_controller' unless defined?(::ApplicationController)
 
 class ApplicationController
   module ParamsExtendable

@@ -23,7 +23,6 @@ module BeaconControl
         "app/controllers/beacon_control/application_controller",
         "app/controllers/beacon_control/api/v1/base_controller",
         "app/controllers/beacon_control/admin_controller",
-        "app/controllers/application_controller/params_extendable",
         "app/jobs/beacon_control/sidekiq_logger",
         "app/jobs/beacon_control/base_job"
       ]
@@ -77,6 +76,20 @@ module BeaconControl
         Rails.application.routes.append do
           mount ext::Engine => '/'
         end rescue nil
+      end
+    end
+
+    def self.exec_load
+      # BeaconControl::Base.load_extensions!
+      BeaconControl::Base.watch_reload.each_pair do |klass, reload_hash|
+        klass = klass.constantize
+        reload_hash.each_pair do |identity, injections|
+          unless klass.const_defined?(identity)
+            injections.each do |mod|
+              klass.send(:include, mod.constantize)
+            end
+          end
+        end
       end
     end
 
