@@ -48,8 +48,26 @@ module BeaconControl
         def config
           @config ||= BeaconControl::Base::Config.new
         end
-      end
 
+        # Automatically inject all extension modules to target class
+        # Engine can handle multiple injection in one identity module
+        # @param [String] target - class which require include after reload
+        # @param [String] identity_module - module which will be use to recognize if injection is required
+        # @param [String] include_module - module to include
+        def auto_include(target, identity_module, include_module)
+          watch_reload[target] ||= {}
+          watch_reload[target][identity_module] ||= []
+          unless watch_reload[target][identity_module].include? include_module
+            watch_reload[target][identity_module] << include_module
+          end
+        end
+
+        # List of observable class with modules to include
+        def watch_reload
+          ::BeaconControl::Base.watch_reload
+        end
+      end
     end
   end
 end
+

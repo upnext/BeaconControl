@@ -9,31 +9,49 @@
 module BeaconControl
   module KontaktIoExtension
     class BeaconsController < BeaconControl::AdminController
+      def index
+        render 'index',
+               locals: {
+                 beacons: Beacon.kontakt_io.order('created_at DESC'),
+                 zones: Zone.kontakt_io.order('created_at DESC')
+               }
+      end
 
       #
       # Fetch & display list of Kontakt.io beacons with division on new and present in DB.
       #
       def import
-        @beacons = beacons_manager.to_import api_client.beacons
+        render 'import',
+               locals: {
+                 beacons: beacons_manager.to_import(api_client.beacons),
+                 sync: false
+               }
       end
 
       #
       # Stores new beacons in DB, creates assignment Beacon Control <-> KontaktIO beacon.
       #
       def create
-        beacons = import_params[:beacons].map{ |b|
-          KontaktIo::Resource::Beacon.new(b)
-        }
-        BeaconsManager.new(current_admin).import beacons
-
+        sync!(params)
         redirect_to beacon_control_kontakt_io_extension.beacons_path
       end
 
       def sync
-        @beacons = beacons_manager.sync api_client.beacons
+        # sync!(params.merge(update: true))
+        render 'sync',
+               locals: {
+                 beacons: beacons_manager.to_import(api_client.beacons),
+                 sync: true
+               }
       end
 
       private
+
+      def sync!(params)
+        ::BeaconControl::KontaktIoExtension::MappingService.
+          new(current_admin).
+          sync!(params)
+      end
 
       def api_client
         @api_client ||= KontaktIo::ApiClient.new(
@@ -43,10 +61,6 @@ module BeaconControl
 
       def beacons_manager
         @beacons_manager ||= BeaconsManager.new(current_admin)
-      end
-
-      def import_params
-        params.permit(:beacons => [:unique_id, :proximity, :name, :major, :minor, :import, :in_db])
       end
     end
   end

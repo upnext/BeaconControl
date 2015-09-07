@@ -27,5 +27,3 @@ module Trigger::DwellTimeExt
     end
   end
 end
-
-Trigger.send :include, Trigger::DwellTimeExt

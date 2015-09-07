@@ -9,7 +9,7 @@
 module BeaconControl
 
   #
-  # Adds authentication with +authenticate_admin!+ before filter. Should beused
+  # Adds authentication with +authenticate_admin!+ before filter. Should be used
   # for admin private pages.
   #
   # ===== Helper methods

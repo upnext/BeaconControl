@@ -114,7 +114,11 @@ class Activity
     end
   end
 end
-Activity.send :include, Activity::SampleExtension
+```
+
+```ruby
+# example_extension.rb
+auto_include('Activity', 'SampleExtension', 'Activity::SampleExtension')
 ```
 
 Then, the above file should be added to extension module and included as a file in ``BeaconControl::EXTENSIONNAMEExtension.load_files`` function (located in``lib/beacon_control/EXTENSIONNAME_extension.rb``) to:

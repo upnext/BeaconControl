@@ -26,5 +26,3 @@ class Beacon
     end
   end
 end
-
-Beacon.send :include, Beacon::DwellTime

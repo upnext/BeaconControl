@@ -11,7 +11,7 @@ module BeaconControl
     class Engine < Rails::Engine
       isolate_namespace BeaconControl::KontaktIoExtension
 
-      initializer "kontakt_io_extension", before: :load_config_initializers do |app|
+      initializer "kontakt_io_extension", before: :load_config_initializers do |_|
         config.paths["db/migrate"].expanded.each do |expanded_path|
           Rails.application.config.paths["db/migrate"] << expanded_path
         end

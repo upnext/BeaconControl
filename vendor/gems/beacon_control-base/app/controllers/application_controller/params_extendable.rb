@@ -56,5 +56,3 @@ class ApplicationController
     end
   end
 end
-
-ApplicationController.send :include, ApplicationController::ParamsExtendable

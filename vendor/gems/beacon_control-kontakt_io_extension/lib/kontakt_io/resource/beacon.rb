@@ -19,8 +19,8 @@ module KontaktIo
       attribute :minor,      Integer
       attribute :name,       String
       attribute :import,     Boolean
-      attribute :in_db,      Boolean
 
+      attribute :venue,     String
       #
       # Composes +ProximityId+ string representation of Beacon +uuid,major,minor+ fields.
       #
@@ -40,6 +40,10 @@ module KontaktIo
       def ==(db_beacon)
         unique_id == db_beacon.unique_id ||
           proximity_id.to_s == db_beacon.proximity_id.to_s
+      end
+
+      def venue=(value)
+        super(value.is_a?(KontaktIo::Resource::Venue) ? value : KontaktIo::Resource::Venue.new(value || {}))
       end
     end
   end

@@ -15,8 +15,7 @@ class AdminController < ApplicationController
 
   def current_admin
     admin = super
-
-    AdminDecorator.new(admin) if admin
+    ::AdminDecorator.new(admin) if admin
   end
 
   def current_account

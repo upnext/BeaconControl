@@ -6,39 +6,44 @@
 # LICENSE.txt file in the root directory of this source tree. 
 ###%>
 
-<div class="table-responsive beacons-table sortable-table">
+<div class="col-xs-12">
+  <div class="table-responsive beacons-table sortable-table">
 
-  <table class="table table-list table-striped">
-    <thead>
+    <table class="table table-list table-striped">
+      <thead>
       <tr>
         <% if local_assigns[:form] == true %>
           <th></th>
         <% end %>
         <th><%= t('.unique_id') %></th>
         <th><%= t('.name') %></th>
+        <th><%= t('.venue') %></th>
         <th><%= t('.major') %></th>
         <th><%= t('.minor') %></th>
       </tr>
-    </thead>
-    <tbody>
-      <% @beacons.each do |beacon| %>
-        <tr class="<%= :active if beacon.in_db %>">
+      </thead>
+      <tbody>
+      <% beacons.each do |beacon| %>
+        <tr class="<%= :active if beacon.db? %>">
           <% if local_assigns[:form] == true %>
             <td class="with-checkbox">
-              <% [:unique_id, :proximity, :name, :major, :minor, :in_db].each do |attr| %>
-                <%= hidden_field_tag "beacons[]#{attr}", beacon.send(attr) %>
-              <% end %>
-              <% if !beacon.in_db %>
-                  <%= check_box_tag "beacons[]import", true, beacon.import, class: 'checkbox ' %>
+              <% unless beacon.db? %>
+                <%= check_box_tag("beacons[]", beacon.unique_id, beacon.import, class: 'checkbox ', id: "beacon_#{beacon.unique_id}") %>
               <% end %>
             </td>
           <% end %>
           <td><%= beacon.unique_id %></td>
           <td><%= beacon.name %></td>
+          <td>
+            <% if beacon.venue %>
+              <%= beacon.venue.name %>
+            <% end %>
+          </td>
           <td><%= beacon.major %></td>
           <td><%= beacon.minor %></td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>

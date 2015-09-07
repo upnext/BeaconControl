@@ -21,5 +21,3 @@ module S2sApi
     end
   end
 end
-
-S2sApi::V1::TriggerSerializer.send :include, S2sApi::V1::TriggerSerializer::DwellTime

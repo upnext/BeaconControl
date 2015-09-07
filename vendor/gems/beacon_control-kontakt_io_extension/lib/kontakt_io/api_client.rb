@@ -42,6 +42,11 @@ module KontaktIo
       response_to_array(response, "beacons", KontaktIo::Resource::Beacon)
     end
 
+    def venues
+      response = request(:get, "/venue")
+      response_to_array(response, "venues", KontaktIo::Resource::Venue)
+    end
+
     #
     # Finds Kontakt.io API key stored in database.
     #
@@ -116,7 +121,11 @@ module KontaktIo
     # * +model+    - Class, KontaktIo::Resource class to instantiate for each returned resource
     #
     def response_to_array(response, key, model)
-      JSON.parse(response.body)[key].map{|item| model.new(item) } rescue []
+      JSON.parse(response.body)[key].map{|item| model.new(item) }
+    rescue => error
+      Rails.logger.error error.message
+      Rails.logger.error error.backtrace.join("\n")
+      []
     end
   end
 end

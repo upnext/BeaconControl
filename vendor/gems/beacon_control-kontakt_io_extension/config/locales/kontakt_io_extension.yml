@@ -14,6 +14,10 @@ en:
           title: Kontakt.io
           import: Import beacons
           sync: Sync beacons
+          uid: UID
+          name: Name
+          major: Major
+          minor: Minor
         import:
           title: Kontakt.io
           action: Import beacons
@@ -30,6 +34,7 @@ en:
           name: Name
           major: Major
           minor: Minor
+          venue: Venue
 
       extensions_marketplace:
         form:

@@ -23,13 +23,13 @@ module BeaconControl
 
     def self.load_files
       [
-        "app/models/beacon/kontakt_io/extension",
         "lib/kontakt_io/api_client",
         "lib/kontakt_io/error",
-        "lib/kontakt_io/resource/base",
-        "lib/kontakt_io/resource/beacon",
-        "lib/kontakt_io/resource/manager"
+        "lib/kontakt_io/resource"
       ]
     end
+
+    auto_include('Beacon', 'KontaktIoExtension', 'Beacon::KontaktIoExtension::Extension')
+    auto_include('Zone', 'KontaktIoExtension', 'Zone::KontaktIoExtension::Extension')
   end
 end

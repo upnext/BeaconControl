@@ -24,12 +24,12 @@ module BeaconControl
       #
       #
       def to_import(kontakt_beacons)
-        kontakt_beacons.map{ |kontakt_beacon|
-          kontakt_beacon.in_db = beacon_from_db(kontakt_beacon).present?
+        kontakt_beacons.map do |kontakt_beacon|
+          kontakt_beacon.was_imported = beacon_imported?(kontakt_beacon)
           kontakt_beacon
-        }.sort_by{ |kontakt_beacon|
-          kontakt_beacon.in_db ? 1 : 0
-        }
+        end.sort_by do |kontakt_beacon|
+          kontakt_beacon.db? ? 1 : 0
+        end
       end
 
       #
@@ -76,13 +76,14 @@ module BeaconControl
       #
       def sync(kontakt_beacons)
         kontakt_beacons.select do |kontakt_beacon|
-          if db_beacon = beacon_from_db(kontakt_beacon)
+          db_beacon = beacon_from_db(kontakt_beacon)
+          if db_beacon
             if db_beacon.beacon_assignment
-              db_beacon.assign_attributes({
+              db_beacon.assign_attributes(
                 uuid:  kontakt_beacon.proximity,
                 major: kontakt_beacon.major,
                 minor: kontakt_beacon.minor
-              })
+              )
             else
               db_beacon.build_beacon_assignment(
                 unique_id: kontakt_beacon.unique_id
@@ -108,8 +109,12 @@ module BeaconControl
       #
       # * +kontakt_beacon+ - KontaktIo::Resource::Beacon object to match against
       #
-      def beacon_from_db(kontakt_beacon)
-        db_beacons.find{ |db_beacon| kontakt_beacon == db_beacon }
+      def beacon_imported?(kontakt_beacon)
+        imported_beacon_uids.include?(kontakt_beacon.unique_id)
+      end
+
+      def imported_beacon_uids
+        @imported_beacon_uids ||= KontaktIoMapping.beacons.pluck(:kontakt_uid)
       end
 
       #
@@ -121,12 +126,13 @@ module BeaconControl
       #   attributes from
       #
       def build_beacon(kontakt_beacon)
-        Beacon::Factory.new(@current_admin, {
+        Beacon::Factory.new(
+          @current_admin,
           name:  "[#{kontakt_beacon.unique_id}] #{kontakt_beacon.name}",
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
           minor: kontakt_beacon.minor
-        }).build
+        ).build
       end
     end
   end

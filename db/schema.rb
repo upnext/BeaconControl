@@ -252,6 +252,12 @@ ActiveRecord::Schema.define(version: 20150903101425) do
 
   add_index "ext_kontakt_io_beacon_assignments", ["beacon_id"], name: "index_ext_kontakt_io_beacon_assignments_on_beacon_id", using: :btree
 
+  create_table "ext_kontakt_io_mapping", force: :cascade do |t|
+    t.string  "target_type", limit: 255
+    t.integer "target_id",   limit: 4
+    t.string  "kontakt_uid", limit: 255
+  end
+
   create_table "ext_neighbours_zone_neighbours", force: :cascade do |t|
     t.integer  "source_id",  limit: 4
     t.integer  "target_id",  limit: 4

@@ -11,6 +11,8 @@ module KontaktIo
     class Base
       include Virtus.model
 
+      attribute :was_imported, Boolean
+
       #
       # Maps CamelCase attributes names to snake_case and calls Virtus constructor.
       #
@@ -21,6 +23,9 @@ module KontaktIo
         super
       end
 
+      def db?
+        was_imported
+      end
     end
   end
 end

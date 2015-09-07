@@ -28,6 +28,10 @@ module BeaconControl
         'app/models/beacon/dwell_time',
       ]
     end
+
+    auto_include('Beacon', 'DwellTime', 'Beacon::DwellTime')
+    auto_include('Trigger', 'DwellTimeExt', 'Trigger::DwellTimeExt')
+    auto_include('S2sApi::V1::TriggerSerializer', 'DwellTime', 'S2sApi::V1::TriggerSerializer::DwellTime')
   end
 end
 

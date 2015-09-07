@@ -16,5 +16,5 @@
   <div class="kontakt-io-table-buttons">
     <%= link_to t(".import"), beacon_control_kontakt_io_extension.import_beacons_path, class: "btn btn-static-width-large btn-success", method: :post %>
   </div>
-  <%= render partial: "list" %>
+  <%= render 'list', beacons: beacons, sync: sync %>
 </div>

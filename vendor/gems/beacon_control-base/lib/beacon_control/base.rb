@@ -85,12 +85,18 @@ module BeaconControl
       @extensions ||= {}
     end
 
+    def self.watch_reload
+      @watch_reload ||= {}
+    end
+
     # @param [String] gem_name
     # @param [BeaconControl::Base::Extension] base_class
     def self.register_extension(gem_name, base_class)
       return if extensions.has_key? gem_name
       extensions[gem_name] = base_class
     end
+    include Extension
+    auto_include('ApplicationController', 'ParamsExtendable', 'ApplicationController::ParamsExtendable')
   end
 end
 
