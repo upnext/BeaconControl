@@ -11,7 +11,8 @@ default: &default
     secret_key_base:
     registerable: true
     confirmable: false
-    mailer_sender:
+    mailer_sender: noreply@beacon-os.com
+    registration_mailer_sender: noreply@beacon-os.com
     mailer_url_options:
       host: localhost
       port: 3000

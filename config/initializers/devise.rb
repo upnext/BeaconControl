@@ -1,6 +1,6 @@
 Devise.setup do |config|
   config.secret_key = AppConfig.secret_key_base
-  config.mailer_sender = AppConfig.mailer_sender
+  config.mailer = CustomDeviseMailer
 
   require 'devise/orm/active_record'
 

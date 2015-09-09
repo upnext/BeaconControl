@@ -32,6 +32,7 @@ AppConfig = ApplicationConfig.new do
     enable_starttls_auto: true
   }
   config_key :mailer_sender, default: 'noreply@beacon-os.com'
+  config_key :registration_mailer_sender, default: 'noreply@beacon-os.com'
   config_key :mailer_url_options, default: {
     host: 'localhost',
     port: 3000
