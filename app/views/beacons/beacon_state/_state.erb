@@ -1,0 +1,8 @@
+<div class="well control-group beacon-state">
+  <% case beacon.vendor %>
+  <% when 'kontakt' %>
+    <%= render text: 'Kontakt' %>
+  <% else %>
+    <%= render text: beacon.vendor %>
+  <%- end %>
+</div>

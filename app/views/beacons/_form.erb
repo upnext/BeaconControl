@@ -1,0 +1,24 @@
+<div class="row page-subheader">
+  <nav class="col-xs-12">
+    <ul>
+      <%= active_link_to t('beacons.form.basic'), '', wrap_tag: 'li' %>
+      <%= active_link_to t('beacons.form.settings'), '', wrap_tag: 'li' %>
+    </ul>
+  </nav>
+</div>
+
+<%= simple_nested_form_for @beacon, html: { class: %W[beacon-form with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
+  <div class="row form-container">
+    <div class="col-md-6 first-column">
+      <div class="control-group">
+        <div class="controls">
+          <%= f.input :name %>
+        </div>
+      </div>
+      <%= render 'beacons/beacon_state/state', f: f, beacon: @beacon %>
+    </div>
+    <div class="col-md-6 second-column">
+      <%= render 'beacons/form/map', f: f, zones: @zones %>
+    </div>
+  </div>
+<%- end %>

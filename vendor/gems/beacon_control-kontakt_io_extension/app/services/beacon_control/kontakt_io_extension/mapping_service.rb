@@ -85,7 +85,8 @@ module BeaconControl
           name:  "[#{kontakt_beacon.unique_id}] #{kontakt_beacon.name}",
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
-          minor: kontakt_beacon.minor
+          minor: kontakt_beacon.minor,
+          vendor: 'Kontakt'
         ).build
       end
 

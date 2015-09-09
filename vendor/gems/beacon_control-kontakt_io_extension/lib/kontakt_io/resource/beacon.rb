@@ -19,8 +19,19 @@ module KontaktIo
       attribute :minor,      Integer
       attribute :name,       String
       attribute :import,     Boolean
+      attribute :tx_power,   Integer
 
-      attribute :venue,     String
+      attribute :browser_actions,   Array
+      attribute :content_actions,   Array
+      attribute :action_count,      Integer
+
+      attribute :venue,         String
+      attribute :firmware,      String
+      attribute :status,        String
+      attribute :source_id,     String
+      attribute :created,       String
+      attribute :updated,       String
+      attribute :device_type,   String
       #
       # Composes +ProximityId+ string representation of Beacon +uuid,major,minor+ fields.
       #

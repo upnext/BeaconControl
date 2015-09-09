@@ -1,0 +1,13 @@
+<%= content_tag :div, class: %W[col-sm-6], style: %W(border-color: #{current_beacon_zone_color}) do %>
+  <%= f.association :zone,
+                    as: :select,
+                    include_blank: false,
+                    input_html: {
+                        class: %W[selectpicker show-tick select-with-border],
+                        data: {
+                            live_search: true
+                        }
+                    },
+                    collection: select_zone_collection_from([BeaconFilterForm::UNASSIGNED_ZONE,*zones])
+  %>
+<% end %>

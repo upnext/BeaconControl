@@ -138,6 +138,8 @@ en:
     form:
       unassigned_floor: "N/A"
       location_on_map: "Location on the map"
+      basic: "Basic"
+      settings: "Settings"
     index:
       new: "Add Beacon"
       all_floors: "All"

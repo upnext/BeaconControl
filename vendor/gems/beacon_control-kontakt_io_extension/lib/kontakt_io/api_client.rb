@@ -47,6 +47,10 @@ module KontaktIo
       response_to_array(response, "venues", KontaktIo::Resource::Venue)
     end
 
+    def device(uid)
+      response_to_array(request(:get, "/device?uniqueId=#{uid}"), 'devices', KontaktIo::Resource::Device)
+    end
+
     #
     # Finds Kontakt.io API key stored in database.
     #
@@ -90,10 +94,10 @@ module KontaktIo
     #
     # will access +/test?foo=bar+ endpoint with extra header key +page+ = 1
     #
-    def request(type, path)
+    def request(type, path, params={})
       response = connection.send(type) do |req|
         req.url path
-        req.params["maxResult"] = 1_000
+        req.params.merge!({"maxResult" => 1_000}.merge(params))
         req.headers.merge! headers
         yield req if block_given?
       end
@@ -121,7 +125,11 @@ module KontaktIo
     # * +model+    - Class, KontaktIo::Resource class to instantiate for each returned resource
     #
     def response_to_array(response, key, model)
-      JSON.parse(response.body)[key].map{|item| model.new(item) }
+      hash = JSON.parse(response.body)
+      (key ? hash[key] : hash).map do |item|
+        puts item.inspect
+        model.new(item)
+      end
     rescue => error
       Rails.logger.error error.message
       Rails.logger.error error.backtrace.join("\n")

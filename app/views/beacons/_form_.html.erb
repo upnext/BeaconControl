@@ -131,7 +131,7 @@
       <br/>
 
       <% if current_admin.test_application %>
-        <%= render 'beacons/test_notification',
+        <%= render 'beacons/form/test_notification',
                    f: f, beacon: @beacon,
                    custom_attributes: @beacon.test_activity.custom_attributes
         %>

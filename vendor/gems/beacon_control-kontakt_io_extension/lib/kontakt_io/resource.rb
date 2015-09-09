@@ -8,5 +8,6 @@ module KontaktIo
     autoload :Beacon
     autoload :Venue
     autoload :Manager
+    autoload :Device
   end
 end

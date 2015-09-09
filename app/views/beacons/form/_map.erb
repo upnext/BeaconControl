@@ -1,0 +1,44 @@
+<div class="">
+  <!-- GOOGLE MAP -->
+  <h4><%= t('beacons.form.location_on_map') %></h4>
+  <div id="beacon-map"></div>
+  <!-- /GOOGLE MAP -->
+  <div class="control-group">
+    <div class="controls">
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.input :floor,
+                      as: :select,
+                      collection: BeaconDecorator.floors_for_select(t('beacons.form.unassigned_floor'), true),
+                      include_blank: false,
+                      input_html: {
+                          class: %W[selectpicker show-tick],
+                          data: {
+                              live_search: true
+                          }
+                      }
+          %>
+        </div>
+        <%= render 'beacons/form/zone_field', f: f, zones: zones %>
+      </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="location">
+      <%= f.input :location %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :lat, as: :string %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :lng, as: :string %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
