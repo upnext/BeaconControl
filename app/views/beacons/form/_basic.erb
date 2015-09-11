@@ -1,0 +1,69 @@
+<div class="row form-container">
+  <div class="col-md-6 first-column">
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :name %>
+      </div>
+    </div>
+    <%= render 'beacons/beacon_state/state',
+               f: f,
+               beacon: beacon,
+               wrapped_beacon: wrapped_beacon
+    %>
+
+    <%- if !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
+      <div class="control-group">
+        <div class="controls">
+          <div class="form-group">
+            <label class="control-label">
+              <%= t('beacons.form.synchronized_by') %>
+            </label>
+            <%= link_to edit_beacon_path(wrapped_beacon.master_beacon) do %>
+              <div class="form-control">
+                <%= wrapped_beacon.master_beacon.name %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls">
+        <div class="form-group">
+          <label class="control-label">
+            <%= t('beacons.form.connected_applications') %>
+          </label>
+          <%- @beacon.applications.each do |app| %>
+
+            <%= link_to application_activities_path(app) do %>
+              <div class="form-control">
+                <div class="col-xs-1">
+                  <span class="small-app-icon"></span>
+                </div>
+                <div class="col-xs-7">
+                  <%= app.name %>
+                </div>
+                <div class="col-xs-4">
+                  <% if app.activities.count == 0 %>
+                    <%= t('beacons.form.no_actions') %>
+                  <% else %>
+                    <%= app.activities.count %>
+                    <%= t('beacons.form.action').downcase.pluralize(app.activities.count) %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+          <%- end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 second-column">
+    <%= render 'beacons/form/map',
+               f: f,
+               zones: zones
+    %>
+  </div>
+</div>

@@ -16,6 +16,8 @@ class @Beacon
     @observeLocationField()
     @observeLatLngFields()
     @fillFields() if $('form.beacon-new').length
+    @enableTabs()
+    @setupWatcher()
 
   createMap: ->
     @map = new Map(@mapDom,
@@ -90,3 +92,24 @@ class @Beacon
         @latDom.val data.latitude
         @locationDom.val result.formatted_address
     ).catch((error)=> console.error(error) )
+
+  enableTabs: ->
+    $(document).on('click','a.tab-switcher', (event)=>
+      @switchTab(event)
+    )
+  switchTab: (event)->
+    event.preventDefault()
+    el = $(event.target)
+    target = $(el.data('target'))
+    el.closest('.tab-space').find('.tab-switcher').removeClass('active')
+    el.addClass('active').parent().addClass('active')
+    target.closest('.tab-space').find('.tab-content').hide(0)
+    target.show(0)
+  setupWatcher: ->
+    footer = $('#beacon-action-footer .modify-beacon-actions')
+    @dom.on('form:change', (event, watcher)=>
+      if watcher.isUnsaved()
+        footer.removeClass('hidden')
+      else
+        footer.addClass('hidden')
+    )

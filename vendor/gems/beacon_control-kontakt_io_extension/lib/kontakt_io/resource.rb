@@ -9,5 +9,8 @@ module KontaktIo
     autoload :Venue
     autoload :Manager
     autoload :Device
+    autoload :Status
+    autoload :Firmware
+    autoload :Config
   end
 end

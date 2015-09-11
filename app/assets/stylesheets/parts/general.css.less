@@ -514,6 +514,19 @@ body {
         border-color: multiply(@btn-border, @multiply-factor) !important;
       }
     }
+    &.btn-action-delete_nice {
+      @btn-background: transparent;
+      @btn-border: transparent;
+      @btn-color: #E74C3C;
+      background: @btn-background !important;
+      border-color: @btn-border !important;
+      border: 1px solid;
+      color: @btn-color;
+      &:hover {
+        background: multiply(@btn-background, @multiply-factor) !important;
+        border-color: multiply(@btn-border, @multiply-factor) !important;
+      }
+    }
     &.btn-action-edit {
       @btn-background: #F4F4F4;
       @btn-border: #D8D8D8;

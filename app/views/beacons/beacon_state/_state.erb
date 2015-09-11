@@ -1,7 +1,9 @@
-<div class="well control-group beacon-state">
+<div class="form-control control-group beacon-state">
   <% case beacon.vendor %>
-  <% when 'kontakt' %>
-    <%= render text: 'Kontakt' %>
+  <% when 'Kontakt' %>
+    <%= render 'beacons/beacon_state/kontakt',
+               beacon: wrapped_beacon
+    %>
   <% else %>
     <%= render text: beacon.vendor %>
   <%- end %>

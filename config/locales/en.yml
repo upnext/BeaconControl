@@ -140,6 +140,22 @@ en:
       location_on_map: "Location on the map"
       basic: "Basic"
       settings: "Settings"
+      working_status: "Status"
+      device_id: "Device ID"
+      device_type: "Device Type"
+      firmware: "Firmware"
+      beacon_active: Active
+      beacon_inactive: Inactive
+      battery: "Battery"
+      last_action: "Last action"
+      average_connection_interval: "Average connection interval"
+      synchronized_by: "Synchronized by"
+      connected_applications: "Connected applications"
+      no_activities: "No activities"
+      no_actions: "No actions"
+      action: "Action"
+      delete_nice: 'Delete Beacon'
+      missing_cloud_message: "This beacon doesn't have cloud beacon managment, so your changes need to be manually synchronized with an iphone app."
     index:
       new: "Add Beacon"
       all_floors: "All"

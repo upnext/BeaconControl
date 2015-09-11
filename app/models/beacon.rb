@@ -11,6 +11,7 @@ class Beacon < ActiveRecord::Base
   SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at)
   PROTOCOLS = %w(iBeacon Eddystone)
   VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Sensorberg', 'Sonic Notify' ]
+  MODE = [ 'Custom', 'Kontakt Beacon', 'Energy saver', 'Power Beacon', 'Apple iBeacon' ]
 
   extend UuidField
 
@@ -111,6 +112,10 @@ class Beacon < ActiveRecord::Base
   }
 
   delegate :uuid, :uuid=, :major, :major=, :minor, :minor=, to: :proximity_id
+
+  attr_accessor :minor_security, :major_security, :namespace,
+                :instance_id, :mode, :signal_interval, :transmission_power,
+                :activity_time
 
   def available_floors
     AVAILABLE_FLOORS

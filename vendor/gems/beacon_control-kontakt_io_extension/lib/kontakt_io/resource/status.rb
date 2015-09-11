@@ -12,10 +12,12 @@ module KontaktIo
     #
     # Kontakt.io Beacon object
     #
-    class Beacon < Base
-      def initialize(*)
-        raise StandardError, 'Kontakt.io Beacon API was deprecated'
-      end
+    class Status < Base
+      attribute :battery_level,         Integer
+      attribute :avg_event_interval,    Integer
+      attribute :last_event_timestamp,  Integer
+      attribute :slaves,                Array
+      attribute :master,                String
     end
   end
 end

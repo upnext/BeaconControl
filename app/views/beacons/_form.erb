@@ -1,24 +1,65 @@
+<%- wrapped_beacon = vendor_beacon(@beacon) %>
+
 <div class="row page-subheader">
   <nav class="col-xs-12">
-    <ul>
-      <%= active_link_to t('beacons.form.basic'), '', wrap_tag: 'li' %>
-      <%= active_link_to t('beacons.form.settings'), '', wrap_tag: 'li' %>
+    <ul class="tab-space">
+      <%= active_link_to t('beacons.form.basic'), '',
+                         wrap_tag: 'li',
+                         class: 'tab-switcher',
+                         data: { target: '#basic' },
+                         active: true
+      %>
+      <%= active_link_to t('beacons.form.settings'), '',
+                         wrap_tag: 'li',
+                         class: 'tab-switcher',
+                         data: { target: '#settings' },
+                         active: false
+      %>
     </ul>
   </nav>
 </div>
 
-<%= simple_nested_form_for @beacon, html: { class: %W[beacon-form with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
-  <div class="row form-container">
-    <div class="col-md-6 first-column">
-      <div class="control-group">
-        <div class="controls">
-          <%= f.input :name %>
-        </div>
-      </div>
-      <%= render 'beacons/beacon_state/state', f: f, beacon: @beacon %>
+<%= simple_nested_form_for @beacon, html: { class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
+  <div class="tab-space">
+    <div id="basic" class="tab-content">
+      <%= render 'beacons/form/basic',
+                 f: f,
+                 beacon: @beacon,
+                 zones: @zones,
+                 wrapped_beacon: wrapped_beacon
+      %>
     </div>
-    <div class="col-md-6 second-column">
-      <%= render 'beacons/form/map', f: f, zones: @zones %>
+    <div id="settings" style="display: none;" class="tab-content">
+      <%= render 'beacons/form/settings',
+                 f: f,
+                 beacon: @beacon,
+                 zones: @zones,
+                 wrapped_beacon: wrapped_beacon
+      %>
     </div>
   </div>
-<%- end %>
+
+  <!-- Footer -->
+  <div id="beacon-action-footer" class="row actions-row sticky-footer">
+    <div class="col-xs-6">
+      <div class="pull-left">
+        <% if @beacon.persisted? %>
+          <%= button_link :delete_nice,
+                          beacon_path(@beacon),
+                          class: %w[btn btn-danger],
+                          with_modal: true,
+                          dynamic_width: true
+          %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-6 modify-beacon-actions hidden">
+      <div class="pull-right">
+        <%= button_link :cancel, beacons_path %>
+        <%= f.button :submit, t('.save'), class: %w[btn-success btn btn-static-width btn-action-save] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= prompt_modal(t('beacons.modal.title'), t('beacons.modal.body')) %>

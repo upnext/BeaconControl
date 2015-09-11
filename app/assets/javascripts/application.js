@@ -60,3 +60,6 @@
 //= require dwell_time_extension
 //= require presence_extension
 //
+// ### Controllers
+//= require_tree ./controllers
+//

@@ -8,7 +8,12 @@
 
 <% content_for :header_breadcrumbs do %>
   <span><%= link_to t('.title'), beacons_path %></span>
-  <span><%= t('.action') %></span>
+  <span>
+    <%= @beacon.name %>
+    <span class="vendor-icon">
+      <%= image_tag "icons/#{@beacon.vendor.to_s.underscore}_icon@2x.png" %>
+    </span>
+  </span>
 <% end %>
 
-<%= render partial: 'form' %>
+<%= render 'form' %>

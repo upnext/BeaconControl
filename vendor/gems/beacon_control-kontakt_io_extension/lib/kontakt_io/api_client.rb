@@ -36,19 +36,45 @@ module KontaktIo
     #
     # Fetches all Kontakt.io beacons assigned to an account from GET /beacon endpoint.
     # Returns array of +KontaktIo::Resource::Beacon+ objects for each beacon.
-    #
-    def beacons
-      response = request(:get, "/beacon")
-      response_to_array(response, "beacons", KontaktIo::Resource::Beacon)
+    # @deprecated
+    def beacons(params={})
+      devices(params)
     end
 
-    def venues
-      response = request(:get, "/venue")
+    def venues(params={})
+      response = request(:get, "/venue", params)
       response_to_array(response, "venues", KontaktIo::Resource::Venue)
     end
 
-    def device(uid)
-      response_to_array(request(:get, "/device?uniqueId=#{uid}"), 'devices', KontaktIo::Resource::Device)
+    def devices(params={})
+      response = request(:get, "/device", params)
+      response_to_array(response, 'devices', KontaktIo::Resource::Device)
+    end
+
+    def device(params)
+      response = request(:get, "/device", params)
+      response_to_array(response, 'devices', KontaktIo::Resource::Device).first
+    end
+
+    def device_status(uuid)
+      hash = JSON.parse(
+        request(:get, "/device/#{uuid}/status").body
+      )
+      KontaktIo::Resource::Status.new(hash)
+    end
+
+    def device_firmware(uuid)
+      hash = JSON.parse(
+        request(:get, "/firmware/last", {uniqueId: uuid}).body
+      )
+      KontaktIo::Resource::Firmware.new(hash[uuid])
+    end
+
+    def device_config(uuid)
+      hash = JSON.parse(
+        request(:get, "/config/#{uuid}").body
+      )
+      KontaktIo::Resource::Config.new(hash)
     end
 
     #
@@ -110,7 +136,7 @@ module KontaktIo
     def headers
       {
         'api-key' => @api_key,
-        'accept'  => 'application/vnd.com.kontakt+json;version=5',
+        'accept'  => 'application/vnd.com.kontakt+json;version=6',
         'url'     => 'https://api.kontakt.io'
       }
     end
@@ -126,9 +152,13 @@ module KontaktIo
     #
     def response_to_array(response, key, model)
       hash = JSON.parse(response.body)
-      (key ? hash[key] : hash).map do |item|
-        puts item.inspect
-        model.new(item)
+      puts hash
+      if hash.key?(key)
+        (key ? hash[key] : hash).map do |item|
+          model.new(item)
+        end
+      else
+        model.new(hash)
       end
     rescue => error
       Rails.logger.error error.message

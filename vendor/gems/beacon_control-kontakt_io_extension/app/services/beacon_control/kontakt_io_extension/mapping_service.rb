@@ -82,7 +82,7 @@ module BeaconControl
       def build_beacon(kontakt_beacon)
         ::Beacon::Factory.new(
           admin,
-          name:  "[#{kontakt_beacon.unique_id}] #{kontakt_beacon.name}",
+          name:  "#{kontakt_beacon.name} #{kontakt_beacon.unique_id}",
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
           minor: kontakt_beacon.minor,
