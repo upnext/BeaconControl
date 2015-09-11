@@ -1,9 +1,4 @@
-class KontaktIoBeacon
-  def initialize(beacon, admin)
-    @beacon = beacon
-    @admin = admin
-  end
-
+class KontaktIoBeacon < WrappedBeacon
   def beacon_status
     @beacon_status ||= api.device_status(uuid)
   rescue KontaktIo::Error::NotFound
@@ -17,6 +12,8 @@ class KontaktIoBeacon
 
   def beacon_firmware
     @beacon_firmware ||= api.device_firmware(uuid)
+  rescue KontaktIo::Error::NotFound
+    @beacon_firmware = ::KontaktIo::Resource::Firmware.new({})
   end
 
   def uuid
@@ -30,6 +27,8 @@ class KontaktIoBeacon
       major:      beacon.proximity_id.major,
       minor:      beacon.proximity_id.minor
     )
+  rescue KontaktIo::Error::NotFound
+    @device = ::KontaktIo::Resource::Device.new({})
   end
 
   def battery_level
@@ -38,6 +37,8 @@ class KontaktIoBeacon
 
   def config
     @config ||= api.device_config( uuid )
+  rescue KontaktIo::Error::NotFound
+    @device = ::KontaktIo::Resource::Config.new({})
   end
 
   def cloud?
@@ -52,6 +53,14 @@ class KontaktIoBeacon
     @master_beacon ||= ::Beacon.kontakt_io.merge(
       ::KontaktIoMapping.with_uid(master)
     ).first
+  end
+
+  def interval
+    device.interval if device
+  end
+
+  def tx_power
+    device.tx_power if device
   end
 
   # private

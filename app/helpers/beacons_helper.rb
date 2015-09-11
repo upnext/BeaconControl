@@ -22,7 +22,7 @@ module BeaconsHelper
   def vendor_beacon(beacon, admin=current_admin)
     case beacon.vendor
     when 'Kontakt' then KontaktIoBeacon.new(beacon, admin)
-    else nil
+    else WrappedBeacon.new(beacon, admin)
     end
   end
 end

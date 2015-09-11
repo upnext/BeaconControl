@@ -115,7 +115,7 @@
       <div class="controls">
         <%= f.input :signal_interval,
                     input_html: {
-                        value: wrapped_beacon.device.interval,
+                        value: wrapped_beacon.try(:interval),
                     }
         %>
       </div>
@@ -127,7 +127,7 @@
                     include_blank: false,
                     input_html: {
                         class: %W[slider-select string optional form-control],
-                        value: wrapped_beacon.device.tx_power,
+                        value: wrapped_beacon.try(:tx_power),
                     }
         %>
       </div>

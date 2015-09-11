@@ -19,7 +19,9 @@
   </nav>
 </div>
 
-<%= simple_nested_form_for @beacon, html: { class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
+<%= simple_nested_form_for @beacon,
+                           html: {
+                               class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
   <div class="tab-space">
     <div id="basic" class="tab-content">
       <%= render 'beacons/form/basic',
@@ -56,7 +58,9 @@
     <div class="col-xs-6 modify-beacon-actions hidden">
       <div class="pull-right">
         <%= button_link :cancel, beacons_path %>
-        <%= f.button :submit, t('.save'), class: %w[btn-success btn btn-static-width btn-action-save] %>
+        <%= f.button :submit, t('.save'),
+                     class: %w[btn-success btn btn-static-width btn-action-save]
+        %>
       </div>
     </div>
   </div>

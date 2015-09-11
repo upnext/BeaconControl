@@ -11,7 +11,7 @@
                wrapped_beacon: wrapped_beacon
     %>
 
-    <%- if !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
+    <%- if wrapped_beacon && !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
       <div class="control-group">
         <div class="controls">
           <div class="form-group">

@@ -17,6 +17,14 @@ module S2sApi
 
       actions :index, :update, :destroy
 
+      def info
+        wrapped = case resource.vendor
+                   when 'Kontakt' then KontaktIoBeacon.new(resource, current_admin)
+                   else WrappedBeacon.new(resource, current_admin)
+                   end
+        respond_with(wrapped)
+      end
+
       def create
         activity = Activity.new(activity_permitted_params)
         resource = Beacon::Factory.new(
@@ -65,8 +73,8 @@ module S2sApi
       def activity_permitted_params
         if params.fetch(:beacon, {})[:activity]
           ActivityParams.new(params.fetch(:beacon, {})
-            .deep_merge(activity: {scheme: :custom, trigger_attributes: {type: 'BeaconTrigger'}})
-          ).call 
+                               .deep_merge(activity: {scheme: :custom, trigger_attributes: {type: 'BeaconTrigger'}})
+          ).call
         else
           {}
         end

@@ -152,6 +152,10 @@ BeaconControl::Application.routes.draw do
         collection do
           delete :index, action: :batch_destroy
         end
+
+        member do
+          get :info
+        end
       end
 
       scope :admin do
