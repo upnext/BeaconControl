@@ -17,6 +17,10 @@ module S2sApi
 
       actions :index, :update, :destroy
 
+      def index
+        respond_with(end_of_association_chain, controller: self)
+      end
+
       def info
         wrapped = case resource.vendor
                    when 'Kontakt' then KontaktIoBeacon.new(resource, current_admin)

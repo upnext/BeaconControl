@@ -15,7 +15,7 @@ module S2sApi
 
       rescue_from StandardError do |e|
         Rails.logger.info e.message
-        Rails.logger.debug e.backtrace.join("\n")
+        Rails.logger.debug e
 
         render json: {}, status: 500
       end

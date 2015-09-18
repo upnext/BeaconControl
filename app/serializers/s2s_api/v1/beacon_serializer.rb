@@ -9,7 +9,7 @@
 module S2sApi
   module V1
     class BeaconSerializer < BaseSerializer
-      attributes :id, :name, :proximity_id, :location, :zone, :vendor, :protocol
+      attributes :id, :name, :proximity_id, :location, :zone, :vendor, :protocol, :unique_id
 
       def zone
         S2sApi::V1::ZoneWithoutBeaconsSerializer.new(object.zone, root: false).as_json if object.zone
@@ -26,6 +26,38 @@ module S2sApi
           floor: object.floor,
           address: object.location
         }
+      end
+
+      def unique_id
+        wrap_beacon.uuid
+      end
+
+      # def info
+      #   info_serializer
+      # end
+      #
+      private
+
+      def wrap_beacon
+        case object.vendor
+        when 'Kontakt' then KontaktIoBeacon.new(object, current_admin)
+        else WrappedBeacon.new(object, current_admin)
+        end
+      end
+
+      # def info_serializer
+      #   case object.vendor
+      #   when 'Kontakt' then KontaktIoBeaconSerializer.new(wrap_beacon)
+      #   else BaseSerializer.new(nil)
+      #   end
+      # end
+      #
+      def current_admin
+        @current_admin ||= controller.send(:current_admin).object
+      end
+
+      def controller
+        @controller ||= @serialization_options.fetch(:controller)
       end
     end
   end

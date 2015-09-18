@@ -2,15 +2,14 @@ class BaseFormatter < ::Logger::Formatter
   private
 
   def msg2str(msg)
-    str = case msg
-          when ::String
-            msg.squish
-          when ::Exception
-            "#{ msg.message } (#{ msg.class })\n" <<
-            (msg.backtrace || []).join("\n")
-          else
-            msg.inspect
-          end
+    case msg
+    when ::String
+      msg.squish
+    when ::Exception
+      "#{ msg.message } (#{ msg.class })\n #{(msg.backtrace || []).join("\n")}"
+    else
+      msg.inspect
+    end
   end
 
   def request_env
@@ -45,7 +44,7 @@ class FileLogFormatter < BaseFormatter
     return if msg2str(msg).blank?
 
     FORMAT % [
-      Time.now.strftime("%d/%b/%Y %H:%M:%S %z"),
+      time.strftime("%d/%b/%Y %H:%M:%S %z"),
       request_env['HTTP_X_FORWARDED_FOR'] || request_env["REMOTE_ADDR"] || "-",
       request_env["REQUEST_METHOD"] || "-",
       request_env["PATH_INFO"] || "-",
