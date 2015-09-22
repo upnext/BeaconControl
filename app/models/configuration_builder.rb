@@ -35,19 +35,19 @@ class ConfigurationBuilder
   #   :ttl=>86400}
   #
   def as_json
-    json = {}
+    json = {}.with_indifferent_access
 
     extensions.each do |extension|
+      name = extension.name.gsub(/\./, '_').camelize
       extension_data_class = begin
-                               "ExtensionData::#{extension.name}".constantize
+                               "ExtensionData::#{name}".constantize
                              rescue NameError
                                nil
                              end
 
       if extension_data_class.present?
-        extension_config =
-          extension_data_class.new(application)
-        json.deeper_merge!(extension_config.as_json)
+        extension_config = extension_data_class.new(application)
+        json.deeper_merge!(extension_config.as_json.with_indifferent_access)
       end
     end
 
