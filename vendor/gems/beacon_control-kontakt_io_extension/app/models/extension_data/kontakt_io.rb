@@ -15,6 +15,15 @@ module ExtensionData
       } }
     end
 
+    def merge!(hash)
+      ranges.each do |beacon|
+        hash[:ranges].each do |json|
+          json.deeper_merge!(beacon) if json[:id] == beacon[:id]
+        end
+      end
+      hash
+    end
+
     private
 
     def zone_range_ids
@@ -30,11 +39,12 @@ module ExtensionData
     def serialized_collection(collection)
       collection.map do |beacon|
         {
-          unique_id: beacon.kontakt_uid
+          unique_id: beacon.kontakt_uid,
+          id: beacon.id
         }
       end
     end
 
-    attr_accessor :application, :range_ids, :zone_ids
+    attr_accessor :application, :range_ids
   end
 end

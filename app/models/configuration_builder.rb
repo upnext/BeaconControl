@@ -40,14 +40,18 @@ class ConfigurationBuilder
     extensions.each do |extension|
       name = extension.name.gsub(/\./, '_').camelize
       extension_data_class = begin
-                               "ExtensionData::#{name}".constantize
-                             rescue NameError
-                               nil
-                             end
+        "ExtensionData::#{name}".constantize
+      rescue NameError
+        nil
+      end
 
       if extension_data_class.present?
         extension_config = extension_data_class.new(application)
-        json.deeper_merge!(extension_config.as_json.with_indifferent_access)
+        if extension_config.respond_to?(:merge!)
+          extension_config.merge!(json)
+        else
+          json.deeper_merge!(extension_config.as_json.with_indifferent_access)
+        end
       end
     end
 
@@ -57,7 +61,7 @@ class ConfigurationBuilder
   private
 
   def extensions
-    application.active_extensions + default_extension
+    default_extension + application.active_extensions
   end
 
   #
