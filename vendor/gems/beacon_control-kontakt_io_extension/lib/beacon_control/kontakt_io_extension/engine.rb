@@ -26,11 +26,6 @@ module BeaconControl
           )
           @cache_key = [*@cache_key[0..2], @options]
         end
-
-        app.config.assets.precompile += %w(
-            kontakt_io_extension.js
-            kontakt_io_extension.css
-          )
       end
     end
   end
