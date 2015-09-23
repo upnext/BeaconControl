@@ -29,13 +29,9 @@ module S2sApi
       end
 
       def unique_id
-        wrap_beacon.uuid
+        wrap_beacon.uuid if controller
       end
 
-      # def info
-      #   info_serializer
-      # end
-      #
       private
 
       def wrap_beacon
@@ -45,19 +41,12 @@ module S2sApi
         end
       end
 
-      # def info_serializer
-      #   case object.vendor
-      #   when 'Kontakt' then KontaktIoBeaconSerializer.new(wrap_beacon)
-      #   else BaseSerializer.new(nil)
-      #   end
-      # end
-      #
       def current_admin
         @current_admin ||= controller.send(:current_admin).object
       end
 
       def controller
-        @controller ||= @serialization_options.fetch(:controller)
+        @controller ||= @serialization_options.fetch(:controller, nil)
       end
     end
   end

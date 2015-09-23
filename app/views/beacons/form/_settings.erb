@@ -126,8 +126,16 @@
         <%= f.input :transmission_power,
                     include_blank: false,
                     input_html: {
-                        class: %W[slider-select string optional form-control],
+                        id: 'transmission_power_minor_security',
+                        class: %W[slider string optional form-control],
                         value: wrapped_beacon.try(:tx_power),
+                        data: {
+                            slider_min:     1,
+                            slider_max:     7,
+                            slider_step:    1,
+                            slider_value:   wrapped_beacon.try(:tx_power),
+                            slider_handle:  :square
+                        }
                     }
         %>
       </div>

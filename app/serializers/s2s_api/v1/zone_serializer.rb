@@ -11,7 +11,8 @@ module S2sApi
     class ZoneSerializer < ZoneWithoutBeaconsSerializer
       attributes :beacon_ids
 
-      has_many :beacons, each_serializer: S2sApi::V1::BeaconSerializer
+      has_many :beacons,
+               each_serializer: S2sApi::V1::BeaconSerializer
     end
   end
 end

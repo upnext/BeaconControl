@@ -20,4 +20,8 @@ class S2sApiResponder < ActionController::Responder
       super
     end
   end
+
+  def display(resource, opts={})
+    super(resource, opts.merge!(controller: @controller))
+  end
 end

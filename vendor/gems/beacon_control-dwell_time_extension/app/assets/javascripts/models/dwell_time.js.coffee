@@ -6,22 +6,21 @@
  LICENSE.txt file in the root directory of this source tree. 
 ###
 
-class DwellTime
+class @DwellTime
   constructor: (@sliderDom, @input) ->
     @initSlider()
     @initInput()
 
   initSlider: ->
-    _self = @
     @sliderMax = @sliderDom.data('slider-max')
     @sliderMin = @sliderDom.data('slider-min')
 
     @slider = @sliderDom.slider(
-      formater: (value) -> return _self.stringWithNumber(value)
+      formater: (value) => @stringWithNumber(value)
     ).on(
-      'slide', _self.sliderChanged.bind(_self)
+      'slide', @sliderChanged.bind(@)
     ).on(
-      'slideStop', _self.sliderChanged.bind(_self)
+      'slideStop', @sliderChanged.bind(@)
     )
 
   initInput: ->

@@ -29,6 +29,8 @@ PATH
   remote: vendor/gems/beacon_control-kontakt_io_extension
   specs:
     beacon_control-kontakt_io_extension (0.0.1)
+      sprockets (>= 3.0.0)
+      sprockets-es6 (= 0.7.0)
       virtus
 
 PATH
@@ -436,6 +438,8 @@ DEPENDENCIES
   simple_form
   sinatra
   spring
+  sprockets (>= 3.0.0)
+  sprockets-es6 (= 0.7.0)
   therubyracer
   timecop (~> 0.7.1)
   turbolinks

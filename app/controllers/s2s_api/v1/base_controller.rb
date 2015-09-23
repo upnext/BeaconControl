@@ -37,8 +37,9 @@ module S2sApi
       private
 
       def current_admin
-        @current_admin ||= if admin = Admin.find(doorkeeper_token.resource_owner_id)
-          AdminDecorator.new(admin)
+        @current_admin ||= begin
+          admin = Admin.find(doorkeeper_token.resource_owner_id)
+          admin ? AdminDecorator.new(admin) : nil
         end
       end
 

@@ -16,6 +16,22 @@ module BeaconControl
           Rails.application.config.paths["db/migrate"] << expanded_path
         end
       end
+
+      initializer 'kontakt_io.assets.precompile', after: :load_config_initializers do |app|
+        ::Sprockets::ES6.instance.instance_exec do
+          @options = @options.merge(
+            stage: 0,
+            modules: :ignore,
+            moduleIds: true
+          )
+          @cache_key = [*@cache_key[0..2], @options]
+        end
+
+        app.config.assets.precompile += %w(
+            kontakt_io_extension.js
+            kontakt_io_extension.css
+          )
+      end
     end
   end
 end
