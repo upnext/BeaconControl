@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928060329) do
+ActiveRecord::Schema.define(version: 20150929132753) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -127,6 +127,16 @@ ActiveRecord::Schema.define(version: 20150928060329) do
     t.integer "hour",         limit: 4,               null: false
     t.integer "users_count",  limit: 4,   default: 0
   end
+
+  create_table "beacon_proximity_fields", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "value",      limit: 255
+    t.integer  "beacon_id",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "beacon_proximity_fields", ["beacon_id"], name: "index_beacon_proximity_fields_on_beacon_id", using: :btree
 
   create_table "beacons", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -480,6 +490,7 @@ ActiveRecord::Schema.define(version: 20150928060329) do
   add_foreign_key "admins", "accounts"
   add_foreign_key "applications", "accounts"
   add_foreign_key "beacon_configs", "beacons"
+  add_foreign_key "beacon_proximity_fields", "beacons"
   add_foreign_key "beacons", "accounts", name: "index_beacons_on_account_id"
   add_foreign_key "mobile_devices", "users"
   add_foreign_key "rpush_apps", "applications"

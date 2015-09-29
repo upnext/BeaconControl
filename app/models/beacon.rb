@@ -31,7 +31,11 @@ class Beacon < ActiveRecord::Base
           dependent: :destroy,
           autosave: true
 
-  serialize :proximity_id, ProximityId
+  has_many :beacon_proximity_fields,
+           dependent: :destroy,
+           autosave: true
+
+  after_save { proximity_id.save }
 
   after_validation do
     [:uuid, :major, :minor, :namespace, :instance, :url].each { |key| (errors[key].push *errors[:proximity_id]).uniq! }
@@ -130,6 +134,16 @@ class Beacon < ActiveRecord::Base
 
   def imported?
     false
+  end
+
+  def proximity_id
+    @proximity_id ||= begin
+      if read_attribute(:proximity_id).present?
+        ProximityId.compatibility_load(self, read_attribute(:proximity_id))
+      else
+        ProximityId.new(self)
+      end
+    end
   end
 
   def config

@@ -14,29 +14,18 @@ class ProximityId
   EDDYSTONE = 'Eddystone'
   PROTOCOLS =  [IBEACON,EDDYSTONE]
 
-  FIELDS = [
-    :protocol,
-    :uuid,
-    :major,
-    :minor,
+  EDDYSTONE_FIELDS = [
     :namespace,
     :instance,
     :url
   ]
+  IBEACON_FIELDS = [
+    :uuid,
+    :major,
+    :minor
+  ]
 
-  # Creates +ProximityId+ instance
-  #
-  # ==== Parameters
-  #
-  # * +value+ - String, serialized proximity
-  #
-  # ==== Example
-  #
-  #   ProximityId.load("8DD8E67D-89C7-4916-ACB9-153F63927CD0+5+8") #=> <ProximityId @major="5", @minor="8", @uuid="8DD8E67D-89C7-4916-ACB9-153F63927CD0">
-  #
-  def self.load(value)
-    new analise(value.to_s)
-  end
+  FIELDS = [:protocol] | IBEACON_FIELDS | EDDYSTONE_FIELDS
 
   def self.analise(str)
     args = str.split('+')
@@ -46,14 +35,19 @@ class ProximityId
     args
   end
 
-  def self.dump(value)
-    value.to_s
+  def self.compatibility_load(beacon, str)
+    Rails.logger.warn 'Beacon proximity id compatibility load...'
+    proximity = new(beacon)
+    args = analise(str)
+    FIELDS.each_with_index do |field, index|
+      proximity.send("#{field}=", args[index] || '')
+    end
+    beacon.update_attribute(:proximity_id, nil) # Erase after done
+    proximity
   end
 
-  def initialize(args)
-    FIELDS.each_with_index do |field, index|
-      send("#{field}=", args[index] || '')
-    end
+  def initialize(beacon)
+    @beacon = beacon
   end
 
   def to_s
@@ -64,8 +58,40 @@ class ProximityId
     other.instance_of?(self.class) && to_s == other.to_s
   end
 
-  attr_accessor :uuid,
-                :major, :minor,
-                :instance, :namespace, :url,
-                :protocol
+  def eddystone
+    EDDYSTONE_FIELDS.reduce([]) { |m, field| m << send(field); m }
+  end
+
+  def i_beacon
+    IBEACON_FIELDS.reduce([]) { |m, field| m << send(field); m }
+  end
+
+  def self.create_proximity_field(field_name)
+    define_method(field_name) do
+      field = send("load_and_memoize_#{field_name}")
+      field.value
+    end
+    define_method("#{field_name}=") do |value|
+      field = send("load_and_memoize_#{field_name}")
+      field.value = value
+    end
+    define_method("load_and_memoize_#{field_name}") do
+      val = instance_variable_get(:"@#{field_name}")
+      return val if val.present?
+      val = beacon.beacon_proximity_fields.where(name: field_name).first_or_create(name: field_name)
+      instance_variable_set(:"@#{field_name}", val)
+      val
+    end
+  end
+
+  def save
+    FIELDS.each do |field_name|
+      field = instance_variable_get(:"@#{field_name}")
+      field.save if field
+    end
+  end
+
+  attr_reader :beacon
+
+  FIELDS.each { |field| create_proximity_field field }
 end
