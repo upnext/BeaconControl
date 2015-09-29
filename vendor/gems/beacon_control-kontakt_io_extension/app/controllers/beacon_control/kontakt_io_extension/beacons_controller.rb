@@ -40,7 +40,12 @@ module BeaconControl
       end
 
       def sync
-        sync!(params.merge(update: true))
+        sync!(
+          params.merge(
+            update: true,
+            beacons: params.fetch(:beacons, []) + Beacon.kontakt_io.map(&:kontant_uid)
+          )
+        )
         render 'sync',
                locals: {
                  beacons: beacons_manager.to_import(api_client.beacons),

@@ -44,10 +44,10 @@ class BeaconIdentityValidator < ActiveModel::Validator
     validate_uuid(record)
 
     record.errors.add(:major, 'is missing') unless record.major.present?
-    record.errors.add(:major, 'must be number') unless record.major.is_a?(Fixnum)
+    record.errors.add(:major, 'must be number') unless record.major.to_s.match /^\d+$/
 
     record.errors.add(:minor, 'is missing') unless record.minor.present?
-    record.errors.add(:minor, 'must be number') unless record.minor.is_a?(Fixnum)
+    record.errors.add(:minor, 'must be number') unless record.minor.to_s.match /^\d+$/
   end
 
   def validate_eddystone(record)
