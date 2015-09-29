@@ -24,14 +24,14 @@
       </div>
     <% end %>
 
-    <%= render 'beacons/beacon_state/state',
+    <%= render 'beacons/form/state',
                f: f,
                beacon: beacon,
                wrapped_beacon: wrapped_beacon
     %>
 
     <%- if wrapped_beacon && !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
-      <div class="control-group">
+      <div id="beacon-cloud" class="control-group">
         <div class="controls">
           <div class="form-group">
             <label class="control-label">
