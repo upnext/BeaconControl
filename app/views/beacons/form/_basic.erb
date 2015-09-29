@@ -31,7 +31,7 @@
     %>
 
     <%- if wrapped_beacon && !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
-      <div id="beacon-cloud" class="control-group">
+      <div id="beacon-cloud" class="with-huge-space control-group">
         <div class="controls">
           <div class="form-group">
             <label class="control-label">
@@ -48,7 +48,7 @@
     <% end %>
 
     <% if @beacon.persisted? %>
-      <div id="beacon-applications" class="control-group">
+      <div id="beacon-applications" class="with-huge-space control-group">
         <div class="controls">
           <div class="form-group">
             <label class="control-label">
