@@ -9,7 +9,9 @@ class BeaconConfig < ActiveRecord::Base
     :average_connection_interval,
     :latest_firmware,
     :signal_interval,
-    :transmission_power
+    :transmission_power,
+    :master,
+    :slaves
   ]
 
   after_initialize :ensure_data
