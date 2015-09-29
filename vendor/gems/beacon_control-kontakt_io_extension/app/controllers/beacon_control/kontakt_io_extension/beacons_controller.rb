@@ -40,7 +40,7 @@ module BeaconControl
       end
 
       def sync
-        # sync!(params.merge(update: true))
+        sync!(params.merge(update: true))
         render 'sync',
                locals: {
                  beacons: beacons_manager.to_import(api_client.beacons),
