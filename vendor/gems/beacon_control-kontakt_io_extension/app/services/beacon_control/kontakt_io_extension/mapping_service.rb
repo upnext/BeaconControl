@@ -32,8 +32,9 @@ module BeaconControl
       # @param [Hash<String, Array<String>>] params
       def sync_beacons!(params)
         fetch_options!(params)
-        beacons.each do |data|
+        beacons.map do |data|
           beacon = get_beacon(data)
+          update_beacon!(beacon, data) if update?
           if beacon.kontakt_io_mapping.blank?
             beacon.build_kontakt_io_mapping(kontakt_uid: data.unique_id)
           end
@@ -41,6 +42,7 @@ module BeaconControl
             beacon.save!
             assign_to_zone!(data, beacon)
           end
+          beacon
         end
       end
 
@@ -56,7 +58,7 @@ module BeaconControl
       # @param [::KontaktIo::Resource::Zone] data
       # @return [::Zone]
       def find_zone(data)
-        ::Zone.kontakt_io.merge(KontaktIoMapping.with_uid(data.id)).first
+        ::Zone.kontakt_io.merge(KontaktIoMapping.with_uid(data.id)).where(account_id: admin.account_id).first
       end
 
       # @param [::KontaktIo::Resource::Zone] data
@@ -74,7 +76,7 @@ module BeaconControl
       # @param [KontaktIo::Resource::Beacon] kontakt_beacon
       # @return [::Beacon]
       def find_beacon(kontakt_beacon)
-        ::Beacon.kontakt_io.merge(KontaktIoMapping.with_uid(kontakt_beacon.unique_id)).first
+        ::Beacon.kontakt_io.merge(KontaktIoMapping.with_uid(kontakt_beacon.unique_id)).where(account_id: admin.account_id).first
       end
 
       # @param [KontaktIo::Resource::Beacon] kontakt_beacon
@@ -85,12 +87,27 @@ module BeaconControl
           name:  "#{kontakt_beacon.name} #{kontakt_beacon.unique_id}",
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
+          minor: kontakt_beacon.minor,
           instance: kontakt_beacon.instance_id,
           namespace: kontakt_beacon.namespace,
           url: kontakt_beacon.url,
           vendor: 'Kontakt',
           protocol: (kontakt_beacon.eddystone? ? 'Eddystone' : 'iBeacon')
         ).build
+      end
+
+      def update_beacon!(beacon, kontakt_beacon)
+        {
+          name:  "#{kontakt_beacon.name} #{kontakt_beacon.unique_id}",
+          uuid:  kontakt_beacon.proximity,
+          major: kontakt_beacon.major,
+          minor: kontakt_beacon.minor,
+          instance: kontakt_beacon.instance_id,
+          namespace: kontakt_beacon.namespace,
+          url: kontakt_beacon.url,
+          vendor: 'Kontakt',
+          protocol: (kontakt_beacon.eddystone? ? 'Eddystone' : 'iBeacon')
+        }.each_pair { |k, v| beacon.send("#{k}=", v) }
       end
 
       # @return [Array<KontaktIo::Resource::Beacon>]
