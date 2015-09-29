@@ -62,7 +62,7 @@ class BeaconConfig
           hash.merge!(device.except(:venue, :was_imported))
           hash.merge!(latest_firmware: firmware.latest?)
           hash.merge!(config: config.except(:was_imported))
-          hash.merge!(device.fetch(:status, {}))
+          hash.merge!((device[:status]||{}).with_indifferent_access)
         end
       end
     end

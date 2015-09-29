@@ -44,7 +44,7 @@
       </div>
       <div class="col-xs-6 beacon-data">
         <%- if beacon.config.battery_level.nil? %>
-          <%= t('beacons.form.battery_unknown'); %>
+          <%= t('beacons.form.battery_unknown') %>
         <%- else %>
           <%= beacon.config.battery_level %>%
         <%- end %>
@@ -65,7 +65,11 @@
         <%= t('beacons.form.average_connection_interval') %>s
       </div>
       <div class="col-xs-6 beacon-data">
-        <%= beacon.config.avg_event_interval %>s
+        <% if beacon.config.avg_event_interval.present? %>
+          <%= beacon.config.avg_event_interval %>s
+        <% else %>
+          <%= t('beacons.form.battery_unknown') %>
+        <% end %>
       </div>
     </div>
   </div>

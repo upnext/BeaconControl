@@ -142,7 +142,7 @@ class BeaconsController < AdminController
   end
 
   def load_config
-    resource.beacon_config || resource.build_beacon_config
-    resource.beacon_config.load_data(current_admin)
+    c = resource.beacon_config || resource.build_beacon_config
+    c.load_data(current_admin)
   end
 end
