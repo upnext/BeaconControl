@@ -47,6 +47,8 @@ class KontaktIoBeacon < WrappedBeacon
   def master_beacon
     @master_beacon ||= ::Beacon.kontakt_io.merge(
       ::KontaktIoMapping.with_uid(master)
+    ).where(
+       account_id: beacon.account_id
     ).first
   end
 
