@@ -1,10 +1,12 @@
 <div class="row form-container">
   <div class="col-md-6 first-column">
-    <div class="control-group">
-      <div class="controls">
-        <%= t('beacons.form.missing_cloud_message') %>
+    <% if wrapped_beacon.master.blank? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= t('beacons.form.missing_cloud_message') %>
+        </div>
       </div>
-    </div>
+    <%- end %>
 
     <div class="control-group">
       <div class="controls">
@@ -15,7 +17,7 @@
                     input_html: {
                         class: %W[selectpicker event-publisher],
                         data: {
-                            live_search: true
+                            live_search: false
                         }
                     }
         %>
@@ -26,7 +28,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="controls">
-            <%= f.input :uuid %>
+            <%= f.input :uuid, label: 'UUID' %>
           </div>
         </div>
       </div>
@@ -37,51 +39,20 @@
             <%= f.input :major %>
           </div>
           <div class="col-xs-6">
-            <%= f.input :major_security,
-                        collection: %w[static secured],
-                        as: :select,
-                        include_blank: false,
-                        input_html: {
-                            class: %W[selectpicker],
-                            data: {
-                                live_search: true
-                            }
-                        }
-            %>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="controls">
-          <div class="col-xs-6">
             <%= f.input :minor %>
-          </div>
-          <div class="col-xs-6">
-            <%= f.input :minor_security,
-                        collection: %w[static secured],
-                        as: :select,
-                        include_blank: false,
-                        input_html: {
-                            class: %W[selectpicker],
-                            data: {
-                                live_search: true
-                            }
-                        }
-            %>
           </div>
         </div>
       </div>
     </div>
 
     <div class="event-subscriber control-group" data-publisher="#beacon_protocol" data-action="show" data-on="change" data-match="Eddystone">
-      <div class="control-group">
+      <div class="row">
         <div class="controls">
           <div class="col-xs-6">
             <%= f.input :namespace %>
           </div>
           <div class="col-xs-6">
-            <%= f.input :instance_id %>
+            <%= f.input :instance %>
           </div>
         </div>
       </div>
@@ -111,41 +82,38 @@
       </div>
     </div>
 
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :signal_interval,
-                    input_html: {
-                        value: wrapped_beacon.try(:interval),
-                    }
-        %>
+    <%= f.fields_for(:config) do |config| %>
+      <div class="control-group event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
+        <div class="controls">
+          <%= config.input :signal_interval,
+                      input_html: {
+                          value: beacon.config.signal_interval
+                      }
+          %>
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :transmission_power,
-                    include_blank: false,
-                    input_html: {
-                        id: 'transmission_power_minor_security',
-                        class: %W[slider string optional form-control],
-                        value: wrapped_beacon.try(:tx_power),
-                        data: {
-                            slider_min:     1,
-                            slider_max:     7,
-                            slider_step:    1,
-                            slider_value:   wrapped_beacon.try(:tx_power),
-                            slider_handle:  :square
-                        }
-                    }
-        %>
+      <div class="control-group">
+        <div class="controls">
+          <%= config.input :transmission_power,
+                      include_blank: false,
+                      id: 'transmission_power-slider',
+                      input_html: {
+                          id: 'transmission_power_minor_security',
+                          class: %W[slider],
+                          value: beacon.config.transmission_power,
+                          data: {
+                              slider_min:     1,
+                              slider_max:     7,
+                              slider_step:    1,
+                              slider_value:   beacon.config.transmission_power,
+                              slider_handle:  :square
+                          }
+                      }
+          %>
+        </div>
       </div>
-    </div>
+    <%- end %>
 
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :activity_time
-        %>
-      </div>
-    </div>
   </div>
 </div>

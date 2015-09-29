@@ -1,18 +1,30 @@
+<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+<input style="display:none" type="text" name="fakeusernameremembered"/>
+<input style="display:none" type="password" name="fakepasswordremembered"/>
+
 <%- wrapped_beacon = vendor_beacon(@beacon) %>
 
 <div class="row page-subheader">
   <nav class="col-xs-12">
-    <ul class="tab-space">
+    <ul class="tab-space tab-manager event-publisher" id="beacon-tabs" data-init="true">
       <%= active_link_to t('beacons.form.basic'), '',
                          wrap_tag: 'li',
                          class: 'tab-switcher',
-                         data: { target: '#basic' },
+                         data: {
+                             target: '#basic'
+                         },
                          active: true
       %>
       <%= active_link_to t('beacons.form.settings'), '',
                          wrap_tag: 'li',
-                         class: 'tab-switcher',
-                         data: { target: '#settings' },
+                         class: 'tab-switcher event-subscriber',
+                         id: 'settings-tab',
+                         data: {
+                             target: '#settings',
+                             publisher: '#beacon-next-tab',
+                             action: 'click',
+                             match: 'settings'
+                         },
                          active: false
       %>
     </ul>
@@ -21,7 +33,8 @@
 
 <%= simple_nested_form_for @beacon,
                            html: {
-                               class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}] } do |f| %>
+                               class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}]
+                           } do |f| %>
   <div class="tab-space">
     <div id="basic" class="tab-content">
       <%= render 'beacons/form/basic',
@@ -41,28 +54,60 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <%# Footer %>
   <div id="beacon-action-footer" class="row actions-row sticky-footer">
-    <div class="col-xs-6">
-      <div class="pull-left">
-        <% if @beacon.persisted? %>
+    <% if @beacon.persisted? %>
+      <div class="col-xs-6">
+        <div class="pull-left">
           <%= button_link :delete_nice,
                           beacon_path(@beacon),
                           class: %w[btn btn-danger],
                           with_modal: true,
                           dynamic_width: true
           %>
-        <% end %>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-6 modify-beacon-actions hidden">
-      <div class="pull-right">
-        <%= button_link :cancel, beacons_path %>
-        <%= f.button :submit, t('.save'),
-                     class: %w[btn-success btn btn-static-width btn-action-save]
-        %>
+    <% end %>
+
+    <% if @beacon.persisted? %>
+      <div class="col-xs-6 modify-beacon-actions">
+        <div class="pull-right">
+          <%= button_link :cancel, beacons_path %>
+          <%= f.button :submit, t('.save'),
+                       class: %w[btn-success btn btn-static-width btn-action-save]
+          %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class="col-xs-12 " id="footer-right" >
+        <div class="pull-right">
+          <%= button_link :cancel,
+                          beacons_path,
+                          class: 'modify-beacon-actions'
+          %>
+          <%= f.button :submit,
+                       t('.save'),
+                       class: %w[btn-success btn btn-static-width btn-action-save modify-beacon-actions event-subscriber],
+                       data: {
+                           publisher: '#beacon-tabs',
+                           action: 'show',
+                           match: 'last'
+                       }
+          %>
+          <%= button_tag t('.next'),
+                         class: %w[btn-success btn btn-static-width btn-action-save event-subscriber],
+                         id: 'beacon-next-tab',
+                         value: 'settings',
+                         data: {
+                             event: 'stop',
+                             publisher: '#beacon-tabs',
+                             action: 'hide',
+                             match: 'last'
+                         }
+          %>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

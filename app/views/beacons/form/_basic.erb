@@ -5,6 +5,25 @@
         <%= f.input :name %>
       </div>
     </div>
+
+    <% unless @beacon.imported? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.input :vendor,
+                      as: :select,
+                      collection: Beacon::VENDORS,
+                      include_blank: false,
+                      input_html: {
+                          class: %W[selectpicker],
+                          data: {
+                              live_search: true
+                          }
+                      }
+          %>
+        </div>
+      </div>
+    <% end %>
+
     <%= render 'beacons/beacon_state/state',
                f: f,
                beacon: beacon,
@@ -28,38 +47,41 @@
       </div>
     <% end %>
 
-    <div class="control-group">
-      <div class="controls">
-        <div class="form-group">
-          <label class="control-label">
-            <%= t('beacons.form.connected_applications') %>
-          </label>
-          <%- @beacon.applications.each do |app| %>
+    <% if @beacon.persisted? %>
+      <div id="beacon-applications" class="control-group">
+        <div class="controls">
+          <div class="form-group">
+            <label class="control-label">
+              <%= t('beacons.form.connected_applications') %>
+            </label>
+            <%- @beacon.applications.each do |app| %>
 
-            <%= link_to application_activities_path(app) do %>
-              <div class="form-control">
-                <div class="col-xs-1">
-                  <span class="small-app-icon"></span>
+              <%= link_to application_activities_path(app) do %>
+                <div class="form-control">
+                  <div class="col-xs-1">
+                    <span class="small-app-icon"></span>
+                  </div>
+                  <div class="col-xs-7">
+                    <%= app.name %>
+                  </div>
+                  <div class="col-xs-4">
+                    <% if app.activities.count == 0 %>
+                      <%= t('beacons.form.no_actions') %>
+                    <% else %>
+                      <%= app.activities.count %>
+                      <%= t('beacons.form.action').downcase.pluralize(app.activities.count) %>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="col-xs-7">
-                  <%= app.name %>
-                </div>
-                <div class="col-xs-4">
-                  <% if app.activities.count == 0 %>
-                    <%= t('beacons.form.no_actions') %>
-                  <% else %>
-                    <%= app.activities.count %>
-                    <%= t('beacons.form.action').downcase.pluralize(app.activities.count) %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
+              <% end %>
 
-          <%- end %>
+            <%- end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
+
   <div class="col-md-6 second-column">
     <%= render 'beacons/form/map',
                f: f,

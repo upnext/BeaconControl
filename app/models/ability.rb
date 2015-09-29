@@ -23,6 +23,7 @@ class Ability
       can :manage, Extension
       can :create, Activity
       can :manage, Activity, trigger: { application: { account_id: user.account_id } }
+      can :manage, BeaconConfig
     when 'beacon_manager'
       can [:read, :update], Admin, id: user.id
       can :manage, Zone, manager_id: user.id

@@ -34,6 +34,9 @@ module BeaconControl
       def create
         sync!(params)
         redirect_to beacon_control_kontakt_io_extension.beacons_path
+      rescue StandardError => error
+        puts error.record.attributes.inspect
+        raise error
       end
 
       def sync
@@ -54,9 +57,7 @@ module BeaconControl
       end
 
       def api_client
-        @api_client ||= KontaktIo::ApiClient.new(
-          KontaktIo::ApiClient.account_api_key(current_account)
-        )
+        @api_client ||= KontaktIo::ApiClient.for_admin(current_admin)
       end
 
       def beacons_manager

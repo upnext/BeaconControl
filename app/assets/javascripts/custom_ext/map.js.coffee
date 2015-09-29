@@ -202,7 +202,7 @@ class @Map
 
   # Returns address by lat/lng
   getAddressByCoordinates: (lat, lng, successCallback, errorCallback) ->
-    new Promise((resolve, fail)=>
+    new Promise((resolve, reject)=>
       latlng      = new google.maps.LatLng(lat, lng)
       geocoderApi = new google.maps.Geocoder()
       geocoderApi.geocode(
@@ -210,10 +210,11 @@ class @Map
         (results, status) ->
           if status is 'OK'
             resolve({results: results, latitude: lat, longitude: lng})
-            successCallback(results, lat, lng) if successCallback
+            if typeof successCallback is 'function'
+              successCallback(results, lat, lng)
           else
-            fail(new Error('Couldn\'t fetch coordinates'))
-            if errorCallback != undefined
+            reject(new Error('Couldn\'t fetch coordinates'))
+            if typeof errorCallback is 'function'
               errorCallback()
             else
               alert "Couldn't fetch coordinates"
@@ -223,13 +224,13 @@ class @Map
   getCurrentPosition: (lat, lng)->
     lat = parseFloat(if lat? then lat else '')
     lng = parseFloat(if lng? then lng else '')
-    new Promise((resolve, fail)=>
+    new Promise((resolve, reject)=>
       if not isNaN(lat) and not isNaN(lng)
         resolve({ coords: { latitude: lat, longitude: lng } })
       else if navigator.geolocation
-        navigator.geolocation.getCurrentPosition(resolve, fail)
+        navigator.geolocation.getCurrentPosition(resolve, reject, enableHighAccuracy: true)
       else
-        fail(new Error('Browser does not support geolocation'))
+        reject(new Error('Browser does not support geolocation'))
     )
 
   addMarkerToCurrentPosition: (markerId, lat, lng, options) ->

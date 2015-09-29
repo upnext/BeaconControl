@@ -90,6 +90,7 @@ class Account < ActiveRecord::Base
       result.map { |i| BeaconOrZone.new(i) }
   end
 
+  # @return [Application|NilClass]
   def test_application
     applications.where(test: true).first
   end

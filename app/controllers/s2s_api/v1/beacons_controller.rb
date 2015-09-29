@@ -11,7 +11,8 @@ module S2sApi
     class BeaconsController < BaseController
       inherit_resources
       load_and_authorize_resource
-      before_action :build_test_activity, only: [:create, :update]
+      before_action :build_test_activity,
+                    only: [:create, :update]
 
       self.responder = S2sApiResponder
 
@@ -23,9 +24,9 @@ module S2sApi
 
       def info
         wrapped = case resource.vendor
-                   when 'Kontakt' then KontaktIoBeacon.new(resource, current_admin)
-                   else WrappedBeacon.new(resource, current_admin)
-                   end
+                  when 'Kontakt' then KontaktIoBeacon.new(resource, current_admin)
+                  else WrappedBeacon.new(resource, current_admin)
+                  end
         respond_with(wrapped)
       end
 
@@ -42,6 +43,7 @@ module S2sApi
 
       def update
         resource.update_test_activity(activity_permitted_params)
+        resource.beacon_config.update_data(current_admin, config_params)
         update!
       end
 
@@ -63,7 +65,19 @@ module S2sApi
       end
 
       def permitted_params
-        params.permit(beacon: [:name, :uuid, :major, :minor, :lat, :lng, :floor, :zone_id] | role_permitted_params)
+        params.permit(beacon: [:name, :uuid, :lat, :lng, :floor, :zone_id] | ibeacon_params | eddystone_params | role_permitted_params)
+      end
+
+      def ibeacon_params
+        [:major, :minor]
+      end
+
+      def eddystone_params
+        [:url, :instance, :namespace]
+      end
+
+      def config_params
+        params.fetch(:beacon, {}).fetch(:config).permit(:signal_interval, :transmission_power)
       end
 
       def role_permitted_params
@@ -76,8 +90,9 @@ module S2sApi
 
       def activity_permitted_params
         if params.fetch(:beacon, {})[:activity]
-          ActivityParams.new(params.fetch(:beacon, {})
-                               .deep_merge(activity: {scheme: :custom, trigger_attributes: {type: 'BeaconTrigger'}})
+          ActivityParams.new(
+            params.fetch(:beacon, {}).
+              deep_merge(activity: {scheme: :custom, trigger_attributes: {type: 'BeaconTrigger'}})
           ).call
         else
           {}

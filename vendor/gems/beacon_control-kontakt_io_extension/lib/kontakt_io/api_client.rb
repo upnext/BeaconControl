@@ -12,6 +12,7 @@ module KontaktIo
   # Kontakt.io API client
   #
   class ApiClient
+    API_VERSION = 7
 
     #
     # Initializer
@@ -22,6 +23,13 @@ module KontaktIo
     #
     def initialize(api_key)
       @api_key = api_key
+    end
+
+    # @param [Admin] admin
+    def self.for_admin(admin)
+      KontaktIo::ApiClient.new(
+        KontaktIo::ApiClient.account_api_key(admin.account)
+      )
     end
 
     #
@@ -41,6 +49,10 @@ module KontaktIo
       devices(params)
     end
 
+    def beacon(uuid, params={})
+      device(uuid, params)
+    end
+
     def venues(params={})
       response = request(:get, "/venue", params)
       response_to_array(response, "venues", KontaktIo::Resource::Venue)
@@ -51,30 +63,35 @@ module KontaktIo
       response_to_array(response, 'devices', KontaktIo::Resource::Device)
     end
 
-    def device(params)
-      response = request(:get, "/device", params)
-      response_to_array(response, 'devices', KontaktIo::Resource::Device).first
+    def device(uuid, params={})
+      response = request(:get, "/device/#{uuid}", params)
+      response_to_instance(response, KontaktIo::Resource::Device)
     end
 
     def device_status(uuid)
-      hash = JSON.parse(
-        request(:get, "/device/#{uuid}/status").body
-      )
+      hash = load_hash_from("/device/#{uuid}/status")
       KontaktIo::Resource::Status.new(hash)
     end
 
     def device_firmware(uuid)
-      hash = JSON.parse(
-        request(:get, "/firmware/last", {uniqueId: uuid}).body
-      )
+      hash = load_hash_from("/firmware/last", {uniqueId: uuid})
       KontaktIo::Resource::Firmware.new(hash[uuid])
     end
 
     def device_config(uuid)
-      hash = JSON.parse(
-        request(:get, "/config/#{uuid}").body
-      )
+      hash = load_hash_from("/config/#{uuid}")
       KontaktIo::Resource::Config.new(hash)
+    end
+
+    def update_device(uuid, device_type, data)
+      response = request(:post, '/device/update', {uniqueId: uuid, deviceType: device_type}.merge(data))
+      response.body
+    end
+
+    private def load_hash_from(url, params={})
+      return JSON.parse(request(:get, url, params).body)
+    rescue KontaktIo::Error::NotFound
+      return {}
     end
 
     #
@@ -128,7 +145,9 @@ module KontaktIo
         yield req if block_given?
       end
 
-      raise KontaktIo::Error.classify(response.status) unless response.success?
+      if Rails.env.production?
+        raise KontaktIo::Error.classify(response.status) unless response.success?
+      end
 
       response
     end
@@ -136,7 +155,7 @@ module KontaktIo
     def headers
       {
         'api-key' => @api_key,
-        'accept'  => 'application/vnd.com.kontakt+json;version=6',
+        'accept'  => "application/vnd.com.kontakt+json;version=#{API_VERSION}",
         'url'     => 'https://api.kontakt.io'
       }
     end
@@ -152,7 +171,7 @@ module KontaktIo
     #
     def response_to_array(response, key, model)
       hash = JSON.parse(response.body)
-      puts hash
+      Rails.logger.debug(hash.inspect) if Rails.env.development?
       if hash.key?(key)
         (key ? hash[key] : hash).map do |item|
           model.new(item)
@@ -160,6 +179,16 @@ module KontaktIo
       else
         model.new(hash)
       end
+    rescue => error
+      Rails.logger.error error.message
+      Rails.logger.error error.backtrace.join("\n")
+      []
+    end
+
+    def response_to_instance(response, model)
+      hash = JSON.parse(response.body)
+      Rails.logger.debug(hash.inspect) if Rails.env.development?
+      model.new(hash)
     rescue => error
       Rails.logger.error error.message
       Rails.logger.error error.backtrace.join("\n")

@@ -5,9 +5,6 @@ module KontaktIo
       attribute :unique_id,           String
       attribute :device_type,         String
       attribute :specification,       String
-      attribute :proximity,           String
-      attribute :major,               Integer
-      attribute :minor,               Integer
       attribute :name,                String
       attribute :alias,               String
       attribute :interval,            Integer
@@ -42,6 +39,32 @@ module KontaktIo
       attribute :updated,             String
 
       attribute :import,              Boolean
+      attribute :profiles,            Array
+
+      attribute :proximity,           String
+      attribute :major,               Integer
+      attribute :minor,               Integer
+
+      attribute :instance_id,         String
+      attribute :namespace,           String
+      attribute :url,                 String
+
+      def eddystone?
+        profiles.include?('EDDYSTONE')
+      end
+
+      def ibeacon?
+        profiles.include?('IBEACON')
+      end
+
+      def profile
+        profiles.first
+      end
+
+      def profiles=(val)
+        val = [] unless val.is_a?(Array)
+        super(val.map(&:upcase))
+      end
 
       def status=(hash)
         if hash.is_a?(Hash)
@@ -53,7 +76,11 @@ module KontaktIo
       # Composes +ProximityId+ string representation of Beacon +uuid,major,minor+ fields.
       # @return [String]
       def proximity_id
-        "#{proximity}+#{major}+#{minor}".upcase
+        if eddystone?
+          "#{self.proximity}##{self.instance_id}##{self.namespace}##{self.url}".upcase
+        else
+          "#{proximity}+#{major}+#{minor}".upcase
+        end
       end
 
       #

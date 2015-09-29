@@ -21,12 +21,7 @@ class KontaktIoBeacon < WrappedBeacon
   end
 
   def device
-    @device ||= api.device(
-      uniqueId:   uuid,
-      proximity:  beacon.proximity_id.uuid,
-      major:      beacon.proximity_id.major,
-      minor:      beacon.proximity_id.minor
-    )
+    @device ||= api.device(uuid)
   rescue KontaktIo::Error::NotFound
     @device = ::KontaktIo::Resource::Device.new({})
   end

@@ -32,6 +32,14 @@ class Beacon
           kontakt_io_mapping.present?
         end
 
+        unless method_defined?(:_non_kontakt_io_imported?)
+          alias_method :_non_kontakt_io_imported?, :imported?
+        end
+
+        def imported?
+          kontakt_io_imported? || _non_kontakt_io_imported?
+        end
+
         scope :kontakt_io, -> { joins(:kontakt_io_mapping).merge(KontaktIoMapping.beacons) }
       end
     end

@@ -9,6 +9,9 @@
 en:
   beacon_control:
     kontakt_io_extension:
+      helpers:
+        links:
+          select_all: 'Select all'
       beacons:
         index:
           title: Kontakt.io
@@ -35,6 +38,7 @@ en:
           major: Major
           minor: Minor
           venue: Venue
+          protocol: Protocol
 
       extensions_marketplace:
         form:

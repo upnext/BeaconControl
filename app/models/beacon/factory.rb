@@ -14,17 +14,21 @@ class Beacon
   class Factory
     NullObject = Naught.build
 
+    # @param [Admin] admin
+    # @param [Hash] params
+    # @param [Application|NullObject] activity
     def initialize(admin, params, activity = NullObject.new)
-      self.admin = admin
-      self.beacon = admin.account.beacons.new(params)
+      @admin = admin
+      @beacon = admin.account.beacons.new(params)
       beacon.test_activity = activity
     end
 
+    # @return [Beacon]
     def build
-      beacon.manager = admin if admin.beacon_manager?
+      @beacon.manager = @admin if @admin.beacon_manager?
       add_to_test_application
 
-      beacon
+      @beacon
     end
 
     def create
@@ -41,10 +45,9 @@ class Beacon
     attr_accessor :beacon, :admin
 
     def add_to_test_application
-      if test_app = admin.test_application
-        beacon.applications_beacons.new(application_id: test_app.id)
-        beacon.assign_test_activity(beacon.test_activity)
-      end
+      return unless @admin.test_application
+      @beacon.applications_beacons.new(application_id: @admin.test_application.id)
+      @beacon.assign_test_activity(@beacon.test_activity)
     end
   end
 end

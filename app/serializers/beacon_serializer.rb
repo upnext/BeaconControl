@@ -7,7 +7,7 @@
 ###
 
 class BeaconSerializer < ApplicationSerializer
-  attributes :id, :name, :proximity_id, :location, :vendor, :protocol
+  attributes :id, :name, :proximity_id, :location, :vendor, :protocol, :config
 
   def proximity_id
     object.proximity_id.to_s
@@ -19,5 +19,9 @@ class BeaconSerializer < ApplicationSerializer
       lng: object.lng,
       floor: object.floor
     }
+  end
+
+  def config
+    object.config
   end
 end

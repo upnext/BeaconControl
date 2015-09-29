@@ -10,8 +10,18 @@
   <%= hidden_field_tag :sync, sync %>
   <div class="form-container">
     <div class="kontakt-io-table-buttons">
-      <%= submit_tag t(".submit"), class: "btn btn-success btn-static-width" %>
-      <%= link_to t("helpers.links.cancel"), beacon_control_kontakt_io_extension.beacons_path, class: "btn btn-primary btn-static-width" %>
+      <%= submit_tag t(".submit"),
+                     class: "btn btn-success btn-static-width"
+      %>
+      <%= link_to t("helpers.links.cancel"),
+                  beacon_control_kontakt_io_extension.beacons_path,
+                  class: "btn btn-primary btn-static-width"
+      %>
+      <%= link_to t("beacon_control.kontakt_io_extension.helpers.links.select_all"),
+                  '#',
+                  class: "btn btn-primary btn-static-width",
+                  id: 'select-all-beacons'
+      %>
     </div>
     <%= render 'list', form: true, beacons: beacons %>
     <div class='kontakt-io-table-buttons'>

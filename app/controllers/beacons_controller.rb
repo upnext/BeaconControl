@@ -12,6 +12,7 @@ class BeaconsController < AdminController
   custom_actions collection: :batch_update
   before_action :load_and_authorize_zones
   before_action :build_test_activity, only: [:new, :create, :edit, :update]
+  before_action :load_config, only: [:new, :create, :edit, :update]
 
   has_scope :sorted, using: [:column, :direction], type: :hash, default: {
     column: 'zones.name',
@@ -86,9 +87,25 @@ class BeaconsController < AdminController
   def permitted_params
     {
       beacon: params.fetch(:beacon, {}).permit(
-        [:name, :uuid, :major, :minor, :location, :lat, :lng, :floor, :zone_id, :protocol, :vendor] | role_permitted_params
+        default_params | role_permitted_params | protocol_params
       )
     }
+  end
+
+  def default_params
+    [:name, :location, :lat, :lng, :floor, :zone_id, :protocol, :vendor]
+  end
+
+  def i_beacon_params
+    [:uuid, :major, :minor]
+  end
+
+  def eddystone_params
+    [:namespace, :instance, :url]
+  end
+
+  def protocol_params
+    i_beacon_params | eddystone_params
   end
 
   def activity_permitted_params
@@ -122,5 +139,10 @@ class BeaconsController < AdminController
 
   def build_test_activity
     resource.build_test_activity
+  end
+
+  def load_config
+    resource.beacon_config || resource.build_beacon_config
+    resource.beacon_config.load_data(current_admin)
   end
 end

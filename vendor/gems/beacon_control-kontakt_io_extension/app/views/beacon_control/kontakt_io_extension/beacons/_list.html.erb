@@ -9,7 +9,7 @@
 <div class="col-xs-12">
   <div class="table-responsive beacons-table sortable-table">
 
-    <table class="table table-list table-striped">
+    <table id="import-select-beacon" class="table table-list table-striped">
       <thead>
       <tr>
         <% if local_assigns[:form] == true %>
@@ -20,6 +20,7 @@
         <th><%= t('.venue') %></th>
         <th><%= t('.major') %></th>
         <th><%= t('.minor') %></th>
+        <th><%= t('.protocol') %></th>
       </tr>
       </thead>
       <tbody>
@@ -41,9 +42,18 @@
           </td>
           <td><%= beacon.major %></td>
           <td><%= beacon.minor %></td>
+          <td><%= beacon.profile %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
 </div>
+<script>
+  $(function () {
+    $('#select-all-beacons').on('click', function (event) {
+      event.preventDefault();
+      $('#import-select-beacon input:checkbox').click();
+    });
+  });
+</script>

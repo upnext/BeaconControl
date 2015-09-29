@@ -1,10 +1,72 @@
-<div class="form-control control-group beacon-state">
-  <% case beacon.vendor %>
-  <% when 'Kontakt' %>
-    <%= render 'beacons/beacon_state/kontakt',
-               beacon: wrapped_beacon
-    %>
-  <% else %>
-    <%= render text: beacon.vendor %>
-  <%- end %>
-</div>
+<% if @beacon.persisted? %>
+  <div class="form-control control-group beacon-state">
+    <div id="beacon-working-status" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.working_status') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%= t("beacons.form.beacon_#{false ? 'active' : 'inactive'}") %>
+      </div>
+    </div>
+    <div id="beacon-device-id" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.device_id') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%= beacon.config.unique_id %>
+      </div>
+    </div>
+    <div id="beacon-device-type" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.vendor') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%= beacon.vendor %>
+      </div>
+    </div>
+    <div id="beacon-firmware" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.firmware') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%- if beacon.config.latest_firmware %>
+          <%= beacon.config.firmware %>
+        <%- else %>
+      <span style="color:darkred;font-weight: 800">
+        <%= beacon.config.firmware %>!
+      </span>
+        <%- end %>
+      </div>
+    </div>
+    <div id="beacon-battery" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.battery') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%- if beacon.config.battery_level.nil? %>
+          <%= t('beacons.form.battery_unknown'); %>
+        <%- else %>
+          <%= beacon.config.battery_level %>%
+        <%- end %>
+      </div>
+    </div>
+    <div id="beacon-last-action" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.last_action') %>
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%= Time.at(beacon.config.last_event_timestamp.to_i).strftime('%d.%m.%Y %H:%M') %>
+      </div>
+    </div>
+    <div id="beacon-last-connection" class="row">
+    </div>
+    <div id="beacon-average-connection-interval" class="row">
+      <div class="col-xs-6 beacon-title">
+        <%= t('beacons.form.average_connection_interval') %>s
+      </div>
+      <div class="col-xs-6 beacon-data">
+        <%= beacon.config.avg_event_interval %>s
+      </div>
+    </div>
+  </div>
+<% end %>

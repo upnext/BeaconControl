@@ -155,7 +155,10 @@ en:
       no_actions: "No actions"
       action: "Action"
       delete_nice: 'Delete Beacon'
-      missing_cloud_message: "This beacon doesn't have cloud beacon managment, so your changes need to be manually synchronized with an iphone app."
+      missing_cloud_message: "Changes has to be updated manually. Move your BeaconControl mobile app close to beacon."
+      next: "Next"
+      vendor: "Vendor"
+      battery_unknown: "Unknown"
     index:
       new: "Add Beacon"
       all_floors: "All"

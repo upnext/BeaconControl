@@ -10,6 +10,7 @@ module KontaktIo
   module Resource
     class Base
       include Virtus.model
+      class_attribute :api
 
       attribute :was_imported, Boolean
 
@@ -25,6 +26,10 @@ module KontaktIo
 
       def db?
         was_imported
+      end
+
+      def self.connect(admin)
+        self.api = KontaktIo::ApiClient.for_admin(admin)
       end
     end
   end

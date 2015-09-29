@@ -438,7 +438,7 @@ form {
     }
 
     .test-notification-group {
-      padding: 0 17px 0 17px;
+      //padding: 0 17px 0 17px;
       border-color: #C1C1C1;
       border-radius: 0;
       -webkit-border-radius: 0;
@@ -617,11 +617,28 @@ body table > tbody > tr.currently-assigned-beacon > td.currently-assigned-beacon
 .with-sticky-footer {
   position: relative;
   padding-bottom: 63px;
-  .sticky-footer {
-    width: ~'calc( 100% - 250px )';
-    position: fixed;
-    bottom: 0;
-    height: 63px;
+  @media (min-width: 1089px) {
+    .sticky-footer {
+      width: ~'calc( 100% - 250px )';
+      position: fixed;
+      bottom: 0;
+      height: 63px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1088px) {
+    .sticky-footer {
+      width: ~'calc( 100% - 250px )';
+      position: fixed;
+      bottom: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .sticky-footer {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      height: auto;
+    }
   }
 }
 

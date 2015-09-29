@@ -8,12 +8,10 @@
 
 class Beacon < ActiveRecord::Base
   AVAILABLE_FLOORS = ((AppConfig.lowest_floor)..(AppConfig.highest_floor)).to_a
-  SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at)
+  SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at beacons.updated_at beacons.protocol)
   PROTOCOLS = %w(iBeacon Eddystone)
   VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Sensorberg', 'Sonic Notify' ]
   MODE = [ 'Custom', 'Kontakt Beacon', 'Energy saver', 'Power Beacon', 'Apple iBeacon' ]
-
-  extend UuidField
 
   include Searchable
 
@@ -28,15 +26,15 @@ class Beacon < ActiveRecord::Base
   has_many :applications, through: :applications_beacons
 
   has_many :activities, through: :triggers
-  #
-  # Includes +UuidField+ module functionality.
-  #
-  uuid_field :uuid, validations: { presence: true, allow_blank: false }
+
+  has_one :beacon_config,
+          dependent: :destroy,
+          autosave: true
 
   serialize :proximity_id, ProximityId
 
   after_validation do
-    [:uuid, :major, :minor].each { |key| (errors[key].push *errors[:proximity_id]).uniq! }
+    [:uuid, :major, :minor, :namespace, :instance, :url].each { |key| (errors[key].push *errors[:proximity_id]).uniq! }
   end
 
   before_destroy do
@@ -44,48 +42,59 @@ class Beacon < ActiveRecord::Base
     triggers_sources.destroy_all
   end
 
-  validates :proximity_id,
-    uniqueness: { scope: :account },
-    presence: true
+  before_save { proximity_id.protocol = protocol }
+  before_validation { proximity_id.protocol = protocol }
 
-  validates :major, :minor,
-    presence: true,
-    numericality: true
+  validates_with BeaconIdentityValidator
 
   validates :account,
-    presence: true
+            presence: true
 
-  validates :floor, inclusion: { in: AVAILABLE_FLOORS }, allow_blank: true
+  validates :floor,
+            inclusion: { in: AVAILABLE_FLOORS },
+            allow_blank: true
 
-  validates :name, presence: true, uniqueness: { scope: :account }
+  validates :name,
+            presence: true,
+            uniqueness: { scope: :account }
 
-  validates :zone_id, inclusion: { in: lambda { |beacon| beacon.manager.zone_ids} },
-    allow_blank: true, if: :manager_id?
+  validates :zone_id,
+            inclusion: { in: ->(beacon) { beacon.manager.zone_ids} },
+            allow_blank: true,
+            if: :manager_id?
 
-  validate :validate_manager_role, if: :manager_id?
+  validate :validate_manager_role,
+           if: :manager_id?
 
-  validates :protocol, inclusion: { in: PROTOCOLS }
+  validates :protocol,
+            inclusion: { in: PROTOCOLS }
 
   validate :validate_test_activity
 
-  validates :vendor, inclusion: { in: VENDORS }
+  validates :vendor,
+            inclusion: { in: VENDORS }
 
   scope :unassigned,    -> { where(zone: nil) }
-  scope :with_location, -> { where('beacons.lat IS NOT NULL AND beacons.lng IS NOT NULL') }
+  scope :with_location, -> {
+    where('beacons.lat IS NOT NULL AND beacons.lng IS NOT NULL')
+  }
   scope :with_floor,    ->(floor) {
-    if floor != 'all'
-      where(floor: floor == 'null' ? nil : floor)
-    end
+    where(floor: floor == 'null' ? nil : floor) if floor != 'all'
   }
   scope :with_zone_id,  ->(zone_ids) {
     zone_ids.map! {|z| z == 'null' ? nil : z }
-
     where(zone_id: zone_ids)
   }
 
   scope :with_name, ->(name) {
     if name.present?
       where('beacons.name LIKE :name', {name: "%#{name}%"})
+    end
+  }
+
+  scope :with_protocol, ->(name) {
+    if name
+      where('beacons.protocol LIKE :name', {name: "%#{name}%"})
     end
   }
 
@@ -111,11 +120,21 @@ class Beacon < ActiveRecord::Base
     order("#{sorted_column} #{direction}")
   }
 
-  delegate :uuid, :uuid=, :major, :major=, :minor, :minor=, to: :proximity_id
+  delegate :uuid, :uuid=,
+           :major, :major=, :minor, :minor=,
+           :namespace, :namespace=, :instance, :instance=, :url, :url=,
+           to: :proximity_id
 
-  attr_accessor :minor_security, :major_security, :namespace,
-                :instance_id, :mode, :signal_interval, :transmission_power,
+  attr_accessor :mode,
                 :activity_time
+
+  def imported?
+    false
+  end
+
+  def config
+    @config = ConfigObject.new((beacon_config || build_beacon_config).loaded_data)
+  end
 
   def available_floors
     AVAILABLE_FLOORS
@@ -158,10 +177,10 @@ class Beacon < ActiveRecord::Base
     end
   end
 
-  def update_test_activity(activity_permitted_params)
+  def update_test_activity(activity_params)
     build_test_activity
 
-    test_activity.assign_attributes(activity_permitted_params)
+    test_activity.assign_attributes(activity_params)
     if test_activity.test
       assign_test_activity(test_activity, true)
     else

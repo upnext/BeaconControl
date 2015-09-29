@@ -1,4 +1,4 @@
-class TransmissionPower {
+export class TransmissionPower {
   constructor(dom) {
     this.dom = dom;
     this.dom.data('controller', this);
@@ -19,6 +19,7 @@ class TransmissionPower {
 
   sliderChanged() {
     this.picker.attr('slider-select-value', this.dom.val());
+    this.dom.trigger('change');
   }
 }
 

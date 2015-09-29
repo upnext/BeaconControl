@@ -9,7 +9,7 @@
 module S2sApi
   module V1
     class BeaconSerializer < BaseSerializer
-      attributes :id, :name, :proximity_id, :location, :zone, :vendor, :protocol, :unique_id
+      attributes :id, :name, :proximity_id, :location, :zone, :vendor, :protocol, :unique_id, :config
 
       def zone
         S2sApi::V1::ZoneWithoutBeaconsSerializer.new(object.zone, root: false).as_json if object.zone
@@ -30,6 +30,14 @@ module S2sApi
 
       def unique_id
         wrap_beacon.uuid if controller
+      end
+
+      def config
+        {
+          data: object.config.attributes,
+          config_updated_at: object.beacon_config.updated_at,
+          beacon_updated_at: object.beacon_config.beacon_updated_at
+        }
       end
 
       private

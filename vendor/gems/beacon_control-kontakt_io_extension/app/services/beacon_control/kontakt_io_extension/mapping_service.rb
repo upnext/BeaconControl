@@ -85,8 +85,11 @@ module BeaconControl
           name:  "#{kontakt_beacon.name} #{kontakt_beacon.unique_id}",
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
-          minor: kontakt_beacon.minor,
-          vendor: 'Kontakt'
+          instance: kontakt_beacon.instance_id,
+          namespace: kontakt_beacon.namespace,
+          url: kontakt_beacon.url,
+          vendor: 'Kontakt',
+          protocol: (kontakt_beacon.eddystone? ? 'Eddystone' : 'iBeacon')
         ).build
       end
 
