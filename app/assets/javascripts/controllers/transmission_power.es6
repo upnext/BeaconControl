@@ -24,6 +24,6 @@ export class TransmissionPower {
 }
 
 $(function () {
-  const el = $('#transmission_power_minor_security');
+  const el = $('#transmission_power');
   el.length && new TransmissionPower(el);
 });
