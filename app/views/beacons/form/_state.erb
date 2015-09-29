@@ -5,7 +5,7 @@
         <%= t('beacons.form.working_status') %>
       </div>
       <div class="col-xs-6 beacon-data">
-        <%= t("beacons.form.beacon_#{false ? 'active' : 'inactive'}") %>
+        <%= t("beacons.form.beacon_#{1 ? 'active' : 'inactive'}") %>
       </div>
     </div>
     <div id="beacon-device-id" class="row">
@@ -29,13 +29,17 @@
         <%= t('beacons.form.firmware') %>
       </div>
       <div class="col-xs-6 beacon-data">
-        <%- if beacon.config.latest_firmware %>
-          <%= beacon.config.firmware %>
-        <%- else %>
+        <% if beacon.config.firmware.present? %>
+          <%- if beacon.config.latest_firmware %>
+            <%= beacon.config.firmware %>
+          <%- else %>
       <span style="color:darkred;font-weight: 800">
         <%= beacon.config.firmware %>!
       </span>
-        <%- end %>
+          <%- end %>
+        <% else %>
+          <%= t('beacons.form.battery_unknown') %>
+        <% end %>
       </div>
     </div>
     <div id="beacon-battery" class="row">
