@@ -1,9 +1,4 @@
-if (typeof Symbol !== 'function') {
-  let i = 0;
-  function Symbol(s) { return `$__${s}__${i++}__`; }
-}
-
-const LIVE_SEARCH_TABLE_TIMEOUT = Symbol('timeout');
+const LIVE_SEARCH_TABLE_TIMEOUT = '$__timeout__';
 
 export class LiveSearchTable {
   constructor(el) {
