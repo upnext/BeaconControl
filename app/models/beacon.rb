@@ -79,12 +79,15 @@ class Beacon < ActiveRecord::Base
             inclusion: { in: VENDORS }
 
   scope :unassigned,    -> { where(zone: nil) }
+
   scope :with_location, -> {
     where('beacons.lat IS NOT NULL AND beacons.lng IS NOT NULL')
   }
+
   scope :with_floor,    ->(floor) {
     where(floor: floor == 'null' ? nil : floor) if floor != 'all'
   }
+
   scope :with_zone_id,  ->(zone_ids) {
     zone_ids.map! {|z| z == 'null' ? nil : z }
     where(zone_id: zone_ids)
@@ -134,6 +137,12 @@ class Beacon < ActiveRecord::Base
 
   def imported?
     false
+  end
+
+  def vendor_uid
+  end
+
+  def vendor_uid=(val)
   end
 
   def proximity_id

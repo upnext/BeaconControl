@@ -14,7 +14,7 @@
                       collection: Beacon::VENDORS,
                       include_blank: false,
                       input_html: {
-                          class: %W[selectpicker],
+                          class: %W[selectpicker event-publisher],
                           data: {
                               live_search: true
                           }
@@ -23,6 +23,14 @@
         </div>
       </div>
     <% end %>
+
+    <div class="control-group event-subscriber" data-publisher="#beacon_vendor" data-match="Other" data-action="hide">
+      <div class="controls">
+        <%= f.input :vendor_uid,
+                    label: 'Vendor UID'
+        %>
+      </div>
+    </div>
 
     <%= render 'beacons/form/state',
                f: f,

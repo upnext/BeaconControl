@@ -37,7 +37,7 @@ module S2sApi
       end
 
       def unique_id
-        wrap_beacon.uuid if controller
+        object.vendor_uid if controller
       end
 
       def config
@@ -46,19 +46,6 @@ module S2sApi
           config_updated_at: object.beacon_config.updated_at,
           beacon_updated_at: object.beacon_config.beacon_updated_at
         }
-      end
-
-      private
-
-      def wrap_beacon
-        case object.vendor
-        when 'Kontakt' then KontaktIoBeacon.new(object, current_admin)
-        else WrappedBeacon.new(object, current_admin)
-        end
-      end
-
-      def current_admin
-        @current_admin ||= controller.send(:current_admin).object
       end
 
       def controller

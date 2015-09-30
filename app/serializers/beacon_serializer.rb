@@ -10,7 +10,14 @@ class BeaconSerializer < ApplicationSerializer
   attributes :id, :name, :proximity_id, :location, :vendor, :protocol, :config
 
   def proximity_id
-    object.proximity_id.to_s
+    case object.protocol
+    when 'iBeacon'
+      object.proximity_id.i_beacon.join('+')
+    when 'Eddystone'
+      object.proximity_id.eddystone.join('+')
+    else
+      object.proximity_id.to_s
+    end
   end
 
   def location

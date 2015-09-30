@@ -93,7 +93,7 @@ class BeaconsController < AdminController
   end
 
   def default_params
-    [:name, :location, :lat, :lng, :floor, :zone_id, :protocol, :vendor]
+    [:name, :location, :lat, :lng, :floor, :zone_id, :protocol, :vendor, :vendor_uid]
   end
 
   def i_beacon_params
