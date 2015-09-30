@@ -3,7 +3,7 @@
  * @example
  *   <input class="event-publisher control-group" id="beacon_protocol" name="beacon[protocol]">
  */
-class EventPublisher {
+export class EventPublisher {
   /**
    * @param {jQuery} el
    */
@@ -47,7 +47,7 @@ class EventPublisher {
  * @example
  *   <div class="event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
  */
-class EventSubscriber {
+export class EventSubscriber {
   /**
    * @param {jQuery} el
    */

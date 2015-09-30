@@ -25,4 +25,10 @@ module BeaconsHelper
     else WrappedBeacon.new(beacon, admin)
     end
   end
+
+  def live_search_value(obj, *fields)
+    fields.map do |field|
+      obj.send(field).to_s
+    end.join(' | ')
+  end
 end
