@@ -23,6 +23,7 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require twitter/bootstrap
+//= require_tree ./polyfill
 //= require handlebars.runtime
 //
 //= require ext/jquery.serializejson.min
