@@ -45,6 +45,23 @@
 }
 
 .dropdown-menu {
+  border-radius: 0;
+  border-color: @border-color;
+  box-shadow: none;
   margin-top: -1px;
-  .border-radius(0);
+
+  &.inner {
+    margin-top: 3px !important;
+  }
+
+  > li > a {
+    outline: 0;
+    padding-bottom: 6px;
+    padding-top: 6px;
+  }
+
+  .no-results {
+    margin: 1px 9px 3px !important;
+    padding: 5px 16px !important;
+  }
 }
