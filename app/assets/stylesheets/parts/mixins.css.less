@@ -66,3 +66,20 @@
   -o-transition: @transition-property @transition-time @method;
   transition: @transition-property @transition-time @method;
 }
+
+.retina-background-image(@path, @w: auto, @h: auto, @repeat: no-repeat, @position: center) {
+  background-image: image-url(@path);
+  background-repeat: @repeat;
+  background-position: @position;
+
+  @at2x_path: ~`"@{path}".replace(/(.*)\.([^.]+)$/, "$1@2x.$2")`;
+
+   @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    background-image: image-url(@at2x_path);
+    background-size: @w @h;
+  }
+}

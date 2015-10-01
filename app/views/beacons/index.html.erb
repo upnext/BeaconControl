@@ -10,7 +10,7 @@
   <span><%= t('.title') %></span>
 <% end %>
 
-<div class="beacons-table table-responsive">
+<div class="beacons-table">
   <%= simple_form_for :search_table, method: :get, html: { class: %W[form-inline] } do |f| %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
@@ -65,7 +65,10 @@
       <tr>
         <th colspan="2" class="select-all-checkbox">
           <% if @beacons.present? %>
-            <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
+            <div class="custom-checkbox">
+              <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
+              <label for="select_all"></label>
+            </div>
           <% end %>
         </th>
         <th class="sortable"><%= sortable "beacons.name", Beacon.human_attribute_name(:name) %></th>
@@ -83,7 +86,12 @@
         <% @beacons.each do |beacon| %>
           <tr data-zone-id="<%= beacon.zone_id %>" data-floor="<%= beacon.floor %>" data-search="<%= live_search_value(beacon, :name, :protocol, :zone_name) %>">
             <td class="zone-mark disable-select" style="background: <%= (beacon.zone && beacon.zone.hex_color) || 'transparent' %>"></td>
-            <td class="with-checkbox"><input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" /></td>
+            <td class="with-checkbox">
+              <div class="custom-checkbox">
+                <input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" />
+                <label for="<%="beacon_#{beacon.id}"%>"></label>
+              </div>
+            </td>
             <td><%= truncate(beacon.name, length: 30) %></td>
             <td class="beacon_protocol">
               <%= beacon.protocol %>

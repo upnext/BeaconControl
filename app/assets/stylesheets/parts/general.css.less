@@ -125,7 +125,7 @@ th > a, th > a:hover {
 
 a.current:after {
   display: inline-block;
-  margin-left: 2px;
+  margin-left: 12px;
 }
 
 a.asc:after {
@@ -140,16 +140,8 @@ td {
   font-size: 14px;
 
   a.btn {
-    padding: 1px 15px;
+    padding: 5px 15px;
   }
-}
-
-input.checkbox {
-  /* scaled checkbox */
-  -ms-transform: scale(1.4); /* IE */
-  -moz-transform: scale(1.4); /* FF */
-  -webkit-transform: scale(1.4); /* Safari and Chrome */
-  -o-transform: scale(1.4); /* Opera */
 }
 
 table.table {
@@ -177,13 +169,20 @@ table.table {
 }
 
 .form-control {
+  box-shadow: none !important;
   font-size: 14px;
+  height: 42px;
   .border-radius(0);
-  .box-shadow(none);
 }
 
-th.sortable:hover {
-  background: @gray-light;
+th.sortable {
+  a {
+    text-decoration: none;
+  }
+
+  &:hover a {
+    color: @brand-success;
+  }
 }
 
 .hidden {
@@ -557,7 +556,6 @@ body {
       background: @btn-background !important;
       border-color: @btn-border !important;
       border: 1px solid;
-      width: 117px !important;
       padding-left: 0;
       padding-right: 0;
       &:hover {

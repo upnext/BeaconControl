@@ -20,7 +20,8 @@ class @SortableTable
   observeRows: ->
     @dom.find('tbody tr td:not(.disable-select)').click (event) =>
       el = $(event.target)
-      el.parent().find('input:checkbox').click() unless (el.is('input') || el.hasClass('input'))
+      locationTarget = el.parent().find('.btn-action-edit').attr('href')
+      window.location.href = locationTarget if locationTarget
 
   observeSelectAllCheckboxChange: ->
     @dom.find('#select_all').click (event)=>
@@ -54,16 +55,12 @@ class @SortableTable
       if el.checked
         tr.addClass('active')
         btn = tr.find('a.btn-default')
-        btn.removeClass('btn-default')
-        btn.addClass('btn-success')
 
         @dom.find('.floor-select, .zone-select, .batch-delete').removeClass('hidden')
         @dom.find('.selectpicker').selectpicker('refresh')
       else
         tr.removeClass('active')
         btn = tr.find('a.btn-success')
-        btn.removeClass('btn-success')
-        btn.addClass('btn-default')
 
         if checked_checkboxes.length == 0
           @dom.find('.floor-select, .zone-select, .batch-delete').addClass('hidden')

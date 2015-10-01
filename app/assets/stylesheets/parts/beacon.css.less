@@ -44,8 +44,8 @@ select#beacon_zone_id {
 }
 
 div.beacons-table {
+  border: 1px solid @border-color;
   margin-top: 20px;
-  min-height: 430px;
 
   form {
     padding: 15px;
@@ -61,11 +61,19 @@ div.beacons-table {
       .search_table_beacon_name {
         width: 100%;
       }
+
+      i {
+        top: 2px !important;
+      }
     }
 
     .row {
       a, .btn-group, input { width: 100%; }
     }
+  }
+
+  table {
+    margin-bottom: 0;
   }
 
   thead {
@@ -91,14 +99,13 @@ div.beacons-table {
   }
 
   .select-all-checkbox {
-    input {
-      margin-left: 8px;
+    .custom-checkbox {
+      margin-left: 4px;
     }
   }
 
-  .with-checkbox input.checkbox {
-    margin-left: 4px;
-    margin-top: 15px;
+  .with-checkbox .custom-checkbox label:before {
+    top: 13px;
   }
 
   td > .btn {
