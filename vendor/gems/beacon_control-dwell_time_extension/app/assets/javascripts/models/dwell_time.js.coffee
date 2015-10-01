@@ -17,33 +17,33 @@ class @DwellTime
 
     @slider = @sliderDom.slider(
       formater: (value) => @stringWithNumber(value)
-    ).on(
+    )
+    @sliderDom.on(
       'slide', @sliderChanged.bind(@)
     ).on(
       'slideStop', @sliderChanged.bind(@)
     )
 
   initInput: ->
-    _self = @
+    @input.on('change', =>
+      currentNumberVal = @numberValue(@input.val())
 
-    @input.change ->
-      currentNumberVal = _self.numberValue($(@).val())
+      if currentNumberVal >= @sliderMax
+        currentNumberVal = @sliderMax
+      else if currentNumberVal <= @sliderMin
+        currentNumberVal = @sliderMin
 
-      if currentNumberVal >= _self.sliderMax
-        currentNumberVal = _self.sliderMax
-      else if currentNumberVal <= _self.sliderMin
-        currentNumberVal = _self.sliderMin
-
-      currentStringVal = _self.stringWithNumber(currentNumberVal)
+      currentStringVal = @stringWithNumber(currentNumberVal)
 
       # Update input on right
-      $(@).val(currentStringVal)
+      @input.val(currentStringVal)
 
       # Update slider
-      _self.slider.slider(
+      @slider.slider(
         'setValue', currentNumberVal, false
       )
-      _self.sliderDom.val(currentNumberVal)
+      @sliderDom.val(currentNumberVal)
+    )
 
   # When slider is touched
   sliderChanged: ->
@@ -57,6 +57,3 @@ class @DwellTime
 
   numberValue: (str) ->
     parseInt(str) || @sliderMin
-
-$ ->
-  window.DwellTime = DwellTime

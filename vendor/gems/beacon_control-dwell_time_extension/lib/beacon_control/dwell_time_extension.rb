@@ -22,10 +22,8 @@ module BeaconControl
 
     def self.load_files
       [
-        "app/models/trigger/dwell_time_ext",
         "app/workers/beacon_control/dwell_time_extension/worker",
-        'app/serializers/s2s_api/trigger_serializer/dwell_time',
-        'app/models/beacon/dwell_time',
+        'app/serializers/s2s_api/trigger_serializer/dwell_time'
       ]
     end
 

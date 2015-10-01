@@ -3,9 +3,9 @@ export class TransmissionPower {
     this.dom = dom;
     this.dom.data('controller', this);
     this.setupView();
-    this.slider = this.dom.data('slider');
-    this.selected = this.slider.selectionEl;
-    this.picker = this.slider.picker;
+    this.slider = this.dom.data().slider;
+    this.selected = $(this.slider.trackSelection);
+    this.picker = $(this.slider.sliderElem);
     this.sliderChanged();
   }
 
