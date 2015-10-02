@@ -40,7 +40,7 @@ PATH
 
 GIT
   remote: ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git
-  revision: 8cd7de68a7e5c04d17d75131bf6ba6c681c5606a
+  revision: 0ef8006e2042de6ac5dcb4bef5821fa7fa8f7fc6
   specs:
     beacon_control-neighbours_extension (0.1.1)
       sprockets (>= 3.0.0)
