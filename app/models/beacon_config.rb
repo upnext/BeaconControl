@@ -2,17 +2,17 @@ class BeaconConfig < ActiveRecord::Base
   belongs_to :beacon
   serialize :data, ActiveSupport::HashWithIndifferentAccess
 
-  DEFAULT_DATA_KEYS = [
-    :battery_level,
-    :device_id,
-    :last_action,
-    :average_connection_interval,
-    :latest_firmware,
-    :signal_interval,
-    :transmission_power,
-    :master,
-    :slaves
-  ]
+  DEFAULT_DATA_KEYS = {
+    battery_level: nil,
+    device_id: nil,
+    last_action: nil,
+    average_connection_interval: nil,
+    latest_firmware: true,
+    signal_interval: 350,
+    transmission_power: 1,
+    master: nil,
+    slaves: []
+  }
 
   after_initialize :ensure_data
 
@@ -41,8 +41,8 @@ class BeaconConfig < ActiveRecord::Base
   # Initialize data.
   private def ensure_data
     self.data ||= {}
-    DEFAULT_DATA_KEYS.each do |key|
-      self.data.key?(key) || self.data.merge!(key => nil)
+    DEFAULT_DATA_KEYS.each_pair do |key, val|
+      self.data.key?(key) || self.data.merge!(key => val)
     end
   end
 end

@@ -28,7 +28,17 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="controls">
-            <%= f.input :uuid, label: 'UUID' %>
+            <%= f.input :uuid,
+                        label: 'UUID',
+                        input_html: {
+                            class: %w[uuid-input],
+                            data: {
+                                :'validate-if' => '#beacon_protocol=iBeacon',
+                                required: true,
+                                pattern: Beacon::UuidFormat::REGEX.inspect.gsub(/\//, '')
+                            }
+                        }
+            %>
           </div>
         </div>
       </div>
@@ -36,10 +46,24 @@
       <div class="row">
         <div class="controls">
           <div class="col-xs-6">
-            <%= f.input :major %>
+            <%= f.input :major,
+                        input_html: {
+                            data: {
+                                :'validate-if' => '#beacon_protocol=iBeacon',
+                                required: true
+                            }
+                        }
+            %>
           </div>
           <div class="col-xs-6">
-            <%= f.input :minor %>
+            <%= f.input :minor,
+                        input_html: {
+                            data: {
+                                :'validate-if' => '#beacon_protocol=iBeacon',
+                                required: true
+                            }
+                        }
+            %>
           </div>
         </div>
       </div>
@@ -49,10 +73,24 @@
       <div class="row">
         <div class="controls">
           <div class="col-xs-6">
-            <%= f.input :namespace %>
+            <%= f.input :namespace,
+                        input_html: {
+                            data: {
+                                :'validate-if' => '#beacon_protocol=Eddystone',
+                                required: true
+                            }
+                        }
+            %>
           </div>
           <div class="col-xs-6">
-            <%= f.input :instance %>
+            <%= f.input :instance,
+                        input_html: {
+                            data: {
+                                :'validate-if' => '#beacon_protocol=Eddystone',
+                                required: true
+                            }
+                        }
+            %>
           </div>
         </div>
       </div>
@@ -60,7 +98,14 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="controls">
-            <%= f.input :url %>
+            <%= f.input :url,
+                        input_html: {
+                            data: {
+                                :'validate-if' => '#beacon_protocol=Eddystone',
+                                required: true
+                            }
+                        }
+            %>
           </div>
         </div>
       </div>

@@ -4,111 +4,120 @@
 
 <%- wrapped_beacon = vendor_beacon(@beacon) %>
 
-<div class="row page-subheader">
-  <nav class="col-xs-12">
-    <ul class="tab-space tab-manager event-publisher" id="beacon-tabs" data-init="true">
-      <%= active_link_to t('beacons.form.basic'), '',
-                         wrap_tag: 'li',
-                         class: 'tab-switcher',
-                         data: {
-                             target: '#basic'
-                         },
-                         active: true
-      %>
-      <%= active_link_to t('beacons.form.settings'), '',
-                         wrap_tag: 'li',
-                         class: 'tab-switcher event-subscriber',
-                         id: 'settings-tab',
-                         data: {
-                             target: '#settings',
-                             publisher: '#beacon-next-tab',
-                             action: 'click',
-                             match: 'settings'
-                         },
-                         active: false
-      %>
-    </ul>
-  </nav>
-</div>
-
-<%= simple_nested_form_for @beacon,
-                           html: {
-                               class: %W[beacon-form watchable with-sticky-footer beacon-#{edit? ? 'edit' : 'new'}]
-                           } do |f| %>
-  <div class="tab-space">
-    <div id="basic" class="tab-content">
-      <%= render 'beacons/form/basic',
-                 f: f,
-                 beacon: @beacon,
-                 zones: @zones,
-                 wrapped_beacon: wrapped_beacon
-      %>
-    </div>
-    <div id="settings" style="display: none;" class="tab-content">
-      <%= render 'beacons/form/settings',
-                 f: f,
-                 beacon: @beacon,
-                 zones: @zones,
-                 wrapped_beacon: wrapped_beacon
-      %>
-    </div>
+<div class="tab-space tab-manager event-publisher" data-init="true" id="beacon-tabs">
+  <div class="row page-subheader">
+    <nav class="col-xs-12">
+      <ul>
+        <%= active_link_to t('beacons.form.basic'), '',
+                           wrap_tag: 'li',
+                           class: 'tab-switcher',
+                           data: {
+                               target: '#basic'
+                           },
+                           active: true
+        %>
+        <%= active_link_to t('beacons.form.settings'), '',
+                           wrap_tag: 'li',
+                           class: 'tab-switcher event-subscriber',
+                           id: 'settings-tab',
+                           data: {
+                               target: '#settings',
+                               publisher: '#beacon-next-tab',
+                               action: 'click',
+                               match: 'settings'
+                           },
+                           active: false
+        %>
+      </ul>
+    </nav>
   </div>
 
-  <%# Footer %>
-  <div id="beacon-action-footer" class="row actions-row sticky-footer">
-    <% if @beacon.persisted? %>
-      <div class="col-xs-6">
-        <div class="pull-left">
-          <%= button_link :delete_nice,
-                          beacon_path(@beacon),
-                          class: %w[btn btn-danger],
-                          with_modal: true,
-                          dynamic_width: true
-          %>
-        </div>
+  <%= simple_nested_form_for @beacon,
+                             html: {
+                                 class: %W[
+                                  validation-extension
+                                  beacon-form
+                                  with-sticky-footer
+                                  tabbed-form
+                                  beacon-#{edit? ? 'edit' : 'new'}
+                                 ],
+                                 novalidate: false
+                             } do |f| %>
+    <div class="tab-space">
+      <div id="basic" class="tab-content">
+        <%= render 'beacons/form/basic',
+                   f: f,
+                   beacon: @beacon,
+                   zones: @zones,
+                   wrapped_beacon: wrapped_beacon
+        %>
       </div>
-    <% end %>
+      <div id="settings" style="display: none;" class="tab-content">
+        <%= render 'beacons/form/settings',
+                   f: f,
+                   beacon: @beacon,
+                   zones: @zones,
+                   wrapped_beacon: wrapped_beacon
+        %>
+      </div>
+    </div>
 
-    <% if @beacon.persisted? %>
-      <div class="col-xs-6 modify-beacon-actions">
-        <div class="pull-right">
-          <%= button_link :cancel, beacons_path %>
-          <%= f.button :submit, t('.save'),
-                       class: %w[btn-success btn btn-static-width btn-action-save]
-          %>
+    <%# Footer %>
+    <div id="beacon-action-footer" class="row actions-row sticky-footer">
+      <% if @beacon.persisted? %>
+        <div class="col-xs-6">
+          <div class="pull-left">
+            <%= button_link :delete_nice,
+                            beacon_path(@beacon),
+                            class: %w[btn btn-danger],
+                            with_modal: true,
+                            dynamic_width: true
+            %>
+          </div>
         </div>
-      </div>
-    <% else %>
-      <div class="col-xs-12 " id="footer-right" >
-        <div class="pull-right">
-          <%= button_link :cancel,
-                          beacons_path,
-                          class: 'modify-beacon-actions'
-          %>
-          <%= f.button :submit,
-                       t('.save'),
-                       class: %w[btn-success btn btn-static-width btn-action-save modify-beacon-actions event-subscriber],
-                       data: {
-                           publisher: '#beacon-tabs',
-                           action: 'show',
-                           match: 'last'
-                       }
-          %>
-          <%= button_tag t('.next'),
-                         class: %w[btn-success btn btn-static-width btn-action-save event-subscriber event-publisher],
-                         id: 'beacon-next-tab',
-                         value: 'settings',
+      <% end %>
+
+      <% if @beacon.persisted? %>
+        <div class="col-xs-6 modify-beacon-actions">
+          <div class="pull-right">
+            <%= button_link :cancel, beacons_path %>
+            <%= f.button :submit, t('.save'),
+                         class: %w[btn-success btn btn-static-width btn-action-save]
+            %>
+          </div>
+        </div>
+      <% else %>
+        <div class="col-xs-12 " id="footer-right" >
+          <div class="pull-right">
+            <%= button_link :cancel,
+                            beacons_path,
+                            class: 'modify-beacon-actions'
+            %>
+            <%= f.button :submit,
+                         t('.save'),
+                         class: %w[btn-success btn btn-static-width btn-action-save modify-beacon-actions event-subscriber],
                          data: {
-                             event: 'stop',
                              publisher: '#beacon-tabs',
-                             action: 'hide',
+                             action: 'show',
                              match: 'last'
                          }
-          %>
+            %>
+            <%= button_tag t('.next'),
+                           class: %w[btn-success btn btn-static-width btn-action-save event-subscriber event-publisher],
+                           id: 'beacon-next-tab',
+                           value: 'settings',
+                           data: {
+                               event: 'stop',
+                               publisher: '#beacon-tabs',
+                               action: 'hide',
+                               match: 'last'
+                           }
+            %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <%= prompt_modal(t('beacons.modal.title'), t('beacons.modal.body')) %>

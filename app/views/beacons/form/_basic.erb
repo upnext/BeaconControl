@@ -2,7 +2,11 @@
   <div class="col-md-6 first-column">
     <div class="control-group">
       <div class="controls">
-        <%= f.input :name %>
+        <%= f.input :name,
+                    input_html: {
+                        required: true
+                    }
+        %>
       </div>
     </div>
 
