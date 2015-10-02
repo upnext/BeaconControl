@@ -125,16 +125,22 @@
   <div class="col-md-6 second-column">
     <% if @beacon.vendor == 'Kontakt' %>
       <div class="control-group">
-        <div class="controls">
-          <%= f.input :mode,
-                      collection: Beacon::MODE,
-                      as: :select,
+       <div class="controls relative">
+          <div class="transmission-power-value"><span>1</span>/7</div>
+
+          <%= config.input :transmission_power,
                       include_blank: false,
                       input_html: {
-                          class: %W[selectpicker],
-                          value: 'Custom',
-                          readonly: true,
-                          disabled: true
+                          id: 'transmission_power',
+                          class: %W[slider],
+                          value: beacon.config.transmission_power,
+                          data: {
+                              slider_min:     0,
+                              slider_max:     7,
+                              slider_step:    1,
+                              slider_value:   beacon.config.transmission_power,
+                              slider_handle:  :square
+                          }
                       }
           %>
         </div>

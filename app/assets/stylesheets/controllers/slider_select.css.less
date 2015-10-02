@@ -1,37 +1,106 @@
 .slider {
-  &[slider-select-value="1"] {
-    .slider-selection {
-      background: #00BD00;
+
+  &.slider-horizontal {
+
+    .slider-tick {
+      background: #e0e0e0;
+      height: 18px;
+      margin: 0 0 0 -15px;
+      top: 5px;
+      width: 1px;
+
+      &.in-selection {
+        display: none;
+      }
+
+      &:nth-of-type(11) {
+        display: none;
+      }
     }
-  }
-  &[slider-select-value="2"] {
-    .slider-selection {
-      background: #53E400;
+
+    .slider-track {
+      background: #fff;
+      border: 1px solid @border-color;
+      border-radius: 0;
+      box-shadow: none;
+      height: 30px;
+
+      .slider-selection {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .slider-handle {
+        background: #fff;
+        margin: 2px 0 0 -26px;
+        height: 24px;
+        outline: none !important;
+        width: 24px;
+
+        &:after,
+        &:before {
+          background-color: @border-color;
+          content: '';
+          display: block;
+          height: 9px;
+          margin: 8px 0 0 9px;
+          opacity: 0.8;
+          position: absolute;
+          width: 2px;
+        }
+
+        &:after {
+          margin-left: 13px;
+        }
+      }
     }
-  }
-  &[slider-select-value="3"] {
-    .slider-selection {
-      background: #A6E300;
+
+    &[slider-select-value="0"] {
+      .slider-handle {
+        margin-left: 2px;
+      }
     }
-  }
-  &[slider-select-value="4"] {
-    .slider-selection {
-      background: #FCCF00;
+
+    &[slider-select-value="1"] {
+      .slider-selection {
+        background: #00BC00;
+      }
     }
-  }
-  &[slider-select-value="5"] {
-    .slider-selection {
-      background: #FF8400;
+
+    &[slider-select-value="2"] {
+      .slider-selection {
+        background: #45E300;
+      }
     }
-  }
-  &[slider-select-value="6"] {
-    .slider-selection {
-      background: #F50000;
+
+    &[slider-select-value="3"] {
+      .slider-selection {
+        background: #A3E300;
+      }
     }
-  }
-  &[slider-select-value="7"] {
-    .slider-selection {
-      background: #E20000;
+
+    &[slider-select-value="4"] {
+      .slider-selection {
+        background: #FDD000;
+      }
+    }
+
+    &[slider-select-value="5"] {
+      .slider-selection {
+        background: #FF8600;
+      }
+    }
+
+    &[slider-select-value="6"] {
+      .slider-selection {
+        background: #F80900;
+      }
+    }
+
+    &[slider-select-value="7"] {
+      .slider-selection {
+        background: #E60000;
+      }
     }
   }
 }
