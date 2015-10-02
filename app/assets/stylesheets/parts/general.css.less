@@ -41,7 +41,8 @@ html {
 
     li {
       display: inline-block;
-      margin: 0 30px;
+      height: 55px;
+      margin: 0 20px;
       border-bottom: 6px solid transparent;
 
       &:first-child {
@@ -53,7 +54,7 @@ html {
       }
 
       &.active {
-        border-bottom: 6px solid @brand-success;
+        border-bottom: 4px solid @brand-success;
         font-weight: 600;
 
         &:not(.extension) {
@@ -63,10 +64,10 @@ html {
       }
 
       a {
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 100;
         color: #000;
-        padding: 9px 20px;
+        padding: 14px 20px;
         text-decoration: none;
         display: block;
       }
@@ -246,12 +247,10 @@ th.sortable {
 
 // this have to be moved to another file
 div.inline-button, button.inline-button {
-  margin-left: 0;
-  margin-top: 24px;
-  padding: 10px;
+  margin: 23px -1px 0 -1px;
+  padding: 11px;
   width: 100%;
   color: #fff;
-  margin-right: -1px;
 }
 
 div.zone_add_beacon {

@@ -10,7 +10,7 @@
   @zoneMarkWidth: 8px;
   @zoneLabelHeight: 50px;
 
-  padding-top: 20px;
+  padding-top: 16px;
 
   #beacon-filter-form {
     a.btn-success {
@@ -32,6 +32,9 @@
   }
 
   .bootstrap-switch {
+    box-shadow: none;
+    right: -15px;
+
     .bootstrap-switch-handle-on.bootstrap-switch-primary {
       background: @brand-success;
     }
@@ -79,8 +82,12 @@
       width: @zoneLabelHeight * 6;
       box-sizing: border-box;
 
-      border: 1px solid @gray;
+      border: 1px solid @border-color;
       background: #ffffff;
+
+      &.without-border {
+        border: none;
+      }
 
       .zones-list {
         max-height: 200px;
@@ -88,7 +95,7 @@
         overflow-x: hidden;
 
         .row {
-          border-top: 1px solid @gray;
+          border-top: 1px solid @border-color;
         }
         .row:first-child {
           border-top: none;

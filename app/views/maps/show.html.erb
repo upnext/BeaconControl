@@ -41,7 +41,7 @@
       <div class="map-view-container">
         <div class="map-view-sidebar">
           <h5><%= t('.select_floor') %></h5>
-          <div class="map-view-sidebar-section">
+          <div class="map-view-sidebar-section without-border">
             <%= f.input :floor, as: :select, collection: @form.floors, include_blank: false, label: false, input_html: { class: %W[selectpicker] } %>
           </div>
 
