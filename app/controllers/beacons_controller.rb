@@ -55,7 +55,7 @@ class BeaconsController < AdminController
   def destroy
     destroy! do |format|
       format.json { render json: {}, status: :ok }
-      format.html { redirect_to_beacons }
+      format.html { redirect_to beacons_url }
     end
   end
 
@@ -63,12 +63,12 @@ class BeaconsController < AdminController
     collection.where(id: params[:beacon_ids]).
       reorder('').
       update_all(permitted_params[:beacon])
-    redirect_to_beacons
+    redirect_to beacons_url
   end
 
   def batch_delete
     collection.destroy_all(id: params[:beacon_ids])
-    redirect_to_beacons
+    redirect_to beacons_url
   end
 
   private

@@ -78,7 +78,11 @@ class ProximityId
     define_method("load_and_memoize_#{field_name}") do
       val = instance_variable_get(:"@#{field_name}")
       return val if val.present?
-      val = beacon.beacon_proximity_fields.where(name: field_name).first_or_create(name: field_name)
+      val = if beacon.persisted?
+              beacon.beacon_proximity_fields.where(name: field_name).first_or_create(name: field_name)
+            else
+              beacon.beacon_proximity_fields.where(name: field_name).first_or_initialize(name: field_name)
+            end
       instance_variable_set(:"@#{field_name}", val)
       val
     end
