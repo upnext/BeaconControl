@@ -13,6 +13,7 @@
         <%= f.input :protocol,
                     collection: Beacon::PROTOCOLS,
                     as: :select,
+                    disabled: 'Eddystone',
                     include_blank: false,
                     input_html: {
                         class: %W[selectpicker event-publisher],

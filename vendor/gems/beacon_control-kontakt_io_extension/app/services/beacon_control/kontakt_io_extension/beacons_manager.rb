@@ -114,7 +114,7 @@ module BeaconControl
       end
 
       def imported_beacon_uids
-        @imported_beacon_uids ||= KontaktIoMapping.beacons.map(&:kontakt_uid)
+        @imported_beacon_uids ||= KontaktIoMapping.beacons.pluck(:kontakt_uid)
       end
 
       #
