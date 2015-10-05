@@ -110,6 +110,7 @@ module BeaconControl
     end
     include Extension
     auto_include('ApplicationController', 'ParamsExtendable', 'ApplicationController::ParamsExtendable')
+    auto_include('Ability', 'ExtensionManageable', 'Ability::ExtensionManageable')
   end
 end
 

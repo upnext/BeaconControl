@@ -119,54 +119,55 @@
 
   </div>
   <div class="col-md-6 second-column">
-    <div class="control-group">
-      <div class="controls">
-        <%= f.input :mode,
-                    collection: Beacon::MODE,
-                    as: :select,
-                    include_blank: false,
-                    input_html: {
-                        class: %W[selectpicker],
-                        value: 'Custom',
-                        readonly: true,
-                        disabled: true
-                    }
-        %>
-      </div>
-    </div>
-
-    <%= f.fields_for(:config) do |config| %>
-      <div class="control-group event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
-        <div class="controls">
-          <%= config.input :signal_interval,
-                      input_html: {
-                          value: beacon.config.signal_interval
-                      }
-          %>
-        </div>
-      </div>
-
+    <% if @beacon.vendor == 'Kontakt' %>
       <div class="control-group">
         <div class="controls">
-          <%= config.input :transmission_power,
+          <%= f.input :mode,
+                      collection: Beacon::MODE,
+                      as: :select,
                       include_blank: false,
-                      id: 'transmission_power-slider',
                       input_html: {
-                          id: 'transmission_power',
-                          class: %W[slider],
-                          value: beacon.config.transmission_power,
-                          data: {
-                              slider_min:     1,
-                              slider_max:     7,
-                              slider_step:    1,
-                              slider_value:   beacon.config.transmission_power,
-                              slider_handle:  :square
-                          }
+                          class: %W[selectpicker],
+                          value: 'Custom',
+                          readonly: true,
+                          disabled: true
                       }
           %>
         </div>
       </div>
-    <%- end %>
 
+      <%= f.fields_for(:config) do |config| %>
+        <div class="control-group event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
+          <div class="controls">
+            <%= config.input :signal_interval,
+                             input_html: {
+                                 value: beacon.config.signal_interval
+                             }
+            %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <%= config.input :transmission_power,
+                             include_blank: false,
+                             id: 'transmission_power-slider',
+                             input_html: {
+                                 id: 'transmission_power',
+                                 class: %W[slider],
+                                 value: beacon.config.transmission_power,
+                                 data: {
+                                     slider_min:     1,
+                                     slider_max:     7,
+                                     slider_step:    1,
+                                     slider_value:   beacon.config.transmission_power,
+                                     slider_handle:  :square
+                                 }
+                             }
+            %>
+          </div>
+        </div>
+      <%- end %>
+    <% end %>
   </div>
 </div>

@@ -15,9 +15,9 @@ class BeaconsController < AdminController
   before_action :load_config, only: [:new, :create, :edit, :update]
 
   has_scope :sorted, using: [:column, :direction], type: :hash, default: {
-    column: 'zones.name',
-    direction: 'asc'
-  }
+                     column: 'zones.name',
+                     direction: 'asc'
+                   }
   has_scope :with_beacon_or_zone_name, as: :beacon_name
 
   def new
@@ -34,20 +34,13 @@ class BeaconsController < AdminController
   def search
     @beacons = collection.with_location.search(search_params)
 
-    render json: @beacons, each_serializer: S2sApi::V1::BeaconSerializer
+    render json: @beacons,
+           each_serializer: S2sApi::V1::BeaconSerializer
   end
 
   def create
-    activity = Activity.new(activity_permitted_params)
-    @beacon = Beacon::Factory.new(
-      current_admin, permitted_params[:beacon], activity
-    ).create
-
-    if @beacon.persisted?
-      redirect_to beacons_url
-    else
-      render :new
-    end
+    @beacon = create_beacon
+    @beacon.persisted? ? redirect_to_beacons : render_new
   end
 
   def update
@@ -55,14 +48,14 @@ class BeaconsController < AdminController
 
     update! do |format|
       format.json { render json: S2sApi::V1::BeaconSerializer.new(resource) }
-      format.html { redirect_to beacons_url } if resource.errors.empty?
+      format.html { redirect_to_beacons } if resource.errors.empty?
     end
   end
 
   def destroy
     destroy! do |format|
       format.json { render json: {}, status: :ok }
-      format.html { redirect_to beacons_url }
+      format.html { redirect_to_beacons }
     end
   end
 
@@ -70,15 +63,31 @@ class BeaconsController < AdminController
     collection.where(id: params[:beacon_ids]).
       reorder('').
       update_all(permitted_params[:beacon])
-    redirect_to beacons_url
+    redirect_to_beacons
   end
 
   def batch_delete
     collection.destroy_all(id: params[:beacon_ids])
-    redirect_to beacons_url
+    redirect_to_beacons
   end
 
   private
+
+  def redirect_to_beacons
+    redirect_to beacons_url
+  end
+
+  def render_new
+    render :new
+  end
+
+  def create_beacon
+    Beacon::Factory.new(
+      current_admin,
+      permitted_params[:beacon],
+      Activity.new(activity_permitted_params)
+    ).create
+  end
 
   def search_params
     params.permit(:name, :sort, :direction, :floor, zone_id: [])

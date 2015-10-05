@@ -33,5 +33,6 @@ module BeaconControl
     auto_include('Beacon::ConfigObject', 'KontaktIoExtension', 'Beacon::KontaktIoExtension::ConfigObject')
     auto_include('BeaconConfig', 'KontaktIoExtension', 'BeaconConfig::KontaktIoExtension::Extension')
     auto_include('Zone', 'KontaktIoExtension', 'Zone::KontaktIoExtension::Extension')
+    auto_include('BeaconsController', 'KontaktIoExtension', 'BeaconControl::BeaconsController::KontaktIoExtension')
   end
 end

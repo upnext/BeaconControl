@@ -159,6 +159,7 @@ en:
       next: "Next"
       vendor: "Vendor"
       battery_unknown: "Unknown"
+      active_kontakt_io: "Active Kontakt IO"
     index:
       new: "Add Beacon"
       all_floors: "All"
