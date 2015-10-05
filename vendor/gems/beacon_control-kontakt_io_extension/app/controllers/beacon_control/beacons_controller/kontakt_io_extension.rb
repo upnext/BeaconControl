@@ -10,7 +10,7 @@ module BeaconControl
           alias_method :_non_kontakt_io_redirect_to_beacons, :redirect_to_beacons
 
           def redirect_to_beacons
-            if kontakt_io_extension_active?
+            if kontakt_io_extension_active? && params[:action].to_s == 'create'
               kontakt_io_redirect_to_beacons
             else
               _non_kontakt_io_redirect_to_beacons
