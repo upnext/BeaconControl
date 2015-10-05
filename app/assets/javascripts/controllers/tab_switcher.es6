@@ -58,9 +58,14 @@ export class TabSwitcher {
   }
 
   static validateField(field) {
-    const valid = field.checkValidity();
     const el = $(field).closest('.form-group');
-    valid ? el.removeClass('error has-error') : el.addClass('error has-error');
+    let valid = true;
+    const validator = $(field).data('custom-validator');
+    if (validator) {
+      valid = validator.isValid;
+    } else if ($(field).is(':visible')) {
+      valid = field.checkValidity();
+    }
     return valid;
   }
 }

@@ -51,7 +51,8 @@
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=iBeacon',
-                                required: true
+                                required: true,
+                                pattern: '\d+'
                             }
                         }
             %>
@@ -61,7 +62,8 @@
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=iBeacon',
-                                required: true
+                                required: true,
+                                pattern: '\d+'
                             }
                         }
             %>
@@ -100,6 +102,7 @@
         <div class="col-xs-12">
           <div class="controls">
             <%= f.input :url,
+                        as: 'text',
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=Eddystone',

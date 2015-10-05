@@ -50,9 +50,10 @@ export class FieldCustomValidator {
   }
 
   get value() {
-    const val = this.el.is(':checkbox') ? this.el.is(':checked') : this.el.val() || this.el.attr('value') || '';
-    if (typeof val === 'string') return val.trim();
-    else return val?'true':'false';
+    if (this.el.is(':checkbox')) return this.el.is(':checked');
+    if (this.el.is('input, select, textarea'))
+      return String(this.el.val() || '').trim();
+    return String(this.attr('value') || '').trim();
   }
 
   get pattern() {
@@ -84,6 +85,11 @@ export class ValidationExtension {
   }
 
   validate(event) {
+    for (let el of this.fields) {
+      const group = $(el).closest('.form-group');
+      if (group && group.length && group.is('.error, .has-error'))
+        group.removeClass('error has-error');
+    }
     for (let el of this.visibleFields) {
       el = $(el);
       if (!el.data('custom-validator')) continue;
@@ -91,10 +97,13 @@ export class ValidationExtension {
       if (!validator.isValid) {
         event.preventDefault();
         el.closest('.form-group').addClass('error has-error');
-      } else {
-        el.closest('.form-group').removeClass('error has-error')
-      }
+      } else el.closest('.form-group').removeClass('error has-error');
     }
+    return this.invalidFields;
+  }
+
+  get invalidFields() {
+    return this.el.find('.form-group.error').toArray();
   }
 
   get fields() {
