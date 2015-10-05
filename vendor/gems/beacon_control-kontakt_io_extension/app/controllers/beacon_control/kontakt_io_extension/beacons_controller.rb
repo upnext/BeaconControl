@@ -43,7 +43,7 @@ module BeaconControl
         sync!(
           params.merge(
             update: true,
-            beacons: params.fetch(:beacons, []) + Beacon.kontakt_io.map(&:kontant_uid)
+            beacons: params.fetch(:beacons, []) + Beacon.kontakt_io.map(&:kontakt_uid)
           )
         )
         render 'sync',
