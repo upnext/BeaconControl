@@ -1,12 +1,12 @@
 export class TransmissionPower {
+  sliderOptions = {
+    tooltip: 'hide',
+    ticks: [0,1,2,3,4,5,6,7]
+  };
 
   constructor(dom) {
     this.dom = dom;
     this.dom.data('controller', this);
-    this.sliderOptions = {
-      tooltip: 'hide',
-      ticks: [0,1,2,3,4,5,6,7]
-    }
     this.setupView();
     this.slider = this.dom.data().slider;
     this.selected = $(this.slider.trackSelection);
