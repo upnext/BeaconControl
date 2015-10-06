@@ -81,26 +81,23 @@
             <label class="control-label">
               <%= t('beacons.form.connected_applications') %>
             </label>
-            <%- @beacon.triggers.each do |trigger| %>
-              <% if trigger.application %>
-                <%= link_to application_activities_path(trigger.application) do %>
-                  <div class="form-control">
-                    <div class="col-xs-1">
-                      <span class="small-app-icon"></span>
-                    </div>
-                    <div class="col-xs-7">
-                      <%= trigger.application.name %>
-                    </div>
-                    <div class="col-xs-4">
-                      <% if trigger.application.activities.count == 0 %>
-                        <%= t('beacons.form.no_actions') %>
-                      <% else %>
-                        <%= trigger.application.activities.count %>
-                        <%= t('beacons.form.action').downcase.pluralize(trigger.application.activities.count) %>
-                      <% end %>
-                    </div>
+            <%- @beacon.applications.each do |app| %>
+
+              <%= link_to application_activities_path(app) do %>
+                <div class="form-control">
+                  <div class="col-xs-8">
+                    <span class="small-app-icon"></span>
+                    <%= app.name %>
                   </div>
-                <% end %>
+                  <div class="col-xs-4 text-right actions">
+                    <% if app.activities.count == 0 %>
+                      <%= t('beacons.form.no_actions') %>
+                    <% else %>
+                      <%= app.activities.count %>
+                      <%= t('beacons.form.action').downcase.pluralize(app.activities.count) %>
+                    <% end %>
+                  </div>
+                </div>
               <% end %>
             <%- end %>
           </div>
