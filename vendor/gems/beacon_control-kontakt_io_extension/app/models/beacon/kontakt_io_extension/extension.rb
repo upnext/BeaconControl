@@ -61,6 +61,11 @@ class Beacon
             self._non_kontakt_io_vendor_uid = val
           end
         end
+
+        def kontakt_io_sync!(admin)
+          sync = ::BeaconControl::KontaktIoExtension::MappingService.new(admin)
+          sync.sync!(update: true, beacons: [kontakt_uid]) if kontakt_uid.present?
+        end
       end
     end
   end

@@ -90,7 +90,7 @@ class ProximityId
 
   def save
     FIELDS.each do |field_name|
-      field = instance_variable_get(:"@#{field_name}")
+      field = send(:"load_and_memoize_#{field_name}")
       field.save if field
     end
   end
