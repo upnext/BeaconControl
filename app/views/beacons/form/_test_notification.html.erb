@@ -13,12 +13,11 @@
       <%= trigger_form.label :test, class: %W[trigger-test] do %>
         <%= trigger_form.input :test,
                                label: false,
-                               inline_label: false,
+                               inline_label: "#{t('beacons.test_notification.title')} <span class=\"grayed\">#{t('beacons.test_notification.hint')}</span>".html_safe,
                                input_html: {
                                    class: %w[event-publisher]
                                }
         %>
-        <%= t('beacons.test_notification.title') %> <span class="grayed"><%= t('beacons.test_notification.hint') %></span>
       <% end %>
     <% end %>
 

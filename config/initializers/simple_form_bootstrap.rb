@@ -11,8 +11,9 @@ class BeaconBooleanInput < SimpleForm::Inputs::BooleanInput
     build_tag_from('div', class: 'beacon-wrapper') do
       build_hidden_field_for_checkbox +
         build_tag_from('div', class: 'boolean') do
-          label = template.label_tag(nil, class: SimpleForm.boolean_label_class) {}
-          label + build_check_box_without_hidden_field(merged_input_options) + inline_label
+          label = template.label_tag("#{object_name}[#{@attribute_name}]", class: SimpleForm.boolean_label_class) { inline_label }
+          input = build_check_box_without_hidden_field(merged_input_options)
+          input + label
         end
     end
   end
