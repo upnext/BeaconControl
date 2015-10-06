@@ -41,7 +41,7 @@ export class FieldCustomValidator {
   get isRequired() {
     const data = this.el.data('required');
     const attr = this.el.data('required');
-    return attr == 'required' || attr == 'true' || data == 'required' || data == 'true';
+    return data == true || attr == 'required' || attr == 'true' || data == 'required' || data == 'true';
   }
 
   get isBlank() {
