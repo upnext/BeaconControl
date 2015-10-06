@@ -45,6 +45,7 @@ class BeaconsController < AdminController
 
   def update
     resource.update_test_activity(activity_permitted_params)
+    resource.beacon_config.update_data(current_admin, config_params)
 
     update! do |format|
       format.json { render json: S2sApi::V1::BeaconSerializer.new(resource) }
@@ -128,6 +129,10 @@ class BeaconsController < AdminController
         }
       )
     ).call
+  end
+
+  def config_params
+    params.fetch(:beacon, {}).fetch(:config).permit(:signal_interval, :transmission_power)
   end
 
   def role_permitted_params
