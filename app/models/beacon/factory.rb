@@ -12,7 +12,7 @@ class Beacon
   # Factory for Beacon model.
   #
   class Factory
-    PARAMS_ORDER = %w[ vendor vendor_uid uuid major minor namespace instance url name ]
+    PARAMS_ORDER = %w[ vendor protocol vendor_uid uuid major minor namespace instance url name ]
 
     NullObject = Naught.build
 
