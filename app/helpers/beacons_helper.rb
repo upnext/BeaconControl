@@ -31,4 +31,12 @@ module BeaconsHelper
       obj.send(field).to_s
     end.join(' | ')
   end
+
+  def master_beacon(beacon)
+    return nil unless beacon && beacon.vendor == 'Kontakt'
+    master = beacon.config && beacon.config.status && beacon.config.status.master
+    if master
+      Beacon.kontakt_io.merge(KontaktIoMapping.with_uid(master)).last
+    end
+  end
 end

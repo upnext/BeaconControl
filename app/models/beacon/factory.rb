@@ -12,6 +12,8 @@ class Beacon
   # Factory for Beacon model.
   #
   class Factory
+    PARAMS_ORDER = %w[ vendor vendor_uid uuid major minor namespace instance url name ]
+
     NullObject = Naught.build
 
     # @param [Admin] admin
@@ -19,7 +21,7 @@ class Beacon
     # @param [Application|NullObject] activity
     def initialize(admin, params, activity = NullObject.new)
       @admin = admin
-      @beacon = admin.account.beacons.new(params)
+      @beacon = admin.account.beacons.new(self.class.sorted_params(params))
       beacon.test_activity = activity
     end
 
@@ -48,6 +50,24 @@ class Beacon
       return unless @admin.test_application
       @beacon.applications_beacons.new(application_id: @admin.test_application.id)
       @beacon.assign_test_activity(@beacon.test_activity)
+    end
+
+    def self.sorted_params(params)
+      (params || {}).sort do |(a,_), (b,_)|
+        a, b = a.to_s, b.to_s
+        if PARAMS_ORDER.include?(a) && PARAMS_ORDER.include?(b)
+          PARAMS_ORDER.index(a) - PARAMS_ORDER.index(b)
+        elsif PARAMS_ORDER.include?(a)
+          -PARAMS_ORDER.index(a)
+        elsif PARAMS_ORDER.include?(b)
+          PARAMS_ORDER.index(b)
+        else
+          a <=> b
+        end
+      end.reduce({}) do |memo, (k, v)|
+        memo[k] = v
+        memo
+      end.with_indifferent_access
     end
   end
 end

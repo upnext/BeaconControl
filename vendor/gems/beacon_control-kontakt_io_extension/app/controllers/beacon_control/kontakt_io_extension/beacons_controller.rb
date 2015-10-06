@@ -34,9 +34,6 @@ module BeaconControl
       def create
         sync!(params)
         redirect_to beacon_control_kontakt_io_extension.beacons_path
-      rescue StandardError => error
-        puts error.record.attributes.inspect
-        raise error
       end
 
       def sync

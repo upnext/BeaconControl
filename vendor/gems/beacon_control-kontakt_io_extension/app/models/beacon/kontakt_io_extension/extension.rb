@@ -28,6 +28,10 @@ class Beacon
 
         alias_attribute :unique_id, :kontakt_uid
 
+        after_save do
+          kontakt_io_mapping && kontakt_io_mapping.save
+        end
+
         def kontakt_io_imported?
           kontakt_io_mapping.present?
         end
@@ -50,7 +54,7 @@ class Beacon
         end
 
         def vendor_uid=(val)
-          if kontakt_io_imported?
+          if vendor == 'Kontakt'
             m = kontakt_io_mapping || build_kontakt_io_mapping
             m.kontakt_uid = val
           else

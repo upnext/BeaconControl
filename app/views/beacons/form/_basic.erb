@@ -56,16 +56,16 @@
                wrapped_beacon: wrapped_beacon
     %>
 
-    <%- if wrapped_beacon && !wrapped_beacon.cloud? && wrapped_beacon.master_beacon %>
+    <%- if master_beacon(@beacon) %>
       <div id="beacon-cloud" class="with-huge-space control-group">
         <div class="controls">
           <div class="form-group">
             <label class="control-label">
               <%= t('beacons.form.synchronized_by') %>
             </label>
-            <%= link_to edit_beacon_path(wrapped_beacon.master_beacon) do %>
+            <%= link_to edit_beacon_path(master_beacon(@beacon)) do %>
               <div class="form-control">
-                <%= wrapped_beacon.master_beacon.name %>
+                <%= master_beacon(@beacon).name %>
               </div>
             <% end %>
           </div>

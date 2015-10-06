@@ -97,8 +97,7 @@ module BeaconControl
       end
 
       def update_beacon!(beacon, kontakt_beacon)
-        {
-          name:  "#{kontakt_beacon.name} #{kontakt_beacon.unique_id}",
+        Beacon::Factory.sorted_params({
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
           minor: kontakt_beacon.minor,
@@ -107,7 +106,7 @@ module BeaconControl
           url: kontakt_beacon.url,
           vendor: 'Kontakt',
           protocol: (kontakt_beacon.eddystone? ? 'Eddystone' : 'iBeacon')
-        }.each_pair { |k, v| beacon.send("#{k}=", v) }
+        }).each_pair { |k, v| beacon.send("#{k}=", v) }
       end
 
       # @return [Array<KontaktIo::Resource::Beacon>]

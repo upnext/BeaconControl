@@ -61,7 +61,7 @@ module S2sApi
       end
 
       def end_of_association_chain
-        super.search(search_params)
+        super.where(protocol: 'iBeacon').search(search_params)
       end
 
       def permitted_params
