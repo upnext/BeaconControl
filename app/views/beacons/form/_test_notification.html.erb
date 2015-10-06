@@ -21,7 +21,7 @@
       <% end %>
     <% end %>
 
-    <div class="event-subscriber" data-publisher="#beacon_activity_trigger_attributes_test" data-action="show" data-match="true">
+    <div class="event-subscriber margin-t15" data-publisher="#beacon_activity_trigger_attributes_test" data-action="show" data-match="true">
       <%= activity_form.simple_fields_for :trigger do |trigger_form| %>
 
         <%= activity_form.simple_fields_for(:custom_attributes, custom_attributes.blank? ? CustomAttribute.new : custom_attributes) do |ff| %>
