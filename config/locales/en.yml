@@ -131,7 +131,7 @@ en:
     other: "%{count} beacons"
     test_notification:
       title: 'Test this beacon'
-      hint: '(send the notification to your BeaconCtrl mobile app)'
+      hint: '(send the notification to your BeaconControl mobile app)'
       name: 'Title'
       placeholder: 'Hello world!'
       default_message: "Your beacon is working."
