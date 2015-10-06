@@ -62,15 +62,36 @@ class BeaconConfig
         def merge_kontakt_data(admin, hash)
           uid = beacon.kontakt_uid
           api = KontaktIo::ApiClient::for_admin(admin)
-          device = api.device(uid).attributes.with_indifferent_access
-          firmware = api.device_firmware(uid)
-          config = api.device_config(uid).attributes.with_indifferent_access
+          device = device_hash(api, uid)
+          firmware = firmware_data(api, uid)
+          config = config_hash(api, uid)
           status = (device[:status].is_a?(Hash) ? device[:status] : {}).with_indifferent_access
           hash.merge!(device.except(:venue, :was_imported))
           hash.merge!(latest_firmware: firmware.name == device[:firmware] || firmware.name.nil?)
           hash.merge!(config: config.except(:was_imported))
           hash.merge!(status: status)
           hash.merge!(status)
+        end
+
+        def device_hash(api, uid)
+          api.device(uid).attributes.with_indifferent_access
+        rescue KontaktIo::Error::NotFound => error
+          Rails.logger.warn error.message
+          {}
+        end
+
+        def config_hash(api, uid)
+          api.device_config(uid).attributes.with_indifferent_access
+        rescue KontaktIo::Error::NotFound => error
+          Rails.logger.warn error.message
+          {}
+        end
+
+        def firmware_data(api, uid)
+          api.device_firmware(uid)
+        rescue KontaktIo::Error::NotFound => error
+          Rails.logger.warn error.message
+          KontaktIo::Resource::Firmware.new({})
         end
       end
     end
