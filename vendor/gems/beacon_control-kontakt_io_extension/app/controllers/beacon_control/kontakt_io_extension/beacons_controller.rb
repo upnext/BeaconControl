@@ -12,7 +12,7 @@ module BeaconControl
       def index
         render 'index',
                locals: {
-                 beacons: Beacon.kontakt_io.order('created_at DESC'),
+                 beacons: current_admin.account.beacons.kontakt_io.order('created_at DESC'),
                  zones: Zone.kontakt_io.order('created_at DESC')
                }
       end
@@ -40,12 +40,15 @@ module BeaconControl
         sync!(
           params.merge(
             update: true,
-            beacons: params.fetch(:beacons, []) + Beacon.kontakt_io.map(&:kontakt_uid)
+            beacons: current_admin.account.beacons.kontakt_io.order('created_at DESC'),
           )
         )
+        beacons = current_admin.account.beacons.kontakt_io.order('created_at DESC').pluck(:kontakt_uid)
         render 'sync',
                locals: {
-                 beacons: beacons_manager.to_import(api_client.beacons),
+                 beacons: beacons_manager.to_import(api_client.beacons).select do |b|
+                   beacons.include?(b.unique_id)
+                 end,
                  sync: true
                }
       end

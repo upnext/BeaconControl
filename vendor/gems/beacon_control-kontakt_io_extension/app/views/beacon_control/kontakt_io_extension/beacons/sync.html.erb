@@ -13,8 +13,5 @@
 
 <div class="row form-container container">
   <h3 class="kontakt-io"><%= t(".header") %></h3>
-  <div class="kontakt-io-table-buttons">
-    <%= link_to t(".import"), beacon_control_kontakt_io_extension.import_beacons_path, class: "btn btn-static-width-large btn-success", method: :post %>
-  </div>
   <%= render 'list', beacons: beacons, sync: sync %>
 </div>
