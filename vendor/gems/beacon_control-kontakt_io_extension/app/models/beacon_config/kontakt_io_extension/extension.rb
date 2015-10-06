@@ -59,10 +59,12 @@ class BeaconConfig
           device = api.device(uid).attributes.with_indifferent_access
           firmware = api.device_firmware(uid)
           config = api.device_config(uid).attributes.with_indifferent_access
+          status = (device[:status].is_a?(Hash) ? device[:status] : {}).with_indifferent_access
           hash.merge!(device.except(:venue, :was_imported))
           hash.merge!(latest_firmware: firmware.name == device[:firmware] || firmware.name.nil?)
           hash.merge!(config: config.except(:was_imported))
-          hash.merge!((device[:status]||{}).with_indifferent_access)
+          hash.merge!(status: status)
+          hash.merge!(status)
         end
       end
     end
