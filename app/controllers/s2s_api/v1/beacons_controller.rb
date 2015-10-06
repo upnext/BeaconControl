@@ -13,8 +13,17 @@ module S2sApi
       load_and_authorize_resource
       before_action :build_test_activity,
                     only: [:create, :update]
+      before_action :load_config, only: [:new, :create, :edit, :update]
 
       self.responder = S2sApiResponder
+
+      rescue_from ::ActionController::ParameterMissing do |error|
+        render json: { error: error.message }, status: 422
+      end
+
+      rescue_from ::KontaktIo::Error::NotFound do |error|
+        render json: { error: error.message }, status: 422
+      end
 
       actions :index, :update, :destroy
 
@@ -105,6 +114,11 @@ module S2sApi
 
       def build_test_activity
         resource.build_test_activity
+      end
+
+      def load_config
+        c = resource.beacon_config || resource.build_beacon_config
+        c.load_data(current_admin)
       end
     end
   end
