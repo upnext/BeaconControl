@@ -20,8 +20,14 @@ class @SortableTable
   observeRows: ->
     @dom.find('tbody tr td:not(.disable-select)').click (event) =>
       el = $(event.target)
-      locationTarget = el.parent().find('.btn-action-edit').attr('href')
-      window.location.href = locationTarget if locationTarget
+      wrapper = el.parents('.beacons-table')
+
+      if wrapper.hasClass('selectable-rows')
+        el.parent().find('input:checkbox').trigger('click')
+
+      else if wrapper.hasClass('linked-rows')
+        locationTarget = el.parent().find('.btn-action-edit').attr('href')
+        window.location.href = locationTarget if locationTarget
 
   observeSelectAllCheckboxChange: ->
     @dom.find('#select_all').click (event)=>

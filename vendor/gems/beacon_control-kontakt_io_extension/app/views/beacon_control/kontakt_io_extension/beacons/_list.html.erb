@@ -6,53 +6,56 @@
 # LICENSE.txt file in the root directory of this source tree. 
 ###%>
 
-<div class="col-xs-12">
-  <div class="table-responsive beacons-table sortable-table">
-
-    <table id="import-select-beacon" class="table table-list table-striped">
-      <thead>
-      <tr>
-        <% if local_assigns[:form] == true %>
-          <th></th>
-        <% end %>
-        <th><%= t('.unique_id') %></th>
-        <th><%= t('.name') %></th>
-        <th><%= t('.venue') %></th>
-        <th><%= t('.major') %></th>
-        <th><%= t('.minor') %></th>
-        <th><%= t('.protocol') %></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% beacons.each do |beacon| %>
-        <tr class="<%= :active if beacon.db? %>">
-          <% if local_assigns[:form] == true %>
-            <td class="with-checkbox">
-              <% unless beacon.db? %>
-                <%= check_box_tag("beacons[]", beacon.unique_id, beacon.import, class: 'checkbox ', id: "beacon_#{beacon.unique_id}") %>
-              <% end %>
-            </td>
+<table id="import-select-beacon" class="table table-list table-striped">
+  <thead>
+  <tr>
+    <% if local_assigns[:form] == true %>
+      <th>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="select-all-beacons" class="checkbox" value="select_all" />
+          <label for="select-all-beacons"></label>
+        </div>
+      </th>
+    <% end %>
+    <th><%= t('.unique_id') %></th>
+    <th><%= t('.name') %></th>
+    <th><%= t('.venue') %></th>
+    <th><%= t('.major') %></th>
+    <th><%= t('.minor') %></th>
+    <th><%= t('.protocol') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% beacons.each do |beacon| %>
+    <tr class="<%= :active if beacon.db? %>">
+      <% if local_assigns[:form] == true %>
+        <td class="with-checkbox disable-select">
+          <% unless beacon.db? %>
+            <div class="custom-checkbox">
+              <%= check_box_tag("beacons[]", beacon.unique_id, beacon.import, class: 'checkbox ', id: "beacon_#{beacon.unique_id}") %>
+              <label for="<%="beacon_#{beacon.unique_id}"%>"></label>
+            </div>
           <% end %>
-          <td><%= beacon.unique_id %></td>
-          <td><%= beacon.name %></td>
-          <td>
-            <% if beacon.venue %>
-              <%= beacon.venue.name %>
-            <% end %>
-          </td>
-          <td><%= beacon.major %></td>
-          <td><%= beacon.minor %></td>
-          <td><%= beacon.profile %></td>
-        </tr>
+        </td>
       <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+      <td><%= beacon.unique_id %></td>
+      <td><%= beacon.name %></td>
+      <td>
+        <% if beacon.venue %>
+          <%= beacon.venue.name %>
+        <% end %>
+      </td>
+      <td><%= beacon.major %></td>
+      <td><%= beacon.minor %></td>
+      <td><%= beacon.profile %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <script>
   $(function () {
     $('#select-all-beacons').on('click', function (event) {
-      event.preventDefault();
       $('#import-select-beacon input:checkbox').click();
     });
   });

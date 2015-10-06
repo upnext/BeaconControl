@@ -45,13 +45,25 @@ select#beacon_zone_id {
 
 div.beacons-table {
   border: 1px solid @border-color;
-  margin-top: 20px;
+  margin: 20px 0;
 
-  form {
+  .table-header {
     padding: 15px;
     background-color: #fff;
     border: 1px solid @table-border-color;
     border-bottom-width: 0;
+
+    a {
+      margin-left: 15px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    input[type=submit]:first-child {
+      margin-left: 0;
+    }
 
     .has-feedback {
       .form-control {
@@ -76,6 +88,11 @@ div.beacons-table {
     margin-bottom: 0;
   }
 
+  td:not(.zone-mark):first-child,
+  th:not(.select-all-checkbox):first-child {
+    padding-left: 20px;
+  }
+
   thead {
     th {
       background-color: @gray-lighter;
@@ -83,12 +100,16 @@ div.beacons-table {
   }
 
   tbody {
-    tr {
-      cursor: pointer;
-    }
 
     td.disable-select {
       cursor: initial;
+    }
+  }
+
+  &.linked-rows,
+  &.selectable-rows {
+    tr {
+      cursor: pointer;
     }
   }
 
@@ -110,6 +131,11 @@ div.beacons-table {
 
   td > .btn {
     color: black;
+  }
+
+  .table-footer {
+    background: #fff;
+    padding: 15px;
   }
 }
 

@@ -11,4 +11,6 @@
   <span><%= t('.action') %></span>
 <% end %>
 
-<%= render 'form', beacons: beacons, sync: sync %>
+<div class="beacons-table selectable-rows">
+  <%= render 'form', beacons: beacons, sync: sync %>
+</div>

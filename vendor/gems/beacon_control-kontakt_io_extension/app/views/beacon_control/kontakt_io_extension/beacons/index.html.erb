@@ -10,35 +10,31 @@
   <span><%= t(".title") %></span>
 <% end %>
 
-<div class="row form-container">
-  <div class="col-md-12">
-    <%= link_to t(".import"), beacon_control_kontakt_io_extension.import_beacons_path, class: "btn btn-static-width-large btn-success", method: :post %>
-    <%= link_to t(".sync"), beacon_control_kontakt_io_extension.sync_beacons_path, class: "btn btn-static-width-large btn-success", method: :post %>
+<div class="beacons-table">
+
+  <div class="table-header">
+    <%= link_to t(".import"), beacon_control_kontakt_io_extension.import_beacons_path, class: "btn btn-success", method: :post %>
+    <%= link_to t(".sync"), beacon_control_kontakt_io_extension.sync_beacons_path, class: "btn btn-success", method: :post %>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="table-responsive beacons-table sortable-table">
-      <table class="table table-list table-striped">
-        <thead>
-        <tr>
-          <th><%= t('.uid') %></th>
-          <th><%= t('.name') %></th>
-          <th><%= t('.major') %></th>
-          <th><%= t('.minor') %></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% beacons.each do |beacon| %>
-          <tr>
-            <td><%= beacon.unique_id %></td>
-            <td><%= beacon.name %></td>
-            <td><%= beacon.major %></td>
-            <td><%= beacon.minor %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+
+  <table class="table table-list table-striped">
+    <thead>
+    <tr>
+      <th><%= t('.uid') %></th>
+      <th><%= t('.name') %></th>
+      <th><%= t('.major') %></th>
+      <th><%= t('.minor') %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% beacons.each do |beacon| %>
+      <tr>
+        <td><%= beacon.unique_id %></td>
+        <td><%= beacon.name %></td>
+        <td><%= beacon.major %></td>
+        <td><%= beacon.minor %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
