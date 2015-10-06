@@ -4,7 +4,9 @@
       <div class="controls">
         <%= f.input :name,
                     input_html: {
-                        required: true
+                        data: {
+                            required: true
+                        }
                     }
         %>
       </div>
@@ -52,8 +54,7 @@
 
     <%= render 'beacons/form/state',
                f: f,
-               beacon: beacon,
-               wrapped_beacon: wrapped_beacon
+               beacon: beacon
     %>
 
     <%- if master_beacon(@beacon) %>

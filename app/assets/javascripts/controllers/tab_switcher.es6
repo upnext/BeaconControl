@@ -51,18 +51,22 @@ export class TabSwitcher {
   get isValid() {
     if (!this.currentTab) return true;
     let valid = true;
-    this.currentTab.find('input, select, textarea').each((n, el)=> {
+    this.currentTab.find('input:visible, select:visible, textarea:visible').each((n, el)=> {
       valid = valid && TabSwitcher.validateField(el);
     });
     return valid;
   }
 
+  /**
+   * @param {HTMLElement} field
+   * @returns {boolean}
+   */
   static validateField(field) {
     const el = $(field).closest('.form-group');
     let valid = true;
     const validator = $(field).data('custom-validator');
     if (validator) {
-      valid = validator.isValid;
+      valid = validator.validate();
     } else if ($(field).is(':visible')) {
       valid = field.checkValidity();
     }

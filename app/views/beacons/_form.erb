@@ -2,8 +2,6 @@
 <input style="display:none" type="text" name="fakeusernameremembered"/>
 <input style="display:none" type="password" name="fakepasswordremembered"/>
 
-<%- wrapped_beacon = vendor_beacon(@beacon) %>
-
 <div class="tab-space tab-manager event-publisher" data-init="true" id="beacon-tabs">
   <div class="row page-subheader">
     <nav class="col-xs-12">
@@ -48,16 +46,14 @@
         <%= render 'beacons/form/basic',
                    f: f,
                    beacon: @beacon,
-                   zones: @zones,
-                   wrapped_beacon: wrapped_beacon
+                   zones: @zones
         %>
       </div>
       <div id="settings" style="display: none;" class="tab-content">
         <%= render 'beacons/form/settings',
                    f: f,
                    beacon: @beacon,
-                   zones: @zones,
-                   wrapped_beacon: wrapped_beacon
+                   zones: @zones
         %>
       </div>
     </div>

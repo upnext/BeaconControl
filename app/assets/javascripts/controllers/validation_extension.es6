@@ -1,3 +1,5 @@
+export const VALIDATOR_TIMEOUT = Symbol('validation timeout');
+
 export class FieldCustomValidator {
   constructor(el) {
     this.el = el;
@@ -19,9 +21,18 @@ export class FieldCustomValidator {
     return true;
   }
 
+  validate() {
+    const valid = this.isValid;
+    const group = this.el.closest('.form-group');
+    !valid ?
+      group.addClass('error has-error') :
+      group.removeClass('error has-error');
+    return valid;
+  }
+
   shouldValidate() {
     if (!this.el.data('validate-if') || this.el.data('validate-if') == '')
-      return false;
+      return true;
     const [selector, requiredValue] = String(this.el.data('validate-if')).split('=');
     const el = this.el.closest('form').find(selector);
     return el.val() == requiredValue;
@@ -73,15 +84,21 @@ export class ValidationExtension {
   setEvents() {
     this.el.
       on('submit', (event)=>{ this.validate(event); }).
-      on('change', (event)=>{ this.validate(event); });
+      on('keyup', (event)=>{ this.delayedValidate(event); });
   }
 
   mountValidations() {
     for (let el of this.fields) {
-      if (Object.keys($(el).data()).length) {
-        new FieldCustomValidator($(el));
-      }
+      new FieldCustomValidator($(el));
     }
+  }
+
+  delayedValidate(event) {
+    if(this[VALIDATOR_TIMEOUT])
+      clearTimeout(this[VALIDATOR_TIMEOUT]);
+    this[VALIDATOR_TIMEOUT] = setTimeout(()=>{
+      this.validate(event);
+    }, 200);
   }
 
   validate(event) {
@@ -94,10 +111,7 @@ export class ValidationExtension {
       el = $(el);
       if (!el.data('custom-validator')) continue;
       let validator = el.data('custom-validator');
-      if (!validator.isValid) {
-        event.preventDefault();
-        el.closest('.form-group').addClass('error has-error');
-      } else el.closest('.form-group').removeClass('error has-error');
+      validator.validate();
     }
     return this.invalidFields;
   }

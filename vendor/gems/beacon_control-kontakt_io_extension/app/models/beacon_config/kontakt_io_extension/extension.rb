@@ -22,7 +22,7 @@ class BeaconConfig
         # @return [ActiveSupport::HashWithIndifferentAccess]
         def load_data(admin)
           hash = _non_kontakt_io_load_data(admin)
-          if beacon && beacon.kontakt_io_mapping
+          if beacon && beacon.kontakt_io_mapping && kontakt_io_active?(admin)
             merge_kontakt_data(admin, hash)
           end
           hash
@@ -33,7 +33,7 @@ class BeaconConfig
         # @param [Admin] admin
         # @param [Hash] data
         def update_data(admin, data)
-          if beacon && beacon.kontakt_uid.present?
+          if beacon && beacon.kontakt_uid.present? && kontakt_io_active?(admin)
             update_kontakt_beacon(admin, data)
           else
             _non_kontakt_io_update_data(admin, data)
@@ -51,6 +51,10 @@ class BeaconConfig
           }
           api = KontaktIo::ApiClient::for_admin(admin)
           api.update_device(beacon.kontakt_uid, beacon.config.device_type, params)
+        end
+
+        def kontakt_io_active?(admin)
+          admin.account.account_extensions.where(extension_name: 'Kontakt.io').exists?
         end
 
         def merge_kontakt_data(admin, hash)

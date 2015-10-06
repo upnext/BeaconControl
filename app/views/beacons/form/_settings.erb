@@ -1,6 +1,6 @@
 <div class="row form-container">
   <div class="col-md-6 first-column">
-    <% if beacon.persisted? && wrapped_beacon.master_beacon.blank? %>
+    <% if beacon.persisted? && master_beacon(beacon) %>
       <div class="control-group">
         <div class="controls" style="color:#d62c1a;margin-bottom:20px;">
           <%= t('beacons.form.missing_cloud_message') %>
