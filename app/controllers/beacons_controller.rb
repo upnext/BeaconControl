@@ -132,7 +132,7 @@ class BeaconsController < AdminController
   end
 
   def config_params
-    params.fetch(:beacon, {}).fetch(:config).permit(:signal_interval, :transmission_power)
+    params.fetch(:beacon, {}).fetch(:config, {}).permit(:signal_interval, :transmission_power)
   end
 
   def role_permitted_params
