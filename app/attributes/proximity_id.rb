@@ -88,10 +88,11 @@ class ProximityId
     end
   end
 
-  def save
+  def save(id)
     FIELDS.each do |field_name|
       field = send(:"load_and_memoize_#{field_name}")
-      field.save if field
+      field.beacon_id = id
+      field.save
     end
   end
 

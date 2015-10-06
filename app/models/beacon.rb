@@ -35,7 +35,7 @@ class Beacon < ActiveRecord::Base
            dependent: :destroy,
            autosave: true
 
-  after_save { proximity_id.save }
+  after_save { proximity_id.save(id) }
 
   after_validation do
     [:uuid, :major, :minor, :namespace, :instance, :url].each { |key| (errors[key].push *errors[:proximity_id]).uniq! }

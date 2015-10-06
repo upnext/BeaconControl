@@ -21,15 +21,24 @@ export class TabSwitcher {
     event.preventDefault();
     const el = this.el.find(event.target);
     const target = this.el.find(el.data('target'));
-    if (!this.currentTab)
+    if (!this.currentTab) {
       this.currentTab = target;
-    if (!this.isValid) return;
+      this.currentTabSwitcher = el;
+    }
+    if (this.isNextTab(el) && !this.isValid)
+      return;
     el.closest('.tab-space').find('.tab-switcher').removeClass('active');
     el.addClass('active').parent().addClass('active');
     target.closest('.tab-space').find('.tab-content').hide(0);
     target.show(0);
     this.currentTab = target;
+    this.currentTabSwitcher = el;
     this.propagateEvent(el);
+  }
+
+  isNextTab(tab) {
+    const all = this.el.find('a.tab-switcher');
+    return all.index(tab) > all.index(this.currentTabSwitcher);
   }
 
   propagateEvent(el) {
