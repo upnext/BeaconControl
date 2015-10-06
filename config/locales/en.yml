@@ -159,7 +159,8 @@ en:
       next: "Next"
       vendor: "Vendor"
       battery_unknown: "Unknown"
-      active_kontakt_io: "Active Kontakt IO"
+      active_kontakt_io_addon: "For multi-device adding and advanced features of your Kontakt beacons use our"
+      kontakt_io_addon: "kontakt.io add-on"
     index:
       new: "Add Beacon"
       all_floors: "All"

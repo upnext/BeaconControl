@@ -28,14 +28,6 @@
           %>
         </div>
       </div>
-      <div class="control-group event-subscriber" data-publisher="#beacon_vendor" data-match="Kontakt" data-action="show">
-        <div class="controls">
-          <%= link_to t('beacons.form.active_kontakt_io'),
-                      activate_extensions_marketplace_path('Kontakt.io'),
-                      method: :put
-          %>
-        </div>
-      </div>
     <% end %>
 
     <div class="control-group event-subscriber" data-publisher="#beacon_vendor" data-match="Kontakt" data-action="show">
@@ -51,6 +43,20 @@
         %>
       </div>
     </div>
+
+    <% unless @beacon.imported? %>
+      <div class="control-group event-subscriber with-huge-space" data-publisher="#beacon_vendor" data-match="Kontakt" data-action="show">
+        <div class="controls">
+          <span class="text-muted">
+            <%= t('beacons.form.active_kontakt_io_addon') %>
+            <%= link_to t('beacons.form.kontakt_io_addon'),
+                        activate_extensions_marketplace_path('Kontakt.io'),
+                        method: :put
+            %>
+          </span>
+        </div>
+      </div>
+    <% end %>
 
     <%= render 'beacons/form/state',
                f: f,
