@@ -51,6 +51,8 @@ class BeaconConfig
           }
           api = KontaktIo::ApiClient::for_admin(admin)
           api.update_device(beacon.kontakt_uid, beacon.config.device_type, params)
+        rescue KontaktIo::Error::NotFound => error
+          Rails.logger.warn error.message
         end
 
         def kontakt_io_active?(admin)
