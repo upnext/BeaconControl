@@ -92,7 +92,8 @@ form > h3 {
 
 /* Custom checkbox */
 
-.custom-checkbox {
+.custom-checkbox,
+.beacon-wrapper .boolean {
   position: relative;
 
   label {
@@ -120,6 +121,22 @@ form > h3 {
       .retina-background-image('icons/icon-checked.png', 10px, 8px);
       background-color: @brand-success;
       border: 1px solid @btn-success-border;
+    }
+  }
+}
+
+.beacon-wrapper .boolean {
+  margin: 3px 0 -10px 0;
+
+  label {
+    line-height: 15px;
+    padding-left: 30px;
+
+    &:before {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      top: -2px;
     }
   }
 }
