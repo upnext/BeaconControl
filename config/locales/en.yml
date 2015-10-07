@@ -142,7 +142,7 @@ en:
       settings: "Settings"
       working_status: "Status"
       device_id: "Device ID"
-      device_id_tooltip: "4-digits code you can find on the bottom of your beacon device"
+      device_id_tooltip: "4-characters code you can find on the bottom of your beacon device"
       device_type: "Device Type"
       firmware: "Firmware"
       beacon_active: Active
