@@ -159,6 +159,7 @@ BeaconControl::Application.routes.draw do
           match 'config' => 'beacon_configs#update', via: :put
           match 'config' => 'beacon_configs#show', via: :get
           match 'beacon_updated' => 'beacon_configs#confirm', via: :put
+          put :sync
         end
       end
 

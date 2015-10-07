@@ -56,6 +56,11 @@ module S2sApi
         update!
       end
 
+      def sync
+        render json: resource,
+               serializer: ::S2sApi::V1::BeaconSerializer
+      end
+
       def batch_destroy
         @beacons = collection.where(id: params[:ids])
         @beacons.delete_all
