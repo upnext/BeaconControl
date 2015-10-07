@@ -7,7 +7,7 @@
 ###
 
 class BeaconSerializer < ApplicationSerializer
-  attributes :id, :name, :proximity_id, :location, :vendor, :protocol, :config
+  attributes :id, :name, :proximity_id, :location, :vendor, :protocol, :config, :unique_id
 
   def proximity_id
     case object.protocol
@@ -18,6 +18,10 @@ class BeaconSerializer < ApplicationSerializer
     else
       object.proximity_id.to_s
     end
+  end
+
+  def unique_id
+    object.vendor_uid
   end
 
   def location

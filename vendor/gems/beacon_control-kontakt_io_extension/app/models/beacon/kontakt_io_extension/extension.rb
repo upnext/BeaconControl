@@ -29,7 +29,9 @@ class Beacon
         alias_attribute :unique_id, :kontakt_uid
 
         after_save do
-          kontakt_io_mapping && kontakt_io_mapping.save
+          if self.vendor == 'Kontakt'
+            (kontakt_io_mapping || build_kontakt_io_mapping).save
+          end
         end
 
         def kontakt_io_imported?
@@ -50,11 +52,11 @@ class Beacon
         scope :kontakt_io, -> { joins(:kontakt_io_mapping).merge(KontaktIoMapping.beacons) }
 
         def vendor_uid
-          kontakt_io_imported? ? self.kontakt_uid : self._non_kontakt_io_vendor_uid
+          self.vendor == 'Kontakt' ? self.kontakt_uid : self._non_kontakt_io_vendor_uid
         end
 
         def vendor_uid=(val)
-          if vendor == 'Kontakt'
+          if self.vendor == 'Kontakt'
             m = kontakt_io_mapping || build_kontakt_io_mapping
             m.kontakt_uid = val
           else

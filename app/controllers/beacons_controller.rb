@@ -120,7 +120,7 @@ class BeaconsController < AdminController
 
   def activity_permitted_params
     ActivityParams.new(
-      params[:beacon].deep_merge(
+      params.fetch(:beacon, {}).deep_merge(
         activity: {
           scheme: :custom,
           trigger_attributes: {

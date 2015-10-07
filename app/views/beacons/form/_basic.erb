@@ -12,23 +12,22 @@
       </div>
     </div>
 
-    <% unless @beacon.imported? %>
-      <div class="control-group">
-        <div class="controls">
-          <%= f.input :vendor,
-                      as: :select,
-                      collection: Beacon::VENDORS,
-                      include_blank: false,
-                      input_html: {
-                          class: %W[selectpicker event-publisher],
-                          data: {
-                              live_search: true
-                          }
-                      }
-          %>
-        </div>
+    <div class="control-group" style="<%= 'display:none;' if @beacon.imported? %>">
+      <div class="controls">
+        <%= f.input :vendor,
+                    as: :select,
+                    collection: Beacon::VENDORS,
+                    include_blank: false,
+                    input_html: {
+                        readonly: @beacon.imported?,
+                        class: %W[selectpicker event-publisher],
+                        data: {
+                            live_search: true
+                        }
+                    }
+        %>
       </div>
-    <% end %>
+    </div>
 
     <div class="control-group event-subscriber" data-publisher="#beacon_vendor" data-match="Kontakt" data-action="show">
       <div class="controls">

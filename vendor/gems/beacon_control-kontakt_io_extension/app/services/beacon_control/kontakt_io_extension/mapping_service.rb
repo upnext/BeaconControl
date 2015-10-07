@@ -18,13 +18,14 @@ module BeaconControl
       def sync_venues!(params)
         fetch_options!(params)
         venues.each do |data|
+          next unless data.name.present?
           zone = get_zone(data)
           if zone.kontakt_io_mapping.blank?
             zone.build_kontakt_io_mapping(kontakt_uid: data.id)
           end
           if !data.db? || update?
             zone.account = admin.account
-            zone.save!
+            zone.save
           end
         end
       end
@@ -39,7 +40,12 @@ module BeaconControl
             beacon.build_kontakt_io_mapping(kontakt_uid: data.unique_id)
           end
           if !data.db? || update?
-            beacon.save!
+            begin
+              beacon.save!
+            rescue StandardError => error
+              puts beacon.attributes.inspect
+              raise error
+            end
             assign_to_zone!(data, beacon)
           end
           beacon

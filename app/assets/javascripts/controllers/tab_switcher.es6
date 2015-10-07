@@ -8,10 +8,28 @@ export class TabSwitcher {
     this.currentTab = this.el.find('.tab-space .tab-content:first-child');
     this.el.find('.tab-space .tab-content:not(:first-child)').hide(0);
     this.setEvents();
+    this.findTab();
   }
 
   setEvents() {
-    this.el.on('click', 'a.tab-switcher', (event)=> { this.switchTab(event); });
+    this.el.on('click', 'a.tab-switcher', (event)=> {
+      this.switchTab(event);
+    });
+
+    this.el.on('validation:mounted', ()=> { this.findTab(); });
+    this.el.on('validation:error', ()=> { this.findTab(); });
+  }
+
+  findTab() {
+    for (let tab of this.tabs) {
+      tab = $(tab);
+      for (let field of this.fieldsFor(tab, true)) {
+        if (!TabSwitcher.validateField(field)) {
+          tab.click();
+          return;
+        }
+      }
+    }
   }
 
   /**
@@ -71,7 +89,6 @@ export class TabSwitcher {
    * @returns {boolean}
    */
   static validateField(field) {
-    const el = $(field).closest('.form-group');
     let valid = true;
     const validator = $(field).data('custom-validator');
     if (validator) {
@@ -80,6 +97,20 @@ export class TabSwitcher {
       valid = field.checkValidity();
     }
     return valid;
+  }
+
+  get tabs() {
+    return this.el.find('a.tab-switcher').toArray();
+  }
+
+  fieldsFor(tab, all) {
+    const selector = all ? 'input, select, textarea' : 'input:visible, select:visible, textarea:visible';
+    const content = this.contentFor(tab);
+    return content.find(selector).toArray();
+  }
+
+  contentFor(tab) {
+    return this.el.find(tab.data('target'));
   }
 }
 

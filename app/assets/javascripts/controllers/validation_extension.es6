@@ -85,7 +85,7 @@ export class ValidationExtension {
 
   setEvents() {
     this.el.
-      on('submit', (event)=>{ this.validate(event); }).
+      on('submit', (event)=>{ this.validateSubmit(event); }).
       on('keyup', (event)=>{ this.delayedValidate(event); });
   }
 
@@ -93,6 +93,7 @@ export class ValidationExtension {
     for (let el of this.fields) {
       new FieldCustomValidator($(el));
     }
+    this.el.trigger('validation:mounted');
   }
 
   delayedValidate(event) {
@@ -103,17 +104,44 @@ export class ValidationExtension {
     }, 200);
   }
 
-  validate(event) {
+  validateSubmit(event) {
+    let triggered = false;
+    this.removeInvalidMarks();
+    for (let el of this.fields) {
+      el = $(el);
+      if (!el.data('custom-validator'))
+        continue;
+      let validator = el.data('custom-validator');
+      const valid = validator.validate();
+      if (!valid) {
+        event.preventDefault();
+        if (!triggered) (triggered = true) && this.el.trigger('validation:error');
+      }
+    }
+    return this.invalidFields;
+  }
+
+  removeInvalidMarks() {
     for (let el of this.fields) {
       const group = $(el).closest('.form-group');
       if (group && group.length && group.is('.error, .has-error'))
         group.removeClass('error has-error');
     }
-    for (let el of this.visibleFields) {
+  }
+
+  validate(event, all) {
+    let triggered = false;
+    this.removeInvalidMarks();
+    for (let el of (all ? this.visibleFields : this.fields)) {
       el = $(el);
-      if (!el.data('custom-validator')) continue;
+      if (!el.data('custom-validator'))
+        continue;
       let validator = el.data('custom-validator');
-      validator.validate();
+      const valid = validator.validate();
+      if (!valid && event && typeof event.preventDefault == 'function') {
+        event.preventDefault();
+        if (!triggered) (triggered = true) && this.el.trigger('validation:error');
+      }
     }
     return this.invalidFields;
   }
