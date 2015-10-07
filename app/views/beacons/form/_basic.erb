@@ -98,7 +98,7 @@
                       <% if trigger.application.activities.count == 0 %>
                         <%= t('beacons.form.no_actions') %>
                       <% else %>
-                        <%= app.activities.count %>
+                        <%= trigger.application.activities.count %>
                         <%= t('beacons.form.action').downcase.pluralize(trigger.application.activities.count) %>
                       <% end %>
                     </div>
