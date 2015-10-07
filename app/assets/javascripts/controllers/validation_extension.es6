@@ -132,7 +132,7 @@ export class ValidationExtension {
   validate(event, all) {
     let triggered = false;
     this.removeInvalidMarks();
-    for (let el of (all ? this.visibleFields : this.fields)) {
+    for (let el of (!all ? this.visibleFields : this.fields)) {
       el = $(el);
       if (!el.data('custom-validator'))
         continue;
