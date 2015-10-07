@@ -50,6 +50,14 @@
   background: image-url("icons/cancel.png") no-repeat;
 }
 
+.bos-info_dark {
+  .retina-background-image('icons/info_normal.png', 13px, 13px);
+
+  &:hover, &:active {
+    .retina-background-image('icons/info_pressed.png', 13px, 13px);
+  }
+}
+
 .glyphicon.glypicon-remove {
   color: red;
 }

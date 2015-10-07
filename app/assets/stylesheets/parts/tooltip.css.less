@@ -1,0 +1,50 @@
+/**
+ * Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD 3-Clause License found in the
+ * LICENSE.txt file in the root directory of this source tree. 
+ */
+
+.tooltip-button-wrapper {
+  display: inline-block;
+  margin: 0 7px 3px 5px;
+  position: relative;
+  top: 4px;
+
+  .tooltip-button {
+    cursor: pointer;
+  }
+}
+
+.tooltip.top {
+  left: -11px !important;
+  margin-top: -10px !important;
+  width: 300px !important;
+
+  .tooltip-arrow {
+    left: 18px !important;
+
+    &:after {
+      border-color: transparent;
+      border-style: solid;
+      border-top-color: #dedede;
+      border-width: 5px 5px 0;
+      content: '';
+      display: block;
+      height: 0;
+      margin-left: -5px;
+      position: absolute;
+      top: -4px;
+      width: 0;
+      z-index: -1;
+    }
+  }
+}
+
+.tooltip-inner {
+  .box-shadow();
+  border-radius: 0;
+  padding: 10px 15px;
+  text-align: left;
+}

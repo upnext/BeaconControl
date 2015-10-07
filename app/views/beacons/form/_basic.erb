@@ -2,6 +2,7 @@
   <div class="col-md-6 first-column">
     <div class="control-group">
       <div class="controls">
+
         <%= f.input :name,
                     input_html: {
                         data: {
@@ -31,8 +32,9 @@
 
     <div class="control-group event-subscriber" data-publisher="#beacon_vendor" data-match="Kontakt" data-action="show">
       <div class="controls">
+
         <%= f.input :vendor_uid,
-                    label: 'Device ID',
+                    label: render('beacons/form/vendor_uid_tooltip'),
                     input_html: {
                         data: {
                             :'validate-if' => '#beacon_vendor=Kontakt',

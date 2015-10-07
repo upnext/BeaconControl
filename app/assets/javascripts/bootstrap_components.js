@@ -6,7 +6,6 @@
  * LICENSE.txt file in the root directory of this source tree. 
  */
 
-jQuery(function() {
-  $("a[rel~=popover], .has-popover").popover();
-  $("a[rel~=tooltip], .has-tooltip").tooltip();
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip();
 });

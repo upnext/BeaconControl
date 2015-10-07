@@ -39,6 +39,9 @@
 //= require ext_bootstrap/bootstrap-select
 //= require ext_bootstrap/jasny-bootstrap.min
 //
+// ### Bootstrap extensions
+//= require bootstrap_components
+//
 // ### Custom etensions
 //= require custom_ext/map
 //= require custom_ext/elements_select
