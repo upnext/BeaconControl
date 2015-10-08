@@ -20,6 +20,8 @@ class BeaconsController < AdminController
                    }
   has_scope :with_beacon_or_zone_name, as: :beacon_name
 
+  include BeaconAllowedParams # MUST be after inherit_resources and load_and_authorize_resource
+
   def new
     resource.uuid ||= current_admin.default_beacon_uuid
     @beacon = resource.decorate
@@ -88,55 +90,6 @@ class BeaconsController < AdminController
       permitted_params[:beacon],
       Activity.new(activity_permitted_params)
     ).create
-  end
-
-  def search_params
-    params.permit(:name, :sort, :direction, :floor, zone_id: [])
-  end
-
-  def permitted_params
-    {
-      beacon: params.fetch(:beacon, {}).permit(
-        default_params | role_permitted_params | protocol_params
-      )
-    }
-  end
-
-  def default_params
-    [:name, :location, :lat, :lng, :floor, :zone_id, :protocol, :vendor, :vendor_uid]
-  end
-
-  def i_beacon_params
-    [:uuid, :major, :minor]
-  end
-
-  def eddystone_params
-    [:namespace, :instance, :url]
-  end
-
-  def protocol_params
-    i_beacon_params | eddystone_params
-  end
-
-  def activity_permitted_params
-    ActivityParams.new(
-      params.fetch(:beacon, {}).deep_merge(
-        activity: {
-          scheme: :custom,
-          trigger_attributes: {
-            type: 'BeaconTrigger'
-          }
-        }
-      )
-    ).call
-  end
-
-  def config_params
-    params.fetch(:beacon, {}).fetch(:config, {}).permit(:signal_interval, :transmission_power)
-  end
-
-  def role_permitted_params
-    current_admin.admin? ? [:manager_id] : []
   end
 
   def begin_of_association_chain

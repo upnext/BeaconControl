@@ -15,6 +15,7 @@ module S2sApi
                     only: [:create, :update]
       before_action :load_config, only: [:new, :create, :edit, :update]
 
+      include BeaconAllowedParams # MUST be after inherit_resources and load_and_authorize_resource
       self.responder = S2sApiResponder
 
       rescue_from ::ActionController::ParameterMissing do |error|
@@ -76,41 +77,6 @@ module S2sApi
 
       def end_of_association_chain
         super.where(protocol: 'iBeacon').search(search_params)
-      end
-
-      def permitted_params
-        params.permit(beacon: [:name, :uuid, :lat, :lng, :floor, :zone_id] | ibeacon_params | eddystone_params | role_permitted_params)
-      end
-
-      def ibeacon_params
-        [:major, :minor]
-      end
-
-      def eddystone_params
-        [:url, :instance, :namespace]
-      end
-
-      def config_params
-        params.fetch(:beacon, {}).fetch(:config, {}).permit(:signal_interval, :transmission_power)
-      end
-
-      def role_permitted_params
-        current_admin.admin? ? [:manager_id] : []
-      end
-
-      def search_params
-        params.permit(:name)
-      end
-
-      def activity_permitted_params
-        if params.fetch(:beacon, {})[:activity]
-          ActivityParams.new(
-            params.fetch(:beacon, {}).
-              deep_merge(activity: {scheme: :custom, trigger_attributes: {type: 'BeaconTrigger'}})
-          ).call
-        else
-          {}
-        end
       end
 
       def default_serializer_options

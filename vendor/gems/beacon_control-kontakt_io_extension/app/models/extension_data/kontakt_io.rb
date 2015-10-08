@@ -21,10 +21,19 @@ module ExtensionData
           json.deeper_merge!(beacon) if json[:id] == beacon[:id]
         end
       end
+      hash[:kontakt_api_key] = api_key
       hash
     end
 
     private
+
+    def api_key
+      application.account.account_extensions.
+        where(extension_name: 'Kontakt.io').
+        joins(:extension_settings).merge(
+        ExtensionSetting.where(key: :api_key).where('value IS NOT NULL')
+      ).pluck("#{ExtensionSetting.table_name}.value").first || ''
+    end
 
     def zone_range_ids
       Beacon.where(zone_id: application.zone_ids)
