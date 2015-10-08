@@ -12,9 +12,9 @@ module BeaconAllowedParams
 
   def permitted_params
     {
-      beacon: params.fetch(:beacon, {}).permit(
+      beacon: Beacon::Factory.sorted_params(params.fetch(:beacon, {}).permit(
         default_params | role_permitted_params | protocol_params
-      )
+      ))
     }
   end
 

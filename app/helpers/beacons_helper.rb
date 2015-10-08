@@ -37,6 +37,14 @@ module BeaconsHelper
     master = beacon.config && beacon.config.status && beacon.config.status.master
     if master
       Beacon.kontakt_io.merge(KontaktIoMapping.with_uid(master)).last
+    else
+      nil
     end
+  end
+
+  def master_beacon?(beacon)
+    return false unless beacon
+    return false unless beacon.persisted?
+    !master_beacon(beacon).nil?
   end
 end

@@ -1,12 +1,10 @@
 <div class="row form-container">
   <div class="col-md-6 first-column">
-    <% if beacon.persisted? && master_beacon(beacon) %>
-      <div class="control-group">
-        <div class="controls" style="color:#d62c1a;margin-bottom:20px;">
-          <%= t('beacons.form.missing_cloud_message') %>
-        </div>
+    <div class="control-group" style="<%= 'display:none;' if master_beacon?(beacon) %>">
+      <div class="controls" style="color:#d62c1a;margin-bottom:20px;">
+        <%= t('beacons.form.missing_cloud_message') %>
       </div>
-    <%- end %>
+    </div>
 
     <div class="control-group">
       <div class="controls">
@@ -125,22 +123,22 @@
   <div class="col-md-6 second-column">
     <% if @beacon.vendor == 'Kontakt' %>
       <div class="control-group">
-       <div class="controls relative">
+        <div class="controls relative">
 
           <%= config.input :transmission_power,
-                      include_blank: false,
-                      input_html: {
-                          id: 'transmission_power',
-                          class: %W[slider],
-                          value: beacon.config.transmission_power,
-                          data: {
-                              slider_min:     0,
-                              slider_max:     7,
-                              slider_step:    1,
-                              slider_value:   beacon.config.transmission_power,
-                              slider_handle:  :square
-                          }
-                      }
+                           include_blank: false,
+                           input_html: {
+                               id: 'transmission_power',
+                               class: %W[slider],
+                               value: beacon.config.transmission_power,
+                               data: {
+                                   slider_min:     0,
+                                   slider_max:     7,
+                                   slider_step:    1,
+                                   slider_value:   beacon.config.transmission_power,
+                                   slider_handle:  :square
+                               }
+                           }
           %>
         </div>
       </div>
