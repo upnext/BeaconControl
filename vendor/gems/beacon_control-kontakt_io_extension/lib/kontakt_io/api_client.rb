@@ -88,9 +88,13 @@ module KontaktIo
       response.body
     end
 
+    # @param [String] uuid
+    # @param [String] device_type
+    # @param [Hash] data
     def update_config(uuid, device_type, data)
       current = load_hash_from("/device/#{uuid}").with_indifferent_access
       hash = {}.with_indifferent_access
+      data = data.with_indifferent_access
       %w[name interval major minor profiles proximity instanceId namespace url].each do |key|
         hash[key] = data[key] if data[key] != current[key]
       end
