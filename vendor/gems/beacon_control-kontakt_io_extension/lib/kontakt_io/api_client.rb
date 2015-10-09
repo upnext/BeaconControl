@@ -94,6 +94,7 @@ module KontaktIo
     def update_config(uuid, device_type, data)
       current = load_hash_from("/device/#{uuid}").with_indifferent_access
       hash = {}.with_indifferent_access
+      data = data.with_indifferent_access
       %w[interval txPower].each do |key|
         hash[key] = data[key] if data[key] != current[key] && data.key?(key)
       end
