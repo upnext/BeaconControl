@@ -50,13 +50,11 @@ class BeaconConfig
             lat: beacon.lat,
             lng: beacon.lng
           )
-          hash = {}.with_indifferent_access
-          hash[:txPower] = data[:transmission_power] if data[:transmission_power] != config.transmission_power
-          hash[:interval] = data[:signal_interval] if data[:signal_interval] != config.signal_interval
           api.update_config(
             beacon.kontakt_uid,
             beacon.config.device_type,
-            hash
+            txPower: data[:transmission_power],
+            interval: data[:signal_interval]
           )
         rescue KontaktIo::Error::NotFound => error
           Rails.logger.warn error.message
