@@ -42,15 +42,20 @@ class BeaconConfig
 
         def update_kontakt_beacon(admin, data)
           load_data(admin)
-          params = {
-              txPower: data[:transmission_power],
-              interval: data[:signal_interval],
-              alias: beacon.name,
-              lat: beacon.lat,
-              lng: beacon.lng
-          }
           api = KontaktIo::ApiClient::for_admin(admin)
-          api.update_device(beacon.kontakt_uid, beacon.config.device_type, params)
+          api.update_device(
+            beacon.kontakt_uid,
+            beacon.config.device_type,
+            alias: beacon.name,
+            lat: beacon.lat,
+            lng: beacon.lng
+          )
+          api.update_config(
+            beacon.kontakt_uid,
+            beacon.config.device_type,
+            txPower: data[:transmission_power],
+            interval: data[:signal_interval]
+          )
         rescue KontaktIo::Error::NotFound => error
           Rails.logger.warn error.message
         rescue KontaktIo::Error => error

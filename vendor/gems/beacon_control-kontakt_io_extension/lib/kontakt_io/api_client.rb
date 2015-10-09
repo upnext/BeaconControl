@@ -88,6 +88,25 @@ module KontaktIo
       response.body
     end
 
+    def update_config(uuid, device_type, data)
+      hash = load_hash_from("/config/#{uuid}").with_indifferent_access
+      hash = {
+        name: hash[:name],
+        interval: hash[:interval],
+        major: hash[:major],
+        minor: hash[:minor],
+        profiles: hash[:profiles],
+        proximity: hash[:proximity],
+        instanceId: hash[:instanceId],
+        namespace: hash[:namespace],
+        url: hash[:url]
+      }.with_indifferent_access
+      hash.merge!(data)
+      hash.merge!({uniqueId: uuid, deviceType: device_type})
+      response = request(:post, '/config/create', hash)
+      response.body
+    end
+
     private def load_hash_from(url, params={})
       return JSON.parse(request(:get, url, params).body)
     rescue KontaktIo::Error::NotFound
