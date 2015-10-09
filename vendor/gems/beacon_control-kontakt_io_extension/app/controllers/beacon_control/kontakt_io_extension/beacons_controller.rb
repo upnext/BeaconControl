@@ -40,7 +40,7 @@ module BeaconControl
         sync!(
           params.merge(
             update: true,
-            beacons: current_admin.account.beacons.kontakt_io.order('created_at DESC'),
+            beacons: current_admin.account.beacons.kontakt_io.order('created_at DESC')
           )
         )
         beacons = current_admin.account.beacons.kontakt_io.order('created_at DESC').pluck(:kontakt_uid)

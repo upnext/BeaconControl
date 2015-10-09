@@ -43,7 +43,6 @@ module BeaconControl
             begin
               beacon.save!
             rescue StandardError => error
-              puts beacon.attributes.inspect
               raise error
             end
             assign_to_zone!(data, beacon)
@@ -103,7 +102,7 @@ module BeaconControl
       end
 
       def update_beacon!(beacon, kontakt_beacon)
-        Beacon::Factory.sorted_params({
+        Beacon::Factory.sorted_params(
           uuid:  kontakt_beacon.proximity,
           major: kontakt_beacon.major,
           minor: kontakt_beacon.minor,
@@ -112,7 +111,7 @@ module BeaconControl
           url: kontakt_beacon.url,
           vendor: 'Kontakt',
           protocol: (kontakt_beacon.eddystone? ? 'Eddystone' : 'iBeacon')
-        }).each_pair { |k, v| beacon.send("#{k}=", v) }
+        ).each_pair { |k, v| beacon.send("#{k}=", v) }
       end
 
       # @return [Array<KontaktIo::Resource::Beacon>]
@@ -162,6 +161,7 @@ module BeaconControl
       def fetch_options!(params)
         @selected_beacons = params.fetch(:beacons, []) unless @selected_beacons
         @selected_venues  = params.fetch(:venues, []) unless @selected_venues
+        @reassign = params.fetch(:reassign, false)
         @update = params[:update] == true
       end
 
@@ -182,9 +182,14 @@ module BeaconControl
         zone_mapped_uids.include?(uid)
       end
 
+      def reassign?
+        @reassign
+      end
+
       def assign_to_zone!(data, beacon)
         return unless data.venue.present?
         return unless data.venue.id.present?
+        return if beacon.zone.present? and !reassign?
         zone = Zone.with_kontakt_uid(data.venue.id).first
         zone.beacons << beacon if zone
       end

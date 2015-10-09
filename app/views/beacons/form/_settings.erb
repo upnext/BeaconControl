@@ -1,10 +1,5 @@
 <div class="row form-container">
   <div class="col-md-6 first-column">
-    <div class="control-group" style="<%= 'display:none;' if master_beacon?(beacon) %>">
-      <div class="controls" style="color:#d62c1a;margin-bottom:20px;">
-        <%= t('beacons.form.missing_cloud_message') %>
-      </div>
-    </div>
 
     <div class="control-group">
       <div class="controls">
@@ -122,6 +117,12 @@
   </div>
   <div class="col-md-6 second-column">
     <% if @beacon.vendor == 'Kontakt' %>
+      <div class="control-group" style="<%= 'display:none;' if master_beacon?(beacon) %>">
+        <div class="controls" style="color:#d62c1a;margin-bottom:20px;">
+          <%= t('beacons.form.missing_cloud_message') %>
+        </div>
+      </div>
+
       <div class="control-group">
         <div class="controls relative">
 

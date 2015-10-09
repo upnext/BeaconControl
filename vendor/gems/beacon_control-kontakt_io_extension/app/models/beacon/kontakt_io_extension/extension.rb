@@ -66,7 +66,7 @@ class Beacon
 
         def kontakt_io_sync!(admin)
           sync = ::BeaconControl::KontaktIoExtension::MappingService.new(admin)
-          sync.sync!(update: true, beacons: [kontakt_uid]) if kontakt_uid.present?
+          sync.sync!(update: true, beacons: [kontakt_uid], reassign: false) if kontakt_uid.present?
         end
       end
     end
