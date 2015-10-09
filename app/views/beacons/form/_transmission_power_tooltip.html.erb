@@ -1,0 +1,7 @@
+<%= t('beacons.form.transmission_power') %>
+<div class="tooltip-button-wrapper">
+  <div class="bos bos-info_dark tooltip-button" data-toggle="tooltip" data-placement="top" title="<%=
+      t('beacons.form.transmission_power_tooltip', current_value: beacon.config.try(:current_transmission_power).to_s) %>">
+
+  </div>
+</div>

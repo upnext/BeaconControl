@@ -128,6 +128,7 @@
 
           <%= config.input :transmission_power,
                            include_blank: false,
+                           label: render('beacons/form/transmission_power_tooltip', beacon: beacon),
                            input_html: {
                                id: 'transmission_power',
                                class: %W[slider],
@@ -148,6 +149,7 @@
         <div class="control-group event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
           <div class="controls">
             <%= config.input :signal_interval,
+                             label: render('beacons/form/signal_interval_tooltip', beacon: beacon),
                              input_html: {
                                  value: beacon.config.signal_interval
                              }
@@ -163,6 +165,7 @@
             <%= config.input :transmission_power,
                              include_blank: false,
                              id: 'transmission_power-slider',
+                             label: render('beacons/form/transmission_power_tooltip', beacon: beacon),
                              input_html: {
                                  id: 'transmission_power',
                                  class: %W[slider],

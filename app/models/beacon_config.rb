@@ -25,6 +25,14 @@ class BeaconConfig < ActiveRecord::Base
     update_attribute(:data, loaded_data)
   end
 
+  def current_transmission_power
+    transmission_power
+  end
+
+  def current_signal_interval
+    signal_interval
+  end
+
   # Loading beacon configuration.
   # Some extension can override this functionality or add some custom stuff.
   # @param [Admin] admin

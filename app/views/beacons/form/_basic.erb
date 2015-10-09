@@ -40,7 +40,8 @@
                             :'validate-if' => '#beacon_vendor=Kontakt',
                             pattern: '^[\w\d]{4,5}$',
                             required: true
-                        }
+                        },
+                        value: beacon.try(:vendor_uid)
                     }
         %>
       </div>

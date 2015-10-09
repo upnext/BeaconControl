@@ -16,8 +16,8 @@ en:
         index:
           title: Kontakt.io
           import: Import beacons
-          sync: Sync beacon data
-          sync_with_reassign: Sync zone data
+          sync: Sync beacons data
+          sync_with_reassign: Sync zones data
           uid: UID
           name: Name
           major: Major

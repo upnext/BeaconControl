@@ -34,10 +34,6 @@ class Beacon
           end
         end
 
-        def kontakt_io_imported?
-          kontakt_io_mapping.present?
-        end
-
         unless method_defined?(:kontakt_extended)
           attr_reader :kontakt_extended
           alias_method :_non_kontakt_io_imported?, :imported?
@@ -45,11 +41,15 @@ class Beacon
           alias_method :_non_kontakt_io_vendor_uid=, :vendor_uid=
         end
 
+        scope :kontakt_io, -> { joins(:kontakt_io_mapping).merge(KontaktIoMapping.beacons) }
+
+        def kontakt_io_imported?
+          kontakt_io_mapping.present?
+        end
+
         def imported?
           kontakt_io_imported? || _non_kontakt_io_imported?
         end
-
-        scope :kontakt_io, -> { joins(:kontakt_io_mapping).merge(KontaktIoMapping.beacons) }
 
         def vendor_uid
           self.vendor == 'Kontakt' ? self.kontakt_uid : self._non_kontakt_io_vendor_uid

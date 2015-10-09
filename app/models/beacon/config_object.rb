@@ -12,5 +12,10 @@ class Beacon
       end
       hash
     end
+
+    %w[transmission_power signal_interval].each do |mth|
+      class_eval "def #{mth};super;end"
+      class_eval "def #{mth}=(*);super;end"
+    end
   end
 end

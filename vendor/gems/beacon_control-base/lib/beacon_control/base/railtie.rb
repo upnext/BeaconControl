@@ -19,6 +19,8 @@ module BeaconControl
         app.paths['app/controllers'] << File.expand_path('../../../../app/controllers', __FILE__)
       end
 
+      config.after_initialize { BeaconControl::Base.exec_load }
+
       config.before_eager_load { BeaconControl::Base.exec_load }
 
       config.to_prepare { BeaconControl::Base.exec_load }

@@ -162,6 +162,10 @@ en:
       battery_unknown: "Unknown"
       active_kontakt_io_addon: "For multi-device adding and advanced features of your Kontakt beacons use our"
       kontakt_io_addon: "kontakt.io add-on"
+      transmission_power: "Transmission Power"
+      transmission_power_tooltip: "Current value: %{current_value}"
+      signal_interval: "Signal interval"
+      signal_interval_tooltip: "Current value: %{current_value}"
     index:
       new: "Add Beacon"
       all_floors: "All"
