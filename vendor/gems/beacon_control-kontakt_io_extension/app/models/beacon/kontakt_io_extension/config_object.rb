@@ -21,11 +21,11 @@ class Beacon
           end
 
           def current_transmission_power
-            _non_kontakt_io_transmission_power.to_i
+            tx_power.to_i
           end
 
           def current_signal_interval
-            _non_kontakt_io_signal_interval.to_i
+            interval.to_i
           end
 
           def transmission_power
