@@ -21,19 +21,11 @@ class Beacon
           end
 
           def current_transmission_power
-            if beacon && beacon.kontakt_io_mapping && kontakt_io_active?(admin)
-              config.config.tx_power || _non_kontakt_io_transmission_power
-            else
-              _non_kontakt_io_transmission_power
-            end
+            config.config.tx_power || _non_kontakt_io_transmission_power
           end
 
           def current_signal_interval
-            if beacon && beacon.kontakt_io_mapping && kontakt_io_active?(admin)
-              config.config.interval || _non_kontakt_io_signal_interval
-            else
-              _non_kontakt_io_signal_interval
-            end
+            _non_kontakt_io_signal_interval
           end
 
           def transmission_power
