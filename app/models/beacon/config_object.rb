@@ -21,7 +21,7 @@ class Beacon
     end
 
     def transmission_power_changed?
-      current_transmission_power > 0 && trasmission_power != current_transmission_power
+      current_transmission_power > 0 && transmission_power != current_transmission_power
     end
 
     def signal_interval_changed?

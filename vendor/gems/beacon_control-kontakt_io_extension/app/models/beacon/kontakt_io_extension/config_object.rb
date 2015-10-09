@@ -21,11 +21,11 @@ class Beacon
           end
 
           def current_transmission_power
-            tx_power.to_i
+            _non_kontakt_io_transmission_power.to_i
           end
 
           def current_signal_interval
-            interval.to_i
+            _non_kontakt_io_signal_interval.to_i
           end
 
           def transmission_power
@@ -33,7 +33,7 @@ class Beacon
             val = current_transmission_power if val == 0
             val
           rescue
-            tx_power.to_i
+            current_transmission_power.to_i
           end
 
           def signal_interval
@@ -41,7 +41,7 @@ class Beacon
             val = current_signal_interval if val == 0
             val
           rescue
-            interval.to_i
+            current_signal_interval.to_i
           end
         end
       end
