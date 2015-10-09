@@ -96,7 +96,7 @@ module KontaktIo
       hash = {}.with_indifferent_access
       data = data.with_indifferent_access
       %w[name interval major minor profiles proximity instanceId namespace url].each do |key|
-        hash[key] = data[key] if data[key] != current[key]
+        hash[key] = data[key] if data[key] != current[key] && data.key?(key)
       end
       hash.merge!(data)
       hash.merge!(uniqueId: uuid, deviceType: device_type)
