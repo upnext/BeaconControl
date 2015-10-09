@@ -93,13 +93,13 @@ module KontaktIo
       hash = {
         name: hash[:name],
         interval: hash[:interval],
-        major: hash[:major],
-        minor: hash[:minor],
-        profiles: hash[:profiles],
-        proximity: hash[:proximity],
-        instanceId: hash[:instanceId],
-        namespace: hash[:namespace],
-        url: hash[:url]
+        # major: hash[:major],
+        # minor: hash[:minor],
+        # profiles: hash[:profiles],
+        # proximity: hash[:proximity],
+        # instanceId: hash[:instanceId],
+        # namespace: hash[:namespace],
+        # url: hash[:url]
       }.with_indifferent_access
       hash.merge!(data)
       hash.merge!(uniqueId: uuid, deviceType: device_type)
