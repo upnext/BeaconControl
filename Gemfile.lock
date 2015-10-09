@@ -40,7 +40,7 @@ PATH
 
 GIT
   remote: ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git
-  revision: fe71630b2324cdbe127fb37747db1202e9a131c9
+  revision: 9da6a33c1a0d0baf4fb868189237485633deca10
   specs:
     beacon_control-neighbours_extension (0.1.1)
       sprockets (>= 3.0.0)
@@ -337,7 +337,7 @@ GEM
       tilt (>= 1.3, < 3)
     slop (3.6.0)
     spring (1.2.0)
-    sprockets (3.3.5)
+    sprockets (3.4.0)
       rack (> 1, < 3)
     sprockets-es6 (0.7.0)
       babel-transpiler
