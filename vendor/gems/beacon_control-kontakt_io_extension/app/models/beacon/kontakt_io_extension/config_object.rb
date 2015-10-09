@@ -29,11 +29,19 @@ class Beacon
           end
 
           def transmission_power
-            config.tx_power.to_i rescue _non_kontakt_io_transmission_power
+            val = config.tx_power.to_i
+            val = current_transmission_power if val == 0
+            val
+          rescue
+            tx_power.to_i
           end
 
           def signal_interval
-            config.interval.to_i rescue _non_kontakt_io_signal_interval
+            val = config.interval.to_i
+            val = current_signal_interval if val == 0
+            val
+          rescue
+            interval.to_i
           end
         end
       end
