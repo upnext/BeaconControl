@@ -60,6 +60,8 @@ class BeaconConfig
           Rails.logger.warn error.message
         rescue KontaktIo::Error => error
           Rails.logger.warn error.message
+        rescue KontaktIo::Error::UnprocessableEntity => error
+          Rails.logger.warn error.message
         end
 
         def kontakt_io_active?(admin)

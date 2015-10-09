@@ -89,7 +89,7 @@ module KontaktIo
     end
 
     def update_config(uuid, device_type, data)
-      hash = load_hash_from("/config/#{uuid}").with_indifferent_access
+      hash = load_hash_from("/device/#{uuid}").with_indifferent_access
       hash = {
         name: hash[:name],
         interval: hash[:interval],
@@ -102,7 +102,7 @@ module KontaktIo
         url: hash[:url]
       }.with_indifferent_access
       hash.merge!(data)
-      hash.merge!({uniqueId: uuid, deviceType: device_type})
+      hash.merge!(uniqueId: uuid, deviceType: device_type)
       response = request(:post, '/config/create', hash)
       response.body
     end
