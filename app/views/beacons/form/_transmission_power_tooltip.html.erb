@@ -1,5 +1,5 @@
 <%= t('beacons.form.transmission_power') %>
-<% if beacon.imported? %>
+<% if beacon.imported? && beacon.config.transmission_power_changed? %>
   <div class="tooltip-button-wrapper">
     <div class="bos bos-info_dark tooltip-button" data-toggle="tooltip" data-placement="top" title="<%=
         t('beacons.form.transmission_power_tooltip', current_value: beacon.config.current_transmission_power.to_s) %>">
