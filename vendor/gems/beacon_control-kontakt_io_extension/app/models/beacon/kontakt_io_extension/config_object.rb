@@ -21,11 +21,11 @@ class Beacon
           end
 
           def current_transmission_power
-            config.config.tx_power || _non_kontakt_io_transmission_power
+            config.tx_power rescue _non_kontakt_io_transmission_power
           end
 
           def current_signal_interval
-            _non_kontakt_io_signal_interval
+            config.signal rescue _non_kontakt_io_signal_interval
           end
 
           def transmission_power
