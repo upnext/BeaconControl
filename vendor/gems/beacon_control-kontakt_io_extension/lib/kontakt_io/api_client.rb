@@ -91,8 +91,8 @@ module KontaktIo
     def update_config(uuid, device_type, data)
       hash = load_hash_from("/device/#{uuid}").with_indifferent_access
       hash = {
-        name: hash[:name],
-        interval: hash[:interval],
+        # name: hash[:name],
+        # interval: hash[:interval],
         # major: hash[:major],
         # minor: hash[:minor],
         # profiles: hash[:profiles],
