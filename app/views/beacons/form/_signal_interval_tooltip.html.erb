@@ -1,6 +1,8 @@
 <%= t('beacons.form.signal_interval') %>
-<div class="tooltip-button-wrapper">
-  <div class="bos bos-info_dark tooltip-button" data-toggle="tooltip" data-placement="top" title="<%=
-      t('beacons.form.transmission_power_tooltip', current_value: beacon.config.try(:current_signal_interval).to_s) %>">
+<% if beacon.imported? %>
+  <div class="tooltip-button-wrapper">
+    <div class="bos bos-info_dark tooltip-button" data-toggle="tooltip" data-placement="top" title="<%=
+        t('beacons.form.transmission_power_tooltip', current_value: beacon.config.current_signal_interval.to_s) %>">
+    </div>
   </div>
-</div>
+<% end %>
