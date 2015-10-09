@@ -54,7 +54,7 @@ class BeaconConfig
             beacon.kontakt_uid,
             beacon.config.device_type,
             txPower: data[:transmission_power],
-            interval: data[:signal_interval]
+            interval: data[:signal_interval].to_f
           )
         rescue KontaktIo::Error::NotFound => error
           Rails.logger.warn error.message
