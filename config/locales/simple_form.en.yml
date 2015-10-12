@@ -42,4 +42,4 @@ en:
       zone:
         name: 'Zone name'
         manager_id: 'Managing user'
-        add_beacon: 'Assing beacons'
+        add_beacon: 'Assign beacons'
