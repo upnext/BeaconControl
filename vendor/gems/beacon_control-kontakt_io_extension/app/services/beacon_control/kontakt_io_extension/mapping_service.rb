@@ -23,6 +23,7 @@ module BeaconControl
           if zone.kontakt_io_mapping.blank?
             zone.build_kontakt_io_mapping(kontakt_uid: data.id)
           end
+          update_zone!(zone, data) if update?
           if !data.db? || update?
             zone.account = admin.account
             zone.save
@@ -69,7 +70,17 @@ module BeaconControl
       # @param [::KontaktIo::Resource::Zone] data
       # @return [::Zone]
       def build_zone(data)
-        ::Zone.new(name: data.name)
+        ::Zone.new(
+          name: data.name,
+          description: kontakt_venue.description
+        )
+      end
+
+      def update_zone!(zone, kontakt_venue)
+        zone.update_attributes(
+          name: kontakt_venue.name,
+          description: kontakt_venue.description
+        )
       end
 
       # @param [KontaktIo::Resource::Beacon] kontakt_beacon
