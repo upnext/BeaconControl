@@ -72,7 +72,7 @@ module BeaconControl
       def build_zone(data)
         ::Zone.new(
           name: data.name,
-          description: kontakt_venue.description
+          description: data.description
         )
       end
 
