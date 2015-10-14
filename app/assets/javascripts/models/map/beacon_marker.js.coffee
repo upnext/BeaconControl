@@ -24,10 +24,6 @@ class BeaconMarker
     @initWithParams(@params)
     @marker = null
 
-    $(@).on('zoneChanged',  (_e, zoneId) => @zoneChanged(zoneId))
-    $(@).on('floorChanged', (_e, floor)  => @floorChanged(floor))
-    $(@).on('deleteBeacon', (_e)         => @delete())
-
   initWithParams: (params) ->
     @id       = params.id.toString()
     @zone     = params.zone
@@ -51,7 +47,6 @@ class BeaconMarker
       fillColor: '#' + @zoneColor()
       fillOpacity: 0.7
     }
-
 
   zoneId: ->
     if @zone
@@ -91,7 +86,7 @@ class BeaconMarker
 
     $(@).trigger('changed')
 
-  delete: ->
+  deleteBeacon: ->
     @_request('DELETE', {}, @deleteDone.bind(@))
 
     false # stops Event Propagation

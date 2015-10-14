@@ -20,7 +20,6 @@ class BeaconPreview extends CurrentBeaconHandler
 
     @_observeDelete()
 
-
   _observeDelete: ->
     # Listen for elements that will appear in the future
     $(document).on('click', '#delete-beacon', ->
@@ -28,10 +27,8 @@ class BeaconPreview extends CurrentBeaconHandler
     )
 
     $('.delete-action').on('click', (e) =>
-      $(@beaconMarkers.currentBeacon).trigger('deleteBeacon')
-
+      @beaconMarkers.currentBeacon.deleteBeacon()
       $('.modal').modal('hide')
-
       false
     )
 
@@ -67,24 +64,19 @@ class BeaconActions extends CurrentBeaconHandler
     $('#beacon-actions').hide()
 
   _observeZoneChange: ->
-    self = @
-
-    $('#beacon_set_zone').on('change',  ->
-      selectedOption = $(@).find("option:selected")
+    $('#beacon_set_zone').on('change', (event) =>
+      selectedOption = $(event.target).find("option:selected")
 
       value = selectedOption.val()
-
-      res = $(self.beaconMarkers.currentBeacon).trigger('zoneChanged', value)
+      @beaconMarkers.currentBeacon.zoneChanged(value)
     )
 
   _observeFloorChange: ->
-    self = @
-
-    $('#beacon_set_floor').on('change',  ->
-      selectedOption = $(@).find("option:selected")
+    $('#beacon_set_floor').on('change', (event) =>
+      selectedOption = $(event.target).find("option:selected")
       value = selectedOption.val()
 
-      $(self.beaconMarkers.currentBeacon).trigger('floorChanged', value)
+      @beaconMarkers.currentBeacon.floorChanged(value)
     )
 
   _changeZoneColor: (selectedOption) ->
