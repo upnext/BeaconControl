@@ -66,17 +66,19 @@ class BeaconActions extends CurrentBeaconHandler
   _observeZoneChange: ->
     $('#beacon_set_zone').on('change', (event) =>
       selectedOption = $(event.target).find("option:selected")
-
+      currentBeacon = @beaconMarkers.currentBeacon
       value = selectedOption.val()
-      @beaconMarkers.currentBeacon.zoneChanged(value)
+
+      currentBeacon.zoneChanged(value) if currentBeacon?
     )
 
   _observeFloorChange: ->
     $('#beacon_set_floor').on('change', (event) =>
       selectedOption = $(event.target).find("option:selected")
+      currentBeacon = @beaconMarkers.currentBeacon
       value = selectedOption.val()
 
-      @beaconMarkers.currentBeacon.floorChanged(value)
+      currentBeacon.floorChanged(value) if currentBeacon?
     )
 
   _changeZoneColor: (selectedOption) ->

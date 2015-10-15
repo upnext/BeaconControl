@@ -49,10 +49,7 @@ class BeaconMarker
     }
 
   zoneId: ->
-    if @zone
-      @zone.id
-    else
-      null
+    @zone.id if @zone
 
   zoneColor: ->
     if @zone
@@ -62,7 +59,6 @@ class BeaconMarker
 
   zoneChanged: (zoneId) ->
     @_request('PUT', { zone_id: zoneId }, @zoneChangeDone.bind(@))
-
     false # stops Event Propagation
 
   zoneChangeDone: (params) ->
@@ -77,7 +73,6 @@ class BeaconMarker
 
   floorChanged: (floor) ->
     @_request('PUT', { floor: floor }, @floorChangeDone.bind(@))
-
     false # stops Event Propagation
 
   floorChangeDone: (params) ->
@@ -88,7 +83,6 @@ class BeaconMarker
 
   deleteBeacon: ->
     @_request('DELETE', {}, @deleteDone.bind(@))
-
     false # stops Event Propagation
 
   deleteDone: ->
