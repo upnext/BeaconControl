@@ -7,8 +7,6 @@ class Beacon
         unless method_defined?(:kontakt_extended)
           attr_reader :kontakt_extended
           alias_method :_non_kontakt_io_extension_compatibility, :extension_compatibility
-          alias_method :_non_kontakt_io_transmission_power, :transmission_power
-          alias_method :_non_kontakt_io_signal_interval, :signal_interval
 
           # Overrides Beacon::ConfigObject#extension_compatibility
           # Prepare data loaded from KontaktIo API.
@@ -16,33 +14,53 @@ class Beacon
             hash = _non_kontakt_io_extension_compatibility(hash)
             hash[:transmission_power] = hash[:tx_power] if hash.key?(:tx_power)
             hash[:signal_interval] = hash[:interval] if hash.key?(:interval)
+            hash[:proximity] = hash[:proximity] if hash.key?(:proximity)
             hash.delete(:was_imported)
             hash
           end
 
-          def current_transmission_power
-            _non_kontakt_io_transmission_power.to_i
+          def self.create_default_methods(mth)
+            class_eval <<-EOS
+              def #{mth}(*);super;end
+              def #{mth}=(*);super;end
+              def current_#{mth}(*);super;end
+              def current_#{mth}=(*);super;end
+            EOS
           end
 
-          def current_signal_interval
-            _non_kontakt_io_signal_interval.to_i
+          def self.kontakt_io_attribute(name, kontakt_key, cast=:to_i)
+            current = :"current_#{name}"
+            non = :"_non_kontakt_io_#{name}"
+            return if method_defined?(current)
+            create_default_methods(name) unless method_defined?(name)
+            alias_method non, name
+            class_eval <<-EOS, __FILE__, __LINE__ + 1
+              def #{current}
+                _non_kontakt_io_#{name}.#{cast}
+              end
+              def #{name}
+                if config[:#{kontakt_key}].nil?
+                  #{current}
+                else
+                  config.#{kontakt_key}.#{cast}
+                end
+              rescue
+                #{current}
+              end
+              def #{name}_changed?
+                #{current}.to_s.size > 0 && #{name} != #{current}
+              end
+            EOS
           end
 
-          def transmission_power
-            val = config.tx_power.to_i
-            val = current_transmission_power if val == 0
-            val
-          rescue
-            current_transmission_power.to_i
-          end
-
-          def signal_interval
-            val = config.interval.to_i
-            val = current_signal_interval if val == 0
-            val
-          rescue
-            current_signal_interval.to_i
-          end
+          kontakt_io_attribute(:transmission_power, :tx_power)
+          kontakt_io_attribute(:signal_interval, :interval)
+          kontakt_io_attribute(:major, :major)
+          kontakt_io_attribute(:minor, :minor)
+          kontakt_io_attribute(:proximity, :proximity, :'to_s.upcase')
+          kontakt_io_attribute(:instance, :instance_id)
+          kontakt_io_attribute(:namespace, :namespace)
+          kontakt_io_attribute(:url, :url)
         end
       end
     end

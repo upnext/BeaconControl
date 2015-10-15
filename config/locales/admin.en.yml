@@ -126,6 +126,13 @@ en:
       save: 'Save Beacon'
       cancel: 'Cancel'
       test_notification: '(will be displayed for the ContextOS App users)'
+      proximity: 'UUID'
+      major: Major
+      minor: Minor
+      namespace: Namespace
+      instance: Instance ID
+      url: URL
+      proximity_tooltip: UUID
 
     index:
       title:   'Beacons'

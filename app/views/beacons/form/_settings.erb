@@ -22,8 +22,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="controls">
-            <%= f.input :uuid,
-                        label: 'UUID',
+            <%= f.input :proximity,
+                        as: :old_value_tooltip,
+                        beacon: beacon,
                         input_html: {
                             class: %w[uuid-input],
                             data: {
@@ -41,6 +42,8 @@
         <div class="controls">
           <div class="col-xs-6">
             <%= f.input :major,
+                        as: :old_value_tooltip,
+                        beacon: beacon,
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=iBeacon',
@@ -52,6 +55,8 @@
           </div>
           <div class="col-xs-6">
             <%= f.input :minor,
+                        as: :old_value_tooltip,
+                        beacon: beacon,
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=iBeacon',
@@ -70,6 +75,9 @@
         <div class="controls">
           <div class="col-xs-6">
             <%= f.input :namespace,
+                        as: :old_value_tooltip,
+                        id: :namespace,
+                        beacon: beacon,
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=Eddystone',
@@ -80,6 +88,9 @@
           </div>
           <div class="col-xs-6">
             <%= f.input :instance,
+                        as: :old_value_tooltip,
+                        id: :instance,
+                        beacon: beacon,
                         input_html: {
                             data: {
                                 :'validate-if' => '#beacon_protocol=Eddystone',
@@ -94,14 +105,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="controls">
-            <%= f.input :url,
-                        as: 'text',
-                        input_html: {
-                            data: {
-                                :'validate-if' => '#beacon_protocol=Eddystone',
-                                required: true
-                            }
-                        }
+            <%= config.input :signal_interval,
+                             as: :old_value_tooltip,
+                             beacon: beacon
             %>
           </div>
         </div>
@@ -123,55 +129,28 @@
         </div>
       </div>
 
-      <div class="control-group">
-        <div class="controls relative">
-
-          <%= config.input :transmission_power,
-                           include_blank: false,
-                           label: render('beacons/form/transmission_power_tooltip', beacon: beacon),
-                           input_html: {
-                               id: 'transmission_power',
-                               class: %W[slider],
-                               value: beacon.config.transmission_power,
-                               data: {
-                                   slider_min:     0,
-                                   slider_max:     7,
-                                   slider_step:    1,
-                                   slider_value:   beacon.config.transmission_power,
-                                   slider_handle:  :square
-                               }
-                           }
-          %>
-        </div>
-      </div>
-
       <%= f.fields_for(:config) do |config| %>
         <div class="control-group event-subscriber" data-publisher="#beacon_protocol" data-action="show" data-match="iBeacon">
           <div class="controls">
             <%= config.input :signal_interval,
-                             label: render('beacons/form/signal_interval_tooltip', beacon: beacon),
-                             input_html: {
-                                 value: beacon.config.signal_interval
-                             }
+                             as: :old_value_tooltip,
+                             beacon: beacon
             %>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls relative">
-
             <div class="transmission-power-value"><span>1</span>/7</div>
-
             <%= config.input :transmission_power,
-                             include_blank: false,
-                             id: 'transmission_power-slider',
-                             label: render('beacons/form/transmission_power_tooltip', beacon: beacon),
+                             as: :old_value_tooltip,
+                             id: :"transmission_power-slider",
+                             beacon: beacon,
                              input_html: {
-                                 id: 'transmission_power',
-                                 class: %W[slider],
-                                 value: beacon.config.transmission_power,
+                                 id: :transmission_power,
+                                 class: %w[slider],
                                  data: {
-                                     slider_min:     1,
+                                     slider_min:     0,
                                      slider_max:     7,
                                      slider_step:    1,
                                      slider_value:   beacon.config.transmission_power,
