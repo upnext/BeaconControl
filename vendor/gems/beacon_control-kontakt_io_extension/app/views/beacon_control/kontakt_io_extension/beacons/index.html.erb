@@ -24,7 +24,7 @@
                 method: :post
     %>
     <%= link_to t(".sync_with_reassign"),
-                beacon_control_kontakt_io_extension.sync_beacons_path(reassign: true),
+                beacon_control_kontakt_io_extension.sync_beacons_path(reassign: true, venue: :force_update),
                 class: "btn btn-success",
                 method: :post
     %>

@@ -140,11 +140,15 @@ module BeaconControl
       end
 
       def load_venues
-        if selected_beacons.any?
+        if selected_beacons.any? && !venue_force_update?
           beacons.map do |beacon|
             beacon.venue
           end.compact.uniq(&:id).each do |venue|
             venue.was_imported = zone_mapped_uids.include?(venue.id)
+          end
+        elsif venue_force_update?
+          api.venues.select do |venue|
+            imported_venue_uids.include? venue.id
           end
         else
           api.venues.select do |venue|
@@ -152,6 +156,14 @@ module BeaconControl
             selected_venues.nil? ? selected_venues.include?(venue.id) : true
           end
         end
+      end
+
+      def imported_venue_uids
+        @imported_venue_uids ||= imported_zones.map(&:kontakt_uid).compact
+      end
+
+      def imported_zones
+        @imported_zones ||= admin.account.zones.kontakt_io
       end
 
       # @return [Array<String>]
@@ -172,6 +184,7 @@ module BeaconControl
       def fetch_options!(params)
         @selected_beacons = params.fetch(:beacons, []) unless @selected_beacons
         @selected_venues  = params.fetch(:venues, []) unless @selected_venues
+        @venue = params.fetch(:venue, false)
         @reassign = params.fetch(:reassign, false)
         @update = params[:update] == true
       end
@@ -179,6 +192,10 @@ module BeaconControl
       # @return [TrueClass|FalseClass]
       def update?
         @update
+      end
+
+      def venue_force_update?
+        @venue.to_s == 'force_update'
       end
 
       # @param [String] uid
