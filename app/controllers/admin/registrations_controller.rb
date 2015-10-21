@@ -18,19 +18,30 @@ class Admin::RegistrationsController < Devise::RegistrationsController
 
   respond_to :json
 
+  rescue_from Gibbon::MailChimpError do |error|
+    render json: { error: error.body.fetch('title', 'unknown error') },
+           status: :unprocessable_entity
+  end
+
   def create
     @admin = Admin::Factory.new(sign_up_params).create
     
     if @admin.persisted?
+      location = nil
       if @admin.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(:admin, @admin)
-        respond_with @admin, location: after_sign_up_path_for(@admin)
+        location = after_sign_up_path_for(@admin)
       else
         set_flash_message :notice, :"signed_up_but_#{@admin.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
-        respond_with @admin, location: after_inactive_sign_up_path_for(@admin)
+        location = after_inactive_sign_up_path_for(@admin)
       end
+      Mailchimp::List.find(AppConfig.mailchimp_list_id).members.create(
+          email_address: sign_up_params.fetch(:email),
+          status: "subscribed"
+      )
+      respond_with @admin, location: location
     else
       clean_up_passwords(@admin)
       # respond_with @admin returns wrong formatted json

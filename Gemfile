@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6', '0.7.0'
 
+gem 'gibbon'
+
 gem 'less'
 gem 'less-rails'
 gem 'less-rails-bootstrap'

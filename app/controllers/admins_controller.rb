@@ -18,8 +18,8 @@ class AdminsController < AdminController
             using: [:column, :direction],
             type: :hash,
             default: {
-              column: 'admins.email',
-              direction: 'asc'
+                column: 'admins.email',
+                direction: 'asc'
             }
   has_scope :with_email, as: :admin_email
 
@@ -29,7 +29,9 @@ class AdminsController < AdminController
   end
 
   def create
-    create! { admins_path }
+    create! do
+      admins_path
+    end
   end
 
   def update
@@ -45,7 +47,7 @@ class AdminsController < AdminController
 
   def permitted_params
     {
-      admin: params.fetch(:admin, {}).permit(:email, :role)
+        admin: params.fetch(:admin, {}).permit(:email, :role)
     }
   end
 

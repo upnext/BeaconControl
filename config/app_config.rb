@@ -66,4 +66,7 @@ AppConfig = ApplicationConfig.new do
 
   config_key :hjid, default: 59670
   config_key :hjsv, default: 5
+
+  config_key :mailchimp_key, default: ''
+  config_key :mailchimp_list_id, default: ''
 end
