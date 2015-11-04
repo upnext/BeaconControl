@@ -17,28 +17,32 @@ class Beacon
       hash
     end
 
-    # def proximity
-    #   beacon.proximity_id.uuid if beacon
-    # end
-    #
-    # def minor
-    #   beacon.proximity_id.minor if beacon
-    # end
-    #
-    # def major
-    #   beacon.proximity_id.major if beacon
-    # end
-    #
-    # def namespace
-    #   beacon.proximity_id.namespace if beacon
-    # end
-    #
-    # def instance
-    #   beacon.proximity_id.instance if beacon
-    # end
-    #
-    # def url
-    #   beacon.proximity_id.url if beacon
-    # end
+    def attributes
+      @table
+    end
+
+    def proximity
+      beacon.proximity_id.uuid if beacon
+    end
+
+    def minor
+      beacon.proximity_id.minor if beacon
+    end
+
+    def major
+      beacon.proximity_id.major if beacon
+    end
+
+    def namespace
+      beacon.proximity_id.namespace if beacon
+    end
+
+    def instance
+      beacon.proximity_id.instance if beacon
+    end
+
+    def url
+      beacon.proximity_id.url if beacon
+    end
   end
 end

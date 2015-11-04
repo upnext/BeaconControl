@@ -33,6 +33,6 @@ class BeaconSerializer < ApplicationSerializer
   end
 
   def config
-    object.config
+    object.config.attributes
   end
 end

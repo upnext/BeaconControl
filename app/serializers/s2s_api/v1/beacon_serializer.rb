@@ -37,7 +37,7 @@ module S2sApi
       end
 
       def unique_id
-        object.vendor_uid if controller
+        object.vendor_uid
       end
 
       def config
@@ -46,10 +46,6 @@ module S2sApi
           config_updated_at: object.beacon_config.updated_at,
           beacon_updated_at: object.beacon_config.beacon_updated_at
         }
-      end
-
-      def controller
-        @controller ||= @serialization_options.fetch(:controller, nil)
       end
     end
   end
