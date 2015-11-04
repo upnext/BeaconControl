@@ -48,6 +48,9 @@ class ProximityId
 
   def initialize(beacon)
     @beacon = beacon
+    beacon.beacon_proximity_fields.where(name: FIELDS).each do |field|
+      instance_variable_set(:"@#{field.name}", field)
+    end
   end
 
   def to_s
@@ -67,6 +70,7 @@ class ProximityId
   end
 
   def self.create_proximity_field(field_name)
+    return if method_defined? field_name
     define_method(field_name) do
       field = send("load_and_memoize_#{field_name}")
       field.value

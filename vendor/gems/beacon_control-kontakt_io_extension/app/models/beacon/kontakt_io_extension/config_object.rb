@@ -21,10 +21,10 @@ class Beacon
 
           def self.create_default_methods(mth)
             class_eval <<-RUBY, __FILE__, __LINE__+1
-              def #{mth}(*);super;end
-              def #{mth}=(*);super;end
-              def current_#{mth}(*);super;end
-              def current_#{mth}=(*);super;end
+              def #{mth}(*);super;end unless method_defined?(:#{mth})
+              def #{mth}=(*);super;end unless method_defined?(:#{mth}=)
+              def current_#{mth}(*);super;end unless method_defined?(:current_#{mth})
+              def current_#{mth}=(*);super;end unless method_defined?(:current_#{mth}=)
             RUBY
           end
 
@@ -33,7 +33,7 @@ class Beacon
             non = :"_non_kontakt_io_#{name}"
             return if method_defined?(current)
             create_default_methods(name) unless method_defined?(name)
-            alias_method non, name
+            alias_method non, name if method_defined?(non)
             class_eval <<-RUBY, __FILE__, __LINE__ + 1
               def #{current}
                 _non_kontakt_io_#{name}.#{cast}
@@ -58,9 +58,9 @@ class Beacon
           kontakt_io_attribute(:major, :major)
           kontakt_io_attribute(:minor, :minor)
           kontakt_io_attribute(:proximity, :proximity, :'to_s.upcase')
-          kontakt_io_attribute(:instance, :instance_id)
-          kontakt_io_attribute(:namespace, :namespace)
-          kontakt_io_attribute(:url, :url)
+          kontakt_io_attribute(:instance, :instance_id, :'to_s')
+          kontakt_io_attribute(:namespace, :namespace, :'to_s')
+          kontakt_io_attribute(:url, :url, :'to_s')
         end
       end
     end
