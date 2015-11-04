@@ -16,12 +16,6 @@ class BeaconConfig < ActiveRecord::Base
 
   after_initialize :ensure_data
 
-  delegate :minor, :major, to: :beacon
-
-  def proximity
-    beacon.try(:uuid)
-  end
-
   # Update beacon configuration.
   # Some extension can override this functionality or add some custom stuff.
   # @param [Admin] admin

@@ -20,12 +20,12 @@ class Beacon
           end
 
           def self.create_default_methods(mth)
-            class_eval <<-EOS
+            class_eval <<-RUBY, __FILE__, __LINE__+1
               def #{mth}(*);super;end
               def #{mth}=(*);super;end
               def current_#{mth}(*);super;end
               def current_#{mth}=(*);super;end
-            EOS
+            RUBY
           end
 
           def self.kontakt_io_attribute(name, kontakt_key, cast=:to_i)
@@ -34,7 +34,7 @@ class Beacon
             return if method_defined?(current)
             create_default_methods(name) unless method_defined?(name)
             alias_method non, name
-            class_eval <<-EOS, __FILE__, __LINE__ + 1
+            class_eval <<-RUBY, __FILE__, __LINE__ + 1
               def #{current}
                 _non_kontakt_io_#{name}.#{cast}
               end
@@ -50,7 +50,7 @@ class Beacon
               def #{name}_changed?
                 #{current}.to_s.size > 0 && #{name} != #{current}
               end
-            EOS
+            RUBY
           end
 
           kontakt_io_attribute(:transmission_power, :tx_power)
