@@ -76,7 +76,7 @@ module S2sApi
       end
 
       def end_of_association_chain
-        super.where(protocol: 'iBeacon').search(search_params)
+        super.search(search_params)
       end
 
       def default_serializer_options

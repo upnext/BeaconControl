@@ -12,7 +12,7 @@ class Beacon
   # Factory for Beacon model.
   #
   class Factory
-    PARAMS_ORDER = %w[ vendor protocol vendor_uid uuid major minor namespace instance url name ]
+    PARAMS_ORDER = %w[ vendor protocol vendor_uid proximity uuid major minor namespace instance url name ]
 
     NullObject = Naught.build
 
@@ -65,7 +65,11 @@ class Beacon
           a <=> b
         end
       end.reduce({}) do |memo, (k, v)|
-        memo[k] = v
+        if k == 'proximity'
+          memo['uuid'] = v
+        else
+          memo[k] = v
+        end
         memo
       end.with_indifferent_access
     end

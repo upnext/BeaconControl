@@ -156,7 +156,7 @@ class Beacon < ActiveRecord::Base
   end
 
   def config
-    @config = ConfigObject.new((beacon_config || build_beacon_config).loaded_data)
+    @config = ConfigObject.new(self, (beacon_config || build_beacon_config).loaded_data)
   end
 
   def available_floors

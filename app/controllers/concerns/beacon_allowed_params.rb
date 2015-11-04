@@ -6,6 +6,7 @@ module BeaconAllowedParams
              status: 500
     end if Rails.env.development?
   end
+
   def search_params
     params.permit(:name, :sort, :direction, :floor, zone_id: [])
   end
@@ -23,7 +24,7 @@ module BeaconAllowedParams
   end
 
   def i_beacon_params
-    [:uuid, :major, :minor]
+    [:uuid, :major, :minor, :proximity]
   end
 
   def eddystone_params
