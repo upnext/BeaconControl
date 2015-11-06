@@ -39,7 +39,7 @@ module EventProcessor
 
         beacon = if event.with_range?
                    Beacon.find_by(id: event.range_id)
-                 else
+                 elsif event.with_proximity_id?
                    Beacon.find_by(proximity_id: event.proximity_id)
                  end
 

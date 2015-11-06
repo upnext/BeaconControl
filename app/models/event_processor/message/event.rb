@@ -48,6 +48,10 @@ module EventProcessor
         zone_id.present?
       end
 
+      def with_proximity_id?
+        proximity_id.present?
+      end
+
       def with_action?
         action.present?
       end
