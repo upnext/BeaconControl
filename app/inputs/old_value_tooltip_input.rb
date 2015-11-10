@@ -1,18 +1,14 @@
 class OldValueTooltipInput < SimpleForm::Inputs::StringInput
-  def config
-    beacon.config if beacon?
-  end
-
   def label(_ = nil)
     @builder.label(attribute_name, t("beacons.form.#{ attribute_name }").html_safe + tooltip.html_safe, {})
   end
 
   def imported?
-    beacon ? beacon.imported? : false
+    object.is_a?(::Beacon) ? object.imported? : false
   end
 
   def tooltip
-    return '<span style="display:inline">Missing beacon parameter</span>'.html_safe unless beacon?
+    return '<span style="display:inline">Missing beacon parameter</span>'.html_safe unless object.is_a?(::Beacon)
     if imported? && config_changed?
       <<-EOS
       <div class="tooltip-button-wrapper #{ attribute_name }-tooltip">
@@ -29,15 +25,11 @@ class OldValueTooltipInput < SimpleForm::Inputs::StringInput
   end
 
   def config_changed?
-    beacon.config.send("#{ attribute_name }_changed?")
+    object.send("#{ attribute_name }_changed?")
   end
 
-  def beacon
-    options.with_indifferent_access[:beacon]
-  end
-
-  def beacon?
-    beacon.present?
+  def opts
+    @opts ||= options.with_indifferent_access
   end
 
   def options
@@ -49,11 +41,11 @@ class OldValueTooltipInput < SimpleForm::Inputs::StringInput
   end
 
   def config_value
-    beacon.config.send(attribute_name)
+    object.send(attribute_name)
   end
 
   def current_value
-    config.send(:"current_#{attribute_name}").to_i
+    object.send(:"current_#{attribute_name}")
   end
 
   def config_title

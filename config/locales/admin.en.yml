@@ -126,6 +126,7 @@ en:
       save: 'Save Beacon'
       cancel: 'Cancel'
       test_notification: '(will be displayed for the ContextOS App users)'
+      uuid: 'UUID'
       proximity: 'UUID'
       major: Major
       minor: Minor

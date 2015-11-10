@@ -7,6 +7,8 @@
 ###
 
 class Beacon < ActiveRecord::Base
+  include AsyncValue
+
   AVAILABLE_FLOORS = ((AppConfig.lowest_floor)..(AppConfig.highest_floor)).to_a
   SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at beacons.updated_at beacons.protocol)
   PROTOCOLS = %w(iBeacon Eddystone)
@@ -155,8 +157,6 @@ class Beacon < ActiveRecord::Base
     end
   end
 
-  # TODO: This should not be in use to get uuid, major and minor in view
-  #       Require to change tooltip with old value.
   def config
     @config = ConfigObject.new(self, (beacon_config || build_beacon_config).loaded_data)
   end

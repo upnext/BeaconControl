@@ -3,6 +3,7 @@ require 'beacon'
 class Beacon
   class ConfigObject < OpenStruct
     attr_reader :beacon
+    include AsyncValue
 
     def initialize(beacon, hash)
       super(extension_compatibility(hash))
@@ -21,28 +22,8 @@ class Beacon
       @table
     end
 
-    def proximity
-      beacon.proximity_id.uuid if beacon
-    end
-
-    def minor
-      beacon.proximity_id.minor if beacon
-    end
-
-    def major
-      beacon.proximity_id.major if beacon
-    end
-
-    def namespace
-      beacon.proximity_id.namespace if beacon
-    end
-
-    def instance
-      beacon.proximity_id.instance if beacon
-    end
-
-    def url
-      beacon.proximity_id.url if beacon
+    def has_own_key?(key)
+      @table.key?(key.to_s.to_sym)
     end
   end
 end

@@ -28,6 +28,16 @@ class Beacon
             RUBY
           end
 
+          def has_old_value?(key)
+            return false unless config.present?
+            return false unless config.has_own_key?(key)
+            config[key].present?
+          end
+
+          def old_value_for(key)
+            config[key]
+          end
+
           def self.kontakt_io_attribute(name, kontakt_key, cast=:to_i)
             current = :"current_#{name}"
             non = :"_non_kontakt_io_#{name}"
@@ -36,13 +46,13 @@ class Beacon
             alias_method non, name if method_defined?(non)
             class_eval <<-RUBY, __FILE__, __LINE__ + 1
               def #{current}
-                _non_kontakt_io_#{name}.#{cast}
+                (#{non} || self['#{kontakt_key}']).#{cast}
               end
               def #{name}
-                if config[:#{kontakt_key}].nil?
-                  #{current}
+                if has_old_value? '#{kontakt_key}'
+                  old_value_for('#{kontakt_key}').#{cast}
                 else
-                  config.#{kontakt_key}.#{cast}
+                  #{current}
                 end
               rescue
                 #{current}
@@ -55,12 +65,6 @@ class Beacon
 
           kontakt_io_attribute(:transmission_power, :tx_power)
           kontakt_io_attribute(:signal_interval, :interval)
-          kontakt_io_attribute(:major, :major)
-          kontakt_io_attribute(:minor, :minor)
-          kontakt_io_attribute(:proximity, :proximity, :'to_s.upcase')
-          kontakt_io_attribute(:instance, :instance_id, :'to_s')
-          kontakt_io_attribute(:namespace, :namespace, :'to_s')
-          kontakt_io_attribute(:url, :url, :'to_s')
         end
       end
     end

@@ -11,13 +11,13 @@ module BeaconControl
     class Engine < Rails::Engine
       isolate_namespace BeaconControl::KontaktIoExtension
 
-      initializer "kontakt_io_extension", before: :load_config_initializers do |_|
+      initializer "kontakt_io_extension", before: :load_config_initializers do |app|
         config.paths["db/migrate"].expanded.each do |expanded_path|
           Rails.application.config.paths["db/migrate"] << expanded_path
         end
       end
 
-      initializer 'kontakt_io.assets.precompile', after: :load_config_initializers do |app|
+      initializer 'kontakt_io.assets.precompile', after: :load_config_initializers do |_|
         ::Sprockets::ES6.instance.instance_exec do
           @options = @options.merge(
             stage: 0,

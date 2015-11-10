@@ -43,6 +43,45 @@ class Beacon
 
         scope :kontakt_io, -> { joins(:kontakt_io_mapping).merge(KontaktIoMapping.beacons) }
 
+        async_value :uuid,
+                    config_key: :proximity,
+                    beacon: -> { self },
+                    vendor: :Kontakt,
+                    cast: 'to_s.upcase'
+        async_value :minor,
+                    config_key: :minor,
+                    beacon: -> { self },
+                    vendor: :Kontakt
+        async_value :major,
+                    config_key: :major,
+                    beacon: -> { self },
+                    vendor: :Kontakt
+        async_value :namespace,
+                    config_key: :namespace,
+                    beacon: -> { self },
+                    vendor: :Kontakt,
+                    cast: 'to_s.upcase'
+        async_value :instance,
+                    config_key: :instance,
+                    beacon: -> { self },
+                    vendor: :Kontakt,
+                    cast: 'to_s.upcase'
+        async_value :url,
+                    config_key: :url,
+                    beacon: -> { self },
+                    vendor: :Kontakt,
+                    cast: 'to_s.upcase'
+
+        delegate :current_signal_interval,
+                 :signal_interval,
+                 :signal_interval=,
+                 :signal_interval_changed?,
+                 :current_transmission_power,
+                 :transmission_power,
+                 :transmission_power=,
+                 :transmission_power_changed?,
+                 to: :config
+
         def kontakt_io_imported?
           kontakt_io_mapping.present?
         end

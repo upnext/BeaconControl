@@ -10,6 +10,8 @@
 # Serialization of Beacon proximity to store and rebuild from database string.
 #
 class ProximityId
+  include AsyncValue
+
   IBEACON = 'iBeacon'
   EDDYSTONE = 'Eddystone'
   PROTOCOLS =  [IBEACON,EDDYSTONE]
