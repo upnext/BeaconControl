@@ -82,10 +82,14 @@ module BeaconControl
     def self.exec_load
       # BeaconControl::Base.load_extensions!
       BeaconControl::Base.watch_reload.each_pair do |klass, reload_hash|
+        Rails.logger.info "exec load auto inject #{klass}"
         klass = klass.constantize
         reload_hash.each_pair do |identity, injections|
+          Rails.logger.info "  checking appearance of #{identity}"
           unless klass.const_defined?(identity)
+            Rails.logger.info "    not found!"
             injections.each do |mod|
+              Rails.logger.info "  including #{mod}"
               klass.send(:include, mod.constantize)
             end
           end

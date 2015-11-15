@@ -6,7 +6,7 @@
 # LICENSE.txt file in the root directory of this source tree. 
 ###
 
-require 'beacon_config' unless defined? Beacon
+require 'beacon_config' unless defined? BeaconConfig
 
 class BeaconConfig
   module KontaktIoExtension

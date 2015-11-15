@@ -1,3 +1,5 @@
+require 'extension_data' unless defined? ExtensionData
+
 module ExtensionData
   class KontaktIo
     def initialize(application)

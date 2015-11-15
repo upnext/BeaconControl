@@ -1,4 +1,4 @@
-require 'beacon'
+require 'beacon' unless defined? Beacon
 
 class Beacon
   class ConfigObject < OpenStruct

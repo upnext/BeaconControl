@@ -1,3 +1,5 @@
+require 'beacon' unless defined? Beacon
+
 class Beacon
   module KontaktIoExtension
     module ConfigObject

@@ -1,4 +1,4 @@
-require 'proximity_id'
+require 'proximity_id' unless defined? ProximityId
 
 class ProximityId
   module KontaktIoExtension
