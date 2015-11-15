@@ -5,8 +5,10 @@ class Beacon
     attr_reader :beacon
     include AsyncValue
 
+    # @param [Beacon] beacon
+    # @param [Hash] hash
     def initialize(beacon, hash)
-      super(extension_compatibility(hash))
+      super(extension_compatibility(hash.with_indifferent_access))
       @beacon = beacon
     end
 

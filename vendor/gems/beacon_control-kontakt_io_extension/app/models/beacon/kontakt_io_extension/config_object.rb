@@ -48,7 +48,9 @@ class Beacon
             alias_method non, name if method_defined?(non)
             class_eval <<-RUBY, __FILE__, __LINE__ + 1
               def #{current}
-                (#{non} || self['#{kontakt_key}']).#{cast}
+                value = self['#{kontakt_key}']
+                value = #{non} unless value.present?
+                value.#{cast}
               end
               def #{name}
                 if has_old_value? '#{kontakt_key}'

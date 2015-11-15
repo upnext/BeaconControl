@@ -158,7 +158,18 @@ class Beacon < ActiveRecord::Base
   end
 
   def config
-    @config = ConfigObject.new(self, (beacon_config || build_beacon_config).loaded_data)
+    if loaded_config_data.__id__ != @config.try(:attributes).__id__
+      @config = ConfigObject.new(self, loaded_config_data)
+    end
+    @config
+  end
+
+  def reload_config!
+    @config = nil || config
+  end
+
+  def loaded_config_data
+    (beacon_config || build_beacon_config).loaded_data
   end
 
   def available_floors
@@ -211,6 +222,10 @@ class Beacon < ActiveRecord::Base
     else
       triggers.delete(test_trigger)
     end
+  end
+
+  def reload(*)
+    super.tap { @config = nil }
   end
 
   private

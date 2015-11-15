@@ -3,7 +3,8 @@ module AsyncValue
 
   included do
     def vendor_callback(mth)
-      current_vendor = self.instance_exec(&self.class.vendor_for_async_callback).vendor
+      current_vendor = self.instance_exec(&self.class.vendor_for_async_callback).vendor.to_s
+      Rails.logger.info "Current vendor for async check: #{ current_vendor.inspect }"
       hash = self.class.async_vendors
       hash[current_vendor] && hash[current_vendor]["#{mth}"]
     end
@@ -19,7 +20,7 @@ module AsyncValue
       mod_name = :"Async#{mth.to_s.camelize}"
       opts = opts.with_indifferent_access
       config_key = opts.fetch(:config_key, mth)
-      vendor = opts.fetch(:vendor)
+      vendor = opts.fetch(:vendor).to_s
       beacon = opts.fetch(:beacon)
       cast = opts.fetch(:cast, :to_i)
       create_module(mth, mod_name, file, line) unless const_defined?(mod_name)
@@ -48,6 +49,7 @@ module AsyncValue
 
             def #{mth}
               callback = vendor_callback("#{mth}")
+              Rails.logger.info "  has async callback for #{mth}: " + (callback ? 'yes' : 'no')
               if callback
                 callback.value(self)
               else
@@ -57,6 +59,7 @@ module AsyncValue
 
             def #{mth}=(value)
               callback = vendor_callback("#{mth}")
+              Rails.logger.info "  has async callback for #{mth}=: " + (callback ? 'yes' : 'no')
               if callback
                 callback.set_value(self, value)
               else
@@ -125,7 +128,12 @@ module AsyncValue
     end
 
     def value(owner)
-      cast owner.send(:"_non_async_#{@mth}")
+      beacon = owner.instance_exec(&@beacon)
+      if beacon.config.has_old_value? @mth.to_s
+        cast beacon.config.old_value_for @mth.to_s
+      else
+        current(owner)
+      end
     end
 
     def set_value(owner, value)

@@ -62,7 +62,7 @@ class Beacon
                     vendor: :Kontakt,
                     cast: 'to_s.upcase'
         async_value :instance,
-                    config_key: :instance,
+                    config_key: :instance_id,
                     beacon: -> { self },
                     vendor: :Kontakt,
                     cast: 'to_s.upcase'
