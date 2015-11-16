@@ -50,9 +50,7 @@ class ProximityId
 
   def initialize(beacon)
     @beacon = beacon
-    beacon.beacon_proximity_fields.where(name: FIELDS).each do |field|
-      instance_variable_set(:"@#{field.name}", field)
-    end
+    load_values
   end
 
   def to_s
@@ -69,6 +67,12 @@ class ProximityId
 
   def i_beacon
     IBEACON_FIELDS.reduce([]) { |m, field| m << send(field); m }
+  end
+
+  def load_values
+    beacon.beacon_proximity_fields.where(name: FIELDS).each do |field|
+      instance_variable_set(:"@#{field.name}", field)
+    end
   end
 
   def self.create_proximity_field(field_name)

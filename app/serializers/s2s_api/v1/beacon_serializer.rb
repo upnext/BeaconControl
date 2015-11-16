@@ -24,7 +24,6 @@ module S2sApi
         else
           object.proximity_id.to_s
         end
-
       end
 
       def location

@@ -29,7 +29,11 @@ module S2sApi
       actions :index, :update, :destroy
 
       def index
-        respond_with(end_of_association_chain, controller: self)
+        beacons = end_of_association_chain.each do |beacon|
+          c = beacon.beacon_config || beacon.build_beacon_config
+          c.load_data(current_admin)
+        end
+        respond_with(beacons, controller: self)
       end
 
       def info

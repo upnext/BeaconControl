@@ -12,9 +12,16 @@ module BeaconControl
       def index
         render 'index',
                locals: {
-                 beacons: current_admin.account.beacons.kontakt_io.order('created_at DESC'),
+                 beacons: beacons,
                  zones: Zone.kontakt_io.order('created_at DESC')
                }
+      end
+
+      def beacons
+        current_admin.account.beacons.kontakt_io.order('created_at DESC').each do |beacon|
+          config = beacon.beacon_config || beacon.build_beacon_config
+          config.load_data current_admin
+        end
       end
 
       #

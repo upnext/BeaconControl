@@ -10,6 +10,7 @@ Doorkeeper.configure do
       Authenticator::MobileUser.new(params).call
     when "s2s_api"
       Authenticator::Admin.new(params).call
+    else
     end
   end
 
