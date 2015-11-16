@@ -8,7 +8,7 @@ class Beacon
     # @param [Beacon] beacon
     # @param [Hash] hash
     def initialize(beacon, hash)
-      super(extension_compatibility(hash.with_indifferent_access))
+      super(extension_compatibility(hash.with_indifferent_access).to_hash)
       @beacon = beacon
     end
 
@@ -21,7 +21,7 @@ class Beacon
     end
 
     def attributes
-      @table
+      @table.to_hash
     end
 
     def has_own_key?(key)

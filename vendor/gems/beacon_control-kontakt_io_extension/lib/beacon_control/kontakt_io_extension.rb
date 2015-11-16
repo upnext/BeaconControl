@@ -36,5 +36,6 @@ module BeaconControl
     auto_include('Zone', 'KontaktIoExtension', 'Zone::KontaktIoExtension::Extension')
     auto_include('BeaconsController', 'KontaktIoExtension', 'BeaconControl::BeaconsController::KontaktIoExtension')
     auto_include('S2sApi::V1::BeaconsController', 'S2sBeaconsExtension', 'BeaconControl::KontaktIoExtension::S2sBeaconsExtension')
+    auto_include('BeaconIdentityValidator', 'KontaktIoExtension', 'BeaconIdentityValidator::KontaktIoExtension::Validator')
   end
 end

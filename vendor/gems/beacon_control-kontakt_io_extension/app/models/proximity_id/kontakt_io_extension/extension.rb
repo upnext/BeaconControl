@@ -15,14 +15,23 @@ class ProximityId
           define_method(field) do
             return send(:"_non_kontakt_io_#{field}") unless @beacon
             return send(:"_non_kontakt_io_#{field}") unless @beacon.vendor == 'Kontakt'
-            mth = @beacon.respond_to?("current_#{field}") ? "current_#{field}" : field
-            @beacon.public_send(mth)
+            @beacon.beacon_config.load_data(admin_mock_up)
+            if @beacon.respond_to?("current_#{field}")
+              return nil unless @beacon.config.present?
+              @beacon.send("current_#{field}")
+            else
+              @beacon.send(field)
+            end
           end
 
           define_method(:"#{field}=") do |value|
             return send(:"_non_kontakt_io_#{field}=", value) unless @beacon
             return send(:"_non_kontakt_io_#{field}=", value) unless @beacon.vendor == 'Kontakt'
             @beacon.send(:"#{field}=", value)
+          end
+
+          def admin_mock_up
+            ::OpenStruct.new(account: @beacon.try(:account))
           end
         end
       end

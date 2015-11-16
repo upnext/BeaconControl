@@ -32,6 +32,13 @@ module KontaktIo
       )
     end
 
+    # @param [Account] account
+    def self.for_account(account)
+      KontaktIo::ApiClient.new(
+        KontaktIo::ApiClient.account_api_key(account)
+      )
+    end
+
     #
     # Fetches all Kontakt.io managers assigned to an account from GET /manager endpoint.
     # Returns array of +KontaktIo::Resource::Manager+ objects for each manager.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929132753) do
+ActiveRecord::Schema.define(version: 20151116134144) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(version: 20150929132753) do
 
   create_table "beacon_configs", force: :cascade do |t|
     t.integer  "beacon_id",         limit: 4
-    t.string   "data",              limit: 255
+    t.text     "data",              limit: 65535
     t.datetime "beacon_updated_at"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "beacon_configs", ["beacon_id"], name: "index_beacon_configs_on_beacon_id", using: :btree
