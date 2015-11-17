@@ -6,6 +6,14 @@ class ProximityId
       extend ActiveSupport::Concern
 
       included do
+        def kontakt_io_loaded_data
+          @kontakt_io_loaded_data ||= load_kontakt_io_data
+        end
+
+        def load_kontakt_io_data
+          @beacon.beacon_config.load_data(::OpenStruct.new(account: @beacon.try(:account)))
+        end
+
         ::ProximityId::FIELDS.each do |field|
           unless method_defined? :"_non_kontakt_io_#{field}"
             alias_method :"_non_kontakt_io_#{field}", field
@@ -15,7 +23,7 @@ class ProximityId
           define_method(field) do
             return send(:"_non_kontakt_io_#{field}") unless @beacon
             return send(:"_non_kontakt_io_#{field}") unless @beacon.vendor == 'Kontakt'
-            @beacon.beacon_config.load_data(::OpenStruct.new(account: @beacon.try(:account)))
+            kontakt_io_loaded_data
             if @beacon.respond_to?("current_#{field}")
               return nil unless @beacon.config.present?
               @beacon.send("current_#{field}")
