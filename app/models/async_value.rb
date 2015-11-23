@@ -60,12 +60,11 @@ module AsyncValue
             def #{mth}=(value)
               callback = vendor_callback("#{mth}")
               Rails.logger.info "  has async callback for #{mth}=: " + (callback ? 'yes' : 'no')
-              if callback
-                callback.set_value(self, value)
-              else
-                self.#{aliased_method} = value
-                self.#{aliased_method}
-              end
+
+              callback.set_value(self, value) if callback
+
+              self.#{aliased_method} = value
+              self.#{aliased_method}
             end
 
             def current_#{mth}

@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 module S2sApi
@@ -29,10 +29,7 @@ module S2sApi
       actions :index, :update, :destroy
 
       def index
-        beacons = end_of_association_chain.each do |beacon|
-          c = beacon.beacon_config || beacon.build_beacon_config
-          c.load_data(current_admin)
-        end
+        beacons = end_of_association_chain
         respond_with(beacons, controller: self)
       end
 
@@ -80,7 +77,7 @@ module S2sApi
       end
 
       def end_of_association_chain
-        super.search(search_params)
+        super.includes(:beacon_config).search(search_params)
       end
 
       def default_serializer_options
