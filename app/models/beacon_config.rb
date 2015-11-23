@@ -23,6 +23,11 @@ class BeaconConfig < ActiveRecord::Base
   def update_data(admin, data)
     loaded_data.merge!(data.with_indifferent_access)
     update_attribute(:data, loaded_data)
+    @data_loaded = false
+  end
+
+  def data_loaded?
+    @data_loaded
   end
 
   def current_transmission_power
@@ -38,6 +43,7 @@ class BeaconConfig < ActiveRecord::Base
   # @param [Admin] admin
   # @return [ActiveSupport::HashWithIndifferentAccess]
   def load_data(admin)
+    @data_loaded = true
     @loaded_data ||= self.data.with_indifferent_access
   end
 
