@@ -13,21 +13,24 @@ class ProximityId
           end
 
           define_method(field) do
-            return send(:"_non_kontakt_io_#{field}") unless @beacon
+            return send(:"_non_kontakt_io_#{field}") unless @beacon.present?
+            return send(:"_non_kontakt_io_#{field}") unless @beacon.beacon_config.present?
             return send(:"_non_kontakt_io_#{field}") unless @beacon.vendor == 'Kontakt'
-            return send(:"_non_kontakt_io_#{field}") if @beacon.beacon_config.present?
-
-            if @beacon.respond_to?("current_#{field}")
-              @beacon.send("current_#{field}")
+            if @beacon.config.has_own_key?(field)
+              if @beacon.config.has_old_value?(field)
+                @beacon.config.old_value_for(field)
+              else
+                @beacon.config.send(field)
+              end
             else
-              @beacon.send(field)
+              send(:"_non_kontakt_io_#{field}")
             end
           end
 
           define_method(:"#{field}=") do |value|
-            return send(:"_non_kontakt_io_#{field}=", value) unless @beacon
-            return send(:"_non_kontakt_io_#{field}=", value) unless @beacon.vendor == 'Kontakt'
-            @beacon.send(:"#{field}=", value) unless @beacon.send(field) == send(field)
+            send(:"_non_kontakt_io_#{field}=", value)
+            @beacon.config["#{field}"] = value if @beacon
+            value
           end
         end
       end
