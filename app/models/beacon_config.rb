@@ -52,6 +52,17 @@ class BeaconConfig < ActiveRecord::Base
     @loaded_data ||= data
   end
 
+  def present?
+    loaded = false
+    data.each_key do |key|
+      if DEFAULT_DATA_KEYS[key] != data[key]
+        loaded = false
+        break
+      end
+    end
+    loaded
+  end
+
   # Initialize data.
   private def ensure_data
     self.data ||= {}
