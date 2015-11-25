@@ -1,0 +1,17 @@
+<section id="zones" class="row">
+  <label for="zones" class="col-xs-12">
+    Add neighbour
+  </label>
+  <div class="drop-down-wrapper col-xs-12">
+    <div class="zones-wrapper col-xs-8">
+      <%= content_tag :select, name: 'zones', class: %w[selectpicker col-xs-12] do %>
+        <%- zones.each do |zone| %>
+          <%= content_tag(:option, value: zone.id, color: zone.color) { zone.name } %>
+        <%- end %>
+      <% end %>
+    </div>
+    <div class="add-wrapper col-xs-4">
+      <%= button_link(:add, '#', class: %w[btn-success btn-action-new col-xs-12], id: 'add-zone-button') %>
+    </div>
+  </div>
+</section>

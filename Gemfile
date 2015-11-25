@@ -53,8 +53,7 @@ gem 'beacon_control-kontakt_io_extension',
     path: 'vendor/gems/beacon_control-kontakt_io_extension'
 
 gem 'beacon_control-neighbours_extension',
-  # path: '../beacon_control-neighbours_extension'
-  git: 'ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git'
+    path: 'vendor/gems/beacon_control-neighbours_extension'
 
 # Barcodes
 gem 'barby'

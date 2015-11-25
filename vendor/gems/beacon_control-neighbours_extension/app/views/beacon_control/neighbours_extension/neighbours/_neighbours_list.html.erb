@@ -1,0 +1,16 @@
+<template id="remove-neighbour-row">
+  <div class="removable-neighbour-remove col-xs-12">
+    <div class="col-xs-8 neighbour-name-wrapper">
+      <div class="neighbour-name"></div>
+    </div>
+    <div class="col-xs-4 remove-neighbour-wrapper">
+      <%= button_link(:delete, '#', class: %w[remove-neighbour]) %>
+    </div>
+  </div>
+</template>
+
+<section id="zone-neighbours-list" class="row">
+  <label class="col-xs-12">
+    Currently added neighbours
+  </label>
+</section>

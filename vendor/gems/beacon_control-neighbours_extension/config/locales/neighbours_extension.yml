@@ -1,0 +1,19 @@
+en:
+  neighbours_extension:
+    configurations:
+    sidebar_links:
+    settings:
+  beacon_control:
+    neighbours_extension:
+      neighbours:
+        show:
+          breadcrumbs: Neighbours
+          title: Neighbours
+          neighbours_title: Neighbours
+  activities:
+    form:
+      scheme:
+        neighbours: Neighbours
+  triggers:
+    neighbours: Neighbours
+    neighbours_description: "Neighbours description"

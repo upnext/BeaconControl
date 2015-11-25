@@ -1,0 +1,14 @@
+<section id="change-zone-list" class="row">
+  <label for="change-zone" class="col-xs-12">
+    Choose zone
+  </label>
+  <div class="col-xs-12">
+    <div class="col-xs-8 drop-down-wrapper" id="choose-zone-wrapper">
+      <%= content_tag :select, name: 'change-zone', class: %w[selectpicker] do %>
+        <% zones.each do |zone| %>
+          <%= content_tag(:option, value: zone.id, color: zone.color) { zone.name } %>
+        <%- end %>
+      <% end %>
+    </div>
+  </div>
+</section>

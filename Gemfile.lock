@@ -34,17 +34,16 @@ PATH
       virtus
 
 PATH
-  remote: vendor/gems/beacon_control-presence_extension
-  specs:
-    beacon_control-presence_extension (0.0.1)
-
-GIT
-  remote: ssh://git@stash.up-next.com:7999/var/beacon_control-neighbours_extension.git
-  revision: 9da6a33c1a0d0baf4fb868189237485633deca10
+  remote: vendor/gems/beacon_control-neighbours_extension
   specs:
     beacon_control-neighbours_extension (0.1.1)
       sprockets (>= 3.0.0)
       sprockets-es6 (= 0.7.0)
+
+PATH
+  remote: vendor/gems/beacon_control-presence_extension
+  specs:
+    beacon_control-presence_extension (0.0.1)
 
 GEM
   remote: https://rubygems.org/
