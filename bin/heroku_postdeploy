@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path("../lib",File.dirname(__FILE__))
+
+require "pathname"
+require "yaml"
+require "string"
+require "fileutils"
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+Dir[APP_ROOT.join("config","*.example")].each { |f| FileUtils.cp(f, f.gsub(/\.example$/,"")) }
+
+system "rake db:setup"
+system 'rake db:schema:load'
+system 'rake db:seed'
