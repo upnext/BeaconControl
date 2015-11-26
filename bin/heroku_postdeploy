@@ -8,5 +8,5 @@ require "string"
 require "fileutils"
 
 
-system 'rake db:schema:load'
+system 'rake db:migrate'
 system 'rake db:seed'
