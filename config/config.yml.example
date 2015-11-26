@@ -8,7 +8,7 @@
 
 default: &default
   config:
-    secret_key_base: 'a7afcddf63860798e504a9fa0a5923c28b1c6f8b070cdc9a0ab38274a2b1837b1c82f1069e40e37964a1d49eb903eca40ff310ad2ae47117a091fa73247de2c1'
+    secret_key_base:
     registerable: true
     confirmable: false
     mailer_sender:

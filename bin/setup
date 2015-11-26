@@ -5,7 +5,6 @@ $:.unshift File.expand_path("../lib",File.dirname(__FILE__))
 require "pathname"
 require "yaml"
 require "string"
-require "fileutils"
 
 # path to your application root.
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
