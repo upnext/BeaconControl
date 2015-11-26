@@ -3,13 +3,13 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 require_relative '../lib/application_config'
 
 AppConfig = ApplicationConfig.new do
-  config_key :secret_key_base, default: 'test'
+  config_key :secret_key_base, default: ENV['SECRET_KEY_BASE']
   config_key :store_dir
   config_key :registerable, default: true
   config_key :confirmable, default: false

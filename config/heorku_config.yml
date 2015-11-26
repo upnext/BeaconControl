@@ -1,0 +1,55 @@
+###
+# Copyright (c) 2015, Upnext Technologies Sp. z o.o.
+# All rights reserved.
+#
+# This source code is licensed under the BSD 3-Clause License found in the
+# LICENSE.txt file in the root directory of this source tree.
+###
+
+default: &default
+  config:
+    secret_key_base: 'a7afcddf63860798e504a9fa0a5923c28b1c6f8b070cdc9a0ab38274a2b1837b1c82f1069e40e37964a1d49eb903eca40ff310ad2ae47117a091fa73247de2c1'
+    registerable: true
+    confirmable: false
+    mailer_sender: noreply@beacon-os.com
+    registration_mailer_sender: noreply@beacon-os.com
+    mailer_url_options:
+      host: localhost
+      port: 3000
+    smtp_settings:
+      address: smtp.gmail.com
+      port: 587
+      domain:
+      user_name:
+      password:
+      authentication: plain
+      enable_starttls_auto: true
+    system_mailer_receiver: noreply@beacon-os.com
+    redis_url: redis://localhost:6379
+    create_test_app_on_new_account: true
+    autoload_extensions:
+      "Analytics":  false
+      "DwellTime":  false
+      "Kontakt.io": false
+      "Presence":   true
+    root:
+      username: root
+      password: toor
+    landing_page_url: http://localhost:3001
+    lowest_floor: 1
+    highest_floor: 10
+    google_analytics_enabled: false
+    sandbox_cert_path: 'path_to_cert.p12'
+    production_cert_path: 'path_to_cert.p12'
+    sandbox_cert_passphrase: 'path_to_cert.p12'
+    production_cert_passphrase: 'path_to_cert.p12'
+    force_ssl: false
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
