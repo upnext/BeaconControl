@@ -16,7 +16,6 @@ export class TabSwitcher {
       this.switchTab(event);
     });
 
-    this.el.on('validation:mounted', ()=> { this.findTab(); });
     this.el.on('validation:error', ()=> { this.findTab(); });
   }
 
