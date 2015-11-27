@@ -8,11 +8,9 @@
 
 default: &default
   config:
-    secret_key_base: 'a7afcddf63860798e504a9fa0a5923c28b1c6f8b070cdc9a0ab38274a2b1837b1c82f1069e40e37964a1d49eb903eca40ff310ad2ae47117a091fa73247de2c1'
     registerable: true
     confirmable: false
-    mailer_sender: noreply@beacon-os.com
-    registration_mailer_sender: noreply@beacon-os.com
+    mailer_sender:
     mailer_url_options:
       host: localhost
       port: 3000
@@ -35,7 +33,6 @@ default: &default
     root:
       username: root
       password: toor
-    landing_page_url: http://localhost:3001
     lowest_floor: 1
     highest_floor: 10
     google_analytics_enabled: false
@@ -44,6 +41,7 @@ default: &default
     sandbox_cert_passphrase: 'path_to_cert.p12'
     production_cert_passphrase: 'path_to_cert.p12'
     force_ssl: false
+    # landing_page_url: http://localhost:3001
 
 development:
   <<: *default
