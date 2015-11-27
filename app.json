@@ -7,10 +7,16 @@
   "env": {
     "RAILS_ENV": "production",
     "RACK_ENV": "production",
-    "RAILS_SERVE_STATIC_FILES": "true"
+    "RAILS_SERVE_STATIC_FILES": "true",
+    "SENDGRID_USERNAME": {
+      "description": "SendGrid username"
+    },
+    "SENDGRID_PASSWORD": {
+      "description": "SendGrid password"
+    }
   },
   "scripts": {
     "postdeploy": "bundle exec ./bin/heroku_postdeploy"
   },
-  "addons": ["cleardb:ignite", "redistogo:nano"]
+  "addons": ["cleardb:ignite", "redistogo:nano", "sendgrid:starter"]
 }

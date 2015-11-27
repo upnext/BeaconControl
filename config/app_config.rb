@@ -23,11 +23,11 @@ AppConfig = ApplicationConfig.new do
   config_key :coupon_url, default: ''
 
   config_key :smtp_settings, mandatory: Rails.env.production?, default: {
-    address:              'smtp.gmail.com',
+    address:              'smtp.sendgrid.net',
     port:                 587,
-    domain:               'beacon-os.com',
-    user_name:            'noreply@beacon-os.com',
-    password:             '',
+    domain:               'heroku.com',
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true
   }
