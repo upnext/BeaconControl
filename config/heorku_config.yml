@@ -14,14 +14,6 @@ default: &default
     mailer_url_options:
       host: localhost
       port: 3000
-    smtp_settings:
-      address: smtp.gmail.com
-      port: 587
-      domain:
-      user_name:
-      password:
-      authentication: plain
-      enable_starttls_auto: true
     system_mailer_receiver: noreply@beacon-os.com
     redis_url: redis://localhost:6379
     create_test_app_on_new_account: true
