@@ -22,7 +22,7 @@ AppConfig = ApplicationConfig.new do
 
   config_key :coupon_url, default: ''
 
-  config_key :smtp_settings, mandatory: Rails.env.production?, default: {
+  config_key :smtp_settings, default: {
     address:              'smtp.sendgrid.net',
     port:                 587,
     domain:               'heroku.com',
