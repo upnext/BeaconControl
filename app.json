@@ -7,13 +7,7 @@
   "env": {
     "RAILS_ENV": "production",
     "RACK_ENV": "production",
-    "RAILS_SERVE_STATIC_FILES": "true",
-    "SENDGRID_USERNAME": {
-      "description": "SendGrid username"
-    },
-    "SENDGRID_PASSWORD": {
-      "description": "SendGrid password"
-    }
+    "RAILS_SERVE_STATIC_FILES": "true"
   },
   "scripts": {
     "postdeploy": "bundle exec ./bin/heroku_postdeploy"
