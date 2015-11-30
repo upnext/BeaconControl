@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 class Admin::RegistrationsController < Devise::RegistrationsController
@@ -25,7 +25,7 @@ class Admin::RegistrationsController < Devise::RegistrationsController
 
   def create
     @admin = Admin::Factory.new(sign_up_params).create
-    
+
     if @admin.persisted?
       location = nil
       if @admin.active_for_authentication?
@@ -40,7 +40,7 @@ class Admin::RegistrationsController < Devise::RegistrationsController
       Mailchimp::List.find(AppConfig.mailchimp_list_id).members.create(
           email_address: sign_up_params.fetch(:email),
           status: "subscribed"
-      )
+      ) if AppConfig.mailchimp_list_id.present?
       respond_with @admin, location: location
     else
       clean_up_passwords(@admin)
