@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 require 'ostruct'
@@ -12,7 +12,9 @@ class ApplicationConfig
   MissingRequiredConfiguration = Class.new(StandardError)
 
   def initialize(file_path=nil, &block)
-    @file_path = file_path || File.expand_path('config/config.yml')
+    config_file = File.expand_path('config/config.yml')
+    config_file = File.expand_path('config/heorku_config.yml') unless File.exist? config_file
+    @file_path = file_path || config_file
     @store = {}
     @config = {}
     instance_exec &block if block_given?

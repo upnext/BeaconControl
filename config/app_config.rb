@@ -3,16 +3,15 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 require_relative '../lib/application_config'
 
 AppConfig = ApplicationConfig.new do
-  config_key :secret_key_base, default: 'test'
+  config_key :secret_key_base, default: ENV['SECRET_KEY_BASE']
   config_key :store_dir
   config_key :registerable, default: true
-  config_key :confirmable, default: false
   config_key :user_management, default: false
 
   config_key :log_path
@@ -22,20 +21,20 @@ AppConfig = ApplicationConfig.new do
 
   config_key :coupon_url, default: ''
 
-  config_key :smtp_settings, mandatory: Rails.env.production?, default: {
-    address:              'smtp.gmail.com',
+  config_key :smtp_settings, default: {
+    address:              'smtp.sendgrid.net',
     port:                 587,
-    domain:               'beacon-os.com',
-    user_name:            'noreply@beacon-os.com',
-    password:             '',
+    domain:               'heroku.com',
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true
   }
   config_key :mailer_sender, default: 'noreply@beacon-os.com'
   config_key :registration_mailer_sender, default: 'noreply@beacon-os.com'
   config_key :mailer_url_options, default: {
-    host: 'localhost',
-    port: 3000
+    host: '',
+    port: 80
   }
   config_key :system_mailer_receiver, default: 'noreply@beacon-os.com'
 

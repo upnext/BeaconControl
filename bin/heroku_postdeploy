@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path("../lib",File.dirname(__FILE__))
+
+require "pathname"
+require "yaml"
+require "string"
+require "fileutils"
+
+
+system 'rake db:migrate'
+system 'rake db:seed'

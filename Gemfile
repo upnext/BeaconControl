@@ -4,8 +4,12 @@ ruby '2.2.2'
 
 gem 'rails', '4.2.0'
 # Use mysql/postgres as the database for Active Record
-gem 'mysql2'
-# gem 'pg'
+group :development, :test do
+  gem 'mysql2'
+end
+group :production do
+  gem 'pg'
+end
 # Active Record composite primary keys support
 gem 'composite_primary_keys'
 # Use SCSS for stylesheets

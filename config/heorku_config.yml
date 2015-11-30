@@ -8,21 +8,8 @@
 
 default: &default
   config:
-    secret_key_base:
     registerable: true
-    mailer_sender: noreply@beacon-os.com
-    registration_mailer_sender: noreply@beacon-os.com
-    mailer_url_options:
-      host: localhost
-      port: 3000
-    smtp_settings:
-      address: smtp.gmail.com
-      port: 587
-      domain:
-      user_name:
-      password:
-      authentication: plain
-      enable_starttls_auto: true
+    mailer_sender:
     system_mailer_receiver: noreply@beacon-os.com
     redis_url: redis://localhost:6379
     create_test_app_on_new_account: true
@@ -34,7 +21,6 @@ default: &default
     root:
       username: root
       password: toor
-    landing_page_url: http://localhost:3001
     lowest_floor: 1
     highest_floor: 10
     google_analytics_enabled: false
@@ -43,6 +29,7 @@ default: &default
     sandbox_cert_passphrase: 'path_to_cert.p12'
     production_cert_passphrase: 'path_to_cert.p12'
     force_ssl: false
+    # landing_page_url: http://localhost:3001
 
 development:
   <<: *default
