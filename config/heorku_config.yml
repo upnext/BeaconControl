@@ -10,9 +10,6 @@ default: &default
   config:
     registerable: true
     mailer_sender:
-    mailer_url_options:
-      host: localhost
-      port: 3000
     system_mailer_receiver: noreply@beacon-os.com
     redis_url: redis://localhost:6379
     create_test_app_on_new_account: true
