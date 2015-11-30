@@ -34,7 +34,7 @@ AppConfig = ApplicationConfig.new do
   config_key :registration_mailer_sender, default: 'noreply@beacon-os.com'
   config_key :mailer_url_options, default: {
     host: '',
-    port: ''
+    port: 80
   }
   config_key :system_mailer_receiver, default: 'noreply@beacon-os.com'
 
