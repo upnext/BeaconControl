@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_application_url
-    AppConfig.mailer_url_options[:host] = request.host if AppConfig.mailer_url_options[:host].blank?
-    AppConfig.mailer_url_options[:port] = request.port if AppConfig.mailer_url_options[:port].blank?
+    if ActionMailer::Base.default_url_options[:host] != request.host
+      ActionMailer::Base.default_url_options[:host] = AppConfig.mailer_url_options[:host] = request.host
+      ActionMailer::Base.default_url_options[:port] = AppConfig.mailer_url_options[:port] = request.port
+    end
   end
 end

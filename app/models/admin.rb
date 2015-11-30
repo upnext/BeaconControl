@@ -60,7 +60,7 @@ class Admin < ActiveRecord::Base
   scope :with_email, ->(email) { where('email LIKE ?', "%#{email}%") }
 
   after_create do
-    confirm! if !confirmed? && !AppConfig.confirmable
+    confirm! if !confirmed?
   end
 
   validates :password, confirmation: true, on: :update, if: -> { password.present? }
