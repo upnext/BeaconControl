@@ -12,7 +12,6 @@ AppConfig = ApplicationConfig.new do
   config_key :secret_key_base, default: ENV['SECRET_KEY_BASE']
   config_key :store_dir
   config_key :registerable, default: true
-  config_key :confirmable, default: false
   config_key :user_management, default: false
 
   config_key :log_path

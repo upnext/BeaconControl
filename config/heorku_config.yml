@@ -9,7 +9,6 @@
 default: &default
   config:
     registerable: true
-    confirmable: false
     mailer_sender:
     mailer_url_options:
       host: localhost
