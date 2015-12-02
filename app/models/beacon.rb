@@ -142,7 +142,7 @@ class Beacon < ActiveRecord::Base
   end
 
   def encoded_proximity_uuid
-    Base64.encode64 [uuid, major, minor, namespace, instance, url, protocol].map(&:to_s).reduce(:+)
+    Base64.encode64 [uuid, major, minor, namespace, instance, url, protocol].join
   end
 
   def imported?
