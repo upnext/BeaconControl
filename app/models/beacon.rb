@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 class Beacon < ActiveRecord::Base
@@ -136,6 +136,14 @@ class Beacon < ActiveRecord::Base
 
   attr_accessor :mode,
                 :activity_time
+
+  before_validation do
+    self[:proximity_uuid] = encoded_proximity_uuid
+  end
+
+  def encoded_proximity_uuid
+    Base64.encode64 [uuid, major, minor, namespace, instance, url, protocol].join
+  end
 
   def imported?
     false
