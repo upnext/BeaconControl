@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###
 
 require 'rails_helper'
@@ -27,13 +27,13 @@ RSpec.describe Beacon do
     end
 
     it 'does not allow to create same beacons on the same accounts' do
-      another_beacon = build(:beacon, account: account, proximity_id: beacon.proximity_id)
+      another_beacon = build(:beacon, account: account, uuid: beacon.uuid, major: beacon.major, minor: beacon.minor)
       expect(another_beacon).to_not be_valid
     end
 
     it 'allows to create same beacons on seperate accounts' do
       another_account = create(:account)
-      another_beacon = build(:beacon, account: another_account, proximity_id: beacon.proximity_id)
+      another_beacon = build(:beacon, account: another_account)
       expect(another_beacon).to be_valid
     end
   end

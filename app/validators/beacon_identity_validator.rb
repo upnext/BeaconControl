@@ -23,10 +23,12 @@ class BeaconIdentityValidator < ActiveModel::Validator
   end
 
   def proximity_exists?(record)
-    Beacon.where(
-      proximity_id: record.proximity_id.to_s,
+    scope = Beacon.where(
+      proximity_uuid: record.proximity_uuid,
       account_id: record.account_id
-    ).where('id != ?', record.id).exists?
+    )
+    scope = scope.where('id != ?', record.id) if record.persisted?
+    scope.exists?
   end
 
   def validate_proximity_id!(record)
