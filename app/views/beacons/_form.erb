@@ -61,7 +61,7 @@
     <%# Footer %>
     <div id="beacon-action-footer" class="row actions-row sticky-footer">
       <% if @beacon.persisted? %>
-        <div class="col-xs-6">
+        <div class="col-md-6 col-sm-4 col-xs-12">
           <div class="pull-left">
             <%= button_link :delete_nice,
                             beacon_path(@beacon),
@@ -74,7 +74,7 @@
       <% end %>
 
       <% if @beacon.persisted? %>
-        <div class="col-xs-6 modify-beacon-actions">
+        <div class="col-md-6 col-sm-8 col-xs-12 modify-beacon-actions">
           <div class="pull-right">
             <%= button_link :cancel, beacons_path %>
             <%= f.button :submit, t('.save'),

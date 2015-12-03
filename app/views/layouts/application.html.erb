@@ -78,6 +78,20 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <% if admin_signed_in? %>
+              <li class="dropdown visible-sm-block visible-md-block visible-lg-block">
+                <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><%= current_admin.email %><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= active_link_to glyphicon(:user, t('.profile')), main_app.edit_admin_registration_path %>
+                  <li><%= link_to glyphicon(:off, t('.logout')), main_app.destroy_admin_session_path, method: :delete %></li>
+                </ul>
+              </li>
+              <li class="visible-xs-block"><a href="#" data-toggle="dropdown"><%= current_admin.email %></a></li>
+              <li class="visible-xs-block"><%= active_link_to t('.profile'), main_app.edit_admin_registration_path %>
+              <li class="visible-xs-block"><%= link_to t('.logout'), main_app.destroy_admin_session_path, method: :delete %></li>
+            <% end %>
+          </ul>
           <%= render 'shared/header' %>
           <ul class="nav navbar-nav visible-xs-block">
             <li><%= active_link_to t('.menu.dashboard'), main_app.root_path, active: [['dashboard'], []] %></li>
@@ -91,18 +105,11 @@
               <li><%= active_link_to t('.menu.users'), main_app.admins_path %></li>
             <% end %>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <% if admin_signed_in? %>
-              <li class="dropdown visible-sm-block visible-md-block visible-lg-block">
-                <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><%= current_admin.email %><span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><%= active_link_to glyphicon(:user, t('.profile')), main_app.edit_admin_registration_path %>
-                  <li><%= link_to glyphicon(:off, t('.logout')), main_app.destroy_admin_session_path, method: :delete %></li>
-                </ul>
-              </li>
-              <li class="visible-xs-block"><a href="#" data-toggle="dropdown"><%= current_admin.email %></a></li>
-              <li class="visible-xs-block"><%= active_link_to t('.profile'), main_app.edit_admin_registration_path %>
-              <li class="visible-xs-block"><%= link_to t('.logout'), main_app.destroy_admin_session_path, method: :delete %></li>
+          <ul class="nav navbar-nav visible-xs-block">
+            <% current_admin.account.active_extensions.each do |ext| %>
+              <% ext.sidebar_links.each do |link| %>
+                <li><%= ext_sidebar_link(link, self) %></li>
+              <% end %>
             <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->

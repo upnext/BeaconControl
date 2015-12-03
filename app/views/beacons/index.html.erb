@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###%>
 
 <% content_for :header_breadcrumbs do %>
@@ -63,65 +63,67 @@
     <% end %>
   </div>
 
-  <table class="table table-list table-striped live-search-table" data-search-input="#search_table_beacon_name">
-    <thead>
-      <tr>
-        <th colspan="2" class="select-all-checkbox">
-          <% if @beacons.present? %>
-            <div class="custom-checkbox">
-              <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
-              <label for="select_all"></label>
-            </div>
-          <% end %>
-        </th>
-        <th class="sortable"><%= sortable "beacons.name", Beacon.human_attribute_name(:name) %></th>
-        <th class="sortable"><%= sortable "beacons.protocol", Beacon.human_attribute_name(:protocol) %></th>
-        <th class="sortable"><%= sortable "zones.name", Beacon.human_attribute_name(:zone) %></th>
-        <th class="sortable"><%= sortable "floor", Beacon.human_attribute_name(:floor) %></th>
-        <th class="sortable"><%= sortable "beacons.created_at", Beacon.human_attribute_name(:created_at) %></th>
-        <th><%= t('.details') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= form_tag "beacons/batch_update", method: :patch, class: %W[batch-update-form] do %>
-        <%= hidden_field_tag 'beacon[zone_id]' %>
-        <%= hidden_field_tag 'beacon[floor]' %>
-        <% @beacons.each do |beacon| %>
-          <tr data-zone-id="<%= beacon.zone_id %>" data-floor="<%= beacon.floor %>" data-search="<%= live_search_value(beacon, :name, :protocol, :zone_name) %>">
-            <td class="zone-mark disable-select" style="background: <%= (beacon.zone && beacon.zone.hex_color) || 'transparent' %>"></td>
-            <td class="with-checkbox">
+  <div class="table-responsive">
+    <table class="table table-list table-striped live-search-table" data-search-input="#search_table_beacon_name">
+      <thead>
+        <tr>
+          <th colspan="2" class="select-all-checkbox">
+            <% if @beacons.present? %>
               <div class="custom-checkbox">
-                <input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" />
-                <label for="<%="beacon_#{beacon.id}"%>"></label>
+                <input type="checkbox" id="select_all" class="checkbox" value="select_all" />
+                <label for="select_all"></label>
               </div>
-            </td>
-            <td><%= truncate(beacon.name, length: 30) %></td>
-            <td class="beacon_protocol">
-              <%= beacon.protocol %>
-            </td>
-            <td class="beacon_zone">
-              <% if beacon.zone_name? %>
-                <%= truncate(beacon.zone_name, length: 30) %>
-              <% else %>
-                <%= t('.unassigned_zone') %>
-              <% end %>
-            </td>
-            <td class="beacon_floor">
-              <% if beacon.floor.present? %>
-                <%= beacon.floor %>
-              <% else %>
-                <%= t('.unassigned_floor') %>
-              <% end %>
-            </td>
-            <td><%= beacon.created_at.to_formatted_s(:two_digits) %></td>
-            <td class="disable-select">
-              <%= button_link :edit, edit_beacon_path(beacon), dynamic_width: true %>
-            </td>
-          </tr>
+            <% end %>
+          </th>
+          <th class="sortable"><%= sortable "beacons.name", Beacon.human_attribute_name(:name) %></th>
+          <th class="sortable"><%= sortable "beacons.protocol", Beacon.human_attribute_name(:protocol) %></th>
+          <th class="sortable"><%= sortable "zones.name", Beacon.human_attribute_name(:zone) %></th>
+          <th class="sortable"><%= sortable "floor", Beacon.human_attribute_name(:floor) %></th>
+          <th class="sortable"><%= sortable "beacons.created_at", Beacon.human_attribute_name(:created_at) %></th>
+          <th><%= t('.details') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= form_tag "beacons/batch_update", method: :patch, class: %W[batch-update-form] do %>
+          <%= hidden_field_tag 'beacon[zone_id]' %>
+          <%= hidden_field_tag 'beacon[floor]' %>
+          <% @beacons.each do |beacon| %>
+            <tr data-zone-id="<%= beacon.zone_id %>" data-floor="<%= beacon.floor %>" data-search="<%= live_search_value(beacon, :name, :protocol, :zone_name) %>">
+              <td class="zone-mark disable-select" style="background: <%= (beacon.zone && beacon.zone.hex_color) || 'transparent' %>"></td>
+              <td class="with-checkbox">
+                <div class="custom-checkbox">
+                  <input type="checkbox" id='<%="beacon_#{beacon.id}"%>' value=<%= beacon.id %> name="beacon_ids[]" class="checkbox value-checkbox" />
+                  <label for="<%="beacon_#{beacon.id}"%>"></label>
+                </div>
+              </td>
+              <td><%= truncate(beacon.name, length: 30) %></td>
+              <td class="beacon_protocol">
+                <%= beacon.protocol %>
+              </td>
+              <td class="beacon_zone">
+                <% if beacon.zone_name? %>
+                  <%= truncate(beacon.zone_name, length: 30) %>
+                <% else %>
+                  <%= t('.unassigned_zone') %>
+                <% end %>
+              </td>
+              <td class="beacon_floor">
+                <% if beacon.floor.present? %>
+                  <%= beacon.floor %>
+                <% else %>
+                  <%= t('.unassigned_floor') %>
+                <% end %>
+              </td>
+              <td><%= beacon.created_at.to_formatted_s(:two_digits) %></td>
+              <td class="disable-select">
+                <%= button_link :edit, edit_beacon_path(beacon), dynamic_width: true %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= prompt_modal(t('beacons.modal.title'), t('beacons.modal.body')) %>

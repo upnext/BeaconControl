@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This source code is licensed under the BSD 3-Clause License found in the
-# LICENSE.txt file in the root directory of this source tree. 
+# LICENSE.txt file in the root directory of this source tree.
 ###%>
 
 <script id="spectrum-color-palette">
@@ -109,14 +109,14 @@
   </div>
 
   <div class="row actions-row sticky-footer">
-    <div class="col-xs-6">
+    <div class="col-md-6 col-sm-4 col-xs-12">
       <div class="pull-left">
         <% if @zone.persisted? %>
           <%= button_link :delete, zone_path(@zone), class: %W[btn btn-danger], with_modal: true %>
         <% end %>
       </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-md-6 col-sm-8 col-xs-12">
       <div class="pull-right">
         <%= button_link :cancel, zones_path %>
         <%= f.button :submit, t('.save'), class: %w[btn btn-success btn-static-width btn-action-save] %>
