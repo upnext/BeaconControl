@@ -35,7 +35,7 @@ module BeaconControl
         BeaconPresence.transaction do
           zp = presence.first_or_create(present: false)
           if zp.valid_timestamp_for_enter?(timestamp)
-            presence.update_all(present: false)
+            ZonePresence.for_user(client_id).update_all(present: false)
             zp.update_attributes(timestamp: timestamp, present: true)
           end
         end
