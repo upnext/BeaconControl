@@ -32,11 +32,12 @@ module BeaconControl
       # and enter occurrence timestamp.
       #
       def enter
-        zp = presence.first_or_create
-
-        if zp.valid_timestamp_for_enter?(timestamp)
-          presence.update_all(present: false)
-          zp.update_attributes(timestamp: timestamp, present: true)
+        BeaconPresence.transaction do
+          zp = presence.first_or_create(present: false)
+          if zp.valid_timestamp_for_enter?(timestamp)
+            presence.update_all(present: false)
+            zp.update_attributes(timestamp: timestamp, present: true)
+          end
         end
       end
 
@@ -44,10 +45,11 @@ module BeaconControl
       # Updates zone presence record in database with leave information and leave occurrence timestamp.
       #
       def leave
-        zp = presence.first || ZonePresence.new
-
-        if zp.valid_timestamp_for_leave?(timestamp)
-          zp.update_attributes(timestamp: timestamp, present: false)
+        BeaconPresence.transaction do
+          zp = presence.first_or_create(present: false)
+          if zp.valid_timestamp_for_leave?(timestamp)
+            zp.update_attributes(timestamp: timestamp, present: false)
+          end
         end
       end
 
