@@ -13,7 +13,7 @@ class CreateZonePresences < ActiveRecord::Migration
       t.string  :client_id
 
       t.datetime :timestamp
-      t.boolean  :present
+      t.boolean  :present, default: false
 
       t.timestamps null: false
     end
