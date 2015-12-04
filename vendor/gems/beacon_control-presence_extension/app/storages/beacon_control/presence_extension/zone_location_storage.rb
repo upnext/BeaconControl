@@ -35,6 +35,7 @@ module BeaconControl
         zp = presence.first_or_create
 
         if zp.valid_timestamp_for_enter?(timestamp)
+          presence.update_all(present: false)
           zp.update_attributes(timestamp: timestamp, present: true)
         end
       end
