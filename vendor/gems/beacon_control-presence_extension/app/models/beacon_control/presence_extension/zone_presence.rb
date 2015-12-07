@@ -28,14 +28,14 @@ module BeaconControl
       # Checks if given timestamp is valid as enter zone timestamp.
       #
       def valid_timestamp_for_enter?(event_timestamp)
-        (timestamp.nil? || event_timestamp > timestamp)
+        (timestamp.nil? || Time.at(event_timestamp.to_i) > Time.at(timestamp))
       end
 
       #
       # Checks if given timestamp is valid as leave zone timestamp.
       #
       def valid_timestamp_for_leave?(event_timestamp)
-        persisted? && event_timestamp.present? && event_timestamp > timestamp
+        persisted? && event_timestamp.present? && Time.at(event_timestamp.to_i) > Time.at(timestamp.to_i)
       end
     end
   end

@@ -11,6 +11,6 @@
 #
 module EventProcessor
   def self.process(events_message)
-    EventJob.perform_later(events_message)
+    EventJob.new(wait: 1.second).perform(events_message)
   end
 end

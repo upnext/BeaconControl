@@ -15,7 +15,7 @@ module BeaconControl
       end
 
       def publish
-        worker.perform_later(event)
+        worker.new(wait: 1.second).perform(event)
       end
 
       private
