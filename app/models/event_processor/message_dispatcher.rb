@@ -28,7 +28,8 @@ module EventProcessor
       events.each do |event|
         logger.debug "Processing event: #{event.inspect}"
 
-        if action = Activity.find_by(id: event.action_id)
+        action = Activity.find_by(id: event.action_id)
+        if action.present?
           event.action     = action
           event.event_type = action.trigger.event_type
 
