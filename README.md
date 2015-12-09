@@ -2,9 +2,9 @@
 
 BeaconCtrl is an open source platform to setup and manage beacon deployments built with Ruby on Rails.
 BeaconCtrl includes **BeaconCtrl Admin Panel** which is used to manage beacons, applications and add-ons through the web panel,
-**API** to authenticate a client, get beacons configuration and send events about beacons to server and 
+**API** to authenticate a client, get beacons configuration and send events about beacons to server and
 **S2S API** to manage beacons, applications and add-ons through API (this requires to setup own BeaconCtrl server).
-More information about BeaconCtrl Admin Panel and APIs can be found at http://www.beaconctrl.com/dev/backend-docs 
+More information about BeaconCtrl Admin Panel and APIs can be found at http://www.beaconctrl.com/dev/backend-docs
 
 You can check working BeaconCtrl service at https://admin.beaconctrl.com/.
 
@@ -15,7 +15,7 @@ Setup your own BeaconCtrl server (e.g to extend its functionality or to use `S2S
 The easiest way to deploy own BeaconCtrl server is to deploy BeaconCtrl to Heroku using Heroku Button.
 Just click on the button bellow and you will be passed through application setup flow on Heroku.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/upnext/BeaconCtrl)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/upnext/BeaconCtrl/tree/v1.1)
 
 
 If you prefer to start development on your local machine just you use the following command:
