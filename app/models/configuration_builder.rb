@@ -35,7 +35,9 @@ class ConfigurationBuilder
   #   :ttl=>86400}
   #
   def as_json
-    json = {}.with_indifferent_access
+    json = {
+      vendors: ::Beacon::VENDORS
+    }.with_indifferent_access
 
     extensions.each do |extension|
       name = extension.name.gsub(/\./, '_').camelize

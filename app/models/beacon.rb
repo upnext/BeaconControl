@@ -12,7 +12,7 @@ class Beacon < ActiveRecord::Base
   AVAILABLE_FLOORS = ((AppConfig.lowest_floor)..(AppConfig.highest_floor)).to_a
   SORTABLE_COLUMNS = %w(beacons.name zones.name floor beacons.created_at beacons.updated_at beacons.protocol)
   PROTOCOLS = %w(iBeacon Eddystone)
-  VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Sensorberg', 'Sonic Notify' ]
+  VENDORS = [ 'Other', 'BlueCats', 'BlueSense', 'Estimote', 'Gelo', 'Glimworm', 'Gimbal by Qualcomm', 'Kontakt', 'Beaconinside', 'Sonic Notify' ]
   MODE = [ 'Custom', 'Kontakt Beacon', 'Energy saver', 'Power Beacon', 'Apple iBeacon' ]
 
   include Searchable
