@@ -27,11 +27,13 @@ module Authenticator
     def call
       return unless valid_params? && application_owner.is_a?(Application)
 
-      return mobile_device if mobile_device.blank?
-      mobile_device.last_sign_in_at = DateTime.now
-      mobile_device.update_correlation_id_from_current_thread
-      mobile_device.save
-      mobile_device
+      mobile_device.tap do |device|
+        break if device.blank?
+
+        device.last_sign_in_at = DateTime.now
+        device.update_correlation_id_from_current_thread
+        device.save
+      end
     end
 
     private
@@ -44,7 +46,10 @@ module Authenticator
     end
 
     def user
-      @user ||= application_owner.users.where(client_id: user_client_id).first_or_create!
+      @user ||= application_owner
+        .users
+        .where(client_id: user_client_id)
+        .first_or_create!
     end
 
     def required_params

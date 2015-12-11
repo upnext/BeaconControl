@@ -446,10 +446,10 @@ ActiveRecord::Schema.define(version: 20151202091632) do
     t.datetime "updated_at",                                   null: false
     t.string   "event_type",     limit: 255, default: "enter"
     t.integer  "application_id", limit: 4
+    t.integer  "dwell_time",     limit: 4
     t.string   "type",           limit: 255
     t.integer  "activity_id",    limit: 4
     t.boolean  "test",           limit: 1,   default: false
-    t.integer  "dwell_time",     limit: 4
   end
 
   add_index "triggers", ["activity_id"], name: "index_triggers_on_activity_id", using: :btree
