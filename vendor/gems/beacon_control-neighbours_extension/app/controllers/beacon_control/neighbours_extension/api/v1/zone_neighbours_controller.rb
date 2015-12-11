@@ -26,7 +26,7 @@ module BeaconControl
           private
 
           def current_zone
-            @current_zone ||= current_admin.account.zones.find(params[:id])
+            @current_zone ||= application.zones.find(params[:id])
           end
         end
       end
