@@ -123,6 +123,7 @@ BeaconControl::Application.routes.draw do
   namespace :s2s_api do
     namespace :v1 do
       resource :registrations, only: [:create], path: 'admins'
+      resources :vendors, only: :index
 
       resource :password, only: [:create, :update]
 
