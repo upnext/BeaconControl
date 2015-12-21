@@ -38,7 +38,6 @@ module BeaconControl
       @registerable                   = yes? "Allow external user registration? (y)es/(n)o"
       @confirmable                    = yes? "Require admin users email confirmation? (y)es/(n)o"
       @create_test_app_on_new_account = yes? "Create test application on new account? (y)es/(n)o"
-      @invitation_codes               = yes? "Require invitation code on registration? (y)es/(n)o"
 
       say "\nAutoloading extensions"
       @autoload_extensions = {
