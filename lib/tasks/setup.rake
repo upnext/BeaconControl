@@ -127,18 +127,14 @@ namespace :setup do
     thor = Thor::Shell::Basic.new
     begin
       ENV["SEED_ADMIN_EMAIL"]    = thor.ask("Admin email:")
-      ENV["SEED_ADMIN_PASSWORD"] = thor.ask("Admin password:", echo: false)
       admin = Admin.new(
         email:                 ENV["SEED_ADMIN_EMAIL"],
-        password:              ENV["SEED_ADMIN_PASSWORD"],
-        password_confirmation: ENV["SEED_ADMIN_PASSWORD"]
       )
       puts "\n#{admin.errors.full_messages.join(', ')}".red unless admin.valid?
     end while not admin.valid?
     puts
 
     Rake::Task["db:seed"].invoke
-    Admin.last.try :send_confirmation_instructions
   end
 
   desc "Run application"

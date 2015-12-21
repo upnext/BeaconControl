@@ -36,7 +36,6 @@ module BeaconControl
 
       @secret_key_base                = SecureRandom.hex(64)
       @registerable                   = yes? "Allow external user registration? (y)es/(n)o"
-      @confirmable                    = yes? "Require admin users email confirmation? (y)es/(n)o"
       @create_test_app_on_new_account = yes? "Create test application on new account? (y)es/(n)o"
 
       say "\nAutoloading extensions"
