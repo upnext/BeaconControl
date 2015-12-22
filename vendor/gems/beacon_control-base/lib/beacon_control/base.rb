@@ -80,7 +80,6 @@ module BeaconControl
     end
 
     def self.exec_load
-      # BeaconControl::Base.load_extensions!
       BeaconControl::Base.watch_reload.each_pair do |klass, reload_hash|
         Rails.logger.info "exec load auto inject #{klass}"
         klass = klass.constantize
