@@ -10,9 +10,12 @@
 
   <h2>
     <%= t('.log_in') %>
-    <small class="pull-right">
-      or <%= link_to t(".create_account"), new_registration_path(resource_name) %>
-    </small>
+
+    <% if AppConfig.registerable %>
+      <small class="pull-right">
+        or <%= link_to t(".create_account"), new_registration_path(resource_name) %>
+      </small>
+    <% end %>
   </h2>
 
   <% flash.each do |type, msg| %>

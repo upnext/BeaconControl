@@ -8,8 +8,6 @@
 
 module BeaconControl
   module Base
-
-    #
     # Basic Extension module. Implements generic class_methods, which can be included
     # into created extension using AS concerns.
     #
@@ -21,6 +19,8 @@ module BeaconControl
 
         def register_extension!(gem_name)
           ::BeaconControl::Base.register_extension(gem_name, self)
+          ext_root = File.expand_path( '../..', File.dirname(caller.first.split(':').first) )
+          BeaconControl::Base::Railtie.append_autoload_dir(ext_root)
         end
 
         #
