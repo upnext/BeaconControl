@@ -47,6 +47,7 @@ if [ `cat ~/.pgpass | grep -c "$pgpass"` -gt 0 ]; then
   echo "pgpass already exists!"
 else
   echo $pgpass >> ~/.pgpass
+  chmod 600 ~/.pgpass
 fi
 
 psql postgres $USER -c 'SELECT 1'
@@ -54,8 +55,8 @@ psql postgres $USER -c 'SELECT 1'
 if [ "$?" == "2" ]; then
   echo "Please execute following command in other terminal and rerun:"
   echo "  sudo -u postgres psql postgres"
-  echo "  create role test with superuser createdb login;"
-  echo "  \\password test"
+  echo "  create role $USER with superuser createdb login;"
+  echo "  \\password $USER"
   exit 0
 else
   echo "Postgresql already installed"
