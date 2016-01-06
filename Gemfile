@@ -5,7 +5,8 @@ ruby '2.2.2'
 gem 'rails', '4.2.0'
 # Use mysql/postgres as the database for Active Record
 group :development, :test do
-  gem 'mysql2'
+  # gem 'mysql2'
+  gem 'pg'
 end
 group :production do
   gem 'mysql2'
@@ -59,6 +60,9 @@ gem 'beacon_control-kontakt_io_extension',
 
 gem 'beacon_control-neighbours_extension',
     path: 'vendor/gems/beacon_control-neighbours_extension'
+
+gem 'beacon_control-backend_request_extension',
+    path: 'vendor/gems/beacon_control-backend_request_extension'
 
 # Barcodes
 gem 'barby'
