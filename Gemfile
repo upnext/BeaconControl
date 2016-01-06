@@ -5,8 +5,8 @@ ruby '2.2.2'
 gem 'rails', '4.2.0'
 # Use mysql/postgres as the database for Active Record
 group :development, :test do
-  # gem 'mysql2'
-  gem 'pg'
+  gem 'mysql2'
+  # gem 'pg'
 end
 group :production do
   gem 'mysql2'
