@@ -15,6 +15,11 @@ PATH
     beacon_control-analytics_extension (0.0.1)
 
 PATH
+  remote: vendor/gems/beacon_control-backend_request_extension
+  specs:
+    beacon_control-backend_request_extension (1.0.0)
+
+PATH
   remote: vendor/gems/beacon_control-base
   specs:
     beacon_control-base (0.0.1)
@@ -387,6 +392,7 @@ DEPENDENCIES
   active_model_serializers (= 0.9.1)
   barby
   beacon_control-analytics_extension!
+  beacon_control-backend_request_extension!
   beacon_control-base!
   beacon_control-dwell_time_extension!
   beacon_control-kontakt_io_extension!
@@ -451,4 +457,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
