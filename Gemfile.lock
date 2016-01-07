@@ -221,7 +221,7 @@ GEM
       less-rails (>= 2.6, <= 2.8)
     letter_opener (1.2.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
