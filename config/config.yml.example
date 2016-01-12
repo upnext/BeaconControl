@@ -12,6 +12,7 @@ default: &default
     registerable: true
     mailer_sender: noreply@beacon-os.com
     registration_mailer_sender: noreply@beacon-os.com
+    presence_timeout: 30 # seconds
     mailer_url_options:
       host: localhost
       port: 3000
