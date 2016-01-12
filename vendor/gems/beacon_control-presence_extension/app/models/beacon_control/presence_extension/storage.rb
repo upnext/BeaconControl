@@ -58,7 +58,7 @@ module BeaconControl
 
       private
 
-      def load_ranges(application, params)
+      def self.load_ranges(application, params)
         ::BeaconControl::PresenceExtension::BeaconPresence.where(
           'updated_at < :now', now: Time.now - AppConfig.presence_timeout
         ).update_all(present: false)
@@ -71,7 +71,7 @@ module BeaconControl
         end
       end
 
-      def load_zones(application, params)
+      def self.load_zones(application, params)
         ::BeaconControl::PresenceExtension::ZonePresence.where(
           'updated_at < :now', now: Time.now - AppConfig.presence_timeout
         ).update_all(present: false)
