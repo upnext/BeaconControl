@@ -10,7 +10,7 @@
     "RAILS_SERVE_STATIC_FILES": "true"
   },
   "scripts": {
-    "postdeploy": "bundle exec ./bin/heroku_postdeploy"
+    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed"
   },
-  "addons": ["cleardb:ignite", "redistogo:nano", "sendgrid:starter"]
+  "addons": ["redistogo:nano", "sendgrid:starter"]
 }

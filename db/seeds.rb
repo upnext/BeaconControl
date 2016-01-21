@@ -17,7 +17,7 @@ admin_factory = Admin::Factory.new(
   password:              password,
   password_confirmation: password,
 )
-admin = admin_factory.create
+admin = admin_factory.create!
 account = admin.account
 
 puts 'Creating sample beacons...'

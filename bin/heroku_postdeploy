@@ -4,9 +4,7 @@ $:.unshift File.expand_path("../lib",File.dirname(__FILE__))
 
 require "pathname"
 require "yaml"
-require "string"
 require "fileutils"
 
 
-system 'rake db:migrate'
-system 'rake db:seed'
+exec 'bundle exec rake db:migrate && bundle exec rake db:seed'
