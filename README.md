@@ -19,9 +19,15 @@ Just click on the button bellow and you will be passed through application setup
 
 
 If you prefer to start development on your local machine just you use the following command:
-```sh
+```bash
 bin/setup
 ```
+
+For Ubuntu I recommend to execute to begin with:
+```bash
+./ubuntu.sh
+```
+
 
 It will take care of a few things:
 - check Ruby version

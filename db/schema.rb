@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202091632) do
+ActiveRecord::Schema.define(version: 20151116134144) do
 
   create_table "account_extensions", id: false, force: :cascade do |t|
     t.integer "account_id",     limit: 4
@@ -139,23 +139,23 @@ ActiveRecord::Schema.define(version: 20151202091632) do
   add_index "beacon_proximity_fields", ["beacon_id"], name: "index_beacon_proximity_fields_on_beacon_id", using: :btree
 
   create_table "beacons", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.datetime "created_at",                                                             null: false
-    t.datetime "updated_at",                                                             null: false
-    t.decimal  "lat",                        precision: 9, scale: 6
-    t.decimal  "lng",                        precision: 9, scale: 6
-    t.integer  "floor",          limit: 4
-    t.integer  "account_id",     limit: 4
-    t.integer  "zone_id",        limit: 4
-    t.integer  "manager_id",     limit: 4
-    t.string   "location",       limit: 255
-    t.string   "protocol",       limit: 255,                         default: "iBeacon"
-    t.string   "vendor",         limit: 255,                         default: "Other"
-    t.string   "proximity_uuid", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "proximity_id", limit: 255
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
+    t.decimal  "lat",                      precision: 9, scale: 6
+    t.decimal  "lng",                      precision: 9, scale: 6
+    t.integer  "floor",        limit: 4
+    t.integer  "account_id",   limit: 4
+    t.integer  "zone_id",      limit: 4
+    t.integer  "manager_id",   limit: 4
+    t.string   "location",     limit: 255
+    t.string   "protocol",     limit: 255,                         default: "iBeacon"
+    t.string   "vendor",       limit: 255,                         default: "Other"
   end
 
   add_index "beacons", ["account_id"], name: "index_beacons_on_account_id", using: :btree
-  add_index "beacons", ["proximity_uuid", "account_id"], name: "index_beacons_on_proximity_uuid_and_account_id", unique: true, using: :btree
+  add_index "beacons", ["proximity_id", "account_id"], name: "index_beacons_on_proximity_id_and_account_id", unique: true, using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -446,10 +446,10 @@ ActiveRecord::Schema.define(version: 20151202091632) do
     t.datetime "updated_at",                                   null: false
     t.string   "event_type",     limit: 255, default: "enter"
     t.integer  "application_id", limit: 4
-    t.integer  "dwell_time",     limit: 4
     t.string   "type",           limit: 255
     t.integer  "activity_id",    limit: 4
     t.boolean  "test",           limit: 1,   default: false
+    t.integer  "dwell_time",     limit: 4
   end
 
   add_index "triggers", ["activity_id"], name: "index_triggers_on_activity_id", using: :btree
