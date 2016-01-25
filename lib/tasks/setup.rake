@@ -16,10 +16,19 @@ namespace :setup do
     Rake::Task["setup:requires"].invoke
     Rake::Task["setup:verify"].invoke
     Rake::Task["setup:database"].invoke
+    Rake::Task["setup:directories"].invoke
     Rake::Task["setup:initial"].invoke
     puts "All done!".green
 
     Rake::Task["setup:run"].invoke
+  end
+
+  desc 'Setup required directories'
+  task :directories do
+    Dir.exist?('tmp') || Dir.mkdir('tmp')
+    %w[ cache pids sessions sockets ].each do |dir|
+      Dir.exist?("tmp/#{dir}") || Dir.mkdir("tmp/#{dir}")
+    end
   end
 
   desc "Setup database.yml, config.yml & sidekiq.yml config files"
@@ -78,6 +87,7 @@ namespace :setup do
         config.merge!({database: "mysql"})
       when "postgresql"
         config.merge!({database: "postgres"})
+      else abort
       end
       ActiveRecord::Base.establish_connection(config).connection.disconnect!
       puts "#{config['adapter'].humanize} [OK]".green
@@ -101,15 +111,15 @@ namespace :setup do
     puts "\n== Create database =="
 
     begin
-      oldstdout = $stdout
+      old_stdout = $stdout
       $stdout = StringIO.new
       Rake::Task["db:drop"].invoke
       Rake::Task["db:create"].invoke
       Rake::Task["db:migrate"].invoke
-      $stdout = oldstdout
+      $stdout = old_stdout
       puts "OK".green
     rescue => e
-      $stdout = oldstdout
+      $stdout = old_stdout
       puts e.message.red
       abort
     end
@@ -131,7 +141,7 @@ namespace :setup do
         email:                 ENV["SEED_ADMIN_EMAIL"],
       )
       puts "\n#{admin.errors.full_messages.join(', ')}".red unless admin.valid?
-    end while not admin.valid?
+    end until admin.valid?
     puts
 
     Rake::Task["db:seed"].invoke
