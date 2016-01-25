@@ -81,12 +81,12 @@
           <%= render 'shared/header' %>
           <ul class="nav navbar-nav visible-xs-block">
             <li><%= active_link_to t('.menu.dashboard'), main_app.root_path, active: [['dashboard'], []] %></li>
-            <% if can? :manage, Application %>
-              <li><%= active_link_to t('.menu.applications'), main_app.applications_path %></li>
-            <% end %>
             <li><%= active_link_to t('.menu.beacons'), main_app.beacons_path %></li>
             <li><%= active_link_to t('.menu.zones'), main_app.zones_path %></li>
             <li><%= active_link_to t('.menu.extensions_marketplace'), main_app.extensions_marketplace_index_path %></li>
+            <% if can? :manage, Application %>
+              <li><%= active_link_to t('.menu.applications'), main_app.applications_path %></li>
+            <% end %>
             <% if (can? :manage, Admin) && AppConfig.user_management %>
               <li><%= active_link_to t('.menu.users'), main_app.admins_path %></li>
             <% end %>
@@ -113,14 +113,14 @@
         <div class="sidebar">
           <ul class="nav nav-sidebar">
             <li><%= active_link_to bos_icon(:dashboard, t('.menu.dashboard')), main_app.root_path, active: [['dashboard'], []] %></li>
+            <li><%= active_link_to bos_icon(:beacon, t('.menu.beacons')), main_app.beacons_path, data: walkthrough_data(1, :beacons) %></li>
+            <li><%= active_link_to bos_icon(:zone, t('.menu.zones')), main_app.zones_path, data: walkthrough_data(2, :zones) %></li>
+            <li><%= active_link_to bos_icon(:earth, t('.menu.map')), main_app.map_path, active: [['maps'], []], data: walkthrough_data(3, :map) %></li>
+            <li><%= active_link_to bos_icon(:extension, t('.menu.extensions_marketplace')), main_app.extensions_marketplace_index_path,
+                    active: /^\/add_ons/, data: walkthrough_data(5, :addons) %></li>
             <% if can? :manage, Application %>
               <li><%= active_link_to bos_icon(:application, t('.menu.applications')), main_app.applications_path, data: walkthrough_data(4, :applications) %></li>
             <% end %>
-            <li><%= active_link_to bos_icon(:earth, t('.menu.map')), main_app.map_path, active: [['maps'], []], data: walkthrough_data(3, :map) %></li>
-            <li><%= active_link_to bos_icon(:beacon, t('.menu.beacons')), main_app.beacons_path, data: walkthrough_data(1, :beacons) %></li>
-            <li><%= active_link_to bos_icon(:zone, t('.menu.zones')), main_app.zones_path, data: walkthrough_data(2, :zones) %></li>
-            <li><%= active_link_to bos_icon(:extension, t('.menu.extensions_marketplace')), main_app.extensions_marketplace_index_path,
-                    active: /^\/add_ons/, data: walkthrough_data(5, :addons) %></li>
             <% if (can? :manage, Admin) && AppConfig.user_management %>
               <li><%= active_link_to bos_icon(:user, t('.menu.users')), main_app.admins_path %></li>
             <% end %>
