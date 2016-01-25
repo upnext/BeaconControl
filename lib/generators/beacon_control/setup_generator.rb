@@ -15,7 +15,7 @@ module BeaconControl
     def setup_database_config_file
       say "\n== Setup database connection =="
 
-      @adapter =  ask "Database adapter:",  default: "mysql2", limited_to: ["mysql2", "postgresql"]
+      @adapter =  ask "Database adapter:",  default: "postgresql", limited_to: ["mysql2", "postgresql"]
       @host =     ask "Database host:",     default: "localhost"
       @username = ask "Database username:", default: `whoami`.strip
       @password = ask "Database password:", echo: false
@@ -26,6 +26,7 @@ module BeaconControl
         gem "mysql2"
       when "postgresql"
         gem "pg"
+      else
       end
 
       template "database.yml.erb", "config/database.yml", force: true
@@ -35,15 +36,16 @@ module BeaconControl
       say "\n== Setup application config =="
 
       @secret_key_base                = SecureRandom.hex(64)
-      @registerable                   = yes? "Allow external user registration? (y)es/(n)o"
-      @create_test_app_on_new_account = yes? "Create test application on new account? (y)es/(n)o"
+      @registerable                   = yes? "Allow external user registration?       yes/no (no)"
+      @create_test_app_on_new_account = yes? "Create test application on new account? yes/no (no)"
 
       say "\nAutoloading extensions"
+      puts yes?("Analytics?  y[es]/n[o] (no)")
       @autoload_extensions = {
-        analytics:  yes?("Analytics? (y)es/(n)o"),
-        dwell_time: yes?("DwellTime? (y)es/(n)o"),
-        kontakt_io: yes?("Kontakt.io? (y)es/(n)o"),
-        presence:   yes?("Presence? (y)es/(n)o"),
+        analytics:  yes?("Analytics?  yes/no (no)"),
+        dwell_time: yes?("DwellTime?  yes/no (no)"),
+        kontakt_io: yes?("Kontakt.io? yes/no (no)"),
+        presence:   yes?("Presence?   yes/no (no)"),
       }
       say ""
 
@@ -55,7 +57,7 @@ module BeaconControl
         port:                 ask("Port:",           default: 587),
         domain:               ask("Domain:",         default: "beacon-os.com"),
         authentication:       ask("Authentication:", default: "plain"),
-        enable_starttls_auto: yes?("Enable starttls auto? (y)es/(n)o"),
+        enable_starttls_auto: yes?("Enable starttls auto? yes/no (no)"),
         user_name:            ask("Username:",       default: "noreply@beacon-os.com"),
         password:             ask("Password:",       echo: false)
       }
