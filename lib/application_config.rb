@@ -13,7 +13,7 @@ class ApplicationConfig
 
   def initialize(file_path=nil, &block)
     config_file = File.expand_path('config/config.yml')
-    config_file = File.expand_path('config/heorku_config.yml') unless File.exist? config_file
+    config_file = File.expand_path('config/heroku_config.yml') unless File.exist? config_file
     @file_path = file_path || config_file
     @store = {}
     @config = {}

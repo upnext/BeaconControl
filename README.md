@@ -15,7 +15,7 @@ Setup your own BeaconCtrl server (e.g to extend its functionality or to use `S2S
 The easiest way to deploy own BeaconCtrl server is to deploy BeaconCtrl to Heroku using Heroku Button.
 Just click on the button bellow and you will be passed through application setup flow on Heroku.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/upnext/BeaconCtrl/tree/v1.1)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/upnext/BeaconCtrl/tree/master)
 
 
 If you prefer to start development on your local machine just you use the following command:

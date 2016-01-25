@@ -20,6 +20,11 @@ class Admin
       admin
     end
 
+    def create!
+      save_admin!
+      admin
+    end
+
     private
 
     # @final
