@@ -13,7 +13,7 @@
       <%= trigger_form.label :test, class: %W[trigger-test] do %>
         <%= trigger_form.input :test,
                                label: false,
-                               inline_label: "#{t('beacons.test_notification.title')} <span class=\"grayed\">#{t('beacons.test_notification.hint')}</span>".html_safe,
+                               inline_label: "#{t('beacons.test_notification.title')} <span class=\"grayed\">#{t('beacons.test_notification.hint', mobile_app_url: "https://itunes.apple.com/pl/app/beaconctrl/id1020666394?mt=8")}</span>".html_safe,
                                input_html: {
                                    class: %w[event-publisher]
                                }
