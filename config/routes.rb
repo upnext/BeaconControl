@@ -109,8 +109,6 @@ BeaconControl::Application.routes.draw do
     namespace :v1 do
       resources :configurations, only: [:index]
       resources :events, only: [:create]
-      resources :zones, only: [:index]
-      resources :beacons, only: [:index]
     end
   end
 
