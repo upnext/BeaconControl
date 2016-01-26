@@ -76,28 +76,6 @@ RSpec.describe 'S2sApi::V1::Registrations', type: :request, s2s: true do
       expect(json_response[:errors]).to have_key(:email)
     end
 
-    it 'sends confirmation email if confirmable is on' do
-      allow(AppConfig).to receive(:confirmable).and_return(true)
-
-      expect {
-        post "/s2s_api/v1/admins.json",
-          client_id: doorkeeper_app.uid, client_secret: doorkeeper_app.secret, admin: admin_params
-      }.to change(ActionMailer::Base.deliveries, :count)
-
-      expect(Admin.last.confirmed?).to eq(false)
-    end
-
-    it 'does not require confirmation if confirmable is off' do
-      allow(AppConfig).to receive(:confirmable).and_return(false)
-
-      post "/s2s_api/v1/admins.json",
-           client_id: doorkeeper_app.uid,
-           client_secret: doorkeeper_app.secret,
-           admin: admin_params
-
-      expect(Admin.last.confirmed?).to eq(true)
-    end
-
     it 'authorizes request' do
       expect {
         post "/s2s_api/v1/admins.json",

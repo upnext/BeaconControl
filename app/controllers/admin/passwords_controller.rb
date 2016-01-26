@@ -34,6 +34,6 @@ class Admin::PasswordsController < Devise::PasswordsController
   end
 
   def confirmable?(resource)
-    AppConfig.confirmable && !resource.active_for_authentication?
+    !resource.active_for_authentication?
   end
 end
