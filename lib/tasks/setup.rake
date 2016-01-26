@@ -151,6 +151,6 @@ namespace :setup do
   task :run do
     puts "\n== Run application =="
 
-    system "foreman start"
+    system "foreman start -p #{ENV['PORT'] || 3000}"
   end
 end
