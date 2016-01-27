@@ -19,7 +19,7 @@ class Beacon < ActiveRecord::Base
 
   belongs_to :account
   belongs_to :manager, class_name: Admin
-  belongs_to :zone, counter_cache: true
+  belongs_to :zone
 
   has_many :triggers_sources, ->{ where(source_type: 'Beacon') }, foreign_key: :source_id
   has_many :triggers, through: :triggers_sources

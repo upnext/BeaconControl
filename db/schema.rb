@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202091632) do
+ActiveRecord::Schema.define(version: 20160127133722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,14 +477,13 @@ ActiveRecord::Schema.define(version: 20151202091632) do
   end
 
   create_table "zones", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.integer  "account_id",                null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",        null: false
+    t.integer  "account_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "description"
     t.integer  "manager_id"
     t.string   "color"
-    t.integer  "beacons_count", default: 0
   end
 
   add_foreign_key "admins", "accounts"
