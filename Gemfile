@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.2.4'
 
 gem 'rails', '4.2.0'
 # Use mysql/postgres as the database for Active Record
