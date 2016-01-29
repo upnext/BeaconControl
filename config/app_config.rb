@@ -16,6 +16,7 @@ AppConfig = ApplicationConfig.new do
 
   config_key :log_path
   config_key :log_level, default: 'debug'
+  config_key :presence_timeout, default: 21600 # seconds
 
   config_key :token_expires_in, default: 7200 # seconds
 

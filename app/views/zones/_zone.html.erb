@@ -11,6 +11,6 @@
 </div>
 <%= link_to edit_zone_path(zone), class: %W[item-box edit], style: "border-top-color: ##{zone.color};" do %>
   <h3><%= zone.name %></h3>
-  <div class="info"><%= t(:beacons, count: zone.beacons_count) %></div>
+  <div class="info"><%= t(:beacons, count: zone.beacons.count) %></div>
 
 <% end %>

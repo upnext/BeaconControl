@@ -28,21 +28,8 @@ module BeaconControl
       #     application zones will be processed further.
       #
       def self.get_status(application, params)
-        ranges = if !params.has_key?(:ranges)
-                    application.beacons.pluck(:id)
-                 elsif params[:ranges].nil?
-                   nil
-                 else
-                   application.beacons.where(id: params[:ranges]).pluck(:id)
-                 end
-
-        zones  =  if !params.has_key?(:zones)
-                    application.zones.pluck(:id)
-                  elsif params[:zones].nil?
-                    nil
-                  else
-                    application.zones.where(id: params[:zones]).pluck(:id)
-                  end
+        ranges = load_ranges(application, params)
+        zones  =  load_zones(application, params)
 
         Rails.logger.info "Getting status for ranges: #{ranges.inspect}, zones: #{zones.inspect}"
 
@@ -70,6 +57,32 @@ module BeaconControl
       end
 
       private
+
+      def self.load_ranges(application, params)
+        ::BeaconControl::PresenceExtension::BeaconPresence.where(
+          'updated_at < :now', now: Time.now - AppConfig.presence_timeout
+        ).update_all(present: false)
+        if !params.has_key?(:ranges)
+          application.beacons.pluck(:id)
+        elsif params[:ranges].nil?
+          nil
+        else
+          application.beacons.where(id: params[:ranges]).pluck(:id)
+        end
+      end
+
+      def self.load_zones(application, params)
+        ::BeaconControl::PresenceExtension::ZonePresence.where(
+          'updated_at < :now', now: Time.now - AppConfig.presence_timeout
+        ).update_all(present: false)
+        if !params.has_key?(:zones)
+          application.zones.pluck(:id)
+        elsif params[:zones].nil?
+          nil
+        else
+          application.zones.where(id: params[:zones]).pluck(:id)
+        end
+      end
 
       #
       # Checks if event is zone or beacon - related, and saves enter event message.

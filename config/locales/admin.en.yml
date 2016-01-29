@@ -287,7 +287,7 @@ en:
     leave: 'On Exit'
     leave_description: 'Trigger an action when a user leaves the beacon range.'
     near: 'Nearby'
-    near_description: 'Trigger an action when a user is in medium-to-close distance from the beacon. (20cm – 5m )'
+    near_description: 'Trigger an action when a user is in medium-to-close distance from the beacon. (20cm – 5m)'
     far: 'In Sight'
     far_description: 'Trigger an action when a user is distant from the beacon. (>5m)'
     immediate: 'Almost Touching'

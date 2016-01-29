@@ -9,15 +9,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'beacon_control/base/version'
+require 'beacon_control/backend_request_extension/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "beacon_control-base"
-  spec.version       = BeaconControl::Base::VERSION
+  spec.name          = "beacon_control-backend_request_extension"
+  spec.version       = BeaconControl::BackendRequestExtension::VERSION
   spec.authors       = ["Upnext Ltd."]
   spec.email         = ["backend-dev@up-next.com"]
-  spec.summary       = %q{BeaconControl::Base}
-  spec.description   = %q{BeaconControl::Base}
+  spec.summary       = %q{BeaconControl::BackendRequestExtension}
+  spec.description   = %q{BeaconControl::BackendRequestExtension}
   spec.homepage      = ""
   spec.license       = "BSD"
 
@@ -26,10 +26,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activesupport"
-
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "ammeter"
+  spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "database_cleaner"
 end

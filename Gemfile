@@ -57,6 +57,9 @@ gem 'beacon_control-kontakt_io_extension',
 gem 'beacon_control-neighbours_extension',
     path: 'vendor/gems/beacon_control-neighbours_extension'
 
+gem 'beacon_control-backend_request_extension',
+    path: 'vendor/gems/beacon_control-backend_request_extension'
+
 # Barcodes
 gem 'barby'
 

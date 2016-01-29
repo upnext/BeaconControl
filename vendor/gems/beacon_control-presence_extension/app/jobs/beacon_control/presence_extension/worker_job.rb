@@ -21,7 +21,7 @@ module BeaconControl
 
         logger.debug "Received event #{message_event.inspect}"
 
-        Storage.new(message_event).save
+        ::BeaconControl::PresenceExtension::Storage.new(message_event).save
       end
     end
   end

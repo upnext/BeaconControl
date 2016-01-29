@@ -1,0 +1,8 @@
+en:
+  activities:
+    form:
+      scheme:
+        requests: Backend Request
+    scheme:
+      requests:
+        attributes: attributes
