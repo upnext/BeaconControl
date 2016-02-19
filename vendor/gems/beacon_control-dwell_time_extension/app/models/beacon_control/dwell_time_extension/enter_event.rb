@@ -16,7 +16,7 @@ module BeaconControl
         self.redis = redis
       end
 
-      delegate :beacon, :application, :mobile_device, to: :event
+      delegate :beacon, :zone, :application, :mobile_device, to: :event
 
       #
       # Schedules job to process enter event message in furure by putting it on
@@ -55,7 +55,10 @@ module BeaconControl
       attr_accessor :event, :redis
 
       def triggers
-        @triggers ||= beacon.triggers_for_application(event.application)
+        @triggers ||= (event.with_range? ? 
+                       beacon.triggers_for_application(event.application) :
+                       zone.triggers_for_application(event.application)
+                      )
       end
     end
   end
