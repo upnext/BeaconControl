@@ -52,7 +52,7 @@ module BeaconControl
         case event.event_type
           when 'enter' then enter
           when 'leave' then leave
-          else unsupported_event_type
+          else logger.info "Unsupported event_type: #{event.event_type}"
         end
       end
 
@@ -104,13 +104,6 @@ module BeaconControl
         elsif event.with_zone?
           ZoneLocationStorage.new(event).leave
         end
-      end
-
-      #
-      # Protests from trying to save yet unsupported event type. Only +enter+ and +leave+ are valid.
-      #
-      def unsupported_event_type # :doc:
-        raise UnsupportedEventType
       end
 
       attr_accessor :event
