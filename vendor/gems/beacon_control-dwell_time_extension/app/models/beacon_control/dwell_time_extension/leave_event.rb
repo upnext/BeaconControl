@@ -16,7 +16,7 @@ module BeaconControl
         self.redis = redis
       end
 
-      delegate :beacon, to: :event
+      delegate :beacon, :zone, :application, to: :event
 
       #
       # Cancels execution of all delayed ActiveJob jobs for given event.
@@ -46,7 +46,7 @@ module BeaconControl
         if sidekiq_id.present?
           BeaconControl::BaseJob.cancel(sidekiq_id).tap do |res|
             if res
-              logger.info "[#{unique_activity_id}] User left beacon before trigger #{trigger_id} - push cancelled"
+              logger.info "[#{unique_activity_id}] User left beacon/zone before trigger #{trigger_id} - push cancelled"
             else
               logger.info "[#{unique_activity_id}] Scheduled trigger not found in sidekiq (could be triggered or cancelled earlier)"
             end
@@ -57,7 +57,10 @@ module BeaconControl
       end
 
       def triggers
-        @triggers ||= beacon.triggers
+        @triggers ||= (event.with_range? ? 
+                       beacon.triggers_for_application(event.application) :
+                       zone.triggers_for_application(event.application)
+                      )
       end
     end
   end
