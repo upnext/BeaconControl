@@ -16,6 +16,7 @@ class Beacon < ActiveRecord::Base
   MODE = [ 'Custom', 'Kontakt Beacon', 'Energy saver', 'Power Beacon', 'Apple iBeacon' ]
 
   include Searchable
+  include ProximitySearchable
 
   belongs_to :account
   belongs_to :manager, class_name: Admin

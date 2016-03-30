@@ -50,7 +50,7 @@ window.analyticsData = {
                   $.each(data.events, (k, v) -> update = v[1])
                   series.data[series.data.length - 1].update(update)
                 )
-              ), 1000)
+              ), 30000)
 
         title:
           text: null
@@ -117,7 +117,7 @@ window.analyticsData = {
                   $.each(data.events, (k, v) -> update = v[1])
                   series.data[series.data.length - 1].update(update)
                 )
-              ), 1000
+              ), 30000
 
         title:
           text: null
@@ -179,7 +179,7 @@ window.analyticsData = {
                   $.each(data.events, (k, v) -> update = v[1])
                   series.data[series.data.length - 1].update(update)
                 )
-              ), 1000
+              ), 30000
 
         title:
           text: null

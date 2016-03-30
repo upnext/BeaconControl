@@ -70,14 +70,14 @@ class Account < ActiveRecord::Base
 
     sql =  <<-SQL
       (
-        select z.id, name, 'Zone' AS 'range', az.application_id = #{app_id} AS 'active' from zones z
+        select z.id, name, 'Zone' AS "range", az.application_id = #{app_id} AS "active" from zones z
         left join applications_zones az on (z.id = az.zone_id and az.application_id = #{app_id})
         where z.account_id = #{id}
         #{search_query}
       )
         union
       (
-        select b.id, name, 'Beacon' AS 'range', ab.application_id = #{app_id} AS 'active' from beacons b
+        select b.id, name, 'Beacon' AS "range", ab.application_id = #{app_id} AS "active" from beacons b
         left join applications_beacons ab on (b.id = ab.beacon_id and ab.application_id = #{app_id})
         where b.account_id = #{id}
         #{search_query}

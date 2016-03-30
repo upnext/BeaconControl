@@ -20,7 +20,7 @@ module EventProcessor
       attribute :mobile_device, MobileDevice
       attribute :user,          User
       attribute :event_type,    String
-      attribute :timestamp,     Integer
+      attribute :timestamp,     Integer, default: Time.now.to_i
 
       # Localization Attributes
       attribute :proximity_id, String
