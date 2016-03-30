@@ -27,6 +27,7 @@ module BeaconControl
           days,
           BeaconControl::AnalyticsExtension::DwellTimeAggregation.
             where(application_id: application_id).
+            where("timestamp <= ?", Time.now).
             order('date desc').
             limit(days).
             group(:date).
@@ -50,6 +51,7 @@ module BeaconControl
           days,
           BeaconControl::AnalyticsExtension::Event.
             where(application_id: application_id).
+            where("timestamp <= ?", Time.now).
             order('date_timestamp desc').
             limit(days).
             group('DATE(timestamp)').
@@ -73,6 +75,7 @@ module BeaconControl
           days,
           BeaconControl::AnalyticsExtension::Event.
             where(application_id: application_id).
+            where("timestamp <= ?", Time.now).
             order('date_timestamp desc').
             limit(days).
             group('DATE(timestamp)').
