@@ -20,7 +20,7 @@ AppConfig = ApplicationConfig.new do
 
   config_key :token_expires_in, default: 7200 # seconds
 
-  config_key :coupon_url, default: ''
+  config_key :coupon_url, default: ENV['COUPON_URL'] || ''
 
   config_key :smtp_settings, default: {
     address:              'smtp.sendgrid.net',
@@ -31,13 +31,13 @@ AppConfig = ApplicationConfig.new do
     authentication:       'plain',
     enable_starttls_auto: true
   }
-  config_key :mailer_sender, default: 'noreply@beacon-os.com'
-  config_key :registration_mailer_sender, default: 'noreply@beacon-os.com'
+  config_key :mailer_sender, default: ENV['MAILER_SENDER'] || 'no-reply@beaconctrl.com'
+  config_key :registration_mailer_sender, default: ENV['REGISTRATION_MAILER_SENDER'] || 'no-reply@beaconctrl.com'
   config_key :mailer_url_options, default: {
-    host: '',
+    host: ENV['MAILER_HOST'] || '',
     port: 80
   }
-  config_key :system_mailer_receiver, default: 'noreply@beacon-os.com'
+  config_key :system_mailer_receiver, default: ENV['SYSTEM_MAILER_RECEIVER'] || 'no-reply@beaconctrl.com'
 
   config_key :redis_url, default: 'redis://localhost:6379'
 
@@ -58,10 +58,10 @@ AppConfig = ApplicationConfig.new do
   config_key :highest_floor, default: 10
   config_key :google_analytics_enabled, default: false
   config_key :google_analytics_id
-  config_key :sandbox_cert_path
-  config_key :production_cert_path
-  config_key :sandbox_cert_passphrase
-  config_key :production_cert_passphrase
+  config_key :sandbox_cert_path, default: ENV['SANDBOX_CERT_PATH']
+  config_key :sandbox_cert_passphrase, default: ENV['SANDBOX_CERT_PASSPHRASE']
+  config_key :production_cert_path, default: ENV['PRODUCTION_CERT_PATH']
+  config_key :production_cert_passphrase, default: ENV['PRODUCTION_CERT_PASSPHRASE']
   config_key :force_ssl
 
   config_key :hjid, default: 59670
