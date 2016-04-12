@@ -1,3 +1,1 @@
-$redis = Moneta.build do
-  adapter :Redis
-end
+$redis = Moneta.new(:Redis, url: AppConfig.redis_url)

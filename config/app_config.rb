@@ -39,7 +39,7 @@ AppConfig = ApplicationConfig.new do
   }
   config_key :system_mailer_receiver, default: ENV['SYSTEM_MAILER_RECEIVER'] || 'no-reply@beaconctrl.com'
 
-  config_key :redis_url, default: 'redis://localhost:6379'
+  config_key :redis_url, default: ENV['REDISTOGO_URL'] || 'redis://localhost:6379'
 
   config_key :create_test_app_on_new_account, default: true
   config_key :autoload_extensions, default: {
