@@ -12,11 +12,7 @@
     "REGISTRATION_MAILER_SENDER": "no-reply@beaconctrl.com",
     "SYSTEM_MAILER_RECEIVER": "no-reply@beaconctrl.com",
     "COUPON_URL": "",
-    "MAILER_HOST": "",
-    "SANDBOX_CERT_PATH": "",
-    "SANDBOX_CERT_PASSPHRASE": "",
-    "PRODUCTION_CERT_PATH": "",
-    "PRODUCTION_CERT_PASSPHRASE": ""
+    "MAILER_HOST": ""
   },
   "scripts": {
     "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed"
